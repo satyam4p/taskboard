@@ -1,23 +1,25 @@
 import React from 'react';
 import { useState } from 'react';
-import Column from '../common/Columns/Column';
-
+import ColumnContainer from '../common/ColumnContainer/ColumnContainer';
 
 const style={
     'width': '100%',
-    'max-height': '95vh',
-    'overflow-y':'auto',
+    'maxHeight': '95vh',
+    'overflowY':'auto',
     'border':'1px solid black',
-    'background': 'lightblue'
-
+    'background': 'lightblue',
+    'padding':'20px',
+    'overflowX':'hidden'
 }
 export default function Board(props){
 
     const [colCount, setColCount] = useState();
-
+    const [colTypes, setColType] = useState();
     return(
         <div style={style}>
-            <Column />
+            <ColumnContainer/>
+            {/* <ColumnContainer/>
+            <ColumnContainer/> */}
         </div>
     )
 }

@@ -1,0 +1,16 @@
+.column-container, .toggle-false{
+    display:flex;
+    flex-direction: row;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid blue;
+    transition: all 1s ease-out;
+    overflow-x:scroll;
+}
+
+.toggle-true{
+    display: block;
+    width: 100%;
+    height: 25px;
+    border: 1px solid blue;
+    transition: all 1s ease-out;
+}

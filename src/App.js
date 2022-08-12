@@ -5,8 +5,8 @@ import Board from './board/board';
 
 const style={
   'display': 'flex',
-  'justify-content':'center',
-  'align-items': 'center',
+  'justifyContent':'center',
+  'alignItems': 'center',
   'padding': '10px 10px 10px 10px'
 }
 

@@ -1,0 +1,58 @@
+$white: #fff;
+$black: #000;
+
+.toggle-container{
+
+    position: relative;
+    width: 20%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid green;
+
+    &.collapse-true{
+        height: 15%;
+        width: 20%;
+    }
+    
+    .toggle-arrow{
+        width: 12px;
+        height: 12px;
+        position: absolute;
+        cursor: pointer;
+        top: 10px;
+    
+        span {
+            top: 4px;
+            position: absolute;
+            width: 8px;
+            height: 2px;
+            background-color: $black;
+            display: inline-block;
+            transition: all .2s ease;
+      
+            &:first-of-type {
+              left: 0;
+              transform: scale(.9) rotate(45deg);
+            }
+      
+            &:last-of-type {
+              right: 0;
+              transform: scale(.9) rotate(-45deg);
+            }
+          }
+    
+          &.collapse-false{
+            span {
+                &:first-of-type {
+                  transform: scale(.9) rotate(-45deg);
+                }
+    
+                &:last-of-type {
+                  transform: scale(.9) rotate(45deg);
+                }
+              }
+          }
+      
+    }
+        
+}

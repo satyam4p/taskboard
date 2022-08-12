@@ -66,14 +66,12 @@ const sampleTask = [
     },
 ]
 
-const Column= (props) =>{
-    const config = {...props};
-
+const Column= ({collapse}) =>{
     return(
-        <Col className='col-container'>
+        <Col className={`col-container col-collapse-${collapse}`}>
             {sampleTask.map((task, key)=>{
                 return(
-                    <Card task = { task }/>
+                    <Card key = {key} task = { task }/>
                 )
             })}
         </Col>
