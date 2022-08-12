@@ -9,9 +9,9 @@ const ColumnContainer = (props) =>{
 
     return(
         <div className={`column-container toggle-${collapse}`}>
-                <ToggleTrigger
-                    collapse={collapse}
-                    setCollapse={setCollapse}
+            <ToggleTrigger
+                collapse={collapse}
+                setCollapse={setCollapse}
                 />
             <Column collapse={collapse}/>
             <Column collapse={collapse}/>

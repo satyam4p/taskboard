@@ -5,11 +5,10 @@ import ColumnContainer from '../common/ColumnContainer/ColumnContainer';
 const style={
     'width': '100%',
     'maxHeight': '95vh',
-    'overflowY':'auto',
+    'overflow':'auto',
     'border':'1px solid black',
     'background': 'lightblue',
     'padding':'20px',
-    'overflowX':'hidden'
 }
 export default function Board(props){
 
@@ -18,8 +17,8 @@ export default function Board(props){
     return(
         <div style={style}>
             <ColumnContainer/>
-            {/* <ColumnContainer/>
-            <ColumnContainer/> */}
+            {/* <ColumnContainer/> */}
+            {/* <ColumnContainer/>  */}
         </div>
     )
 }

@@ -4,7 +4,9 @@
     padding: 10px 10px 10px 10px;
     border: 1px solid blue;
     transition: all 1s ease-out;
-    overflow-x:scroll;
+    overflow-x: visible;
+    overflow-y: visible;
+    min-width: fit-content;
 }
 
 .toggle-true{

@@ -6,7 +6,7 @@ import './stylesheet.scss';
 
 const sampleTask = [
     {   
-        name:'complete side project',
+        name:'complete side project aosuidhajksdb asodiajkashd; asljdh;als lasnd pasjnd pakjsd lkjhasd aojklsdna a;sdnalmsnaslnas asldkna asdhlaksnd',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',
         owner: 'Satyam Kumar',
@@ -57,7 +57,7 @@ const sampleTask = [
         currentStatus:' Ongoing',
         description: ' Basic structure of the task board is ready, making changes for the resusable components'
     },{   
-        name:'complete side project',
+        name:'complete side project ',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',
         owner: 'Satyam Kumar',

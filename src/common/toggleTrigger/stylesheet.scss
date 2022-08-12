@@ -4,14 +4,16 @@ $black: #000;
 .toggle-container{
 
     position: relative;
-    width: 20%;
+    width: 400px;
     height: 100px;
     padding: 10px;
-    border: 1px solid green;
+    // border: 1px solid green;
+    display: block;
 
     &.collapse-true{
         height: 15%;
-        width: 20%;
+        width: 180px;
+        display: block;
     }
     
     .toggle-arrow{
