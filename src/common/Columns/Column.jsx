@@ -5,13 +5,33 @@ import Card from '../Card/Card';
 import './stylesheet.scss';
 import useStatusTask from '../../helpers/hooks/useStatusTask';
 import Header from './Header/Header';
+import { useEffect } from 'react';
 
 
 const Column= ({collapse, colType, sampleTask}) =>{
-    const [ tataskAsPerStatus ] = useStatusTask(sampleTask, colType);
+    const [ tataskAsPerStatus, getTaskAsperStatus ] = useStatusTask(sampleTask, colType);
+
+    useEffect(()=>{
+        getTaskAsperStatus();
+    },[]);
+
+    const handleDropEvent=(ev)=>{
+        let id = ev.dataTransfer.getData('taskID');
+        /**logic to update the task status and update the taskAsPerstatus again */
+    }
     return(
         <>
-        <Col className={`col-container col-collapse-${collapse}`}>
+        <Col 
+        onDragOver={ev=>{
+           ev.stopPropagation();
+           ev.preventDefault();
+        }}
+        onDrop={ev=>{
+            ev.stopPropagation();
+            ev.preventDefault();
+            handleDropEvent(ev);
+        }}
+        className={`col-container col-collapse-${collapse}`}>
             <Header name={colType} level={4} style="default"/>
             {tataskAsPerStatus.map((task, key)=>{
                 return(

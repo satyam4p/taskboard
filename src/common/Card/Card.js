@@ -15,8 +15,15 @@ const Card=(props)=>{
 
     return(
         <AntCard
+            draggable={true}
             title={ props.task.name}
             style={style}
+            onDragStart={e=>{
+                console.log("task id in card:: ",props.task.taskID);
+                e.dataTransfer.setData("taskID", props.task.taskID);
+            }}
+            onDragOver={e=>e.preventDefault}
+
         />
     )
 }

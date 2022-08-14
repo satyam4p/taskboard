@@ -6,6 +6,7 @@ import ToggleTrigger from '../toggleTrigger/ToggleTrigger';
 
 const sampleTask = [
     {   
+        taskID:1,
         name:'complete side project',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',
@@ -14,6 +15,7 @@ const sampleTask = [
         description: ' Basic structure of the task board is ready, making changes for the resusable components'
     },
     {   
+        taskID:2,
         name:'complete side project',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',
@@ -22,6 +24,16 @@ const sampleTask = [
         description: ' Basic structure of the task board is ready, making changes for the resusable components'
     },
     {   
+        taskID:3,
+        name:'complete side project',
+        InitialDate:'12 May, 2022',
+        finalDate: '12 Dec, 2022',
+        owner: 'Satyam Kumar',
+        status:'Complete',
+        description: ' Basic structure of the task board is ready, making changes for the resusable components'
+    },
+    {   
+        taskID:4,
         name:'complete side project',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',
@@ -29,13 +41,7 @@ const sampleTask = [
         status:'Complete',
         description: ' Basic structure of the task board is ready, making changes for the resusable components'
     },{   
-        name:'complete side project',
-        InitialDate:'12 May, 2022',
-        finalDate: '12 Dec, 2022',
-        owner: 'Satyam Kumar',
-        status:'Complete',
-        description: ' Basic structure of the task board is ready, making changes for the resusable components'
-    },{   
+        taskID:5,
         name:'complete side project',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',
@@ -43,6 +49,7 @@ const sampleTask = [
         status:'In Progress',
         description: ' Basic structure of the task board is ready, making changes for the resusable components'
     },{   
+        taskID:6,
         name:'complete side project',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',
@@ -50,6 +57,7 @@ const sampleTask = [
         status:'In Progress',
         description: ' Basic structure of the task board is ready, making changes for the resusable components'
     },{   
+        taskID:7,
         name:'complete side project',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',
@@ -57,6 +65,7 @@ const sampleTask = [
         status:'Complete',
         description: ' Basic structure of the task board is ready, making changes for the resusable components'
     },{   
+        taskID:8,
         name:'complete side project ',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',

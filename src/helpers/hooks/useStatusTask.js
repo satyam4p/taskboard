@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
 const useStatusTask=(taskList, status='New')=>{
-    const taskAsPerStatus = taskList.filter( task => task.status == status );
-    return [taskAsPerStatus];
+    const [taskAsPerStatus, setTaskAsperStatus] = useState([]);
+
+    function getTaskAsperStatus(){
+        let taskArray = taskList.filter( task => task.status == status );
+        setTaskAsperStatus([...taskArray]);
+    }
+    return [taskAsPerStatus, getTaskAsperStatus];
 }
 export default useStatusTask;
