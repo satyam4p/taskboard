@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState }  from 'react';
 import { Col } from 'antd';
-import { useState } from 'react';
 import Card from '../Card/Card';
 import './stylesheet.scss';
 import useStatusTask from '../../helpers/hooks/useStatusTask';
 import Header from './Header/Header';
-import { useEffect } from 'react';
 
 
 const Column= ({collapse, colType, sampleTask}) =>{
