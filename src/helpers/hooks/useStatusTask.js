@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 const useStatusTask=(taskList, status='New')=>{
     const [taskAsPerStatus, setTaskAsperStatus] = useState([]);
 
-    function getTaskAsperStatus(){
+    function getTaskAsperStatus(taskList){
         let taskArray = taskList.filter( task => task.status == status );
         setTaskAsperStatus([...taskArray]);
     }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState }  from 'react';
+import { cloneDeep }  from 'lodash';
 import { Col } from 'antd';
 import Card from '../Card/Card';
 import './stylesheet.scss';
@@ -7,15 +8,29 @@ import Header from './Header/Header';
 
 
 const Column= ({collapse, colType, sampleTask}) =>{
-    const [ tataskAsPerStatus, getTaskAsperStatus ] = useStatusTask(sampleTask, colType);
+    const [ taskAsPerStatus, getTaskAsperStatus ] = useStatusTask(sampleTask, colType);
+    const [rederCount, setRenderCounter] = useState(1);
 
     useEffect(()=>{
-        getTaskAsperStatus();
-    },[]);
-
+        getTaskAsperStatus(sampleTask);
+    },[rederCount]);
+    console.log("render count:: ",rederCount);
     const handleDropEvent=(ev)=>{
         let id = ev.dataTransfer.getData('taskID');
+        // let allTasks = cloneDeep(sampleTask);
+        let modifiedTasks = sampleTask.map(task=>{
+            if(task.taskID == id){
+                return {...task, status:colType};
+            }
+            return task;
+        })
+        getTaskAsperStatus(modifiedTasks);
+        setRenderCounter((prevCount=>{
+            return prevCount+1;
+        }));
         /**logic to update the task status and update the taskAsPerstatus again */
+        /** need to change the logic for updateing the sampleTask as
+         *  when we re-render the sample task is same as before even after making modified task list */
     }
     return(
         <>
@@ -31,7 +46,7 @@ const Column= ({collapse, colType, sampleTask}) =>{
         }}
         className={`col-container col-collapse-${collapse}`}>
             <Header name={colType} level={4} style="default"/>
-            {tataskAsPerStatus.map((task, key)=>{
+            {taskAsPerStatus.map((task, key)=>{
                 return(
                     <Card key = {key} task = { task }/>
                 )
