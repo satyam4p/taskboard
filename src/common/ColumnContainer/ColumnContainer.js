@@ -75,6 +75,7 @@ const ColumnContainer = (props) =>{
             <ToggleTrigger
                 collapse={collapse}
                 setCollapse={setCollapse}
+                user = "Satyam Kumar"
                 />
             {colTypes ? 
                 colTypes.map((colType, key)=>{

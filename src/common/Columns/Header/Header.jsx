@@ -1,13 +1,14 @@
 import React from 'react';
 import { Typography }  from 'antd';
+import './stylesheet.scss';
 
 const { Title } = Typography;
 
 
-const Header = ({colType})=>{
-    
+const Header = ({name, level, style})=>{
+
     return(
-        <Title className='col-header' level={5}>{colType}</Title>
+        <Title className={style} level={level}>{name}</Title>
     )
 }
 

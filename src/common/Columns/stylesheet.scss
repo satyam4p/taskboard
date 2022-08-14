@@ -1,14 +1,9 @@
 .col-container, .col-collapse-false{
-    width: 20%;
+    width: 15%;
+    margin-left: 10px;
     // border: 1px solid black;
     overflow: visible;
     // display: block;
-
-    .col-header{
-        margin-block-start: 5px;
-        margin-block-end: 10px;
-    }
-
 }
 
 .col-collapse-true{

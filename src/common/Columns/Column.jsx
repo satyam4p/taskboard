@@ -12,7 +12,7 @@ const Column= ({collapse, colType, sampleTask}) =>{
     return(
         <>
         <Col className={`col-container col-collapse-${collapse}`}>
-            <Header colType={colType} />
+            <Header name={colType} level={4} style="default"/>
             {tataskAsPerStatus.map((task, key)=>{
                 return(
                     <Card key = {key} task = { task }/>
