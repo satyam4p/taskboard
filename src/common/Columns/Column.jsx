@@ -5,26 +5,41 @@ import Card from '../Card/Card';
 import './stylesheet.scss';
 import useStatusTask from '../../helpers/hooks/useStatusTask';
 import Header from './Header/Header';
+import isObjArrayEqual from '../../helpers/HOF/isObjArrEquals';
 
 
 const Column= ({collapse, colType, sampleTask}) =>{
-    const [ taskAsPerStatus, getTaskAsperStatus ] = useStatusTask(sampleTask, colType);
+    const [ taskList, setTaskList ] = useState(sampleTask);
+    const [ taskAsPerStatus, getTaskAsperStatus ] = useStatusTask(taskList, colType);
     const [rederCount, setRenderCounter] = useState(1);
 
     useEffect(()=>{
-        getTaskAsperStatus(sampleTask);
+        getTaskAsperStatus(taskList);
     },[rederCount]);
     console.log("render count:: ",rederCount);
     const handleDropEvent=(ev)=>{
         let id = ev.dataTransfer.getData('taskID');
         // let allTasks = cloneDeep(sampleTask);
-        let modifiedTasks = sampleTask.map(task=>{
+        let modifiedTaskList = taskList.map(task=>{
             if(task.taskID == id){
-                return {...task, status:colType};
+                return {
+                    taskID:task.taskID,
+                    name:task.name,
+                    InitialDate:task.InitialDate,
+                    finalDate: task.finalDate,
+                    owner: task.owner,
+                    description: task.description,
+                    status:colType
+                };
             }
             return task;
         })
-        getTaskAsperStatus(modifiedTasks);
+        setTaskList((prevTaskList=>{
+            if(!isObjArrayEqual(prevTaskList,modifiedTaskList)){
+                return modifiedTaskList;
+            }
+            return prevTaskList;
+        }))
         setRenderCounter((prevCount=>{
             return prevCount+1;
         }));
@@ -48,7 +63,7 @@ const Column= ({collapse, colType, sampleTask}) =>{
             <Header name={colType} level={4} style="default"/>
             {taskAsPerStatus.map((task, key)=>{
                 return(
-                    <Card key = {key} task = { task }/>
+                    <Card key = {key+task.taskID} task = { task }/>
                 )
             })}
         </Col>

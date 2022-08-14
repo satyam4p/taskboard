@@ -16,7 +16,7 @@ const sampleTask = [
     },
     {   
         taskID:2,
-        name:'complete side project',
+        name:'ticket 2',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',
         owner: 'Satyam Kumar',
@@ -25,7 +25,7 @@ const sampleTask = [
     },
     {   
         taskID:3,
-        name:'complete side project',
+        name:'ticket 3',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',
         owner: 'Satyam Kumar',
@@ -34,7 +34,7 @@ const sampleTask = [
     },
     {   
         taskID:4,
-        name:'complete side project',
+        name:'ticket 4',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',
         owner: 'Satyam Kumar',
@@ -42,7 +42,7 @@ const sampleTask = [
         description: ' Basic structure of the task board is ready, making changes for the resusable components'
     },{   
         taskID:5,
-        name:'complete side project',
+        name:'ticket 5',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',
         owner: 'Satyam Kumar',
@@ -50,7 +50,7 @@ const sampleTask = [
         description: ' Basic structure of the task board is ready, making changes for the resusable components'
     },{   
         taskID:6,
-        name:'complete side project',
+        name:'ticket 6',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',
         owner: 'Satyam Kumar',
@@ -58,7 +58,7 @@ const sampleTask = [
         description: ' Basic structure of the task board is ready, making changes for the resusable components'
     },{   
         taskID:7,
-        name:'complete side project',
+        name:'ticket 7',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',
         owner: 'Satyam Kumar',
@@ -66,7 +66,7 @@ const sampleTask = [
         description: ' Basic structure of the task board is ready, making changes for the resusable components'
     },{   
         taskID:8,
-        name:'complete side project ',
+        name:'ticket 8',
         InitialDate:'12 May, 2022',
         finalDate: '12 Dec, 2022',
         owner: 'Satyam Kumar',
@@ -78,6 +78,7 @@ const sampleTask = [
 const ColumnContainer = (props) =>{
     
     const [ collapse, setCollapse ] = useState(false);
+    const [taskList, setTaskList] = useState(sampleTask);
     const colTypes = ['Active','In Progress', 'Complete', 'New'];
     return(
         <div className={`column-container toggle-${collapse}`}>
@@ -88,7 +89,12 @@ const ColumnContainer = (props) =>{
                 />
             {colTypes ? 
                 colTypes.map((colType, key)=>{
-                    return <Column key={key} collapse={collapse} colType={colType} sampleTask = { sampleTask }/>
+                    return <Column 
+                                key={key} 
+                                collapse={collapse} 
+                                colType={colType} 
+                                sampleTask = { taskList }
+                                />
                 }) : null
             }
         </div>
