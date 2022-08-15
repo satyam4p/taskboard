@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row } from 'antd';
 import Column from '../Columns/Column';
 import './stylesheet.scss';
 import ToggleTrigger from '../toggleTrigger/ToggleTrigger';
+import useStatusTask from '../../helpers/hooks/useStatusTask';
 
 const sampleTask = [
     {   
@@ -78,8 +79,30 @@ const sampleTask = [
 const ColumnContainer = (props) =>{
     
     const [ collapse, setCollapse ] = useState(false);
-    const [taskList, setTaskList] = useState(sampleTask);
+    const [taskList, setTaskList] = useState([]);
     const colTypes = ['Active','In Progress', 'Complete', 'New'];
+
+    const [ taskAsPerStatus, getTaskAsperStatus ] = useStatusTask();
+
+    useEffect(()=>{
+        for(let i=0; i < colTypes.length; i++){
+            // debugger;
+            const colType = colTypes[i];
+            getTaskAsperStatus(sampleTask,colType);
+            setTaskList(prev=>{
+                // debugger;
+                let colType = colTypes[i];
+                console.log("coltype:: ",colType);
+                console.log("prev:: ",prev);
+                console.log("taskAsPerStatus:: ",taskAsPerStatus);
+                return {
+                    ...prev,
+                    // [colType] :[...prev[colType],taskAsPerStatus]
+                }
+            })
+        }
+    },[]);
+    console.log("taskList: ",taskList);
     return(
         <div className={`column-container toggle-${collapse}`}>
             <ToggleTrigger

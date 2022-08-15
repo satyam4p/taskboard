@@ -16,7 +16,7 @@ const Column= ({collapse, colType, sampleTask}) =>{
     useEffect(()=>{
         getTaskAsperStatus(taskList);
     },[rederCount]);
-    console.log("render count:: ",rederCount);
+    // console.log("render count:: ",rederCount);
     const handleDropEvent=(ev)=>{
         let id = ev.dataTransfer.getData('taskID');
         // let allTasks = cloneDeep(sampleTask);
