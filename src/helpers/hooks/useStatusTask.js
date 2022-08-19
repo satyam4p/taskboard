@@ -6,13 +6,15 @@ const useStatusTask=()=>{
     const [taskAsPerStatus, setTaskAsperStatus] = useState([]);
 
     function getTaskAsperStatus(taskList, status){
-        console.log("tasklist:: ",taskList);
+        // console.log("tasklist:: ",taskList);
         // console.log("taskList:: ",taskList, 'length:: ',taskList.length);
         /** reduce the main taskList into array of different object with status as their key and value as required data */
         /** the use state behaviour needs to be debugged for updating the tasklist */
+        /** TODO: need to cleanup and make this whole as reusable function instead of hook- search alternatives */
         let count=0;
+        let listOfTasks = []
         if(taskList && taskList.length > 0){
-            let listOfTasks = taskList.reduce((acc,curr)=>{
+            listOfTasks = taskList.reduce((acc,curr)=>{
                 count = count+1;
                 if(curr.status == status){
                     acc.push({...curr});
@@ -20,13 +22,13 @@ const useStatusTask=()=>{
                 return acc;
             },[]);
             // debugger;
-            console.log("listOfTasks:: ",listOfTasks);
+            // console.log("listOfTasks:: ",listOfTasks);
             setTaskAsperStatus((prevList=>{
                 // debugger;
                 return listOfTasks
             }));
         }
-        
+        return listOfTasks;
         // console.log("list of obj:: ",listOfTasks);
         
     }

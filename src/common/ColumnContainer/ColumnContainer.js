@@ -88,21 +88,17 @@ const ColumnContainer = (props) =>{
         for(let i=0; i < colTypes.length; i++){
             // debugger;
             const colType = colTypes[i];
-            getTaskAsperStatus(sampleTask,colType);
+            const tasks = getTaskAsperStatus(sampleTask,colType);
+            console.log("tasks returned:: ",tasks);
             setTaskList(prev=>{
-                // debugger;
-                let colType = colTypes[i];
-                console.log("coltype:: ",colType);
-                console.log("prev:: ",prev);
-                console.log("taskAsPerStatus:: ",taskAsPerStatus);
                 return {
-                    ...prev,
-                    // [colType] :[...prev[colType],taskAsPerStatus]
-                }
+                        ...prev,
+                        [colType]: [...tasks]
+                    }
             })
         }
     },[]);
-    console.log("taskList: ",taskList);
+    console.log("tasklist:: ",taskList);
     return(
         <div className={`column-container toggle-${collapse}`}>
             <ToggleTrigger
@@ -116,7 +112,7 @@ const ColumnContainer = (props) =>{
                                 key={key} 
                                 collapse={collapse} 
                                 colType={colType} 
-                                sampleTask = { taskList }
+                                sampleTask = { taskList[colType] }
                                 />
                 }) : null
             }
