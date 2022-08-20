@@ -16,6 +16,7 @@ const useStatusTask=()=>{
         if(taskList && taskList.length > 0){
             listOfTasks = taskList.reduce((acc,curr)=>{
                 count = count+1;
+                /** need to add the index of each task that is pushed */
                 if(curr.status == status){
                     acc.push({...curr});
                 }

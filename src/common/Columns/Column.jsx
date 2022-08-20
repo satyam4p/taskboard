@@ -8,11 +8,13 @@ import Header from './Header/Header';
 import isObjArrayEqual from '../../helpers/HOF/isObjArrEquals';
 
 
-const Column= ({collapse, colType, sampleTask}) =>{
-    console.log("sample task:: ",sampleTask);
+const Column= ({collapse, colType, sampleTask, handleTaskChange}) =>{
+    const [tasks, setTasks] = useState(sampleTask);
+    // console.log("sample task:: ",sampleTask);
     const handleDropEvent=(ev)=>{
         let id = ev.dataTransfer.getData('taskID');
-        
+
+        handleTaskChange(id, colType);
         /**logic to update the task status and update the taskAsPerstatus again */
         /** need to change the logic for updateing the sampleTask as
          *  when we re-render the sample task is same as before even after making modified task list */
@@ -29,7 +31,7 @@ const Column= ({collapse, colType, sampleTask}) =>{
         onDrop={ev=>{
             ev.stopPropagation();
             ev.preventDefault();
-            // handleDropEvent(ev);
+            handleDropEvent(ev);
         }}
         className={`col-container col-collapse-${collapse}`}>
             <Header name={colType} level={4} style="default"/>

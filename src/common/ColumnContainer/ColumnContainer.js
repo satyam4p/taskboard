@@ -4,8 +4,9 @@ import Column from '../Columns/Column';
 import './stylesheet.scss';
 import ToggleTrigger from '../toggleTrigger/ToggleTrigger';
 import useStatusTask from '../../helpers/hooks/useStatusTask';
+import { cloneDeep } from 'lodash';
 
-const sampleTask = [
+let sampleTask = [
     {   
         taskID:1,
         name:'complete side project',
@@ -84,12 +85,29 @@ const ColumnContainer = (props) =>{
 
     const [ taskAsPerStatus, getTaskAsperStatus ] = useStatusTask();
 
+    const handleTaskChange = (id, colType)=>{
+        let taskListCP = cloneDeep(taskList);
+        
+        let task = sampleTask.filter(task=>{
+           if(task.taskID == id){
+            return task;
+           }
+        });
+        const colTypeOfTask = task[0]['status'];
+        const toModifyArr = taskListCP[colTypeOfTask];
+        /** logic to remove the task from previous column and add the task to new column and update state */
+        console.log("colTypeOfTask type:: ",colTypeOfTask);
+        taskListCP[colType].push(task);
+        
+        console.log("taskListCP:: ",taskListCP);
+    }
+
     useEffect(()=>{
         for(let i=0; i < colTypes.length; i++){
             // debugger;
             const colType = colTypes[i];
             const tasks = getTaskAsperStatus(sampleTask,colType);
-            console.log("tasks returned:: ",tasks);
+            // console.log("tasks returned:: ",tasks);
             setTaskList(prev=>{
                 return {
                         ...prev,
@@ -98,7 +116,7 @@ const ColumnContainer = (props) =>{
             })
         }
     },[]);
-    console.log("tasklist:: ",taskList);
+    // console.log("tasklist:: ",taskList);
     return(
         <div className={`column-container toggle-${collapse}`}>
             <ToggleTrigger
@@ -113,6 +131,7 @@ const ColumnContainer = (props) =>{
                                 collapse={collapse} 
                                 colType={colType} 
                                 sampleTask = { taskList[colType] }
+                                handleTaskChange = {handleTaskChange}
                                 />
                 }) : null
             }
