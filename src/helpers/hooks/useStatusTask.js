@@ -1,4 +1,3 @@
-import { camelCase } from 'lodash';
 import React, { useState } from 'react';
 
 
@@ -22,16 +21,11 @@ const useStatusTask=()=>{
                 }
                 return acc;
             },[]);
-            // debugger;
-            // console.log("listOfTasks:: ",listOfTasks);
             setTaskAsperStatus((prevList=>{
-                // debugger;
                 return listOfTasks
             }));
         }
         return listOfTasks;
-        // console.log("list of obj:: ",listOfTasks);
-        
     }
 
     return [taskAsPerStatus, getTaskAsperStatus];

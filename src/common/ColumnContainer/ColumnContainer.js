@@ -4,7 +4,7 @@ import Column from '../Columns/Column';
 import './stylesheet.scss';
 import ToggleTrigger from '../toggleTrigger/ToggleTrigger';
 import useStatusTask from '../../helpers/hooks/useStatusTask';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, findIndex, isEqual } from 'lodash';
 
 let sampleTask = [
     {   
@@ -75,6 +75,24 @@ let sampleTask = [
         status:'Active',
         description: ' Basic structure of the task board is ready, making changes for the resusable components'
     },
+    {
+        taskID:10,
+        name:'ticket 10',
+        InitialDate:'12 May, 2022',
+        finalDate: '12 Dec, 2022',
+        owner: 'Satyam Kumar',
+        status:'Unassigned',
+        description: ' Basic structure of the task board is ready, making changes for the resusable components'
+    },
+    {
+        taskID:11,
+        name:'ticket 11',
+        InitialDate:'12 May, 2022',
+        finalDate: '12 Dec, 2022',
+        owner: 'Satyam Kumar',
+        status:'Rejected',
+        description: ' Basic structure of the task board is ready, making changes for the resusable components'
+    }
 ]
 
 const ColumnContainer = (props) =>{
@@ -90,24 +108,26 @@ const ColumnContainer = (props) =>{
         
         let task = sampleTask.filter(task=>{
            if(task.taskID == id){
-            return task;
+            return {...task};
            }
         });
         const colTypeOfTask = task[0]['status'];
         const toModifyArr = taskListCP[colTypeOfTask];
+        task[0].status = colType;
+        const index = findIndex(toModifyArr,(task)=>task.taskID == id);
         /** logic to remove the task from previous column and add the task to new column and update state */
-        console.log("colTypeOfTask type:: ",colTypeOfTask);
-        taskListCP[colType].push(task);
-        
-        console.log("taskListCP:: ",taskListCP);
+        toModifyArr.splice(index,1);
+        taskListCP[colType].push(task[0]);
+        setTaskList((prevTaskList)=>{
+                if(!isEqual(prevTaskList, taskListCP)){
+                    return {...taskListCP};
+                }
+        })
     }
-
     useEffect(()=>{
         for(let i=0; i < colTypes.length; i++){
-            // debugger;
             const colType = colTypes[i];
             const tasks = getTaskAsperStatus(sampleTask,colType);
-            // console.log("tasks returned:: ",tasks);
             setTaskList(prev=>{
                 return {
                         ...prev,
@@ -116,7 +136,6 @@ const ColumnContainer = (props) =>{
             })
         }
     },[]);
-    // console.log("tasklist:: ",taskList);
     return(
         <div className={`column-container toggle-${collapse}`}>
             <ToggleTrigger

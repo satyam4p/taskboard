@@ -10,11 +10,12 @@ import isObjArrayEqual from '../../helpers/HOF/isObjArrEquals';
 
 const Column= ({collapse, colType, sampleTask, handleTaskChange}) =>{
     const [tasks, setTasks] = useState(sampleTask);
-    // console.log("sample task:: ",sampleTask);
     const handleDropEvent=(ev)=>{
         let id = ev.dataTransfer.getData('taskID');
-
-        handleTaskChange(id, colType);
+        let result = sampleTask.filter(task=>task.taskID == id);
+        if(result.length < 1){
+            handleTaskChange(id, colType);
+        }
         /**logic to update the task status and update the taskAsPerstatus again */
         /** need to change the logic for updateing the sampleTask as
          *  when we re-render the sample task is same as before even after making modified task list */
@@ -37,7 +38,7 @@ const Column= ({collapse, colType, sampleTask, handleTaskChange}) =>{
             <Header name={colType} level={4} style="default"/>
             {sampleTask && sampleTask.map((task, key)=>{
                 return(
-                    <Card key = {key+task.taskID} task = { task }/>
+                    <Card key = {task.taskID} task = { task }/>
                 )
             })}
         </Col>
