@@ -9,12 +9,12 @@ import isObjArrayEqual from '../../helpers/HOF/isObjArrEquals';
 
 
 const Column= ({collapse, colType, sampleTask, handleTaskChange}) =>{
-    const [tasks, setTasks] = useState(sampleTask);
     const handleDropEvent=(ev)=>{
-        let id = ev.dataTransfer.getData('taskID');
-        let result = sampleTask.filter(task=>task.taskID == id);
+        const id = ev.dataTransfer.getData('taskID');
+        const fromColType = ev.dataTransfer.getData('fromCol');
+        let result = sampleTask.filter(task=>task.id == id);
         if(result.length < 1){
-            handleTaskChange(id, colType);
+            handleTaskChange(id, fromColType, colType);
         }
         /**logic to update the task status and update the taskAsPerstatus again */
         /** need to change the logic for updateing the sampleTask as
@@ -38,7 +38,7 @@ const Column= ({collapse, colType, sampleTask, handleTaskChange}) =>{
             <Header name={colType} level={4} style="default"/>
             {sampleTask && sampleTask.map((task, key)=>{
                 return(
-                    <Card key = {task.taskID} task = { task }/>
+                    <Card key = {task.id} task = { task }/>
                 )
             })}
         </Col>
