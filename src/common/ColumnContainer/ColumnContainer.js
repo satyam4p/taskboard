@@ -103,6 +103,26 @@ const ColumnContainer = (props) =>{
 
     const [ taskAsPerStatus, getTaskAsperStatus ] = useStatusTask();
 
+    useEffect(()=>{
+        fetch('http://localhost:9000/tasks').then(response=>{
+            response.json().then(response=>{
+                for(let i=0; i < colTypes.length; i++){
+                    const colType = colTypes[i];
+                    const tasks = getTaskAsperStatus(response,colType);
+                    setTaskList(prev=>{
+                        return {
+                                ...prev,
+                                [colType]: [...tasks]
+                            }
+                    })
+                }      
+            })
+        }).catch(error=>{
+            console.log("error:: ",error);
+        })
+
+    },[])
+
     const handleTaskChange = (id, colType)=>{
         let taskListCP = cloneDeep(taskList);
         
@@ -124,18 +144,9 @@ const ColumnContainer = (props) =>{
                 }
         })
     }
-    useEffect(()=>{
-        for(let i=0; i < colTypes.length; i++){
-            const colType = colTypes[i];
-            const tasks = getTaskAsperStatus(sampleTask,colType);
-            setTaskList(prev=>{
-                return {
-                        ...prev,
-                        [colType]: [...tasks]
-                    }
-            })
-        }
-    },[]);
+    // useEffect(()=>{
+        
+    // },[]);
     return(
         <div className={`column-container toggle-${collapse}`}>
             <ToggleTrigger
