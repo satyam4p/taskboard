@@ -166,8 +166,8 @@ const axiosConfig = {
 
   // `cancelToken` specifies a cancel token that can be used to cancel the request
   // (see Cancellation section below for details)
-  cancelToken: new CancelToken(function (cancel) {
-  }),
+  // cancelToken: new CancelToken(function (cancel) {
+  // }),
 
   // `decompress` indicates whether or not the response body should be decompressed 
   // automatically. If set to `true` will also remove the 'content-encoding' header 

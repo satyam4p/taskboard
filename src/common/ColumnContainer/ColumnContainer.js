@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import AxiosAjax from '../../network/axiosAjax';
 import { Row } from 'antd';
 import Column from '../Columns/Column';
 import './stylesheet.scss';
 import ToggleTrigger from '../toggleTrigger/ToggleTrigger';
 import useStatusTask from '../../helpers/hooks/useStatusTask';
 import { cloneDeep, findIndex, isEqual } from 'lodash';
+
+const axiosAjax = new AxiosAjax();
 
 const ColumnContainer = (_props) =>{
     
@@ -15,23 +18,20 @@ const ColumnContainer = (_props) =>{
     const [ taskAsPerStatus, getTaskAsperStatus ] = useStatusTask();
 
     useEffect(()=>{
-        fetch('http://localhost:9000/tasks').then(response=>{
-            response.json().then(response=>{
+        axiosAjax.makeRequest('http://localhost:9000/tasks', 'GET').then(response=>{
+            if(response.status == 200){
                 for(let i=0; i < colTypes.length; i++){
                     const colType = colTypes[i];
-                    const tasks = getTaskAsperStatus(response,colType);
+                    const tasks = getTaskAsperStatus(response.data,colType);
                     setTaskList(prev=>{
                         return {
                                 ...prev,
                                 [colType]: [...tasks]
                             }
                     })
-                }      
-            })
-        }).catch(error=>{
-            console.log("error:: ",error);
+                }
+            }
         })
-
     },[])
 
     const handleTaskChange = (id, fromColType, toColType)=>{
@@ -75,9 +75,6 @@ const ColumnContainer = (_props) =>{
             }
         </div>
     )
-
-
-
 }
 
 export default ColumnContainer;

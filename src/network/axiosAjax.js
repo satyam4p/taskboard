@@ -1,15 +1,12 @@
 import axios from 'axios';
 
 import axiosConfig from './axiosConfig';
+import { ClientJS } from 'clientjs';
 
-const ClientJS  = window.ClientJS
-
-let client;
+const client = new ClientJS();
 let payload;
 
-
-window.addEventListener('load',()=>{
-    client = new ClientJS();
+window.addEventListener('load',() => {
     let clientData = {
         '13': {
             '11': Date.now(),
@@ -29,10 +26,6 @@ window.addEventListener('load',()=>{
             '2': client.getDeviceXDPI() || '',
             '26': client.getDeviceYDPI() || '',
             '13': client.getColorDepth() || '',
-            '15': client.isJava(),
-            '17': client.getJavaVersion() || '',
-            '30': client.isFlash(),
-            '12': client.getFlashVersion() || '',
             '29': client.isSilverlight(),
             '6': client.getSilverlightVersion() || '',
             '9': client.isMimeTypes(),
@@ -49,7 +42,7 @@ window.addEventListener('load',()=>{
     payload = btoa(JSON.stringify(clientData));
 })
 
-class AxiosAjax {
+export default class AxiosAjax {
 
     constructor(options){
 
@@ -75,5 +68,3 @@ class AxiosAjax {
         return request;
     }
 }
-
-module.exports = AxiosAjax;
