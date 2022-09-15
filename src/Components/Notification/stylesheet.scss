@@ -1,0 +1,19 @@
+
+.notification{
+
+    display: block;
+    position: absolute;
+    bottom: 2%;
+    right: 3%;
+    background: #fff;
+    // border: 0.5px solid #19191b;
+    border-radius: 5px;
+
+    h6 {
+        padding: 10px;
+        margin: 0px;
+        text-transform: capitalize;
+        color: #087d0e;
+    }
+
+}

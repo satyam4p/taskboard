@@ -62,7 +62,7 @@ export default class AxiosAjax {
             method: this.method,
             url: this.url,
             params: this.params,
-            data: this.data
+            data: this.body
         });
 
         return request;

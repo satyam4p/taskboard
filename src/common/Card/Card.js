@@ -22,7 +22,6 @@ const Card=(props)=>{
                 e.dataTransfer.setData("fromCol", props.task.status);
             }}
             onDragOver={e=>e.preventDefault}
-
         />
     )
 }
