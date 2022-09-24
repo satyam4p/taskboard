@@ -1,10 +1,13 @@
 /** @jsxImportSource theme-ui */
-import React from 'react';
+import React, { useState } from 'react';
 import { Flex } from 'theme-ui';
 import { Button } from 'theme-ui';
 
 
 function SecondaryBar(props){
+
+    const [ toggleSideMenu, setToggleSideMenu ] = useState(false);
+    
     return(
         <Flex sx={{
             width:['95%', null, null],
@@ -24,29 +27,33 @@ function SecondaryBar(props){
                 height:'40px',
                 mx:'10px',
                 bg:'inherit',
-                padding:'5px',
+                padding:'6px',
                 display:'flex',
                 flexDirection:'column',
                 justifyContent:'space-evenly'
-            }}>
-                <Flex sx={{
+                }} 
+                onClick={()=>setToggleSideMenu((prevVal)=>!prevVal)}>
+                    <Flex sx={{
                         width:'100%',
                         height:'3px',
                         bg:'#7E7E7E',
-                    }}
-                />
-                <Flex sx={{
+                        my:'1px'
+                        }}
+                    />
+                    <Flex sx={{
                         width:'100%',
                         height:'3px',
                         bg:'#7E7E7E',
-                    }} 
-                />
-                <Flex sx={{
+                        my:'1px'
+                        }} 
+                    />
+                    <Flex sx={{
                         width:'100%',
                         height:'3px',
                         bg:'#7E7E7E',
-                    }}
-                />
+                        my:'1px'
+                        }}
+                    />
             </Button>
             <Button sx={{
                 borderRadius:'50%',

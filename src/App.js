@@ -1,11 +1,9 @@
 
 import { useState, useEffect } from 'react';
 import './App.css';
-import SecondaryBar from './Components/Secondarybar/SecondaryBar';
-
+import Home from './views/home';
+import SideMenu from './Components/SideMenu/SideMenu';
 function App() {
-
-
 
   // const [inputData, setInputData] = useState({
   //   firstName:"",
@@ -39,7 +37,7 @@ function App() {
   // });
   return (
     <div>
-      <SecondaryBar/>
+      <Home/>
     </div>
   );
 }
