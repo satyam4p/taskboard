@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import SecondaryBar from '../Components/Secondarybar/SecondaryBar';
 
-function Home(){
+function Home({ setToggleSideMenu }){
 
     return(
         <>
-            <SecondaryBar/>
+            <SecondaryBar
+                setToggleSideMenu = {setToggleSideMenu}
+            />
         </>
     )
 

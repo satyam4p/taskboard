@@ -4,9 +4,7 @@ import { Flex } from 'theme-ui';
 import { Button } from 'theme-ui';
 
 
-function SecondaryBar(props){
-
-    const [ toggleSideMenu, setToggleSideMenu ] = useState(false);
+function SecondaryBar({ setToggleSideMenu }){
     
     return(
         <Flex sx={{
