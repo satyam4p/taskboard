@@ -19,12 +19,40 @@ function SecondaryBar(props){
             alignItems:'center',
             justifyContent:'space-between'
         }}>
-            <Button/>
+            <Button sx={{
+                width:'40px',
+                height:'40px',
+                mx:'10px',
+                bg:'inherit',
+                padding:'5px',
+                display:'flex',
+                flexDirection:'column',
+                justifyContent:'space-evenly'
+            }}>
+                <Flex sx={{
+                        width:'100%',
+                        height:'3px',
+                        bg:'#7E7E7E',
+                    }}
+                />
+                <Flex sx={{
+                        width:'100%',
+                        height:'3px',
+                        bg:'#7E7E7E',
+                    }} 
+                />
+                <Flex sx={{
+                        width:'100%',
+                        height:'3px',
+                        bg:'#7E7E7E',
+                    }}
+                />
+            </Button>
             <Button sx={{
                 borderRadius:'50%',
                 width:'40px',
                 height:'40px',
-                bg:'#417F65',
+                bg:'#88AF9F',
                 mx:'10px'
             }}/>
         </Flex>
