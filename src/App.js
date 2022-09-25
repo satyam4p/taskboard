@@ -5,7 +5,7 @@ import Home from './views/home';
 import SideMenu from './Components/SideMenu/SideMenu';
 function App() {
 
-  const [toggleSideMenu, setToggleSideMenu] = useState(false);
+  const [toggleSideMenu, setToggleSideMenu] = useState(true);
 
   // const [inputData, setInputData] = useState({
   //   firstName:"",

@@ -6,7 +6,7 @@ import { Flex, } from 'theme-ui';
 function SideMenu(props){
     return(
         <Flex sx={{
-                width:'15%',
+                width:'13%',
                 height:'80vh',
                 top:`calc(100vh - 90vh)`,
                 bg:'black',
@@ -28,20 +28,49 @@ function SideMenu(props){
                 }}>.
                     <div sx={{
                         width:'85%',
-                        mx:'10px',
-                        my:'10px',
+                        mx:'2px',
+                        my:'2px',
                         alignSelf:'center',
-                        
                     }}>
-                        <span>Recent Tasks</span>
+                        <button
+                            sx={{
+                                width:'100%',
+                                height:'inherit',
+                                border:'none',
+                                borderRadius:'5px',
+                                bg:'transparent',
+                                margin:0,
+                                padding:'8px',
+                                textAlign:'left',
+                                alignSelf:'center',
+                                '&:hover':{
+                                    bg:'#DFDFDF',
+                                    cursor:'pointer'
+                                }
+                            }}>Recent Tasks</button>
                     </div>
                     <div sx={{
                         width:'85%',
-                        mx:'10px',
-                        my:'10px',
+                        mx:'2px',
+                        my:'2px',
                         alignSelf:'center'
                     }}>
-                        <span>Archive</span>
+                        <button
+                             sx={{
+                                width:'100%',
+                                height:'inherit',
+                                border:'none',
+                                borderRadius:'5px',
+                                bg:'transparent',
+                                margin:0,
+                                padding:'8px',
+                                textAlign:'left',
+                                alignSelf:'center',
+                                '&:hover':{
+                                    bg:'#DFDFDF',
+                                    cursor:'pointer'
+                                }
+                            }}>Archive</button>
                     </div>
                     <div sx={{
                         width:'85%',
@@ -57,7 +86,22 @@ function SideMenu(props){
                     my:'10px',
                     alignSelf:'center'
                 }}>
-                    <span>Settings</span>
+                    <button
+                         sx={{
+                            width:'100%',
+                            height:'inherit',
+                            border:'none',
+                            borderRadius:'5px',
+                            bg:'transparent',
+                            margin:0,
+                            padding:'8px',
+                            textAlign:'left',
+                            alignSelf:'center',
+                            '&:hover':{
+                                bg:'#DFDFDF',
+                                cursor:'pointer'
+                            }
+                        }}>Settings</button>
                 </div>
             </Flex>
 
