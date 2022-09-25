@@ -15,7 +15,7 @@ function SecondaryBar({ setToggleSideMenu }){
             marginLeft:'calc(100% - 97.5%)',
             marginTop:'1.5%',
             borderRadius:10,
-            bg:'#E9E9E9',
+            bg:'#F7F7F7',
             display:'flex',
             alignItems:'center',
             justifyContent:'space-between'

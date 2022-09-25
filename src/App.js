@@ -40,7 +40,7 @@ function App() {
   return (
     <div>
       {
-        toggleSideMenu && <SideMenu/>
+        toggleSideMenu && <SideMenu />
       }
       <Home
         setToggleSideMenu = {setToggleSideMenu}
