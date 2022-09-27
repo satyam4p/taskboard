@@ -4,7 +4,7 @@ import { Flex } from 'theme-ui';
 import { Button } from 'theme-ui';
 
 
-function SecondaryBar({ setToggleSideMenu }){
+function SecondaryBar({ toggleSideMenu, setToggleSideMenu }){
     
     return(
         <Flex sx={{
@@ -15,7 +15,7 @@ function SecondaryBar({ setToggleSideMenu }){
             marginLeft:'calc(100% - 97.5%)',
             marginTop:'1.5%',
             borderRadius:10,
-            bg:'#F7F7F7',
+            bg:'#F6F6F6',
             display:'flex',
             alignItems:'center',
             justifyContent:'space-between'
@@ -30,7 +30,7 @@ function SecondaryBar({ setToggleSideMenu }){
                 flexDirection:'column',
                 justifyContent:'space-evenly'
                 }} 
-                onClick={()=>setToggleSideMenu((prevVal)=>!prevVal)}>
+                onClick={()=>setToggleSideMenu((prev)=>!prev)}>
                     <Flex sx={{
                         width:'100%',
                         height:'3px',

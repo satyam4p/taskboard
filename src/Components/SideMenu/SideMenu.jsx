@@ -1,9 +1,9 @@
 /** @jsxImportSource theme-ui */
 import React, { useState } from 'react';
 import { Flex, } from 'theme-ui';
+import iconsMap from '../../common/Icons/iconsMap';
 
-
-function SideMenu(props){
+function SideMenu({showSideMenu}){
     return(
         <Flex sx={{
                 width:'13%',
@@ -12,9 +12,11 @@ function SideMenu(props){
                 bg:'black',
                 position:'absolute',
                 display:'block',
-                bg:'#F7F7F7',
+                bg:'#F6F6F6',
                 fontFamily:'body',
-                fontSize:1,
+                fontSize:2,
+                transform:()=> showSideMenu ? 'translateX(0%)' : 'translateX(-100%)',
+                transition:'all 0.3s',
             }}>
             <Flex sx={{
                     flexDirection:'column',
@@ -46,8 +48,10 @@ function SideMenu(props){
                                 '&:hover':{
                                     bg:'#DFDFDF',
                                     cursor:'pointer'
-                                }
-                            }}>Recent Tasks</button>
+                                },
+                                display:'flex',
+                                alignItems:'center',
+                            }}>{iconsMap['RecentTasks']()}&nbsp;Recent Tasks</button>
                     </div>
                     <div sx={{
                         width:'85%',
@@ -69,8 +73,35 @@ function SideMenu(props){
                                 '&:hover':{
                                     bg:'#DFDFDF',
                                     cursor:'pointer'
-                                }
-                            }}>Archive</button>
+                                },
+                                display:'flex',
+                                alignItems:'center',
+                            }}>{iconsMap['Board']()}&nbsp;Board</button>
+                    </div>
+                    <div sx={{
+                        width:'85%',
+                        mx:'2px',
+                        my:'2px',
+                        alignSelf:'center'
+                    }}>
+                        <button
+                             sx={{
+                                width:'100%',
+                                height:'inherit',
+                                border:'none',
+                                borderRadius:'5px',
+                                bg:'transparent',
+                                margin:0,
+                                padding:'8px',
+                                textAlign:'left',
+                                alignSelf:'center',
+                                '&:hover':{
+                                    bg:'#DFDFDF',
+                                    cursor:'pointer'
+                                },
+                                display:'flex',
+                                alignItems:'center',
+                            }}>{iconsMap['Archive']()}&nbsp;Archive</button>
                     </div>
                     <div sx={{
                         width:'85%',
@@ -100,8 +131,10 @@ function SideMenu(props){
                             '&:hover':{
                                 bg:'#DFDFDF',
                                 cursor:'pointer'
-                            }
-                        }}>Settings</button>
+                            },
+                            display:'flex',
+                            alignItems:'center',
+                        }}>{iconsMap['Settings']()}&nbsp;Settings</button>
                 </div>
             </Flex>
 
