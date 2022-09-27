@@ -1,5 +1,5 @@
 
-export default (({props)=>{
+export default ((props)=>{
     return {
         Settings:(width=15, color= '123E2C')=>{
             return <img src={'https://img.icons8.com/windows/' + width + '/' + color + '/settings--v1.png'}/>
