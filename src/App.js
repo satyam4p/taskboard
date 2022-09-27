@@ -39,10 +39,9 @@ function App() {
   // });
   return (
     <div>
-      {
-        toggleSideMenu && <SideMenu />
-      }
+      <SideMenu showSideMenu = {toggleSideMenu}/>
       <Home
+        toggleSideMenu = {toggleSideMenu}
         setToggleSideMenu = {setToggleSideMenu}
       />
 
