@@ -7,7 +7,7 @@ function SideMenu({showSideMenu}){
     return(
         <Flex sx={{
                 width:'13%',
-                height:'80vh',
+                height:'86vh',
                 top:`calc(100vh - 90vh)`,
                 bg:'black',
                 position:'absolute',
@@ -15,7 +15,7 @@ function SideMenu({showSideMenu}){
                 bg:'#F6F6F6',
                 fontFamily:'body',
                 fontSize:2,
-                transform:()=> showSideMenu ? 'translateX(0%)' : 'translateX(-100%)',
+                transform:()=> showSideMenu ? 'translateX(0%)' : 'translateX(-150%)',
                 transition:'all 0.3s',
             }}>
             <Flex sx={{

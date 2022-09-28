@@ -1,6 +1,4 @@
-
 import { useState, useEffect } from 'react';
-import './App.css';
 import Home from './views/home';
 import SideMenu from './Components/SideMenu/SideMenu';
 function App() {
