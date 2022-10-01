@@ -27,7 +27,7 @@ function SideMenu({showSideMenu}){
             }}>
                 <Flex sx={{
                     flexDirection:'column',
-                }}>.
+                }}>
                     <div sx={{
                         width:'85%',
                         mx:'2px',
