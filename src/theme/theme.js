@@ -7,6 +7,7 @@ const theme = {
 
       },
     fontSizes:['12px', '14px', '16px', '20px', '24px', '28px', '32px', '48px', '64px', '96px'],
+    fontWeights:['600','700']
 }
 
 export default theme;

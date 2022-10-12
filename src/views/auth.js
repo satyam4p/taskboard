@@ -57,7 +57,7 @@ function Auth(){
                                 background:'#123E2C',
                                 color:'#FFFF',
                                 borderRadius:'4px',
-                                fontWeight:'700'
+                                fontWeight:1
                             }}>
                             Create Account
                         </Button>
@@ -78,7 +78,7 @@ function Auth(){
                 }}>
                     <Text sx={{
                         fontSize:5,
-                        fontWeight:'700',
+                        fontWeight:1,
                         padding:'5px'
                     }}>
                         Log into Taskboard
@@ -89,6 +89,7 @@ function Auth(){
                     }} as={"form"} onSubmit={(e)=>formHandler(e)}>
                         <Label sx={{
                             padding:'5px',
+                            fontWeight:0
                         }}>
                             Username / Email
                         </Label>
@@ -99,16 +100,18 @@ function Auth(){
                         <Container sx={{
                             display:'flex',
                             flexDirection:'row',
-                            justifyContent:'space-between'
+                            justifyContent:'space-between',
+                            alignItems:'center'
                         }}>
                             <Label sx={{
-                                padding:'5px'
+                                padding:'5px',
+                                fontWeight:0,
                             }}>
                                 Password
                             </Label>
                             <Link sx={{
                                 minWidth:'140px',
-                                padding:'5px'
+                                textAlign:'end'
                             }}>
                                 Forgot Password?
                             </Link>
@@ -121,7 +124,7 @@ function Auth(){
                             background:'#123E2C',
                             color:'#ffff',
                             margin:'5px',
-                            fontWeight:'700'
+                            fontWeight:1
                         }} type='submit'>Sign In</Button>
                     </Box>
                 </Container>
