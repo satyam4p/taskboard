@@ -1,7 +1,19 @@
-import { Box, Button, Container, Flex, Text } from 'theme-ui';
-
+import { 
+    Box, 
+    Button, 
+    Container, 
+    Flex, 
+    Text,
+    Label,
+    Input,
+    Link 
+} from 'theme-ui';
 
 function Auth(){
+
+    const formHandler=(event)=>{
+        event.preventDefault();
+    }
 
     return(
         <Flex>
@@ -45,23 +57,79 @@ function Auth(){
                                 background:'#123E2C',
                                 color:'#FFFF',
                                 borderRadius:'4px',
+                                fontWeight:'700'
                             }}>
                             Create Account
                         </Button>
                     </Container>
                 </Box>
                 <Box sx={{
-                    background:'yellow',
+                    // background:'yellow',
                     width:'100%',
-                    height:'90%'
+                    height:'90%',
+                    display:'flex',
+                    flexDirection:'column',
+                    alignItems:'center',
                 }}>
-
+                <Container sx={{
+                    margin:'120px 200px 0 0',
+                    // background:'lightgray',
+                    width:'45%',               
+                }}>
+                    <Text sx={{
+                        fontSize:5,
+                        fontWeight:'700',
+                        padding:'5px'
+                    }}>
+                        Log into Taskboard
+                    </Text>
+                    <Box sx={{
+                        marginTop:'30px',
+                        fontSize:1
+                    }} as={"form"} onSubmit={(e)=>formHandler(e)}>
+                        <Label sx={{
+                            padding:'5px',
+                        }}>
+                            Username / Email
+                        </Label>
+                        <Input sx={{
+                            margin:'5px',
+                            height:'40px'
+                        }} />
+                        <Container sx={{
+                            display:'flex',
+                            flexDirection:'row',
+                            justifyContent:'space-between'
+                        }}>
+                            <Label sx={{
+                                padding:'5px'
+                            }}>
+                                Password
+                            </Label>
+                            <Link sx={{
+                                minWidth:'140px',
+                                padding:'5px'
+                            }}>
+                                Forgot Password?
+                            </Link>
+                        </Container>
+                        <Input sx={{
+                            margin:'5px',
+                            height:'40px'
+                        }}/>
+                        <Button sx={{
+                            background:'#123E2C',
+                            color:'#ffff',
+                            margin:'5px',
+                            fontWeight:'700'
+                        }} type='submit'>Sign In</Button>
+                    </Box>
+                </Container>
+                    
                 </Box>
             </Flex>
         </Flex>
     )
-
-
 }
 
 export default Auth;
