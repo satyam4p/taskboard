@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Home from './views/home';
 import SideMenu from './Components/SideMenu/SideMenu';
+import Auth from './views/auth';
 function App() {
 
   const [toggleSideMenu, setToggleSideMenu] = useState(true);
@@ -37,11 +38,12 @@ function App() {
   // });
   return (
     <div>
-      <SideMenu showSideMenu = {toggleSideMenu}/>
+      <Auth/>
+      {/* <SideMenu showSideMenu = {toggleSideMenu}/>
       <Home
         toggleSideMenu = {toggleSideMenu}
         setToggleSideMenu = {setToggleSideMenu}
-      />
+      /> */}
 
     </div>
   );
