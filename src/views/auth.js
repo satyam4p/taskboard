@@ -72,7 +72,7 @@ function Auth(){
                     alignItems:'center',
                 }}>
                 <Container sx={{
-                    margin:'120px 200px 0 0',
+                    margin:'150px 400px 0 0',
                     // background:'lightgray',
                     width:'45%',               
                 }}>
