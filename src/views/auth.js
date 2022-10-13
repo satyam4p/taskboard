@@ -119,7 +119,9 @@ function Auth(){
                         <Input sx={{
                             margin:'5px',
                             height:'40px'
-                        }}/>
+                        }} 
+                        type="password"
+                        />
                         <Button sx={{
                             background:'#123E2C',
                             color:'#ffff',
