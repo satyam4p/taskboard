@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react';
 import Home from './views/home';
 import SideMenu from './Components/SideMenu/SideMenu';
 import Auth from './views/auth';
+import { routes } from './routes';
 function App() {
-
-  const [toggleSideMenu, setToggleSideMenu] = useState(true);
-
   // const [inputData, setInputData] = useState({
   //   firstName:"",
   //   lastName:""
@@ -39,11 +37,7 @@ function App() {
   return (
     <div>
       <Auth/>
-      {/* <SideMenu showSideMenu = {toggleSideMenu}/>
-      <Home
-        toggleSideMenu = {toggleSideMenu}
-        setToggleSideMenu = {setToggleSideMenu}
-      /> */}
+      {/* <Home /> */}
 
     </div>
   );

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { 
     Box, 
     Button, 
@@ -9,10 +10,22 @@ import {
     Link 
 } from 'theme-ui';
 
+
 function Auth(){
 
-    const formHandler=(event)=>{
+    const [userEmail, setUserEmail] = useState();
+    const [validEmail, setValidEmail ] = useState();
+    const [userFocus, setUserFocus] = useState();
+
+    const [password, setPassword] = useState();
+    const [validPassword, setValidPassword] = useState();
+    const [passwordFocus, setPasswordFocus] = useState();
+
+    const handleSubmit=(event)=>{
         event.preventDefault();
+        const email = event.target.email.value;
+        const pass = event.target.password.value;
+        
     }
 
     return(
@@ -64,7 +77,6 @@ function Auth(){
                     </Container>
                 </Box>
                 <Box sx={{
-                    // background:'yellow',
                     width:'100%',
                     height:'90%',
                     display:'flex',
@@ -73,7 +85,6 @@ function Auth(){
                 }}>
                 <Container sx={{
                     margin:'150px 400px 0 0',
-                    // background:'lightgray',
                     width:'45%',               
                 }}>
                     <Text sx={{
@@ -86,17 +97,19 @@ function Auth(){
                     <Box sx={{
                         marginTop:'30px',
                         fontSize:1
-                    }} as={"form"} onSubmit={(e)=>formHandler(e)}>
+                    }} as={"form"} onSubmit={(e)=>handleSubmit(e)}>
                         <Label sx={{
                             padding:'5px',
                             fontWeight:0
-                        }}>
+                        }} htmlFor="email" >
                             Username / Email
                         </Label>
                         <Input sx={{
                             margin:'5px',
                             height:'40px'
-                        }} />
+                        }} 
+                        name = "email"
+                        />
                         <Container sx={{
                             display:'flex',
                             flexDirection:'row',
@@ -106,7 +119,9 @@ function Auth(){
                             <Label sx={{
                                 padding:'5px',
                                 fontWeight:0,
-                            }}>
+                            }}
+                            htmlFor="password"
+                            >
                                 Password
                             </Label>
                             <Link sx={{
@@ -120,6 +135,7 @@ function Auth(){
                             margin:'5px',
                             height:'40px'
                         }} 
+                        name="password"
                         type="password"
                         />
                         <Button sx={{
@@ -130,7 +146,6 @@ function Auth(){
                         }} type='submit'>Sign In</Button>
                     </Box>
                 </Container>
-                    
                 </Box>
             </Flex>
         </Flex>
