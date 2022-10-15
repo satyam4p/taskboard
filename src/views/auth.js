@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState , useRef} from 'react';
+import AxiosAjax from '../network/axiosAjax';
+// import { encryptPass } from '../helpers/commonUtils/authUtils';
 import { 
     Box, 
     Button, 
@@ -10,24 +12,74 @@ import {
     Link 
 } from 'theme-ui';
 
+const AUTH_LOGIN_URL = "/auth/login"  
+const EMAIL_REGEX = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const axiosAjax = new AxiosAjax();
 
 function Auth(){
 
-    const [userEmail, setUserEmail] = useState();
-    const [validEmail, setValidEmail ] = useState();
+    const errRef = useRef();
+    const [email, setemail] = useState("");
+    const [validEmail, setValidEmail ] = useState(false);
     const [userFocus, setUserFocus] = useState();
 
-    const [password, setPassword] = useState();
-    const [validPassword, setValidPassword] = useState();
+    const [password, setPassword] = useState("");
+    const [validPassword, setValidPassword] = useState(false);
     const [passwordFocus, setPasswordFocus] = useState();
 
-    const handleSubmit=(event)=>{
-        event.preventDefault();
-        const email = event.target.email.value;
-        const pass = event.target.password.value;
-        
-    }
+    const [errorMessage, setErrorMessage] = useState('');
+    const [success, setSuccess] = useState(false);
 
+    useEffect(()=>{
+        setValidEmail(EMAIL_REGEX.test(email));
+    },[email]);
+
+    useEffect(()=>{
+        setValidPassword(PWD_REGEX.test(password));
+    },[password]);
+
+    useEffect(()=>{
+        setErrorMessage('');
+    },[email,password]);
+
+    const handleSubmit= async (event)=>{
+        event.preventDefault();
+        const isEmailValid = EMAIL_REGEX.test(email);
+        const isPwdValid = PWD_REGEX.test(password);
+        if(!isEmailValid || !isPwdValid){
+            setErrorMessage('Invalid Entry');
+            errRef.current.focus();
+            return
+        }
+
+        try{
+            const response = await axiosAjax.makeRequest(AUTH_LOGIN_URL,
+                 'POST', 
+                 {
+                    email,
+                    password
+                 },
+                 {
+                    headers: {'contentType':'application/json'},
+                    withCredentials:true
+                 });
+            setSuccess(true);
+            setemail('');
+            setPassword('');
+        }catch(err){
+            console.log("error: ",err?.response);
+            if(!err?.response){
+                setErrorMessage("No Server Reponse");
+            }else if(err?.response.status == 401){
+                const errorMsg = err.response.data?.message;
+                setErrorMessage(errorMsg);
+            }else{
+                setErrorMessage("Login Failed");
+            }
+            errRef.current.focus();
+        }
+    }
     return(
         <Flex>
             <Flex
@@ -94,8 +146,16 @@ function Auth(){
                     }}>
                         Log into Taskboard
                     </Text>
+                    <br/>
+                    <Text sx={{
+                        paddingX:'5px',
+                        display:'block',
+                        color:'#FF4E50',
+                        paddingTop:'5px'
+                    }} 
+                    ref={errRef}>{errorMessage}</Text>
                     <Box sx={{
-                        marginTop:'30px',
+                        marginTop:'15px',
                         fontSize:1
                     }} as={"form"} onSubmit={(e)=>handleSubmit(e)}>
                         <Label sx={{
@@ -108,7 +168,11 @@ function Auth(){
                             margin:'5px',
                             height:'40px'
                         }} 
-                        name = "email"
+                        id = "email"
+                        onChange={e=>setemail(e.target.value)}
+                        value={email}
+                        required
+                        autoComplete='off'
                         />
                         <Container sx={{
                             display:'flex',
@@ -135,8 +199,12 @@ function Auth(){
                             margin:'5px',
                             height:'40px'
                         }} 
-                        name="password"
+                        id="password"
                         type="password"
+                        onChange={e=>setPassword(e.target.value)}
+                        value = {password}
+                        required
+                        autoComplete='off'
                         />
                         <Button sx={{
                             background:'#123E2C',

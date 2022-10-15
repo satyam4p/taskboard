@@ -52,7 +52,7 @@ export default class AxiosAjax {
 
     }
 
-    makeRequest=(url, method, params, body )=>{
+    makeRequest=(url, method, body, params)=>{
         this.url = url;
         this.method = method.toLowerCase();
         this.params = params;
