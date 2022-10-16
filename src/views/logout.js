@@ -5,7 +5,7 @@ const Logout = () =>{
     
 
     return(
-        <></>
+        <>Logged out</>
     )
 
 

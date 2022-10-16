@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
-import Home from './views/home';
-import SideMenu from './Components/SideMenu/SideMenu';
-import Auth from './views/auth';
+import React, { useState, useEffect } from 'react';
 import { routes } from './routes';
+import { Route, Routes } from 'react-router';
+import Layout from './Components/Layout';
+import RequireAuth from './Components/RequireAuth';
+import shortid from 'shortid';
+
 function App() {
   // const [inputData, setInputData] = useState({
   //   firstName:"",
@@ -35,11 +37,20 @@ function App() {
   //   )
   // });
   return (
-    <div>
-      <Auth/>
-      {/* <Home /> */}
-
-    </div>
+    <React.Fragment>
+      <Routes>
+        <Route path='/' element={<Layout/>}>
+          {routes.map((routes, key)=>{
+            if(routes.AuthRequired){
+              return <Route element={<RequireAuth/>} key={shortid.generate()+key}>
+                <Route path={routes.path} element={<routes.component/>} key={shortid.generate()+key}/>
+              </Route>
+            }
+            return <Route path={routes.path} element={<routes.component/>} key={shortid.generate()+key}/>
+          })}
+        </Route>
+      </Routes> 
+    </React.Fragment>
   );
 }
 

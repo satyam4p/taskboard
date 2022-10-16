@@ -5,12 +5,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from 'theme-ui';
 import theme from './theme/theme';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {AuthProvider} from './context/AuthProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
+    <ThemeProvider theme={theme}> 
+      <BrowserRouter>
+        <AuthProvider>
+          <Routes>
+            <Route path='/*' element={<App />} />
+          </Routes>
+        </AuthProvider>
+      </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>
 );

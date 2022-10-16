@@ -1,5 +1,8 @@
-import { useEffect, useState , useRef} from 'react';
+import { useEffect, useState , useRef, useContext} from 'react';
 import AxiosAjax from '../network/axiosAjax';
+import useAuth from '../helpers/hooks/useAuth';
+import { useNavigate, useLocation } from 'react-router';
+
 // import { encryptPass } from '../helpers/commonUtils/authUtils';
 import { 
     Box, 
@@ -9,7 +12,7 @@ import {
     Text,
     Label,
     Input,
-    Link 
+    Link
 } from 'theme-ui';
 
 const AUTH_LOGIN_URL = "/auth/login"  
@@ -18,6 +21,11 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const axiosAjax = new AxiosAjax();
 
 function Auth(){
+
+    const { auth, setAuth } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const errRef = useRef();
     const [email, setemail] = useState("");
@@ -29,7 +37,6 @@ function Auth(){
     const [passwordFocus, setPasswordFocus] = useState();
 
     const [errorMessage, setErrorMessage] = useState('');
-    const [success, setSuccess] = useState(false);
 
     useEffect(()=>{
         setValidEmail(EMAIL_REGEX.test(email));
@@ -64,11 +71,18 @@ function Auth(){
                     headers: {'contentType':'application/json'},
                     withCredentials:true
                  });
-            setSuccess(true);
-            setemail('');
-            setPassword('');
+            if(response.status == 200){
+                const user = response.data?.user;
+                const token = response.data?.token;
+                setemail('');
+                setPassword('');
+                setAuth({
+                    user,
+                    token
+                });
+                navigate( from, {replace: true});
+            }
         }catch(err){
-            console.log("error: ",err?.response);
             if(!err?.response){
                 setErrorMessage("No Server Reponse");
             }else if(err?.response.status == 401){
