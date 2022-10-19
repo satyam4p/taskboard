@@ -1,5 +1,5 @@
 import { useEffect, useState , useRef, useContext} from 'react';
-import AxiosAjax from '../network/axiosAjax';
+// import AxiosAjax from '../network/axiosAjax';
 import useAuth from '../helpers/hooks/useAuth';
 import { useNavigate, useLocation } from 'react-router';
 
@@ -14,11 +14,11 @@ import {
     Input,
     Link
 } from 'theme-ui';
+import axios from '../network/axios';
 
 const AUTH_LOGIN_URL = "/auth/login"  
 const EMAIL_REGEX = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const axiosAjax = new AxiosAjax();
 
 function Auth(){
 
@@ -61,16 +61,14 @@ function Auth(){
         }
 
         try{
-            const response = await axiosAjax.makeRequest(AUTH_LOGIN_URL,
-                 'POST', 
-                 {
-                    email,
-                    password
-                 },
-                 {
-                    headers: {'contentType':'application/json'},
-                    withCredentials:true
-                 });
+            const response = await axios.post(AUTH_LOGIN_URL,
+            { email, password },
+             {
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                withCredentials:true
+             });
             if(response.status == 200){
                 const user = response.data?.user;
                 const token = response.data?.token;
