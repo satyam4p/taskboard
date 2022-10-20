@@ -5,8 +5,6 @@ const useStatusTask=()=>{
     const [taskAsPerStatus, setTaskAsperStatus] = useState([]);
 
     function getTaskAsperStatus(taskList, status){
-        // console.log("tasklist:: ",taskList);
-        // console.log("taskList:: ",taskList, 'length:: ',taskList.length);
         /** reduce the main taskList into array of different object with status as their key and value as required data */
         /** the use state behaviour needs to be debugged for updating the tasklist */
         /** TODO: need to cleanup and make this whole as reusable function instead of hook- search alternatives */
