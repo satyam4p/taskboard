@@ -11,7 +11,9 @@ const useRefreshToken=()=>{
             withCredentials: true
         });
         setAuth(prev=>{
-            return {...prev, token:response?.data?.token};
+            console.log("prev:: ",prev.token);
+            console.log("new:: ",response?.data?.token);
+            return {...prev, user: response?.data?.user, token:response?.data?.token};
         });
         return response.data?.token;
     }
