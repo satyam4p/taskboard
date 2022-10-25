@@ -4,10 +4,11 @@ import { Flex } from 'theme-ui';
 import { Button } from 'theme-ui';
 import ProfileTogggle from './Profile/ProfileToggle';
 
-function SecondaryBar({ toggleSideMenu, setToggleSideMenu }){
+function SecondaryBar({ toggleSideMenu, 
+    setToggleSideMenu, 
+    toggleProfile,
+    setToggleProile }){
 
-    const [toggleProfile, setToggleProile] = useState(false);
-    
     return(
         <>
             <Flex sx={{
