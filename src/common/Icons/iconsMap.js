@@ -13,7 +13,9 @@ export default ((props)=>{
         },
         Archive:(width=15, color='123E2C')=>{
             return <img src={'https://img.icons8.com/fluency-systems-regular/' + width + '/' + color + '/archive.png'}/>
+        },
+        New: (width=25, color)=>{
+            return <img src={'https://img.icons8.com/ios/'+ width + '/' + color + '/plus-2-math.png'}/>
         }
-
     }
 })();

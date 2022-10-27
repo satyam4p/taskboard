@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import React, { useState } from 'react';
-import { Flex, } from 'theme-ui';
+import { Button, Flex, } from 'theme-ui';
 import iconsMap from '../../common/Icons/iconsMap';
 
 function SideMenu({showSideMenu}){
@@ -28,6 +28,18 @@ function SideMenu({showSideMenu}){
                 <Flex sx={{
                     flexDirection:'column',
                 }}>
+                    <button sx={{
+                            width:'35px',
+                            height:'35px',
+                            background:'transparent',
+                            borderRadius:'20%',
+                            border:'none',
+                            alignSelf:'end',
+                            padding:0,
+                            margin:0
+                        }}>
+                            {iconsMap['New']()}
+                        </button>
                     <div sx={{
                         width:'85%',
                         mx:'2px',
