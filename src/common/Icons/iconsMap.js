@@ -1,20 +1,20 @@
 
 export default ((props)=>{
     return {
-        Settings:(width=15, color= '123E2C')=>{
+        Settings:(width=15, color= '014421')=>{
             return <img src={'https://img.icons8.com/windows/' + width + '/' + color + '/settings--v1.png'}/>
         },
 
-        Board:(width=15, color='123E2C')=>{
+        Board:(width=15, color='014421')=>{
             return <img src={'https://img.icons8.com/fluency-systems-regular/' + width + '/' + color + '/noticeboard.png'}/>
         },
-        RecentTasks:(width=15, color='123E2C')=>{
+        RecentTasks:(width=15, color='014421')=>{
             return <img src={'https://img.icons8.com/fluency-systems-regular/' + width + '/' + color + '/task.png'}/>
         },
-        Archive:(width=15, color='123E2C')=>{
+        Archive:(width=15, color='014421')=>{
             return <img src={'https://img.icons8.com/fluency-systems-regular/' + width + '/' + color + '/archive.png'}/>
         },
-        New: (width=25, color)=>{
+        New: (width=25, color='014421')=>{
             return <img src={'https://img.icons8.com/ios/'+ width + '/' + color + '/plus-2-math.png'}/>
         }
     }

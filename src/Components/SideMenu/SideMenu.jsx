@@ -4,6 +4,9 @@ import { Button, Flex, } from 'theme-ui';
 import iconsMap from '../../common/Icons/iconsMap';
 
 function SideMenu({showSideMenu}){
+
+    const [toggleAddMenu, setToggleAddMenu] = useState(false);
+
     return(
         <Flex sx={{
                 width:'13%',
@@ -37,9 +40,18 @@ function SideMenu({showSideMenu}){
                             alignSelf:'end',
                             padding:0,
                             margin:0
-                        }}>
+                        }}
+                        onClick={()=>setToggleAddMenu(!toggleAddMenu)}
+                        >
                             {iconsMap['New']()}
                         </button>
+                        {toggleAddMenu && (
+                            <ul>
+                                <li>
+                                    New Task
+                                </li>
+                            </ul>
+                        )}
                     <div sx={{
                         width:'85%',
                         mx:'2px',
