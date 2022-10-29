@@ -8,6 +8,7 @@ function SideMenu({showSideMenu}){
     const [toggleAddMenu, setToggleAddMenu] = useState(false);
 
     return(
+        <>
         <Flex sx={{
                 width:'13%',
                 height:'86vh',
@@ -39,19 +40,12 @@ function SideMenu({showSideMenu}){
                             border:'none',
                             alignSelf:'end',
                             padding:0,
-                            margin:0
+                            margin:0,
                         }}
                         onClick={()=>setToggleAddMenu(!toggleAddMenu)}
                         >
                             {iconsMap['New']()}
                         </button>
-                        {toggleAddMenu && (
-                            <ul>
-                                <li>
-                                    New Task
-                                </li>
-                            </ul>
-                        )}
                     <div sx={{
                         width:'85%',
                         mx:'2px',
@@ -161,8 +155,8 @@ function SideMenu({showSideMenu}){
                         }}>{iconsMap['Settings']()}&nbsp;Settings</button>
                 </div>
             </Flex>
-
         </Flex>
+        </>
     )
 
 
