@@ -4,10 +4,11 @@ import { Flex } from 'theme-ui';
 import { Button } from 'theme-ui';
 import ProfileTogggle from './Profile/ProfileToggle';
 
-function SecondaryBar({ toggleSideMenu, 
+function SecondaryBar({ 
     setToggleSideMenu, 
     toggleProfile,
-    setToggleProile }){
+    setToggleProile,
+    setToggleAddMenu }){
 
     return(
         <>
@@ -34,25 +35,28 @@ function SecondaryBar({ toggleSideMenu,
                     flexDirection:'column',
                     justifyContent:'space-evenly'
                     }} 
-                    onClick={()=>setToggleSideMenu((prev)=>!prev)}>
+                    onClick={()=>{
+                        setToggleSideMenu((prev)=>!prev)
+                        setToggleAddMenu(false);
+                    }}>
                         <Flex sx={{
                             width:'100%',
                             height:'3px',
-                            bg:'#7E7E7E',
+                            bg:'#014421',
                             my:'1px'
                             }}
                         />
                         <Flex sx={{
                             width:'100%',
                             height:'3px',
-                            bg:'#7E7E7E',
+                            bg:'#014421',
                             my:'1px'
                             }} 
                         />
                         <Flex sx={{
                             width:'100%',
                             height:'3px',
-                            bg:'#7E7E7E',
+                            bg:'#014421',
                             my:'1px'
                             }}
                         />

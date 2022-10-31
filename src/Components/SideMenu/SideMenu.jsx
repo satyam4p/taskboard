@@ -2,10 +2,20 @@
 import React, { useState } from 'react';
 import { Button, Flex, } from 'theme-ui';
 import iconsMap from '../../common/Icons/iconsMap';
+import Popover from '../Popover/Popover';
 
-function SideMenu({showSideMenu}){
+const actions = [
+    {
+        type: 'create',
+        label: 'Create New Task',
+    },
+    {
+        type: 'create',
+        label: 'Create New Story'
+    }
+]
 
-    const [toggleAddMenu, setToggleAddMenu] = useState(false);
+function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
 
     return(
         <>
@@ -46,6 +56,10 @@ function SideMenu({showSideMenu}){
                         >
                             {iconsMap['New']()}
                         </button>
+                        {
+                            toggleAddMenu && 
+                            <Popover actions={actions} />
+                        }
                     <div sx={{
                         width:'85%',
                         mx:'2px',

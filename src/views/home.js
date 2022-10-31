@@ -7,14 +7,20 @@ function Home(props){
     const [toggleSideMenu, setToggleSideMenu] = useState(true);
     const {auth} = useAuth();
     const [toggleProfile, setToggleProile] = useState(false);
+    const [toggleAddMenu, setToggleAddMenu] = useState(false);
 
     return(
         <>
-            <SideMenu showSideMenu = {toggleSideMenu}/>
+            <SideMenu 
+                showSideMenu = {toggleSideMenu}
+                toggleAddMenu = {toggleAddMenu}
+                setToggleAddMenu = {setToggleAddMenu}
+            />
             <SecondaryBar
                 setToggleSideMenu = {setToggleSideMenu}
                 setToggleProile = {setToggleProile}
                 toggleProfile = {toggleProfile}
+                setToggleAddMenu = {setToggleAddMenu}
             />
         </>
     )
