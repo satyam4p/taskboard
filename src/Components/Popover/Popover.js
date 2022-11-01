@@ -2,7 +2,7 @@
 import React from "react";
 
 const Popover=( { actions } )=>{
-    console.log("actions:: ",actions);
+    
     return actions.length > 0 ? (
         <div sx={{
             display:'flex',
@@ -28,11 +28,29 @@ const Popover=( { actions } )=>{
                 {actions.map(( action,key )=>{
 
                     return(
-                        <li key={key} sx={{
-                            py:'3px'
-                        }}>
+                        <button 
+                        key={key} 
+                        sx={{
+                            width:'100%',
+                            height:'inherit',
+                            border:'none',
+                            borderRadius:'5px',
+                            bg:'transparent',
+                            margin:0,
+                            padding:'8px',
+                            textAlign:'left',
+                            alignSelf:'center',
+                            '&:hover':{
+                                cursor:'pointer',
+                                color:'#014421'
+                            },
+                            display:'flex',
+                            alignItems:'center',
+                        }}
+                        onClick={action}
+                        >
                             {action.label}
-                        </li>
+                        </button>
                     );
                 })}
             </ul>
