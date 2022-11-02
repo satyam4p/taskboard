@@ -7,6 +7,7 @@ import { ThemeProvider } from 'theme-ui';
 import theme from './theme/theme';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {AuthProvider} from './context/AuthProvider';
+import { ModalProvider } from './context/ModalProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,9 +15,11 @@ root.render(
     <ThemeProvider theme={theme}> 
       <BrowserRouter>
         <AuthProvider>
-          <Routes>
-            <Route path='/*' element={<App />} />
-          </Routes>
+          <ModalProvider>
+            <Routes>
+              <Route path='/*' element={<App />} />
+            </Routes>
+          </ModalProvider>
         </AuthProvider>
       </BrowserRouter>
     </ThemeProvider>

@@ -6,11 +6,13 @@ import Popover from '../Popover/Popover';
 
 const actions = [
     {
-        type: 'create',
+        type: 'task',
         label: 'Create New Task',
+        action: 'create'
     },
     {
-        type: 'create',
+        type: 'Story',
+        action: 'create',
         label: 'Create New Story'
     }
 ]

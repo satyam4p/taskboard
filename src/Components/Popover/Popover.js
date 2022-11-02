@@ -1,8 +1,13 @@
 /** @jsxImportSource theme-ui */
 import React from "react";
-
+import useActions from "../../helpers/hooks/useActions";
+import useModals from "../../helpers/hooks/useModals";
 const Popover=( { actions } )=>{
-    
+    const {isVisible, modalType } = useModals();
+    const execute = useActions();
+    const handleAction=(action)=>{
+        execute(action);
+    }
     return actions.length > 0 ? (
         <div sx={{
             display:'flex',
@@ -47,7 +52,7 @@ const Popover=( { actions } )=>{
                             display:'flex',
                             alignItems:'center',
                         }}
-                        onClick={action}
+                        onClick={e=>handleAction(action)}
                         >
                             {action.label}
                         </button>
