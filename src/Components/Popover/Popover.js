@@ -2,6 +2,7 @@
 import React from "react";
 import useActions from "../../helpers/hooks/useActions";
 import useModals from "../../helpers/hooks/useModals";
+
 const Popover=( { actions } )=>{
     const {isVisible, modalType } = useModals();
     const execute = useActions();
@@ -17,7 +18,6 @@ const Popover=( { actions } )=>{
             zIndex:'100',
             left:'calc(100%)',
             background:'#CAD8D0',
-            // color:'#',
             alignItems:'flex-start',
             justifyContent:'left',
             borderRadius:'4px',

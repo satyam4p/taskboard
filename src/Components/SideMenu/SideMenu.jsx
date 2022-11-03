@@ -33,6 +33,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                 fontSize:2,
                 transform:()=> showSideMenu ? 'translateX(0%)' : 'translateX(-150%)',
                 transition:'all 0.3s',
+                zIndex:'100'
             }}>
             <Flex sx={{
                     flexDirection:'column',
