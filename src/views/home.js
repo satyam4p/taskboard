@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SecondaryBar from '../Components/Secondarybar/SecondaryBar';
 import SideMenu from '../Components/SideMenu/SideMenu';
 import useAuth from '../helpers/hooks/useAuth';
+import TaskModal from '../common/Modals/Task/TaskModal';
 
 function Home(props){
     const [toggleSideMenu, setToggleSideMenu] = useState(true);
@@ -22,6 +23,7 @@ function Home(props){
                 toggleProfile = {toggleProfile}
                 setToggleAddMenu = {setToggleAddMenu}
             />
+            <TaskModal/>
         </>
     )
 
