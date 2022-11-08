@@ -61,7 +61,10 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                         </button>
                         {
                             toggleAddMenu && 
-                            <Popover actions={actions} />
+                            <Popover 
+                                actions={actions}
+                                setToggleAddMenu={setToggleAddMenu} 
+                            />
                         }
                     <div sx={{
                         width:'85%',

@@ -3,11 +3,12 @@ import React from "react";
 import useActions from "../../helpers/hooks/useActions";
 import useModals from "../../helpers/hooks/useModals";
 
-const Popover=( { actions } )=>{
+const Popover=( { actions, setToggleAddMenu } )=>{
     const {isVisible, modalType } = useModals();
     const execute = useActions();
     const handleAction=(action)=>{
         execute(action);
+        setToggleAddMenu(false);
     }
     return actions.length > 0 ? (
         <div sx={{
