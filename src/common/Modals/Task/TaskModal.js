@@ -17,7 +17,8 @@ const TaskModal=(props)=>{
                 left:'50%',
                 transform:'translate(-50%,-45%)',
                 borderRadius:'5px',
-                boxShadow: '7px 10px 38px -18px rgba(0,0,0,0.75)'
+                boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.75)',
+                overflowY:'auto'
             }}>
                 <Box as={'form'}>
                     <div sx={{
@@ -75,6 +76,35 @@ const TaskModal=(props)=>{
                         margin:'auto',
                         height:'40px',
                     }} name="title" placeholder="Enter Title"/>
+                    <Container sx={{
+                        width:'75%',
+                        marginY:'30px',
+                        display:'flex',
+                        flexDirection:'column',
+                        justifyContent:'space-between',
+                        minHeight:'10em'
+                    }}>
+                        <div>
+                            Status
+                        </div>
+                        <div>
+                            Timeline
+                        </div>
+                        <div>
+                            Assignee
+                        </div>
+                        <div>
+                            Label
+                        </div>
+                    </Container>
+                    <Container
+                        sx={{
+                            width:'75%'
+                        }}>
+                        <div>
+                            
+                        </div>
+                    </Container>
                 </Box>
             </div>
         )
