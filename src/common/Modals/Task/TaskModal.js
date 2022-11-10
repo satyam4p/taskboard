@@ -6,6 +6,14 @@ import iconsMap from "../../Icons/iconsMap";
 
 const TaskModal=(props)=>{
     const { modalType, setModalType } = useModals();
+
+    useEffect(()=>{
+    },[]);
+
+    const toggleTab=(event)=>{
+        event.preventDefault();
+    }
+
     if(modalType.type === 'task' && modalType.isVisible){
         return(
             <div sx={{
@@ -77,33 +85,73 @@ const TaskModal=(props)=>{
                         height:'40px',
                     }} name="title" placeholder="Enter Title"/>
                     <Container sx={{
-                        width:'75%',
+                        width:'85%',
                         marginY:'30px',
                         display:'flex',
                         flexDirection:'column',
                         justifyContent:'space-between',
                         minHeight:'10em'
                     }}>
-                        <div>
-                            Status
+                        <div sx={{
+                            display:'flex',
+                            alignItems:'center'
+                        }}>
+                            {iconsMap.Status()}&nbsp;Status
                         </div>
-                        <div>
-                            Timeline
+                        <div sx={{
+                            display:'flex',
+                            alignItems:'center'
+                        }}>
+                            {iconsMap.Timeline()}&nbsp;Timeline
                         </div>
-                        <div>
-                            Assignee
+                        <div sx={{
+                            display:'flex',
+                            alignItems:'center'
+                        }}>
+                            {iconsMap.Assignee()}&nbsp;Assignee
                         </div>
-                        <div>
-                            Label
+                        <div sx={{
+                            display:'flex',
+                            alignItems:'center'
+                        }}>
+                            {iconsMap.Label()}&nbsp;Label
                         </div>
                     </Container>
                     <Container
                         sx={{
-                            width:'75%'
+                            width:'85%',
+                            marginTop:'50px'
                         }}>
-                        <div>
-                            
+                        <div sx={{
+                            borderBottom:'0.5px solid',
+                            width:'32%',
+                            display:'flex',
+                            justifyContent:'space-between'
+                        }}>
+                            <button sx={{
+                                border:'none',
+                                bg:'transparent',
+                                padding:'0px',
+                                fontSize:1,
+                            }}
+                            onClick={toggleTab}
+                            >
+                                <span>Comments</span>
+                            </button>
+                            <button sx={{
+                                border:'none',
+                                bg:'transparent',
+                                padding:'0px',
+                                fontSize:1
+                            }}
+                            onClick={toggleTab}
+                            >
+                                <span>Description</span>
+                            </button>
                         </div>
+                        <Container className="data-container">
+                            /** content for comments and description with come here*/
+                        </Container>
                     </Container>
                 </Box>
             </div>

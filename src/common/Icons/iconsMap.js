@@ -27,7 +27,19 @@ export default ((props)=>{
         },
         Close: (width=25, color='000000')=>{
             return <img src={'https://img.icons8.com/windows/'+ width + '/' + color + '/macos-close.png'}/>
-        }
+        },
+        Status: (width=22, color='B0AEAE')=>{
+            return <img src={'https://img.icons8.com/color-glass/'+ width + '/' + color + '/connection-status-on.png'}/>
+        },
+        Timeline: (width=22, color=null)=>{
+            return <img src={'https://img.icons8.com/material-outlined/'+ width + '/' + color + '/vertical-timeline.png'}/>
+        },
+        Assignee: (width=22, color=null)=>{
+            return <img src={'https://img.icons8.com/ios-glyphs/'+ width + '/' + color + '/batch-assign.png'}/>
+        },
+        Label: (width=22, color=null)=>{
+            return <img src={'https://img.icons8.com/ios/'+ width + '/' + color + '/tags--v1.png'}/>
+        },
 
     }
 })();
