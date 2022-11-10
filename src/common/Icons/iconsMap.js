@@ -29,7 +29,7 @@ export default ((props)=>{
             return <img src={'https://img.icons8.com/windows/'+ width + '/' + color + '/macos-close.png'}/>
         },
         Status: (width=22, color='B0AEAE')=>{
-            return <img src={'https://img.icons8.com/color-glass/'+ width + '/' + color + '/connection-status-on.png'}/>
+            return <img src={'https://img.icons8.com/emoji/'+ width + '/' + color + '/black-circle-emoji.png'}/>
         },
         Timeline: (width=22, color=null)=>{
             return <img src={'https://img.icons8.com/material-outlined/'+ width + '/' + color + '/vertical-timeline.png'}/>

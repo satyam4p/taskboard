@@ -124,7 +124,7 @@ const TaskModal=(props)=>{
                         }}>
                         <div sx={{
                             borderBottom:'0.5px solid',
-                            width:'32%',
+                            width:'30%',
                             display:'flex',
                             justifyContent:'space-between'
                         }}>
