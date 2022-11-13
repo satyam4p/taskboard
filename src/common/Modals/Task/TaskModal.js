@@ -150,7 +150,7 @@ const TaskModal=(props)=>{
                             </button>
                         </div>
                         <Container className="data-container">
-                            /** content for comments and description with come here*/
+                           
                         </Container>
                     </Container>
                 </Box>
