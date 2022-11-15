@@ -1,19 +1,24 @@
 /** @jsxImportSource theme-ui */
-import React,{useEffect, useState} from "react";
+import React,{Suspense, useEffect, useState} from "react";
 import useModals from "../../../helpers/hooks/useModals";
 import { Box, Container, Flex, Input, Label, Text } from "theme-ui";
 import iconsMap from "../../Icons/iconsMap";
+import TextLoader from "../../Loaders/simpleTextLoader";
+const Comments = React.lazy(()=>import('../../Comments/comments'));
+
 
 const TaskModal=(props)=>{
     const { modalType, setModalType } = useModals();
+    const [activeTab, setActiveTab] = useState('comments');
 
     useEffect(()=>{
     },[]);
 
-    const toggleTab=(event)=>{
+    const toggleTab=(event, type)=>{
         event.preventDefault();
+        setActiveTab(type);
     }
-
+    console.log("active tab:: ",activeTab);
     if(modalType.type === 'task' && modalType.isVisible){
         return(
             <div sx={{
@@ -134,7 +139,7 @@ const TaskModal=(props)=>{
                                 padding:'0px',
                                 fontSize:1,
                             }}
-                            onClick={toggleTab}
+                            onClick={e=>toggleTab(e,'comments')}
                             >
                                 <span>Comments</span>
                             </button>
@@ -144,13 +149,18 @@ const TaskModal=(props)=>{
                                 padding:'0px',
                                 fontSize:1
                             }}
-                            onClick={toggleTab}
+                            onClick={e=>toggleTab(e,'description')}
                             >
                                 <span>Description</span>
                             </button>
                         </div>
                         <Container className="data-container">
-                           
+                            <Suspense fallback={<TextLoader/>}>
+                                {activeTab === 'comments' 
+                                    ? <Comments/>
+                                    : null
+                                }
+                            </Suspense>
                         </Container>
                     </Container>
                 </Box>
