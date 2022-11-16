@@ -1,8 +1,11 @@
 /** @jsxImportSource theme-ui */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Container } from "theme-ui";
 import { UserOutlined } from '@ant-design/icons';
 import shortid from "shortid";
+import TextArea from "../TextArea/TextArea";
+import useProfile from "../../helpers/hooks/useProfile";
+import useAuth from "../../helpers/hooks/useAuth";
 
 const sampleComments = [
     {
@@ -16,11 +19,24 @@ const sampleComments = [
 ]
 
 const Comments =(props)=>{
-
+    const userProfile = useProfile();
     return(
         <Container sx={{
             marginY:'8px'
         }}>
+            <Card key={shortid.generate()} sx={{
+                        marginY:'8px',
+                        paddingY:'5px',
+                    }}>
+                <div sx={{
+                    marginY:'5px'
+                }}>
+                    <span><UserOutlined/> {userProfile?.username}</span>
+                </div>
+                <div>
+                    <TextArea/>
+                </div>
+            </Card>
             {sampleComments.map((comment, key)=>{
                 return (
                     <Card key={shortid.generate()} sx={{
