@@ -4,6 +4,14 @@ import useModals from "../../../helpers/hooks/useModals";
 import { Box, Container, Flex, Input, Label, Text } from "theme-ui";
 import iconsMap from "../../Icons/iconsMap";
 import TextLoader from "../../Loaders/simpleTextLoader";
+import { SaveOutlined,
+        ShareAltOutlined,
+        EditOutlined,
+        TagOutlined,
+        CloseCircleOutlined,
+        UserAddOutlined,
+        MoreOutlined
+} from '@ant-design/icons';
 const Comments = React.lazy(()=>import('../../Comments/comments'));
 
 
@@ -47,7 +55,9 @@ const TaskModal=(props)=>{
                                 cursor:'pointer'
                             }
                         }}>
-                            {iconsMap.Share()}
+                            {<SaveOutlined style={{
+                                fontSize:'20px'
+                            }}/>}
                         </div>
                         <div sx={{
                             margin:'10px',
@@ -55,7 +65,9 @@ const TaskModal=(props)=>{
                                 cursor:'pointer'
                             }
                         }}>
-                            {iconsMap.Edit()}
+                            {<ShareAltOutlined style={{
+                                fontSize:'20px'
+                            }}/>}
                         </div>
                         <div sx={{
                             margin:'10px',
@@ -63,7 +75,19 @@ const TaskModal=(props)=>{
                                 cursor:'pointer'
                             }
                         }}>
-                            {iconsMap.More()}
+                            {<EditOutlined style={{
+                                fontSize:'20px'
+                            }}/>}
+                        </div>
+                        <div sx={{
+                            margin:'10px',
+                            '&:hover':{
+                                cursor:'pointer'
+                            }
+                        }}>
+                            {<MoreOutlined style={{
+                                fontSize:'20px'
+                            }}/>}
                         </div>
                         <div sx={{
                             margin:'10px',
@@ -78,7 +102,9 @@ const TaskModal=(props)=>{
                             }
                         })}
                         >
-                            {iconsMap.Close()}
+                            {<CloseCircleOutlined style={{
+                                fontSize:'20px'
+                            }}/>}
                         </div>
                     </div>
                     <Label htmlFor="title"></Label>
@@ -137,8 +163,11 @@ const TaskModal=(props)=>{
                             <button sx={{
                                 border:'none',
                                 bg:'transparent',
-                                padding:'0px',
+                                padding:'4px',
                                 fontSize:1,
+                                '&:hover':{
+                                    bg:'#F6F6F6'
+                                }
                             }}
                             onClick={e=>toggleTab(e,'comments')}
                             >
@@ -147,8 +176,11 @@ const TaskModal=(props)=>{
                             <button sx={{
                                 border:'none',
                                 bg:'transparent',
-                                padding:'0px',
-                                fontSize:1
+                                padding:'4px',
+                                fontSize:1,
+                                '&:hover':{
+                                    bg:'#F6F6F6'
+                                }
                             }}
                             onClick={e=>toggleTab(e,'description')}
                             >
