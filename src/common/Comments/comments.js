@@ -22,7 +22,8 @@ const Comments =(props)=>{
     const userProfile = useProfile();
     return(
         <Container sx={{
-            marginY:'8px'
+            marginY:'8px',
+            fontSize:1
         }}>
             <Card key={shortid.generate()} sx={{
                         marginY:'8px',

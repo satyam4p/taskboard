@@ -31,7 +31,8 @@ const TaskModal=(props)=>{
                 transform:'translate(-50%,-45%)',
                 borderRadius:'5px',
                 boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.75)',
-                overflowY:'auto'
+                overflowY:'auto',
+                fontSize:1
             }}>
                 <Box as={'form'}>
                     <div sx={{
