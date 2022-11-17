@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 import { Button, Flex, } from 'theme-ui';
 import iconsMap from '../../common/Icons/iconsMap';
 import Popover from '../Popover/Popover';
+import { CarryOutOutlined,
+        FundOutlined,
+        FileZipOutlined,
+        SettingOutlined} from '@ant-design/icons';
 
 const actions = [
     {
@@ -89,7 +93,9 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                                 },
                                 display:'flex',
                                 alignItems:'center',
-                            }}>{iconsMap['RecentTasks']()}&nbsp;Recent Tasks</button>
+                            }}>{<CarryOutOutlined style={{
+                                fontSize:'16px'
+                            }}/>}&nbsp;Recent Tasks</button>
                     </div>
                     <div sx={{
                         width:'85%',
@@ -114,7 +120,9 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                                 },
                                 display:'flex',
                                 alignItems:'center',
-                            }}>{iconsMap['Board']()}&nbsp;Board</button>
+                            }}>{<FundOutlined style={{
+                                fontSize:'16px'
+                            }}/>}&nbsp;Board</button>
                     </div>
                     <div sx={{
                         width:'85%',
@@ -139,7 +147,9 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                                 },
                                 display:'flex',
                                 alignItems:'center',
-                            }}>{iconsMap['Archive']()}&nbsp;Archive</button>
+                            }}>{<FileZipOutlined style={{
+                                fontSize:'16px'
+                            }}/>}&nbsp;Archive</button>
                     </div>
                     <div sx={{
                         width:'85%',
@@ -172,7 +182,9 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                             },
                             display:'flex',
                             alignItems:'center',
-                        }}>{iconsMap['Settings']()}&nbsp;Settings</button>
+                        }}>{<SettingOutlined style={{
+                            fontSize:'16px'
+                        }}/>}&nbsp;Settings</button>
                 </div>
             </Flex>
         </Flex>

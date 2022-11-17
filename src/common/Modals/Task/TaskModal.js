@@ -10,7 +10,7 @@ import { SaveOutlined,
         TagOutlined,
         CloseCircleOutlined,
         UserAddOutlined,
-        MoreOutlined
+        MoreOutlined,
 } from '@ant-design/icons';
 const Comments = React.lazy(()=>import('../../Comments/comments'));
 
