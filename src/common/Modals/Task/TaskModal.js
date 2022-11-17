@@ -117,7 +117,7 @@ const TaskModal=(props)=>{
                         height:'40px',
                     }} name="title" placeholder="Enter Title"/>
                     <Container sx={{
-                        width:'85%',
+                        width:'90%',
                         marginY:'30px',
                         display:'flex',
                         flexDirection:'column',
@@ -151,7 +151,7 @@ const TaskModal=(props)=>{
                     </Container>
                     <Container
                         sx={{
-                            width:'85%',
+                            width:'90%',
                             marginTop:'50px'
                         }}>
                         <div sx={{
