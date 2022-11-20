@@ -8,14 +8,14 @@ import useProfile from "../../helpers/hooks/useProfile";
 import useAuth from "../../helpers/hooks/useAuth";
 
 const sampleComments = [
-    {
-        'userName':'Satyam Kumar',
-        'commentBody':"Hi, this ticket is currently unders progress and estimated time is around 12 hours. Let me know if this has any upcoming changes will look into them accordingly."
-    },
-    {
-        'userName':'testUser',
-        'commentBody':"Hi, this ticket is currently unders progress and estimated time is around 12 hours. Let me know if this has any upcoming changes will look into them accordingly."
-    }
+    // {
+    //     'userName':'Satyam Kumar',
+    //     'commentBody':"Hi, this ticket is currently unders progress and estimated time is around 12 hours. Let me know if this has any upcoming changes will look into them accordingly."
+    // },
+    // {
+    //     'userName':'testUser',
+    //     'commentBody':"Hi, this ticket is currently unders progress and estimated time is around 12 hours. Let me know if this has any upcoming changes will look into them accordingly."
+    // }
 ]
 
 const Comments =(props)=>{
