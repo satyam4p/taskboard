@@ -6,7 +6,9 @@ import Popover from '../Popover/Popover';
 import { CarryOutOutlined,
         FundOutlined,
         FileZipOutlined,
-        SettingOutlined} from '@ant-design/icons';
+        SettingOutlined,
+        PlusSquareOutlined    
+    } from '@ant-design/icons';
 
 const actions = [
     {
@@ -61,7 +63,9 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                         }}
                         onClick={()=>setToggleAddMenu(!toggleAddMenu)}
                         >
-                            {iconsMap['New']()}
+                            {<PlusSquareOutlined style={{
+                                fontSize:'20px'
+                            }}/>}
                         </button>
                         {
                             toggleAddMenu && 

@@ -7,10 +7,12 @@ import TextLoader from "../../Loaders/simpleTextLoader";
 import { SaveOutlined,
         ShareAltOutlined,
         EditOutlined,
-        TagOutlined,
         CloseCircleOutlined,
-        UserAddOutlined,
         MoreOutlined,
+        FieldTimeOutlined,
+        UserAddOutlined,
+        TagsOutlined,
+        AlertOutlined
 } from '@ant-design/icons';
 const Comments = React.lazy(()=>import('../../Comments/comments'));
 
@@ -126,27 +128,37 @@ const TaskModal=(props)=>{
                     }}>
                         <div sx={{
                             display:'flex',
-                            alignItems:'center'
+                            alignItems:'center',
+                            padding:'0px',
+                            margin:'0px'
                         }}>
-                            {iconsMap.Status()}&nbsp;Status
+                            {<AlertOutlined style={{
+                                fontSize:'20px',
+                            }}/>}&nbsp;Status
                         </div>
                         <div sx={{
                             display:'flex',
                             alignItems:'center'
                         }}>
-                            {iconsMap.Timeline()}&nbsp;Timeline
+                            {<FieldTimeOutlined style={{
+                                fontSize:'20px',
+                            }}/>}&nbsp;Timeline
                         </div>
                         <div sx={{
                             display:'flex',
                             alignItems:'center'
                         }}>
-                            {iconsMap.Assignee()}&nbsp;Assignee
+                            {<UserAddOutlined style={{
+                                fontSize:'20px'
+                            }}/>}&nbsp;Assignee
                         </div>
                         <div sx={{
                             display:'flex',
                             alignItems:'center'
                         }}>
-                            {iconsMap.Label()}&nbsp;Label
+                            {<TagsOutlined style={{
+                                fontSize:'20px'
+                            }}/>}&nbsp;Label
                         </div>
                     </Container>
                     <Container
@@ -161,26 +173,33 @@ const TaskModal=(props)=>{
                             justifyContent:'space-between'
                         }}>
                             <button sx={{
-                                border:'none',
+                                borderBottom:()=>activeTab=='comments' ? '2px solid #36463F' : 'none',
+                                borderTop:'none',
+                                borderLeft:'none',
+                                borderRight:'none',
                                 bg:'transparent',
                                 padding:'4px',
                                 fontSize:1,
                                 '&:hover':{
                                     bg:'#F6F6F6'
-                                }
+                                },
                             }}
                             onClick={e=>toggleTab(e,'comments')}
                             >
                                 <span>Comments</span>
                             </button>
                             <button sx={{
-                                border:'none',
+                                borderBottom:()=>activeTab=='description' ? '2px solid #36463F' : 'none',
+                                borderTop:'none',
+                                borderLeft:'none',
+                                borderRight:'none',
                                 bg:'transparent',
                                 padding:'4px',
                                 fontSize:1,
                                 '&:hover':{
                                     bg:'#F6F6F6'
                                 }
+                                
                             }}
                             onClick={e=>toggleTab(e,'description')}
                             >
