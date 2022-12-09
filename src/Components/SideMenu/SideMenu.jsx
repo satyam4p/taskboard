@@ -1,7 +1,5 @@
 /** @jsxImportSource theme-ui */
-import React, { useState } from 'react';
-import { Button, Flex, } from 'theme-ui';
-import iconsMap from '../../common/Icons/iconsMap';
+import { Flex, } from 'theme-ui';
 import Popover from '../Popover/Popover';
 import { CarryOutOutlined,
         FundOutlined,
