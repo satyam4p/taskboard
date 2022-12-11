@@ -32,7 +32,7 @@ const TaskModal=(props)=>{
     if(modalType.type === 'task' && modalType.isVisible){
         return(
             <div sx={{
-                zIndex:'1000',
+                zIndex:'400',
                 width:'40%',
                 height:'80vh',
                 position:'absolute',
