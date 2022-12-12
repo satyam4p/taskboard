@@ -161,6 +161,7 @@ const TaskModal=(props)=>{
                             }}/>}&nbsp;Label
                         </div>
                     </Container>
+                </Box>
                     <Container
                         sx={{
                             width:'90%',
@@ -215,7 +216,6 @@ const TaskModal=(props)=>{
                             </Suspense>
                         </Container>
                     </Container>
-                </Box>
             </div>
         )
     } 
