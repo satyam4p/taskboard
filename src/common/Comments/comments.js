@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Card, Container } from "theme-ui";
 import { UserOutlined } from '@ant-design/icons';
 import shortid from "shortid";
-import TextArea from "../TextArea/TextArea";
+import TextArea from "../Fields/TextArea/TextArea";
 import useProfile from "../../helpers/hooks/useProfile";
 import useAuth from "../../helpers/hooks/useAuth";
 

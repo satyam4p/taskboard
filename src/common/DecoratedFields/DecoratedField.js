@@ -1,15 +1,21 @@
+/** @jsxImportSource theme-ui */
 import React, { useState } from "react";
 
 
-const DecoratedField = ( props ) =>{
+const DecoratedFieldHOC = ( props ) =>{
 
-    const resultantField = props.field;
+    const ResultantField = props.field;
 
     return(
-        <div >
-
+        <div
+        sx = {{
+            width:'20%',
+            width:'100%',
+            bg:'green'
+        }}>
+            <ResultantField />
         </div>
     )
 }
 
-export default DecoratedField;
+export default DecoratedFieldHOC;

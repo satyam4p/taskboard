@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import Input from "antd/lib/input/Input";
+import { Input } from 'antd';
 
 const { TextArea } = Input;
+
 const TextField = () => {
 
     const [value, setValue] = useState();

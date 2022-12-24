@@ -4,6 +4,7 @@ import useModals from "../../../helpers/hooks/useModals";
 import { Box, Container, Flex, Input, Label, Text } from "theme-ui";
 import iconsMap from "../../Icons/iconsMap";
 import TextLoader from "../../Loaders/simpleTextLoader";
+import FieldMapper from "../../Fields/FieldMappingMaster";
 import { SaveOutlined,
         ShareAltOutlined,
         EditOutlined,
@@ -148,9 +149,10 @@ const TaskModal=(props)=>{
                             display:'flex',
                             alignItems:'center'
                         }}>
-                            {<UserAddOutlined style={{
+                            {/* {<UserAddOutlined style={{
                                 fontSize:'20px'
-                            }}/>}&nbsp;Assignee
+                            }}/>}&nbsp;Assignee */}
+                            <FieldMapper/>
                         </div>
                         <div sx={{
                             display:'flex',
