@@ -1,15 +1,19 @@
+/** @jsxImportSource theme-ui */
 import React, { useState } from "react";
 import { Input } from 'antd';
-
-const { TextArea } = Input;
 
 const TextField = () => {
 
     const [value, setValue] = useState();
 
     return(
-        <TextArea
+        <Input
             value = {value}
+            type="text"
+            autoComplete="off"
+            sx={{
+                padding:'5px',
+            }}
         />
     )
 

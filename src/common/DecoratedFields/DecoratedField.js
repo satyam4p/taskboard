@@ -8,12 +8,23 @@ const DecoratedFieldHOC = ( props ) =>{
 
     return(
         <div
-        sx = {{
-            width:'20%',
-            width:'100%',
-            bg:'green'
-        }}>
-            <ResultantField />
+            sx = {{
+                display:'flex',
+                flexDirection:'row',
+                alignItems:'center'
+            }}>
+            {props.icon}
+            <div sx = {{
+                width:'44%',
+                display:'flex',
+                flexDirection:'row',
+                justifyContent:'space-between',
+                height:'24px',
+                alignItems:'center'
+            }}>
+                <p>{props.label}</p>
+                <ResultantField />
+            </div>
         </div>
     )
 }

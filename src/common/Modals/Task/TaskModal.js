@@ -152,7 +152,9 @@ const TaskModal=(props)=>{
                             {/* {<UserAddOutlined style={{
                                 fontSize:'20px'
                             }}/>}&nbsp;Assignee */}
-                            <FieldMapper/>
+                            <FieldMapper icon =  {<UserAddOutlined style={{
+                                fontSize:'20px'
+                            }}/>} />
                         </div>
                         <div sx={{
                             display:'flex',
