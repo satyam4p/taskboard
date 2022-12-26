@@ -5,14 +5,17 @@ import useAuth from "../../../helpers/hooks/useAuth";
 import useAxiosPrivate from "../../../helpers/hooks/useAxiosPrivate";
 
 const LOGOUT_URL = 'auth/logout';
+const LOGOUT_ALL_URL = 'auth/logoutAll'
 
 const ProfileTogggle =(props)=>{
 
     const { setAuth } = useAuth();
     const axiosPrivate = useAxiosPrivate();
 
-    const handlLogout= async ()=>{
-        await axiosPrivate.post(LOGOUT_URL);
+    const handlLogout= async (e, type)=>{
+        type === 'all' 
+            ? await axiosPrivate.post(LOGOUT_ALL_URL) 
+            : await axiosPrivate.post(LOGOUT_URL); 
         setAuth({});
     }
 
@@ -90,6 +93,27 @@ const ProfileTogggle =(props)=>{
                         }}
                         onClick={e=>handlLogout(e)}
                         >Sign Out</button>
+                         
+                    <button
+                        sx={{
+                            width:'100%',
+                            height:'inherit',
+                            border:'none',
+                            borderRadius:'5px',
+                            bg:'transparent',
+                            margin:0,
+                            padding:'8px',
+                            textAlign:'left',
+                            alignSelf:'center',
+                            '&:hover':{
+                                bg:'#DFDFDF',
+                                cursor:'pointer'
+                            },
+                            display:'flex',
+                            alignItems:'center',
+                        }}
+                        onClick={e=>handlLogout(e, 'all')}
+                        >Sign Out All</button>
                 </div>
             </Flex>
         </Box>
