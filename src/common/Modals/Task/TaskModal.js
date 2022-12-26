@@ -19,10 +19,55 @@ const Comments = React.lazy(()=>import('../../Comments/comments'));
 
 
 const TaskModal=(props)=>{
+    const fieldConfig = [
+        // {
+        //     field:'text',
+        //     label:'Title',
+        //     icon: null,
+        //     options:{}
+        // },
+        {
+            field:'text',
+            label:'Status',
+            icon: <AlertOutlined style={{
+                fontSize:'20px'
+            }}/>,
+            options:{}
+        },
+        // {
+        //     field:'date',
+        //     label:'Timeline',
+        //     icon: <FieldTimeOutlined style={{
+        //         fontSize:'20px'
+        //     }}/>,
+        //     options:{}
+        // },
+        {
+            field:'lookup',
+            label:'Assignee',
+            icon: <UserAddOutlined style={{
+                fontSize:'20px'
+            }}/>,
+            options:{}
+        },
+        {
+            field:'label',
+            label:'Label',
+            icon: <TagsOutlined style={{
+                fontSize:'20px'
+            }}/>,
+            options: {
+                value: 'Bug',
+                color:'error'
+            }
+        }
+
+    ]
     const { modalType, setModalType } = useModals();
     const [activeTab, setActiveTab] = useState('comments');
 
     useEffect(()=>{
+
     },[]);
 
     const toggleTab=(event, type)=>{
@@ -121,7 +166,7 @@ const TaskModal=(props)=>{
                     }} name="title" placeholder="Enter Title"/>
                     <Container sx={{
                         width:'90%',
-                        marginY:'30px',
+                        marginY:'10px',
                         display:'flex',
                         flexDirection:'column',
                         justifyContent:'space-between',
@@ -130,46 +175,27 @@ const TaskModal=(props)=>{
                         <div sx={{
                             display:'flex',
                             alignItems:'center',
-                            padding:'0px',
-                            margin:'0px'
+                            flexDirection:'column',
+                            margin:'5px',
                         }}>
-                            {<AlertOutlined style={{
-                                fontSize:'20px',
-                            }}/>}&nbsp;Status
-                        </div>
-                        <div sx={{
-                            display:'flex',
-                            alignItems:'center'
-                        }}>
-                            {<FieldTimeOutlined style={{
-                                fontSize:'20px',
-                            }}/>}&nbsp;Timeline
-                        </div>
-                        <div sx={{
-                            display:'flex',
-                            alignItems:'center'
-                        }}>
-                            {/* {<UserAddOutlined style={{
-                                fontSize:'20px'
-                            }}/>}&nbsp;Assignee */}
-                            <FieldMapper icon =  {<UserAddOutlined style={{
-                                fontSize:'20px'
-                            }}/>} />
-                        </div>
-                        <div sx={{
-                            display:'flex',
-                            alignItems:'center'
-                        }}>
-                            {<TagsOutlined style={{
-                                fontSize:'20px'
-                            }}/>}&nbsp;Label
+                            {fieldConfig.map((field, key)=>{
+                                return(
+                                    <FieldMapper
+                                        key = {key} 
+                                        field = {field.field}
+                                        label = {field.label}
+                                        icon =  {field.icon} 
+                                        options = {field.options}
+                                    />
+                                )
+                            })}
                         </div>
                     </Container>
                 </Box>
                     <Container
                         sx={{
                             width:'90%',
-                            marginTop:'50px'
+                            marginTop:'30px'
                         }}>
                         <div sx={{
                             borderBottom:'0.5px solid',
