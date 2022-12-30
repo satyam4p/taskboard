@@ -75,6 +75,12 @@ const TaskModal=(props)=>{
         setActiveTab(type);
     }
     console.log("active tab:: ",activeTab);
+
+    const handleSaveSubmit=(event)=>{
+        event.preventDefault();
+
+    }
+
     if(modalType.type === 'task' && modalType.isVisible){
         return(
             <div sx={{
@@ -90,7 +96,7 @@ const TaskModal=(props)=>{
                 overflowY:'auto',
                 fontSize:1
             }}>
-                <Box as={'form'}>
+                <Box as={'form'} onSubmit = {event=>handleSaveSubmit(event)}>
                     <div sx={{
                         display:'flex',
                         alignItems:'center',
@@ -103,9 +109,14 @@ const TaskModal=(props)=>{
                                 cursor:'pointer'
                             }
                         }}>
-                            {<SaveOutlined style={{
+                            {<button type="submit" sx={{
+                                background:'transparent',
+                                border:'none'
+                            }}>
+                                <SaveOutlined style={{
                                 fontSize:'20px'
-                            }}/>}
+                            }} />    
+                            </button>}
                         </div>
                         <div sx={{
                             margin:'10px',
@@ -113,9 +124,11 @@ const TaskModal=(props)=>{
                                 cursor:'pointer'
                             }
                         }}>
-                            {<ShareAltOutlined style={{
-                                fontSize:'20px'
-                            }}/>}
+                            {<button>
+                                <ShareAltOutlined style={{
+                                    fontSize:'20px'
+                                }}/>
+                            </button>}
                         </div>
                         <div sx={{
                             margin:'10px',
@@ -123,9 +136,11 @@ const TaskModal=(props)=>{
                                 cursor:'pointer'
                             }
                         }}>
-                            {<EditOutlined style={{
-                                fontSize:'20px'
-                            }}/>}
+                            {<button>
+                                <EditOutlined style={{
+                                    fontSize:'20px'
+                                }}/>
+                            </button>}
                         </div>
                         <div sx={{
                             margin:'10px',
@@ -133,9 +148,11 @@ const TaskModal=(props)=>{
                                 cursor:'pointer'
                             }
                         }}>
-                            {<MoreOutlined style={{
-                                fontSize:'20px'
-                            }}/>}
+                            {<button>
+                                <MoreOutlined style={{
+                                    fontSize:'20px'
+                                }}/>
+                            </button>}
                         </div>
                         <div sx={{
                             margin:'10px',
