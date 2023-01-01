@@ -1,5 +1,9 @@
 /** @jsxImportSource theme-ui */
 import React,{Suspense, useEffect, useState} from "react";
+/** testing START*/
+import { useSelector, useDispatch } from "react-redux";
+import { fetchTasks, addTask, selectAllTasks, selectError, selectStatus } from "../../../features/task/taskSlice";
+/** END */
 import useModals from "../../../helpers/hooks/useModals";
 import { Box, Container, Flex, Input, Label, Text } from "theme-ui";
 import iconsMap from "../../Icons/iconsMap";
@@ -66,9 +70,20 @@ const TaskModal=(props)=>{
     const { modalType, setModalType } = useModals();
     const [activeTab, setActiveTab] = useState('comments');
 
-    useEffect(()=>{
+    const dispatch = useDispatch();
+    const tasks = useSelector(selectAllTasks);
+    const taskStatus = useSelector(selectStatus);
+    const taskError = useSelector(selectError);
 
-    },[]);
+    /** need to resolve the double useEffect call while using react18 hooks components */
+    /** also need to avoid the call to network unless the component is required */
+    useEffect(()=>{
+        if(taskStatus === 'idle'){
+            dispatch(fetchTasks());
+        }
+    },[taskStatus, dispatch]);
+
+    console.log(tasks);
 
     const toggleTab=(event, type)=>{
         event.preventDefault();
@@ -124,7 +139,10 @@ const TaskModal=(props)=>{
                                 cursor:'pointer'
                             }
                         }}>
-                            {<button>
+                            {<button sx={{
+                                background:'transparent',
+                                border:'none'
+                            }}>
                                 <ShareAltOutlined style={{
                                     fontSize:'20px'
                                 }}/>
@@ -136,7 +154,10 @@ const TaskModal=(props)=>{
                                 cursor:'pointer'
                             }
                         }}>
-                            {<button>
+                            {<button sx={{
+                                background:'transparent',
+                                border:'none'
+                            }}>
                                 <EditOutlined style={{
                                     fontSize:'20px'
                                 }}/>
@@ -148,7 +169,10 @@ const TaskModal=(props)=>{
                                 cursor:'pointer'
                             }
                         }}>
-                            {<button>
+                            {<button sx={{
+                                background:'transparent',
+                                border:'none'
+                            }}>
                                 <MoreOutlined style={{
                                     fontSize:'20px'
                                 }}/>
