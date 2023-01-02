@@ -2,9 +2,10 @@
 import React,{Suspense, useEffect, useState} from "react";
 /** testing START*/
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTasks, addTask, selectAllTasks, selectError, selectStatus } from "../../../features/task/taskSlice";
+import { fetchTasks, addTask, selectCurrentTaskStatus, selectAllTasks, selectError, selectStatus } from "../../../features/task/taskSlice";
 /** END */
 import { Box, Container, Flex, Input, Label, Text } from "theme-ui";
+import { store } from "../../../store/store";
 import iconsMap from "../../Icons/iconsMap";
 import TextLoader from "../../Loaders/simpleTextLoader";
 import FieldMapper from "../../Fields/FieldMappingMaster";
@@ -16,8 +17,12 @@ import { SaveOutlined,
         FieldTimeOutlined,
         UserAddOutlined,
         TagsOutlined,
-        AlertOutlined
+        AlertOutlined,
+        LoadingOutlined
 } from '@ant-design/icons';
+import { Spin } from 'antd';
+import taskResolver from "../ModalResolver/TaskResolver";
+import TaskResolver from "../ModalResolver/TaskResolver";
 const Comments = React.lazy(()=>import('../../Comments/comments'));
 
 
@@ -72,22 +77,32 @@ const TaskModal=(props)=>{
     const tasks = useSelector(selectAllTasks);
     const taskStatus = useSelector(selectStatus);
     const taskError = useSelector(selectError);
+    const currentTaskStatus = useSelector(selectCurrentTaskStatus);
+    const myTestObj = {
+        'props':{
+            dispatch,
+            tasks,
+            taskStatus,
+            taskError
+        }
+    }
+   
 
     /** need to resolve the double useEffect call while using react18 hooks components */
     /** also need to avoid the call to network unless the component is required */
-    useEffect(()=>{
-        if(taskStatus === 'idle'){
-            dispatch(fetchTasks());
-        }
-    },[taskStatus, dispatch]);
-
-    console.log(tasks);
+    // useEffect(()=>{
+    //     if(taskStatus === 'idle'){
+    //         dispatch(fetchTasks());
+    //     }
+    // },[taskStatus, dispatch]);
 
     const toggleTab=(event, type)=>{
         event.preventDefault();
         setActiveTab(type);
     }
     console.log("active tab:: ",activeTab);
+    console.log("errors:: ", taskError);
+    console.log("status:: ", taskStatus);
 
     const handleSaveSubmit=(event)=>{
         event.preventDefault();
@@ -108,7 +123,7 @@ const TaskModal=(props)=>{
             overflowY:'auto',
             fontSize:1
         }}>
-            <Box as={'form'} onSubmit = {event=>handleSaveSubmit(event)}>
+            <Box as={'form'} onSubmit = {(e)=>TaskResolver(e, "createTask", dispatch)}>
                 <div sx={{
                     display:'flex',
                     alignItems:'center',
@@ -124,10 +139,10 @@ const TaskModal=(props)=>{
                         {<button type="submit" sx={{
                             background:'transparent',
                             border:'none'
-                        }}>
-                            <SaveOutlined style={{
-                            fontSize:'20px'
-                        }} />    
+                        }}> { currentTaskStatus === "loading" 
+                            ? <LoadingOutlined style={{ fontSize: '20px' }} spin /> 
+                            : <SaveOutlined style={{ fontSize:'20px' }} /> }
+                               
                         </button>}
                     </div>
                     <div sx={{
@@ -166,10 +181,12 @@ const TaskModal=(props)=>{
                             cursor:'pointer'
                         }
                     }}>
-                        {<button sx={{
+                        {<button
+                            onClick={ event=> taskResolver(event,"fetchTask", dispatch) } // only for testing
+                            sx={{
                             background:'transparent',
                             border:'none'
-                        }}>
+                            }}>
                             <MoreOutlined style={{
                                 fontSize:'20px'
                             }}/>

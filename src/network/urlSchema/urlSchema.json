@@ -1,0 +1,12 @@
+{
+    "Tasks":{
+        "FETCH_ALL":"/tasks",
+        "PATCH_TASK":"/tasks/updateStatus/:id",
+        "DELETE_TASK":"/tasks/delete/:id",
+        "GET_TASK":"",
+        "CREATE_TASK":"/tasks/create"
+    },
+    "Users":{
+        
+    }
+}

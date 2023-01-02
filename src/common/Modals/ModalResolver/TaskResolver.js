@@ -1,29 +1,56 @@
-import { axiosPrivate } from "../../../network/axios"
+import { axiosPrivate } from "../../../network/axios";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTasks, createTask, selectAllTasks, selectError, selectStatus } from "../../../features/task/taskSlice";
 
 /* add reducers and actions*/
 /**
  * 
- * @param {*} action 
- * @param {*} op - GET/PUT/PATCH/DELETE  
+ * @param {*} action
  * @param {*} details 
  */
-const taskResolver = (action, op, details )=>{
+const TaskResolver = (event, action, dispatch )=>{
 
-    switch(op){
-        case GET:
-            
-            return
-        case PUT:
+    return {
+        fetchTask: (event, dispatch) =>{
+            event.preventDefault();
+            dispatch(fetchTasks()); 
+        },
+        createTask: event =>{
+            /**sAMPLE PAYLOAD */
+            /**
+             * {
+                "name": "askhjdg test",
+                "InitialDate": "12 May, 2022",
+                "finalDate": "12 Dec, 2022",
+                "status": "In Progress",
+                "description": "create",
+                assignee: 978346hasbd7823
+                "label":"Bug"
+            }
+             */
+            // const payload = event?.data;
+            event.preventDefault();
+            const payload = {
+                "name": "askhjdg test",
+                "InitialDate": "12 May, 2022",
+                "finalDate": "12 Dec, 2022",
+                "status": "In Progress",
+                "description": "create",
+                "label":"Bug"
+            }
+            if(payload){
+                dispatch(createTask(payload));
+            }
+        },
+        updateTask: event=>{
 
-            return
-        case PATCH:
-            return
-        case DELETE:
-            return
+        },
+        deleteTask: event =>{
 
-        default:
-            return
-    }
+        }
+    }[action](event, dispatch);
     
 
 }
+
+export default TaskResolver;

@@ -5,7 +5,6 @@ import useAuth from '../helpers/hooks/useAuth';
 import useModals from '../helpers/hooks/useModals';
 
 const TaskModal = React.lazy(()=>import('../common/Modals/Task/TaskModal'));
-// import TaskModal from '../common/Modals/Task/TaskModal';
 
 function Home(props){
     const [toggleSideMenu, setToggleSideMenu] = useState(true);
