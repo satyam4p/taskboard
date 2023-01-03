@@ -1,6 +1,6 @@
-import { axiosPrivate } from "../../../network/axios";
+import { axiosPrivate } from "../../../../network/axios";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTasks, createTask, selectAllTasks, selectError, selectStatus } from "../../../features/task/taskSlice";
+import { fetchTasks, createTask, selectAllTasks, selectError, selectStatus } from "../../../../features/task/taskSlice";
 
 /* add reducers and actions*/
 /**

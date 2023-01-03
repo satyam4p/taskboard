@@ -1,10 +1,11 @@
 /** @jsxImportSource theme-ui */
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Input } from 'antd';
+import TaskContext from "../../Modals/Task/TaskContext/TaskProvider";
 
 const TextField = () => {
-
-    const [value, setValue] = useState();
+    const {task, setTask} = useContext(TaskContext);
+    const [value, setValue] = useState(null);
 
     return(
         <Input

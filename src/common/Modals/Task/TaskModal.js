@@ -2,7 +2,12 @@
 import React,{Suspense, useEffect, useState} from "react";
 /** testing START*/
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTasks, addTask, selectCurrentTaskStatus, selectAllTasks, selectError, selectStatus } from "../../../features/task/taskSlice";
+import { fetchTasks, 
+         addTask, 
+         selectCurrentTaskStatus, 
+         selectAllTasks, 
+         selectError, 
+         selectStatus } from "../../../features/task/taskSlice";
 /** END */
 import { Box, Container, Flex, Input, Label, Text } from "theme-ui";
 import { store } from "../../../store/store";
@@ -20,11 +25,11 @@ import { SaveOutlined,
         AlertOutlined,
         LoadingOutlined
 } from '@ant-design/icons';
-import { Spin } from 'antd';
-import taskResolver from "../ModalResolver/TaskResolver";
-import TaskResolver from "../ModalResolver/TaskResolver";
-const Comments = React.lazy(()=>import('../../Comments/comments'));
 
+/** Helpers */
+import TaskResolver from "../Helpers/ModalResolver/TaskResolver";
+import { TaskProvider } from "./TaskContext/TaskProvider";
+const Comments = React.lazy(()=>import('../../Comments/comments'));
 
 const TaskModal=(props)=>{
     const fieldConfig = [
@@ -72,7 +77,6 @@ const TaskModal=(props)=>{
 
     ]
     const [activeTab, setActiveTab] = useState('comments');
-
     const dispatch = useDispatch();
     const tasks = useSelector(selectAllTasks);
     const taskStatus = useSelector(selectStatus);
@@ -104,11 +108,6 @@ const TaskModal=(props)=>{
     console.log("errors:: ", taskError);
     console.log("status:: ", taskStatus);
 
-    const handleSaveSubmit=(event)=>{
-        event.preventDefault();
-
-    }
-
     return(
         <div sx={{
             zIndex:'400',
@@ -123,6 +122,7 @@ const TaskModal=(props)=>{
             overflowY:'auto',
             fontSize:1
         }}>
+        <TaskProvider>
             <Box as={'form'} onSubmit = {(e)=>TaskResolver(e, "createTask", dispatch)}>
                 <div sx={{
                     display:'flex',
@@ -140,9 +140,9 @@ const TaskModal=(props)=>{
                             background:'transparent',
                             border:'none'
                         }}> { currentTaskStatus === "loading" 
-                            ? <LoadingOutlined style={{ fontSize: '20px' }} spin /> 
+                            ? <LoadingOutlined style={{ fontSize: '20px' }} Spin /> 
                             : <SaveOutlined style={{ fontSize:'20px' }} /> }
-                               
+                            
                         </button>}
                     </div>
                     <div sx={{
@@ -182,7 +182,7 @@ const TaskModal=(props)=>{
                         }
                     }}>
                         {<button
-                            onClick={ event=> taskResolver(event,"fetchTask", dispatch) } // only for testing
+                            onClick={ event=> TaskResolver(event,"fetchTask", dispatch) } // only for testing
                             sx={{
                             background:'transparent',
                             border:'none'
@@ -301,6 +301,7 @@ const TaskModal=(props)=>{
                         </Suspense>
                     </Container>
                 </Container>
+        </TaskProvider>
         </div>
     )
 }
