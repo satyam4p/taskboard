@@ -3,6 +3,7 @@ import SecondaryBar from '../Components/Secondarybar/SecondaryBar';
 import SideMenu from '../Components/SideMenu/SideMenu';
 import useAuth from '../helpers/hooks/useAuth';
 import useModals from '../helpers/hooks/useModals';
+import { TaskProvider } from '../common/Modals/Task/TaskContext/TaskProvider';
 
 const TaskModal = React.lazy(()=>import('../common/Modals/Task/TaskModal'));
 
@@ -29,7 +30,9 @@ function Home(props){
             {
             (modalType.type === 'task' && modalType.isVisible) &&
                 <Suspense fallback={<h4>Loading...</h4>}>
-                    <TaskModal setModalType = {setModalType}  />
+                    <TaskProvider>
+                        <TaskModal setModalType = {setModalType}  />
+                    </TaskProvider>
                 </Suspense>   
             }
         </>

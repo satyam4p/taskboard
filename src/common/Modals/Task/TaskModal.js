@@ -1,5 +1,6 @@
 /** @jsxImportSource theme-ui */
-import React,{Suspense, useEffect, useState} from "react";
+import React,{Suspense, useEffect, useState, useContext } from "react";
+import TaskContext from "./TaskContext/TaskProvider";
 /** testing START*/
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTasks, 
@@ -28,10 +29,11 @@ import { SaveOutlined,
 
 /** Helpers */
 import TaskResolver from "../Helpers/ModalResolver/TaskResolver";
-import { TaskProvider } from "./TaskContext/TaskProvider";
 const Comments = React.lazy(()=>import('../../Comments/comments'));
 
 const TaskModal=(props)=>{
+    const { task, setTask } = useContext( TaskContext );
+    console.log("parent Task State:: ", task);
     const fieldConfig = [
         // {
         //     field:'text',
@@ -82,16 +84,7 @@ const TaskModal=(props)=>{
     const taskStatus = useSelector(selectStatus);
     const taskError = useSelector(selectError);
     const currentTaskStatus = useSelector(selectCurrentTaskStatus);
-    const myTestObj = {
-        'props':{
-            dispatch,
-            tasks,
-            taskStatus,
-            taskError
-        }
-    }
    
-
     /** need to resolve the double useEffect call while using react18 hooks components */
     /** also need to avoid the call to network unless the component is required */
     // useEffect(()=>{
@@ -104,9 +97,11 @@ const TaskModal=(props)=>{
         event.preventDefault();
         setActiveTab(type);
     }
-    console.log("active tab:: ",activeTab);
-    console.log("errors:: ", taskError);
-    console.log("status:: ", taskStatus);
+   
+    const handleEdit= (e) => {
+        e.preventDefault();
+      
+    }
 
     return(
         <div sx={{
@@ -122,7 +117,6 @@ const TaskModal=(props)=>{
             overflowY:'auto',
             fontSize:1
         }}>
-        <TaskProvider>
             <Box as={'form'} onSubmit = {(e)=>TaskResolver(e, "createTask", dispatch)}>
                 <div sx={{
                     display:'flex',
@@ -166,7 +160,9 @@ const TaskModal=(props)=>{
                             cursor:'pointer'
                         }
                     }}>
-                        {<button sx={{
+                        {<button 
+                        onClick={e=>handleEdit(e)}
+                        sx={{
                             background:'transparent',
                             border:'none'
                         }}>
@@ -301,7 +297,6 @@ const TaskModal=(props)=>{
                         </Suspense>
                     </Container>
                 </Container>
-        </TaskProvider>
         </div>
     )
 }
