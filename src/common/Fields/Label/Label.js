@@ -8,7 +8,7 @@ import debounce from "../../../helpers/commonUtils/debounce";
 
 const LabelField = (props)=>{
     const {task, setTask} = useContext(TaskContext);
-    console.log("task:: ",task);
+    console.log("task out of debounce:: ",task);
     const [value, setValue] = useState("Bug");
     const labelOptions = ["Bug", "RCA", "Task"]
     const handleSelect = (e)=>{
@@ -22,14 +22,13 @@ const LabelField = (props)=>{
  
      const updateParentState = useCallback(
          debounce(value=>{
-             let taskClone = cloneDeep(task);
-             console.log("taskClone:: ",taskClone);
              /** this 'status' value in taskData is hardCoded but should be actually picked from configuration and updated accordingly */
-             taskClone.taskData['label'] = value;
              setTask(prevTask=>{
+                let taskClone = cloneDeep(prevTask);
+                taskClone.taskData['label'] = value;
                 return {
-                   ...prevTask,
-                   taskData: taskClone
+                    ...prevTask,
+                    taskData: taskClone.taskData
                 }   
                });
          }, 400), []);

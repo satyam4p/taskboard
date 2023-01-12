@@ -21,10 +21,15 @@ const TextField = (props) => {
 
     const updateParentState = useCallback(
         debounce(value=>{
-            let taskClone = cloneDeep(task);
             /** this 'status' value in taskData is hardCoded but should be actually picked from configuration and updated accordingly */
-            taskClone.taskData['status'] = value;
-            setTask(taskClone);
+            setTask(prevTask=>{
+                let taskClone = cloneDeep(prevTask);
+                taskClone.taskData['status'] = value;
+                return{
+                    ...prevTask,
+                    taskData: taskClone.taskData
+                }
+            });
         }, 400), []);
 
     return(
