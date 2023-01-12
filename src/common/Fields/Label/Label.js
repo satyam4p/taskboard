@@ -8,7 +8,6 @@ import debounce from "../../../helpers/commonUtils/debounce";
 
 const LabelField = (props)=>{
     const {task, setTask} = useContext(TaskContext);
-    console.log("task out of debounce:: ",task);
     const [value, setValue] = useState("Bug");
     const labelOptions = ["Bug", "RCA", "Task"]
     const handleSelect = (e)=>{
@@ -43,7 +42,6 @@ const LabelField = (props)=>{
            <Select sx = {{
                 minWidth:'120px'
             }} 
-            defaultValue=""
             className={`label-container ${value}`}
             value={value}
             arrow = {
