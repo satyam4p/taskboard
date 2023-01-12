@@ -106,7 +106,7 @@ const TaskModal=(props)=>{
     return(
         <div sx={{
             zIndex:'400',
-            width:'40%',
+            width:'36%',
             height:'80vh',
             position:'absolute',
             top:'50%',
