@@ -3,6 +3,7 @@ import { cloneDeep, debounce } from 'lodash';
 import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { Select, Box } from 'theme-ui';
 import TaskContext from '../../Modals/Task/TaskContext/TaskProvider';
+import './stylesheet.scss';
 
 //this array will be obtained from the api call or prop
 
@@ -56,6 +57,7 @@ const LookupField = () => {
     <Select sx = {{
         minWidth:'120px'
       }} 
+    className={'lookup-container'}
     defaultValue="Hello"
     arrow = {
       <Box

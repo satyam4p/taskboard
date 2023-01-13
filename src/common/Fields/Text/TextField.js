@@ -4,6 +4,7 @@ import { Input } from 'antd';
 import TaskContext from "../../Modals/Task/TaskContext/TaskProvider";
 import { cloneDeep } from "lodash";
 import debounce from "../../../helpers/commonUtils/debounce";
+import './stylesheet.scss'
 
 const TextField = (props) => {
     const {task, setTask} = useContext(TaskContext);
@@ -34,6 +35,7 @@ const TextField = (props) => {
 
     return(
         <Input
+        className="text-container"
             value = {textValue}
             type="text"
             autoComplete="off"
