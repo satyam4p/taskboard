@@ -1,6 +1,8 @@
 
-import React, { useState } from 'react';
+import { cloneDeep, debounce } from 'lodash';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { Select, Box } from 'theme-ui';
+import TaskContext from '../../Modals/Task/TaskContext/TaskProvider';
 
 //this array will be obtained from the api call or prop
 
@@ -16,17 +18,39 @@ const getOptions = ()=> {
 
 const LookupField = () => {
     const [options, setOptions] = useState([]);
-    const handleChange = () =>{
-      console.log("change clicked");
+    const {task, setTask} = useContext(TaskContext);
+    const [value, setValue] = useState();
+
+    const handleChange = (e) =>{
+      e.preventDefault()
+      const value = e.target.value;
+      console.log("selected value:: ",value);
+      setValue(value);
     }
     const handleClick= async ()=>{
       if(options.length > 0){
         return;
       }
       const optionsList = await getOptions();
-      console.log("options list:: ",optionsList);
       setOptions(optionsList);
     }
+
+    useEffect(()=>{
+      updateParentState(value);
+    },[value, setValue]);
+
+    const updateParentState = useCallback(
+      debounce((value)=>{
+        setTask((prevTask)=>{
+          const taskClone = cloneDeep(prevTask);
+          taskClone.taskData['assignee'] = value;
+          console.log("taskClone after:: ",taskClone);
+          return {
+            ...prevTask,
+            taskData : taskClone.taskData
+          }
+        })
+      }, 4),[]);
 
   return(
     <Select sx = {{
