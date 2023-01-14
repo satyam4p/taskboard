@@ -29,6 +29,7 @@ import { SaveOutlined,
 
 /** Helpers */
 import TaskResolver from "../Helpers/ModalResolver/TaskResolver";
+import TaskHeader from "./TaskModalHeader/TaskHeader";
 const Comments = React.lazy(()=>import('../../Comments/comments'));
 
 const TaskModal=(props)=>{
@@ -206,7 +207,7 @@ const TaskModal=(props)=>{
                         }}/>}
                     </div>
                 </div>
-                <Label htmlFor="title"></Label>
+                {/* <Label htmlFor="title"></Label>
                 <Input sx={{
                     border:'0.5px solid #C4C4C4',
                     padding:'10px',
@@ -214,7 +215,8 @@ const TaskModal=(props)=>{
                     width:'90%',
                     margin:'auto',
                     height:'40px',
-                }} name="title" placeholder="Enter Title"/>
+                }} name="title" placeholder="Enter Title"/> */}
+                <TaskHeader />
                 <Container sx={{
                     width:'90%',
                     marginY:'10px',

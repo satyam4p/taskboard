@@ -25,7 +25,11 @@ const TextField = (props) => {
             /** this 'status' value in taskData is hardCoded but should be actually picked from configuration and updated accordingly */
             setTask(prevTask=>{
                 let taskClone = cloneDeep(prevTask);
-                taskClone.taskData['status'] = value;
+                if(props.type && props.type == "header"){
+                    taskClone.taskData['title'] = value;    
+                }else{
+                    taskClone.taskData['status'] = value;
+                }
                 return{
                     ...prevTask,
                     taskData: taskClone.taskData
@@ -35,7 +39,7 @@ const TextField = (props) => {
 
     return(
         <Input
-        className="text-container"
+            className={`text-container ${props.type}`}
             value = {textValue}
             type="text"
             autoComplete="off"
