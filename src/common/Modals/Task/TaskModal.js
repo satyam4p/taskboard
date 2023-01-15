@@ -27,6 +27,9 @@ import { SaveOutlined,
         LoadingOutlined
 } from '@ant-design/icons';
 
+import TextEditor from "../../TextEditor/TextEditor";
+import './stylesheet.scss';
+
 /** Helpers */
 import TaskResolver from "../Helpers/ModalResolver/TaskResolver";
 import TaskHeader from "./TaskModalHeader/TaskHeader";
@@ -105,7 +108,7 @@ const TaskModal=(props)=>{
     }
 
     return(
-        <div sx={{
+        <div className="task-modal-container" sx={{
             zIndex:'400',
             width:'36%',
             height:'80vh',
@@ -294,7 +297,7 @@ const TaskModal=(props)=>{
                         <Suspense fallback={<TextLoader/>}>
                             {activeTab === 'comments' 
                                 ? <Comments/>
-                                : null
+                                : <TextEditor/>
                             }
                         </Suspense>
                     </Container>
