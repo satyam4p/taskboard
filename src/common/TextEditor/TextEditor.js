@@ -13,13 +13,12 @@ const TextEditor = ()=>{
     const [editorState, setEditorState] = useState(()=>{
         EditorState.createEmpty();
     });
+    
     const { task, setTask } = useContext(TaskContext); 
     
     useEffect(()=>{
-        console.log("editorState:: ",editorState);
         if(editorState !== undefined){
-            const currentState = editorState.getCurrentContent();
-            console.log("EditorState:: ",convertToRaw(currentState));
+            updateParentState(editorState);
         }
     },[ editorState ]);
 
@@ -33,9 +32,7 @@ const TextEditor = ()=>{
                 return {
                     ...prevTask,
                     taskData: taskClone.taskData
-                }
-                })
-            
+                }});
         },4),[])
 
     return(
