@@ -41,7 +41,7 @@ const Comments = React.lazy(()=>import('../../Comments/comments'));
 
 const TaskModal=(props)=>{
     const { task, setTask } = useContext( TaskContext );
-    const [loading, create] = useCreateTask();
+    const [loading, create, data] = useCreateTask();
     const [result, setResult] = useState(undefined);
     console.log("parent Task State:: ", task);
     const fieldConfig = [

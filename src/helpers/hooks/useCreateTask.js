@@ -7,6 +7,7 @@ import urlSchema from '../../network/urlSchema/urlSchema.json';
 const useCreateTask =()=>{
     const axiosPrivate = useAxiosPrivate();
     const [loading, setLoading] = useState(false);
+    const [data, setData] = useState();
     const dispatch = useDispatch();
     const create = async (/**payload to be sent here */ )=>{
         setLoading(true);
@@ -23,11 +24,10 @@ const useCreateTask =()=>{
         const result = await axiosPrivate.post(URL, payload);
         if(result){
             setLoading(false);
-            return result?.data
+            setData(result.data);
         }
-        return result;
     }    
-    return [loading, create];
+    return [loading, create, data];
 }
 
 export default useCreateTask;
