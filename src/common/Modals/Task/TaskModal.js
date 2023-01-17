@@ -33,10 +33,16 @@ import './stylesheet.scss';
 /** Helpers */
 import TaskResolver from "../Helpers/ModalResolver/TaskResolver";
 import TaskHeader from "./TaskModalHeader/TaskHeader";
+/**test */
+import useCreateTask from "../../../helpers/hooks/useCreateTask";
 const Comments = React.lazy(()=>import('../../Comments/comments'));
+
+
 
 const TaskModal=(props)=>{
     const { task, setTask } = useContext( TaskContext );
+    const [loading, create] = useCreateTask();
+    const [result, setResult] = useState(undefined);
     console.log("parent Task State:: ", task);
     const fieldConfig = [
         // {
@@ -106,7 +112,15 @@ const TaskModal=(props)=>{
         e.preventDefault();
       
     }
-
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        const result = create();
+        if(!loading){
+            setResult(result);
+        }
+    }
+    console.log("loading:: ",loading)
+    console.log("loading:: ",result)
     return(
         <div className="task-modal-container" sx={{
             zIndex:'400',
@@ -121,7 +135,8 @@ const TaskModal=(props)=>{
             overflowY:'auto',
             fontSize:1
         }}>
-            <Box as={'form'} onSubmit = {(e)=>TaskResolver(e, "createTask", dispatch)}>
+            {/* <Box as={'form'} onSubmit = {(e)=>TaskResolver(e, "createTask", dispatch)}> */}
+            <Box as={'form'} onSubmit = {(e)=>{handleSubmit(e)}}>
                 <div sx={{
                     display:'flex',
                     alignItems:'center',
