@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import useAxiosPrivate from "./useAxiosPrivate";
-import { fetchTasks, createTask } from "../../features/task/taskSlice";
+import { createTaskSuccess, createTaskBegin, createTaskError } from "../../features/task/taskSlice";
 import urlSchema from '../../network/urlSchema/urlSchema.json';
 
 const useCreateTask =()=>{
@@ -11,6 +11,7 @@ const useCreateTask =()=>{
     const dispatch = useDispatch();
     const create = async (/**payload to be sent here */ )=>{
         setLoading(true);
+        dispatch(createTaskBegin());
         const payload = {
             "name": "askhjdg test",
             "InitialDate": "12 May, 2022",
@@ -25,6 +26,10 @@ const useCreateTask =()=>{
         if(result){
             setLoading(false);
             setData(result.data);
+            dispatch(createTaskSuccess(result.data));
+        }else{
+            setLoading(false);
+            dispatch(createTaskError("something went wrong"));
         }
     }    
     return [loading, create, data];

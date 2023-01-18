@@ -1,6 +1,6 @@
 import { axiosPrivate } from "../../../../network/axios";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTasks, createTask, selectAllTasks, selectError, selectStatus } from "../../../../features/task/taskSlice";
+import { fetchTasks, createTaskSuccess, selectAllTasks, selectError, selectStatus } from "../../../../features/task/taskSlice";
 
 /* add reducers and actions*/
 /**
@@ -39,7 +39,7 @@ const TaskResolver = (event, action, dispatch )=>{
                 "label":"Bug"
             }
             if(payload){
-                dispatch(createTask(payload));
+                dispatch(createTaskSuccess(payload));
             }
         },
         updateTask: event=>{

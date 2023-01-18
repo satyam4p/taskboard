@@ -18,11 +18,11 @@ export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async ()=>{
     return response.data;
 });
 
-export const createTask = createAsyncThunk("tasks/createTask", async (data)=>{
-    const URL = urlSchema.Tasks.CREATE_TASK;
-    const response = await axiosPrivate.put(URL, data, {withCredentials:true});
-    console.log("creat task response:: ",response);
-})
+// export const createTask = createAsyncThunk("tasks/createTask", async (data)=>{
+//     const URL = urlSchema.Tasks.CREATE_TASK;
+//     const response = await axiosPrivate.put(URL, data, {withCredentials:true});
+//     console.log("creat task response:: ",response);
+// })
 
 export const taskSlice = createSlice({
     name:'tasks',
@@ -51,6 +51,27 @@ export const taskSlice = createSlice({
                 }
             }
         },
+        createTaskSuccess:(state, action)=>{
+            return {
+                ...state,
+                currentTask: action.payload,
+                currentTaskStatus: "succeeded"
+
+            }
+        },
+        createTaskBegin: (state, action)=>{
+            return {
+                ...state,
+                currentTaskStatus: "loading"
+            }
+        },
+        createTaskError: (state, action)=>{
+            return {
+                ...state,
+                currentTaskStatus: "failed",
+                error: action.payload
+            }
+        }
     },
     extraReducers(builder){/** extra reducer user builder to do some async data fecth/requests and
                                 we can add manual cases which needs to be handled for async requests */
@@ -65,17 +86,17 @@ export const taskSlice = createSlice({
             state.status = 'failed'
             state.error = action.error.message
         })
-        .addCase(createTask.fulfilled, (state, action)=>{
-            state.currentTask = action.payload;
-            state.currentTaskStatus = "succeeded"
-        })
-        .addCase(createTask.pending, (state, action)=>{
-            state.currentTaskStatus = "loading";
-        })
-        .addCase(createTask.rejected, (state, action)=>{
-            state.currentTaskStatus = "failed";
-            state.error = action.error.message;
-        })
+        // .addCase(createTask.fulfilled, (state, action)=>{
+        //     state.currentTask = action.payload;
+        //     state.currentTaskStatus = "succeeded"
+        // })
+        // .addCase(createTask.pending, (state, action)=>{
+        //     state.currentTaskStatus = "loading";
+        // })
+        // .addCase(createTask.rejected, (state, action)=>{
+        //     state.currentTaskStatus = "failed";
+        //     state.error = action.error.message;
+        // })
     }
 
 })
@@ -86,6 +107,6 @@ export const selectError = (state)=>state.task.error;
 export const selectCurrentTaskStatus = (state)=>state.task.currentTaskStatus;
 
 
-export const { addTask } = taskSlice.actions;
+export const { addTask, createTaskSuccess, createTaskBegin, createTaskError } = taskSlice.actions;
 
 export default taskSlice.reducer;

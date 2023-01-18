@@ -119,8 +119,6 @@ const TaskModal=(props)=>{
             setResult(result);
         }
     }
-    console.log("loading:: ",loading)
-    console.log("loading:: ",result)
     return(
         <div className="task-modal-container" sx={{
             zIndex:'400',
@@ -135,7 +133,6 @@ const TaskModal=(props)=>{
             overflowY:'auto',
             fontSize:1
         }}>
-            {/* <Box as={'form'} onSubmit = {(e)=>TaskResolver(e, "createTask", dispatch)}> */}
             <Box as={'form'} onSubmit = {(e)=>{handleSubmit(e)}}>
                 <div sx={{
                     display:'flex',
