@@ -5,7 +5,7 @@ let defaultState = {
             assignee: null,
             label: null,
             description:null,
-            title: null
+            name: null
         },
         taskConfig: {}
     }

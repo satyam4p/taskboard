@@ -114,7 +114,7 @@ const TaskModal=(props)=>{
     }
     const handleSubmit = (e)=>{
         e.preventDefault();
-        const result = create();
+        const result = create(task.taskData);
         if(!loading){
             setResult(result);
         }

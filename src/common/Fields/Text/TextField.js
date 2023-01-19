@@ -26,7 +26,7 @@ const TextField = (props) => {
             setTask(prevTask=>{
                 let taskClone = cloneDeep(prevTask);
                 if(props.type && props.type == "header"){
-                    taskClone.taskData['title'] = value;    
+                    taskClone.taskData['name'] = value;    
                 }else{
                     taskClone.taskData['status'] = value;
                 }

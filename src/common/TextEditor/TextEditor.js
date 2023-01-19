@@ -28,7 +28,7 @@ const TextEditor = ()=>{
                 const currentState = editorState.getCurrentContent();
                 const rawContent = convertToRaw(currentState);
                 let taskClone = cloneDeep(task);
-                taskClone.taskData['description'] = rawContent;
+                taskClone.taskData['description'] = JSON.stringify(rawContent);
                 return {
                     ...prevTask,
                     taskData: taskClone.taskData

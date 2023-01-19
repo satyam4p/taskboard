@@ -9,28 +9,25 @@ const useCreateTask =()=>{
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState();
     const dispatch = useDispatch();
-    const create = async (/**payload to be sent here */ )=>{
+    const create = async ( payload )=>{
         setLoading(true);
         dispatch(createTaskBegin());
-        const payload = {
-            "name": "askhjdg test",
-            "InitialDate": "12 May, 2022",
-            "finalDate": "12 Dec, 2022",
-            "status": "In Progress",
-            "description": "create",
-            "label":"Bug"
-        }
-        // const result = await dispatch(createTask(payload, axiosPrivate));
+        console.log("taskData:: ",payload);
         const URL = urlSchema.Tasks.CREATE_TASK;
-        const result = await axiosPrivate.post(URL, payload);
-        if(result){
-            setLoading(false);
-            setData(result.data);
-            dispatch(createTaskSuccess(result.data));
-        }else{
-            setLoading(false);
-            dispatch(createTaskError("something went wrong"));
+        try{
+            const result = await axiosPrivate.post(URL, payload);
+        console.log("result:: ",result);
+            if(result){
+                setLoading(false);
+                setData(result.data);
+                dispatch(createTaskSuccess(result.data));
+            }
+        }catch(error){
+                setLoading(false);
+                dispatch(createTaskError("something went wrong"));
+                console.log("error",error)
         }
+            
     }    
     return [loading, create, data];
 }
