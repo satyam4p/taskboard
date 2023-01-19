@@ -150,7 +150,7 @@ const TaskModal=(props)=>{
                             background:'transparent',
                             border:'none'
                         }}> { currentTaskStatus === "loading" 
-                            ? <LoadingOutlined style={{ fontSize: '20px' }} Spin /> 
+                            ? <LoadingOutlined style={{ fontSize: '20px' }} spin /> 
                             : <SaveOutlined style={{ fontSize:'20px' }} /> }
                             
                         </button>}

@@ -4,23 +4,19 @@ import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { Select, Box } from 'theme-ui';
 import TaskContext from '../../Modals/Task/TaskContext/TaskProvider';
 import './stylesheet.scss';
+import useAxiosPrivate from '../../../helpers/hooks/useAxiosPrivate';
+import urlSchema from '../../../network/urlSchema/urlSchema.json';
 
 //this array will be obtained from the api call or prop
 
-const getOptions = ()=> {
-  return new Promise((resolve, reject) => setTimeout(resolve(
-    ['hello',
-      'blah',
-      'hjasdv',
-      'yiqwe',
-      'Hi']
-  ), 2000 )); 
-}
+
 
 const LookupField = () => {
     const [options, setOptions] = useState([]);
     const {task, setTask} = useContext(TaskContext);
     const [value, setValue] = useState();
+    const axiosPrivate = useAxiosPrivate();
+
 
     const handleChange = (e) =>{
       e.preventDefault()
@@ -36,16 +32,25 @@ const LookupField = () => {
       setOptions(optionsList);
     }
 
+    const getOptions = async ()=> {
+      const url = urlSchema.Users.GET_ALL_USERS;
+      const usersList = await axiosPrivate.get(url);
+      console.log("usersList:: ",usersList);
+      return usersList.data;
+    }
+
     useEffect(()=>{
-      updateParentState(value);
+      if(options && options.length > 0){
+        updateParentState(options.filter(user=>user.username === value));
+      }
     },[value, setValue]);
 
     const updateParentState = useCallback(
       debounce((value)=>{
         setTask((prevTask)=>{
           const taskClone = cloneDeep(prevTask);
-          taskClone.taskData['assignee'] = value;
-          console.log("taskClone after:: ",taskClone);
+          const user_id = value[0]?.id;
+          taskClone.taskData['assignee'] = user_id;
           return {
             ...prevTask,
             taskData : taskClone.taskData
@@ -81,7 +86,7 @@ const LookupField = () => {
       {options.map((option, key)=>{
         return (
             <option key={key}>
-              {option}
+              {option.username}
             </option>
         )
       })}
