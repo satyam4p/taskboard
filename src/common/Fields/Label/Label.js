@@ -31,12 +31,6 @@ const LabelField = (props)=>{
                 }   
                });
          }, 400), []);
-
-    const Pill = ({label})=>{
-        return  <div className="label-container" color={props.options.color} icon={props?.icon}>
-                    { label }
-                </div>
-    }
     return(
         <div>
            <Select sx = {{

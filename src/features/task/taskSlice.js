@@ -9,7 +9,7 @@ const initialState = {
     comments:[],
     currentTask:null,
     currentTaskStatus:'idle',
-    taskConfig:{}
+    taskConfig:[]
 }
 
 export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async ()=>{
@@ -126,6 +126,7 @@ export const selectAllTasks = (state)=>state.task.tasks;
 export const selectStatus = (state)=>state.task.status;
 export const selectError = (state)=>state.task.error;
 export const selectCurrentTaskStatus = (state)=>state.task.currentTaskStatus;
+export const selectTaskConfig = (state)=>state.task.taskConfig;
 
 
 export const { addTask, createTaskSuccess, 

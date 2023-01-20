@@ -7,7 +7,6 @@ const FieldMapper = (props) =>{
 
     //need to have logic for provideing if we need to render raw or decorated field
     const requireDecoratedFields = true;
-
     const resultantField = fieldMaster[props.field];
     const label = props.label;
     if(requireDecoratedFields){

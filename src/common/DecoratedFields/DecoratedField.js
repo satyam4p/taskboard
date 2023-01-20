@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import React, { useState } from "react";
-
+import iconsMap from "../IconsMapper/IconsMap";
 
 const DecoratedFieldHOC = ( props ) =>{
 
@@ -19,7 +19,7 @@ const DecoratedFieldHOC = ( props ) =>{
                     display:'flex',
                     alignItems:'center'
                 }}>
-                    {props.icon}&nbsp;&nbsp;
+                    {iconsMap[props.icon] ? iconsMap[props.icon]() : null}&nbsp;&nbsp;
                     <p>{props.label}</p>
                 </div>
                 <div sx = {{

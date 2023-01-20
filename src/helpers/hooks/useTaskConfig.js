@@ -20,7 +20,8 @@ const useTaskConfig = ()=>{
             const result = await axiosprivate.get(URL);
             if(result && result.data){
                 setLoading(true);
-                dispatch(fetchTaskConfigSuccess(result.data));
+                const config = Object.values(result.data);
+                dispatch(fetchTaskConfigSuccess(config));
                 setConfig(result.data);
             }
         }catch(error){
