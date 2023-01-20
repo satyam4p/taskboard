@@ -9,5 +9,10 @@
     "Users":{
         "GET_ALL_USERS": "/auth/users",
         "GET_USER": "/auth/me"
+    },
+    "Config": {
+        "GET_CONFIG": "/config/:id",
+        "CREATE_CONFIG": "/config/create",
+        "DELETE_CONFIG": "/config/delete/:id"
     }
 }

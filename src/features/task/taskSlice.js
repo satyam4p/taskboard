@@ -9,6 +9,7 @@ const initialState = {
     comments:[],
     currentTask:null,
     currentTaskStatus:'idle',
+    taskConfig:{}
 }
 
 export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async ()=>{
@@ -28,6 +29,26 @@ export const taskSlice = createSlice({
     name:'tasks',
     initialState,
     reducers:{
+        fetchTaskConfigBegin : (state, action) => {
+            return {
+                ...state,
+                status: 'loading'
+            }
+        },
+        fetchTaskConfigSuccess:(state, action)=>{
+            return {
+                ...state,
+                status: 'succeeded',
+                taskConfig: action.payload
+            }
+        },
+        fetchTaskConfigError:(state, action)=>{
+            return {
+                ...state,
+                status: 'failed',
+                error: action.payload
+            }
+        },
         /**typical format for reducer in a slice is::
          * START: 
          *  reducers:{
@@ -107,6 +128,9 @@ export const selectError = (state)=>state.task.error;
 export const selectCurrentTaskStatus = (state)=>state.task.currentTaskStatus;
 
 
-export const { addTask, createTaskSuccess, createTaskBegin, createTaskError } = taskSlice.actions;
+export const { addTask, createTaskSuccess, 
+    createTaskBegin, createTaskError,
+    fetchTaskConfigBegin, fetchTaskConfigSuccess,
+    fetchTaskConfigError } = taskSlice.actions;
 
 export default taskSlice.reducer;
