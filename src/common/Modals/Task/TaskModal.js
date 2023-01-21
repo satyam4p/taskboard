@@ -21,6 +21,8 @@ import TaskResolver from "../Helpers/ModalResolver/TaskResolver";
 import TaskHeader from "./TaskModalHeader/TaskHeader";
 import useCreateTask from "../../../helpers/hooks/useCreateTask";
 import useTaskConfig from "../../../helpers/hooks/useTaskConfig";
+import useNotification from "../../Notification/helpers/useNotification";
+import Notification from "../../Notification/Notification";
 
 const Comments = React.lazy(()=>import('../../Comments/comments'));
 
@@ -29,7 +31,6 @@ const TaskModal=(props)=>{
     const [loading, create, data] = useCreateTask();
     const [result, setResult] = useState(undefined);
     const [configLoaded, fetchConfig, config] = useTaskConfig();
-
     useEffect(()=>{
         fetchConfig();
     },[]);
