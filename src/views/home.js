@@ -4,14 +4,16 @@ import SideMenu from '../Components/SideMenu/SideMenu';
 import useAuth from '../helpers/hooks/useAuth';
 import useModals from '../helpers/hooks/useModals';
 import { TaskProvider } from '../common/Modals/Task/TaskContext/TaskProvider';
+import Notification from '../common/Notification/Notification';
 
 const TaskModal = React.lazy(()=>import('../common/Modals/Task/TaskModal'));
 
 function Home(props){
+    
     const [toggleSideMenu, setToggleSideMenu] = useState(true);
-    const {auth} = useAuth();
-    const [toggleProfile, setToggleProile] = useState(false);
-    const [toggleAddMenu, setToggleAddMenu] = useState(false);
+    const { showNotification } = useAuth();
+    const [ toggleProfile, setToggleProile ] = useState(false);
+    const [ toggleAddMenu, setToggleAddMenu ] = useState(false);
     const { modalType, setModalType } = useModals();
 
     return(
@@ -35,6 +37,7 @@ function Home(props){
                     </TaskProvider>
                 </Suspense>   
             }
+            {showNotification && <Notification/>}
         </>
     )
 
