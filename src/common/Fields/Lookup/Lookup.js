@@ -59,39 +59,43 @@ const LookupField = (props) => {
       }, 4),[]);
 
   return(
-    <Select sx = {{
-        minWidth:'120px'
-      }} 
-    className={'lookup-container'}
-    defaultValue="Hello"
-    arrow = {
-      <Box
-        as="svg"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="currentcolor"
-        sx={{
-          ml: -28,
-          alignSelf: 'center',
-          pointerEvents: 'none',
-        }}>
-        <path d="M7.41 7.84l4.59 4.58 4.59-4.58 1.41 1.41-6 6-6-6z" />
-      </Box>
-    }
-      onClick={handleClick}
-      onChange={handleChange}
-      disabled={!props.editEnabled}
-      >
-      {options.map((option, key)=>{
-        return (
-            <option key={key}>
-              {option.username}
-            </option>
-        )
-      })}
-      </Select>
+    <div className='wrapper'>
+      <Select sx = {{
+          minWidth:'120px'
+        }} 
+      className={'lookup-container'}
+      defaultValue="Hello"
+      
+      arrow = {
+        <Box
+          as="svg"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="currentcolor"
+          sx={{
+            ml: -28,
+            alignSelf: 'center',
+            pointerEvents: 'none',
+          }}>
+          <path d="M7.41 7.84l4.59 4.58 4.59-4.58 1.41 1.41-6 6-6-6z" />
+        </Box>
+      }
+        op
+        onClick={handleClick}
+        onChange={handleChange}
+        disabled={!props.editEnabled}
+        >
+        {options.map((option, key)=>{
+          return (
+              <option key={key}>
+                {option.username}
+              </option>
+          )
+        })}
+        </Select>
+      </div>
   );
   
 }
