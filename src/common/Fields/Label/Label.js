@@ -14,7 +14,6 @@ const LabelField = (props)=>{
         e.preventDefault();
         setValue(e.target.value);
     }
-
     useEffect(()=>{
         updateParentState(value);
      },[value, setValue])
@@ -38,6 +37,7 @@ const LabelField = (props)=>{
             }} 
             className={`label-container ${value}`}
             value={value}
+            disabled={!props.editEnabled}
             arrow = {
             <Box
                 as="svg"

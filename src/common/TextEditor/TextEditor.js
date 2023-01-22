@@ -8,7 +8,7 @@ import debounce from '../../helpers/commonUtils/debounce';
 import { cloneDeep } from 'lodash';
 
 
-const TextEditor = ()=>{
+const TextEditor = (props)=>{
     
     const [editorState, setEditorState] = useState(()=>{
         EditorState.createEmpty();
@@ -38,6 +38,7 @@ const TextEditor = ()=>{
     return(
         <div className= 'text-editor--container'>
             <Editor
+                readOnly = {!props.editEnabled}
                 editorState={editorState}
                 onEditorStateChange = {setEditorState}
                 toolbar={{

@@ -7,7 +7,8 @@ let defaultState = {
             description:null,
             name: null
         },
-        taskConfig: {}
+        taskConfig: {},
+        editEnabled: true
     }
     return defaultState;
 }

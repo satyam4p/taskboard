@@ -11,7 +11,7 @@ import urlSchema from '../../../network/urlSchema/urlSchema.json';
 
 
 
-const LookupField = () => {
+const LookupField = (props) => {
     const [options, setOptions] = useState([]);
     const {task, setTask} = useContext(TaskContext);
     const [value, setValue] = useState();
@@ -82,6 +82,7 @@ const LookupField = () => {
     }
       onClick={handleClick}
       onChange={handleChange}
+      disabled={!props.editEnabled}
       >
       {options.map((option, key)=>{
         return (

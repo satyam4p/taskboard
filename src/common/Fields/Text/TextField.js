@@ -47,6 +47,7 @@ const TextField = (props) => {
                 padding:'5px',
             }}
             onChange={handleChange}
+            disabled = {!props.editEnabled}
         />
     )
 

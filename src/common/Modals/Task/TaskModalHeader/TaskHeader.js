@@ -1,9 +1,9 @@
 import TextField from "../../../Fields/Text/TextField";
 
-const TaskHeader = ()=>{
+const TaskHeader = (props)=>{
 
     return(
-        <TextField type= {'header'}/>
+        <TextField editEnabled = {props.editEnabled} type= {'header'}/>
     )
 }
 export default TaskHeader;

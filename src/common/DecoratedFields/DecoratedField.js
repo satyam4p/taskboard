@@ -35,7 +35,7 @@ const DecoratedFieldHOC = ( props ) =>{
                         display:'flex',
                         justifyContent:'left'
                     }}>
-                        <ResultantField options={props.options}/>
+                        <ResultantField options={props.options} editEnabled = {props.editEnabled}/>
                     </div>
                     
                 </div>

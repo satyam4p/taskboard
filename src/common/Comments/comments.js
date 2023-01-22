@@ -35,7 +35,7 @@ const Comments =(props)=>{
                     <span><UserOutlined/> {userProfile?.username}</span>
                 </div>
                 <div>
-                    <TextArea/>
+                    <TextArea editEnabled = {props.editEnabled}/>
                 </div>
             </Card>
             {sampleComments.map((comment, key)=>{

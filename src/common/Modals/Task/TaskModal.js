@@ -31,6 +31,7 @@ const TaskModal=(props)=>{
     const [loading, create, data] = useCreateTask();
     const [result, setResult] = useState(undefined);
     const [configLoaded, fetchConfig, config] = useTaskConfig();
+    
     useEffect(()=>{
         fetchConfig();
     },[]);
@@ -50,7 +51,12 @@ const TaskModal=(props)=>{
    
     const handleEdit= (e) => {
         e.preventDefault();
-      
+        setTask(prevTask=>{
+            return {
+                ...prevTask,
+                editEnabled: true
+            }
+        })
     }
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -58,6 +64,10 @@ const TaskModal=(props)=>{
         if(!loading){
             setResult(result);
         }
+    }
+
+    const handleShare=(e)=>{
+        e.preventDefault();
     }
 
     return(
@@ -85,7 +95,7 @@ const TaskModal=(props)=>{
                             margin:'15px',
                         }}>
                             <div sx={{
-                                margin:'10px',
+                                margin:'5px',
                                 '&:hover':{
                                     cursor:'pointer'
                                 }
@@ -95,11 +105,11 @@ const TaskModal=(props)=>{
                                 border:'none'
                             }}> { currentTaskStatus === "loading" 
                                 ? <span style={{color:'green'}}>Creating...{iconsMap.loading()}</span> 
-                                : iconsMap.save() } 
+                                : iconsMap.create() } 
                             </button>}
                         </div>
                         <div sx={{
-                            margin:'10px',
+                            margin:'5px',
                             '&:hover':{
                                 cursor:'pointer'
                             }
@@ -107,12 +117,14 @@ const TaskModal=(props)=>{
                             {<button sx={{
                                 background:'transparent',
                                 border:'none'
-                            }}>
+                            }}
+                            onClick={(e)=>handleShare(e)}
+                            >
                                 {iconsMap.share()}
                             </button>}
                         </div>
                         <div sx={{
-                            margin:'10px',
+                            margin:'5px',
                             '&:hover':{
                                 cursor:'pointer'
                             }
@@ -123,11 +135,11 @@ const TaskModal=(props)=>{
                                 background:'transparent',
                                 border:'none'
                             }}>
-                                {iconsMap.edit()}
+                                {iconsMap.edit(task.editEnabled)}
                             </button>}
                         </div>
                         <div sx={{
-                            margin:'10px',
+                            margin:'5px',
                             '&:hover':{
                                 cursor:'pointer'
                             }
@@ -142,7 +154,7 @@ const TaskModal=(props)=>{
                             </button>}
                         </div>
                         <div sx={{
-                            margin:'10px',
+                            margin:'5px',
                             '&:hover':{
                                 cursor:'pointer'
                             }
@@ -157,7 +169,7 @@ const TaskModal=(props)=>{
                             {iconsMap.close()}
                         </div>
                         </div>
-                        <TaskHeader />
+                        <TaskHeader editEnabled = {task.editEnabled}/>
                         <Container sx={{
                             width:'90%',
                             marginY:'10px',
@@ -181,6 +193,7 @@ const TaskModal=(props)=>{
                                                 label = {field.label}
                                                 icon =  {field.icon}
                                                 options = {field.options}
+                                                editEnabled = {task.editEnabled}
                                             />
                                         )
                                     }
@@ -239,8 +252,8 @@ const TaskModal=(props)=>{
                 <Container className="data-container">
                     <Suspense fallback={<TextLoader/>}>
                         {activeTab === 'comments' 
-                            ? <Comments/>
-                            : <TextEditor/>
+                            ? <Comments editEnabled = {task.editEnabled}/>
+                            : <TextEditor editEnabled = {task.editEnabled}/>
                         }
                     </Suspense>
                 </Container>

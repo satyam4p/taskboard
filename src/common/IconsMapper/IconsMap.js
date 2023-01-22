@@ -7,40 +7,54 @@ import { SaveOutlined,
     UserAddOutlined,
     TagsOutlined,
     AlertOutlined,
-    LoadingOutlined
+    LoadingOutlined,
+    FileAddOutlined,
+    DeleteOutlined
 } from '@ant-design/icons';
+
+let style = {
+    fontSize: '20px',
+    fontWeight:'800'
+}
 
 const iconsMap = (()=>{
     return {
         save: ()=>{
-            return <SaveOutlined style={{ fontSize:'20px' }}></SaveOutlined>
+            return <SaveOutlined style={style}></SaveOutlined>
         },
         share: ()=>{
-            return <ShareAltOutlined style={{ fontSize:'20px' }}></ShareAltOutlined>
+            return <ShareAltOutlined style={style}></ShareAltOutlined>
         },
-        edit: ()=>{
-            return <EditOutlined style={{ fontSize:'20px' }}></EditOutlined>
+        edit: ( editEnabled = false )=>{
+            const newStyle = editEnabled ? {...style, color: '#6B8B65'} : {...style}; 
+            return <EditOutlined style={newStyle}></EditOutlined>
         },
         close: ()=>{
-            return <CloseCircleOutlined style={{ fontSize:'20px' }}></CloseCircleOutlined>
+            return <CloseCircleOutlined style={style}></CloseCircleOutlined>
         },
         more: ()=>{
-            return <MoreOutlined style={{ fontSize:'20px' }}></MoreOutlined>
+            return <MoreOutlined style={style}></MoreOutlined>
         },
         time: ()=>{
-            return <FieldTimeOutlined style={{ fontSize:'20px' }}></FieldTimeOutlined>
+            return <FieldTimeOutlined style={style}></FieldTimeOutlined>
         },
         user: ()=>{
-            return <UserAddOutlined style={{ fontSize:'20px' }}></UserAddOutlined>
+            return <UserAddOutlined style={style}></UserAddOutlined>
         },
         tag: ()=>{
-            return <TagsOutlined style={{ fontSize:'20px' }}></TagsOutlined>
+            return <TagsOutlined style={style}></TagsOutlined>
         },
         alert : ()=>{
-            return <AlertOutlined style={{ fontSize:'20px' }}></AlertOutlined>
+            return <AlertOutlined style={style}></AlertOutlined>
         },
         loading: ()=>{
-            return <LoadingOutlined spin style={{ fontSize:'20px' }}></LoadingOutlined>
+            return <LoadingOutlined spin style={style}></LoadingOutlined>
+        },
+        create: ()=>{
+            return <FileAddOutlined style={style}></FileAddOutlined>
+        },
+        delete: ()=>{
+            return <DeleteOutlined style={style}></DeleteOutlined>
         }
     }
 })();

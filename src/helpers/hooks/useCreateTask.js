@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useDispatch } from "react-redux";
 import useAxiosPrivate from "./useAxiosPrivate";
 import { createTaskSuccess, createTaskBegin, createTaskError } from "../../features/task/taskSlice";
 import urlSchema from '../../network/urlSchema/urlSchema.json';
 import useNotification from "../../common/Notification/helpers/useNotification";
+import TaskContext from "../../common/Modals/Task/TaskContext/TaskProvider";
 
 
 const useCreateTask = () => {
+    const {task, setTask} = useContext(TaskContext);
     const axiosPrivate = useAxiosPrivate();
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState();
@@ -26,6 +28,12 @@ const useCreateTask = () => {
                 setData(result.data);
                 dispatch(createTaskSuccess(result.data));
                 show("task created successfully", "success");
+                setTask(prevTask=>{
+                    return {
+                        ...prevTask,
+                        editEnabled : false
+                    }
+                })
             }
 
         }catch(error){

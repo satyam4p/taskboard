@@ -3,7 +3,7 @@ import { Textarea } from "theme-ui";
 
 
 
-const TextArea =()=>{
+const TextArea =(props)=>{
 
     return(
         <Textarea sx={{
@@ -13,7 +13,9 @@ const TextArea =()=>{
             fontFamily:'monospace',
             fontSize:1,
             height:'80px'
-        }}/>
+        }}
+        disabled={!props.editEnabled}
+        />
     )
 }
 

@@ -19,6 +19,7 @@ const FieldMapper = (props) =>{
                         field = {resultantField}
                         icon = {props.icon}
                         options = {props.options}
+                        editEnabled = {props.editEnabled}
                     />
                 </div>
             )
