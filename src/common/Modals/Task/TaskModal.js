@@ -210,13 +210,13 @@ const TaskModal=(props)=>{
                     marginTop:'30px'
                 }}>
                 <div sx={{
-                    borderBottom:'0.5px solid',
+                    borderBottom:'0.5px solid #DEDEDE',
                     width:'30%',
                     display:'flex',
                     justifyContent:'space-between'
                 }}>
                     <button sx={{
-                        borderBottom:()=>activeTab=='comments' ? '2px solid #36463F' : 'none',
+                        borderBottom:()=>activeTab=='comments' ? '2px solid #476451' : 'none',
                         borderTop:'none',
                         borderLeft:'none',
                         borderRight:'none',
@@ -232,7 +232,7 @@ const TaskModal=(props)=>{
                         <span>Comments</span>
                     </button>
                     <button sx={{
-                        borderBottom:()=>activeTab=='description' ? '2px solid #36463F' : 'none',
+                        borderBottom:()=>activeTab=='description' ? '2px solid #476451' : 'none',
                         borderTop:'none',
                         borderLeft:'none',
                         borderRight:'none',

@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 import React, { useEffect, useState } from "react";
 import { Card, Container } from "theme-ui";
-import { UserOutlined } from '@ant-design/icons';
+import iconsMap from "../IconsMapper/IconsMap";
 import shortid from "shortid";
 import TextArea from "../Fields/TextArea/TextArea";
 import useProfile from "../../helpers/hooks/useProfile";
@@ -32,7 +32,7 @@ const Comments =(props)=>{
                 <div sx={{
                     marginY:'5px'
                 }}>
-                    <span><UserOutlined/> {userProfile?.username}</span>
+                    <span>{iconsMap.profile()} {userProfile?.username}</span>
                 </div>
                 <div>
                     <TextArea editEnabled = {props.editEnabled}/>
@@ -47,7 +47,7 @@ const Comments =(props)=>{
                     <div sx={{
                         marginY:'5px'
                     }}>
-                        <span><UserOutlined/> {comment.userName}</span>
+                        <span>{iconsMap.profile()} {comment.userName}</span>
                     </div>
                     <div>
                         {comment.commentBody}

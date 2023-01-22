@@ -1,0 +1,12 @@
+.text-area-container{
+    border: 0.5px solid #DEDEDE;
+    resize: vertical;
+    margin: 0px;
+    font-family: monospace;
+    font-size: 1;
+    height: 80px;
+}
+.text-area-container:focus{
+    outline: 1px solid #7A9D8F;
+    border: none;
+}

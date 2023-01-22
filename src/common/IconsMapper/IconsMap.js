@@ -9,7 +9,8 @@ import { SaveOutlined,
     AlertOutlined,
     LoadingOutlined,
     FileAddOutlined,
-    DeleteOutlined
+    DeleteOutlined,
+    UserOutlined
 } from '@ant-design/icons';
 
 let style = {
@@ -55,6 +56,9 @@ const iconsMap = (()=>{
         },
         delete: ()=>{
             return <DeleteOutlined style={style}></DeleteOutlined>
+        },
+        profile:()=>{
+            return <UserOutlined style={style}></UserOutlined>
         }
     }
 })();
