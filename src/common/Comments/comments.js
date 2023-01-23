@@ -32,7 +32,7 @@ const Comments =(props)=>{
                 <div sx={{
                     marginY:'5px'
                 }}>
-                    <span>{iconsMap.profile()} {userProfile?.username}</span>
+                    <span style={{textTransform:'capitalize'}}>{iconsMap.profile()} {userProfile?.username}</span>
                 </div>
                 <div>
                     <TextArea editEnabled = {props.editEnabled}/>

@@ -30,7 +30,7 @@ function SecondaryBar({
                     height:'40px',
                     mx:'10px',
                     bg:'inherit',
-                    padding:'6px',
+                    padding:'5px',
                     display:'flex',
                     flexDirection:'column',
                     justifyContent:'space-evenly'
@@ -39,25 +39,22 @@ function SecondaryBar({
                         setToggleSideMenu((prev)=>!prev)
                         setToggleAddMenu(false);
                     }}>
-                        <Flex sx={{
+                        <div sx={{
                             width:'100%',
-                            height:'3px',
+                            height:'4px',
                             bg:'#014421',
-                            my:'1px'
                             }}
                         />
-                        <Flex sx={{
+                        <div sx={{
                             width:'100%',
-                            height:'3px',
+                            height:'4px',
                             bg:'#014421',
-                            my:'1px'
                             }} 
                         />
-                        <Flex sx={{
+                        <div sx={{
                             width:'100%',
-                            height:'3px',
+                            height:'4px',
                             bg:'#014421',
-                            my:'1px'
                             }}
                         />
                 </Button>

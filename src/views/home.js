@@ -17,7 +17,7 @@ function Home(props){
     const { modalType, setModalType } = useModals();
 
     return(
-        <>
+        <div className='main-container'>
             <SideMenu 
                 showSideMenu = {toggleSideMenu}
                 toggleAddMenu = {toggleAddMenu}
@@ -38,7 +38,7 @@ function Home(props){
                 </Suspense>   
             }
             {showNotification && <Notification/>}
-        </>
+        </div>
     )
 
 }
