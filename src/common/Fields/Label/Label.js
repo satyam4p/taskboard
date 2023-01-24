@@ -5,10 +5,14 @@ import { Select, Box } from "theme-ui";
 import TaskContext from "../../Modals/Task/TaskContext/TaskProvider";
 import { cloneDeep } from "lodash";
 import debounce from "../../../helpers/commonUtils/debounce";
+import { useSelector } from "react-redux";
+import { selectCurrentTask } from "../../../features/task/taskSlice";
 
 const LabelField = (props)=>{
+    const currentTask = useSelector(selectCurrentTask);
     const {task, setTask} = useContext(TaskContext);
-    const [value, setValue] = useState("Bug");
+    const entityKey = props.config ? props.config?.entityKey : ''; 
+    const [value, setValue] = useState( currentTask && currentTask[entityKey] ? currentTask[entityKey] : "Bug" );
     const labelOptions = ["Bug", "RCA", "Task"]
     const handleSelect = (e)=>{
         e.preventDefault();
