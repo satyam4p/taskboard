@@ -7,7 +7,7 @@ import useNotification from "../../common/Notification/helpers/useNotification";
 import TaskContext from "../../common/Modals/Task/TaskContext/TaskProvider";
 
 
-const useCreateTask = () => {
+const useCreateAndGetTask = () => {
     const {task, setTask} = useContext(TaskContext);
     const axiosPrivate = useAxiosPrivate();
     const [loading, setLoading] = useState(false);
@@ -18,16 +18,20 @@ const useCreateTask = () => {
         setLoading(true);
         dispatch(createTaskBegin());
 
-        const URL = urlSchema.Tasks.CREATE_TASK;
+        const CREATE_URL = urlSchema.Tasks.CREATE_TASK;
 
         try{
 
-            const result = await axiosPrivate.post(URL, payload);
+            const result = await axiosPrivate.post(CREATE_URL, payload);
             if(result){
+
                 setLoading(false);
                 setData(result.data);
+
                 dispatch(createTaskSuccess(result.data));
+
                 show("task created successfully", "success");
+                
                 setTask(prevTask=>{
                     return {
                         ...prevTask,
@@ -47,4 +51,4 @@ const useCreateTask = () => {
     return [loading, create, data];
 }
 
-export default useCreateTask;
+export default useCreateAndGetTask;

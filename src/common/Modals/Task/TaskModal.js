@@ -2,14 +2,16 @@
 import React,{Suspense, useEffect, useState, useContext } from "react";
 import TaskContext from "./TaskContext/TaskProvider";
 /** testing START*/
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, connect } from "react-redux";
 import { selectCurrentTaskStatus, 
          selectAllTasks, 
          selectError, 
          selectStatus,
-         selectTaskConfig } from "../../../features/task/taskSlice";
+         selectTaskConfig,
+         selectCurrentTask,
+         createTaskSuccess } from "../../../features/task/taskSlice";
 /** END */
-import { Box, Container } from "theme-ui";
+import { Box, Container, Flex } from "theme-ui";
 import TextLoader from "../../Loaders/simpleTextLoader";
 import FieldMapper from "../../Fields/FieldMappingMaster";
 import iconsMap from "../../IconsMapper/IconsMap";
@@ -19,7 +21,7 @@ import './stylesheet.scss';
 /** Helpers */
 import TaskResolver from "../Helpers/ModalResolver/TaskResolver";
 import TaskHeader from "./TaskModalHeader/TaskHeader";
-import useCreateTask from "../../../helpers/hooks/useCreateTask";
+import useCreateAndGetTask from "../../../helpers/hooks/useCreateAndGetTask";
 import useTaskConfig from "../../../helpers/hooks/useTaskConfig";
 import useNotification from "../../Notification/helpers/useNotification";
 import Notification from "../../Notification/Notification";
@@ -28,7 +30,7 @@ const Comments = React.lazy(()=>import('../../Comments/comments'));
 
 const TaskModal=(props)=>{
     const { task, setTask } = useContext( TaskContext );
-    const [loading, create, data] = useCreateTask();
+    const [loading, create, data] = useCreateAndGetTask();
     const [result, setResult] = useState(undefined);
     const [configLoaded, fetchConfig, config] = useTaskConfig();
     
@@ -43,6 +45,7 @@ const TaskModal=(props)=>{
     const taskError = useSelector(selectError);
     const currentTaskStatus = useSelector(selectCurrentTaskStatus);
     const taskConfig = useSelector(selectTaskConfig);
+    const currentTask = useSelector(selectCurrentTask);
 
     const toggleTab=(event, type)=>{
         event.preventDefault();
@@ -70,6 +73,17 @@ const TaskModal=(props)=>{
         e.preventDefault();
     }
 
+    const handleClose =(e)=>{
+        e.preventDefault();
+        dispatch(createTaskSuccess({}));
+        props.setModalType((prev)=>{
+                return {
+                    ...prev,
+                    isVisible:false
+                }
+            })
+    }
+
     return(
         <div className="task-modal-container" sx={{
             zIndex:'400',
@@ -83,11 +97,13 @@ const TaskModal=(props)=>{
             boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.75)',
             overflowY:'auto',
             fontSize:1
-        }}>{
-            <Suspense fallback={<h3>...loading modal</h3>}>
-                {
-                    configLoaded && 
-                        <Box as={'form'} onSubmit = {(e)=>{handleSubmit(e)}}>
+        }}>
+            {
+                (configLoaded && (currentTaskStatus == "idle" || 
+                                currentTaskStatus == "succeeded" || 
+                                currentTaskStatus == "failed" )) ? 
+                <>
+                    <Box as={'form'} onSubmit = {(e)=>{handleSubmit(e)}}>
                         <div sx={{
                             display:'flex',
                             alignItems:'center',
@@ -159,17 +175,18 @@ const TaskModal=(props)=>{
                                 cursor:'pointer'
                             }
                         }}
-                        onClick={()=>props.setModalType((prev)=>{
-                            return {
-                                ...prev,
-                                isVisible:false
-                            }
-                        })}
+                        // onClick={()=>props.setModalType((prev)=>{
+                        //     return {
+                        //         ...prev,
+                        //         isVisible:false
+                        //     }
+                        // })}
+                        onClick={(e)=>handleClose(e)}
                         >
                             {iconsMap.close()}
                         </div>
                         </div>
-                        <TaskHeader editEnabled = {task.editEnabled}/>
+                        <TaskHeader editEnabled = {task.editEnabled} currentTask = {currentTask}/>
                         <Container sx={{
                             width:'90%',
                             marginY:'10px',
@@ -188,6 +205,7 @@ const TaskModal=(props)=>{
                                     if(field.entityKey != "name" && field.entityKey != "description"){
                                         return(
                                             <FieldMapper
+                                                config = {field}
                                                 key = {key} 
                                                 field = {field.entityType}
                                                 label = {field.label}
@@ -200,64 +218,67 @@ const TaskModal=(props)=>{
                                 })}
                             </div>
                         </Container>
-                    </Box>
-                }
-            </Suspense>
-            }
-            <Container
-                sx={{
-                    width:'90%',
-                    marginTop:'30px'
-                }}>
-                <div sx={{
-                    borderBottom:'0.5px solid #DEDEDE',
-                    width:'30%',
-                    display:'flex',
-                    justifyContent:'space-between'
-                }}>
-                    <button sx={{
-                        borderBottom:()=>activeTab=='comments' ? '2px solid #476451' : 'none',
-                        borderTop:'none',
-                        borderLeft:'none',
-                        borderRight:'none',
-                        bg:'transparent',
-                        padding:'4px',
-                        fontSize:1,
-                        '&:hover':{
-                            bg:'#F6F6F6'
-                        },
-                    }}
-                    onClick={e=>toggleTab(e,'comments')}
-                    >
-                        <span>Comments</span>
-                    </button>
-                    <button sx={{
-                        borderBottom:()=>activeTab=='description' ? '2px solid #476451' : 'none',
-                        borderTop:'none',
-                        borderLeft:'none',
-                        borderRight:'none',
-                        bg:'transparent',
-                        padding:'4px',
-                        fontSize:1,
-                        '&:hover':{
-                            bg:'#F6F6F6'
-                        }
-                        
-                    }}
-                    onClick={e=>toggleTab(e,'description')}
-                    >
-                        <span>Description</span>
-                    </button>
+                    </Box> 
+                    <Container
+                        sx={{
+                            width:'90%',
+                            marginTop:'30px'
+                        }}>
+                        <div sx={{
+                            borderBottom:'0.5px solid #DEDEDE',
+                            width:'30%',
+                            display:'flex',
+                            justifyContent:'space-between'
+                        }}>
+                            <button sx={{
+                                borderBottom:()=>activeTab=='comments' ? '2px solid #476451' : 'none',
+                                borderTop:'none',
+                                borderLeft:'none',
+                                borderRight:'none',
+                                bg:'transparent',
+                                padding:'4px',
+                                fontSize:1,
+                                '&:hover':{
+                                    bg:'#F6F6F6'
+                                },
+                            }}
+                            onClick={e=>toggleTab(e,'comments')}
+                            >
+                                <span>Comments</span>
+                            </button>
+                            <button sx={{
+                                borderBottom:()=>activeTab=='description' ? '2px solid #476451' : 'none',
+                                borderTop:'none',
+                                borderLeft:'none',
+                                borderRight:'none',
+                                bg:'transparent',
+                                padding:'4px',
+                                fontSize:1,
+                                '&:hover':{
+                                    bg:'#F6F6F6'
+                                }
+                                
+                            }}
+                            onClick={e=>toggleTab(e,'description')}
+                            >
+                                <span>Description</span>
+                            </button>
+                        </div>
+                        <Container className="data-container">
+                            <Suspense fallback={<TextLoader/>}>
+                                { activeTab === 'comments' 
+                                    ? <Comments editEnabled = {task.editEnabled}/>
+                                    : <TextEditor editEnabled = {task.editEnabled}/>
+                                }
+                            </Suspense>
+                        </Container>
+                    </Container>
+                </> :
+                <div style={{width:'100%', height:'100%', display:'flex', justifyContent:"center", alignItems:'center' }}>
+                    <h4>Loading...</h4>
                 </div>
-                <Container className="data-container">
-                    <Suspense fallback={<TextLoader/>}>
-                        {activeTab === 'comments' 
-                            ? <Comments editEnabled = {task.editEnabled}/>
-                            : <TextEditor editEnabled = {task.editEnabled}/>
-                        }
-                    </Suspense>
-                </Container>
-            </Container>
+
+        }
         </div>
     )
 }

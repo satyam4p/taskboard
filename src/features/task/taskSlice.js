@@ -127,7 +127,7 @@ export const selectStatus = (state)=>state.task.status;
 export const selectError = (state)=>state.task.error;
 export const selectCurrentTaskStatus = (state)=>state.task.currentTaskStatus;
 export const selectTaskConfig = (state)=>state.task.taskConfig;
-
+export const selectCurrentTask = (state)=>state.task.currentTask;
 
 export const { addTask, createTaskSuccess, 
     createTaskBegin, createTaskError,

@@ -4,12 +4,17 @@ import { Input } from 'antd';
 import TaskContext from "../../Modals/Task/TaskContext/TaskProvider";
 import { cloneDeep } from "lodash";
 import debounce from "../../../helpers/commonUtils/debounce";
+import { useSelector } from "react-redux";
+import { selectCurrentTask, selectCurrentTaskStatus } from "../../../features/task/taskSlice";
 import './stylesheet.scss'
 
 const TextField = (props) => {
     const {task, setTask} = useContext(TaskContext);
-    const [textValue, setValue] = useState(null);
-
+    const currentTask = useSelector(selectCurrentTask);
+    const currentTaskStatus = useSelector(selectCurrentTaskStatus);
+    const entityKey = props.config?.entityKey;
+    const [textValue, setValue] = useState( currentTask && currentTask[entityKey] ? currentTask[entityKey]
+                                    :  null);
     const handleChange = ( event ) =>{
         event.preventDefault();
         const value = event.target.value;

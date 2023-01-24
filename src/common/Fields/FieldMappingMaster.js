@@ -15,6 +15,7 @@ const FieldMapper = (props) =>{
                     width:'100%'
                 }}>
                     <DecoratedFieldHOC 
+                        config = {props.config}
                         label = {label}
                         field = {resultantField}
                         icon = {props.icon}

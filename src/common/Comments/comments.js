@@ -4,7 +4,6 @@ import { Card, Container } from "theme-ui";
 import iconsMap from "../IconsMapper/IconsMap";
 import shortid from "shortid";
 import TextArea from "../Fields/TextArea/TextArea";
-import useProfile from "../../helpers/hooks/useProfile";
 import useAuth from "../../helpers/hooks/useAuth";
 
 const sampleComments = [
@@ -19,7 +18,9 @@ const sampleComments = [
 ]
 
 const Comments =(props)=>{
-    const userProfile = useProfile();
+    
+    const { auth } = useAuth();
+
     return(
         <Container sx={{
             marginY:'8px',
@@ -32,7 +33,7 @@ const Comments =(props)=>{
                 <div sx={{
                     marginY:'5px'
                 }}>
-                    <span style={{textTransform:'capitalize'}}>{iconsMap.profile()} {userProfile?.username}</span>
+                    <span style={{textTransform:'capitalize'}}>{iconsMap.profile()} {auth?.user?.username}</span>
                 </div>
                 <div>
                     <TextArea editEnabled = {props.editEnabled}/>
