@@ -12,9 +12,8 @@ const TextField = (props) => {
     const {task, setTask} = useContext(TaskContext);
     const currentTask = useSelector(selectCurrentTask);
     const currentTaskStatus = useSelector(selectCurrentTaskStatus);
-    const entityKey = props.config?.entityKey;
-    const [textValue, setValue] = useState( currentTask && currentTask[entityKey] ? currentTask[entityKey]
-                                    :  null);
+    const entityKey = props.config?.entityKey || "name";
+    const [textValue, setValue] = useState( currentTask && currentTask[entityKey] ? currentTask[entityKey] :  null);
     const handleChange = ( event ) =>{
         event.preventDefault();
         const value = event.target.value;

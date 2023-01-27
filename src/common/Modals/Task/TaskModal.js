@@ -175,18 +175,11 @@ const TaskModal=(props)=>{
                                 cursor:'pointer'
                             }
                         }}
-                        // onClick={()=>props.setModalType((prev)=>{
-                        //     return {
-                        //         ...prev,
-                        //         isVisible:false
-                        //     }
-                        // })}
-                        onClick={(e)=>handleClose(e)}
-                        >
+                        onClick={(e)=>handleClose(e)} >
                             {iconsMap.close()}
                         </div>
                         </div>
-                        <TaskHeader editEnabled = {task.editEnabled} currentTask = {currentTask}/>
+                        <TaskHeader editEnabled = {task.editEnabled} config = {taskConfig}/>
                         <Container sx={{
                             width:'90%',
                             marginY:'10px',
