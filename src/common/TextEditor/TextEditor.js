@@ -6,14 +6,32 @@ import TaskContext from '../Modals/Task/TaskContext/TaskProvider';
 import './stylesheet.scss';
 import debounce from '../../helpers/commonUtils/debounce';
 import { cloneDeep } from 'lodash';
+import { selectCurrentTask } from '../../features/task/taskSlice';
+import { useSelector } from 'react-redux';
 
 
 const TextEditor = (props)=>{
-    
-    const [editorState, setEditorState] = useState(()=>{
-        EditorState.createEmpty();
-    });
-    
+
+    const currentTask = useSelector(selectCurrentTask);
+
+    const [editorState, setEditorState] = useState();
+
+    useEffect(()=>{
+
+        const rawContent = currentTask && currentTask['description'] ? currentTask['description'] : {};
+        const editorContent =  rawContent && Object.keys(rawContent).length ? convertFromRaw(JSON.parse(rawContent)) : null;
+        let editorStateInitial = '';
+
+        if(editorContent){
+            editorStateInitial = EditorState.createWithContent(editorContent);
+        } else {
+            editorStateInitial = EditorState.createEmpty();
+        }
+
+        setEditorState(editorStateInitial);
+
+    },[]);
+
     const { task, setTask } = useContext(TaskContext); 
     
     useEffect(()=>{

@@ -268,7 +268,7 @@ const TaskModal=(props)=>{
                             <Suspense fallback={<TextLoader/>}>
                                 { activeTab === 'comments' 
                                     ? <Comments editEnabled = {task.editEnabled}/>
-                                    : <TextEditor editEnabled = {task.editEnabled}/>
+                                    : <TextEditor config = {taskConfig} editEnabled = {task.editEnabled}/>
                                 }
                             </Suspense>
                         </Container>
