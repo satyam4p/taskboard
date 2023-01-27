@@ -84,7 +84,7 @@ const LookupField = (props) => {
       }, 4),[]);
 
   return(
-    <div>
+    <div className='wrapper'>
       {
         props.editEnabled ?
           (

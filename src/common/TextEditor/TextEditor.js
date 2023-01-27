@@ -27,7 +27,7 @@ const TextEditor = (props)=>{
             setTask(prevTask=>{
                 const currentState = editorState.getCurrentContent();
                 const rawContent = convertToRaw(currentState);
-                let taskClone = cloneDeep(task);
+                let taskClone = cloneDeep(prevTask);
                 taskClone.taskData['description'] = JSON.stringify(rawContent);
                 return {
                     ...prevTask,
