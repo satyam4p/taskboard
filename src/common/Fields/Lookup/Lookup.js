@@ -88,9 +88,7 @@ const LookupField = (props) => {
       {
         props.editEnabled ?
           (
-            <Select sx = {{
-              minWidth:'120px'
-            }} 
+            <Select 
               className={'lookup-container'}
               value = { value }
               arrow = {
