@@ -9,7 +9,8 @@ import { selectCurrentTaskStatus,
          selectStatus,
          selectTaskConfig,
          selectCurrentTask,
-         createTaskSuccess } from "../../../features/task/taskSlice";
+         createTaskSuccess,
+         clearCurrentTask } from "../../../features/task/taskSlice";
 /** END */
 import { Box, Container, Flex } from "theme-ui";
 import TextLoader from "../../Loaders/simpleTextLoader";
@@ -25,12 +26,15 @@ import useCreateAndGetTask from "../../../helpers/hooks/useCreateAndGetTask";
 import useTaskConfig from "../../../helpers/hooks/useTaskConfig";
 import useNotification from "../../Notification/helpers/useNotification";
 import Notification from "../../Notification/Notification";
+import TaskActionBar from "./TaskActionsBar/TaskActionBar";
+import useUpdateTask from "../../../helpers/hooks/useUpdateTask";
 
 const Comments = React.lazy(()=>import('../../Comments/comments'));
 
 const TaskModal=(props)=>{
     const { task, setTask } = useContext( TaskContext );
     const [loading, create, data] = useCreateAndGetTask();
+    const [updateLoading, update] = useUpdateTask();
     const [result, setResult] = useState(undefined);
     const [configLoaded, fetchConfig, config] = useTaskConfig();
     
@@ -63,10 +67,19 @@ const TaskModal=(props)=>{
     }
     const handleSubmit = (e)=>{
         e.preventDefault();
-        const result = create(task.taskData);
-        if(!loading){
-            setResult(result);
+        if(currentTask?._id){
+            const result = update(currentTask?._id, task.taskData);
+            if(!updateLoading){
+                setResult(result);
+            }
+        }else{
+            const result = create(task.taskData);
+            if(!loading){
+                setResult(result);
+            }
         }
+        
+       
     }
 
     const handleShare=(e)=>{
@@ -75,7 +88,7 @@ const TaskModal=(props)=>{
 
     const handleClose =(e)=>{
         e.preventDefault();
-        dispatch(createTaskSuccess({}));
+        dispatch(clearCurrentTask());
         props.setModalType((prev)=>{
                 return {
                     ...prev,
@@ -104,81 +117,13 @@ const TaskModal=(props)=>{
                                 currentTaskStatus == "failed" )) ? 
                 <>
                     <Box as={'form'} onSubmit = {(e)=>{handleSubmit(e)}}>
-                        <div sx={{
-                            display:'flex',
-                            alignItems:'center',
-                            justifyContent:'end',
-                            margin:'15px',
-                        }}>
-                            <div sx={{
-                                margin:'5px',
-                                '&:hover':{
-                                    cursor:'pointer'
-                                }
-                            }}>
-                            {<button type="submit" sx={{
-                                background:'transparent',
-                                border:'none'
-                            }}> { currentTaskStatus === "loading" 
-                                ? <span style={{color:'green'}}>Creating...{iconsMap.loading()}</span> 
-                                : iconsMap.create() } 
-                            </button>}
-                        </div>
-                        <div sx={{
-                            margin:'5px',
-                            '&:hover':{
-                                cursor:'pointer'
-                            }
-                        }}>
-                            {<button sx={{
-                                background:'transparent',
-                                border:'none'
-                            }}
-                            onClick={(e)=>handleShare(e)}
-                            >
-                                {iconsMap.share()}
-                            </button>}
-                        </div>
-                        <div sx={{
-                            margin:'5px',
-                            '&:hover':{
-                                cursor:'pointer'
-                            }
-                        }}>
-                            {<button 
-                            onClick={e=>handleEdit(e)}
-                            sx={{
-                                background:'transparent',
-                                border:'none'
-                            }}>
-                                {iconsMap.edit(task.editEnabled)}
-                            </button>}
-                        </div>
-                        <div sx={{
-                            margin:'5px',
-                            '&:hover':{
-                                cursor:'pointer'
-                            }
-                        }}>
-                            {<button
-                                onClick={ event=> TaskResolver(event,"fetchTask", dispatch) } // only for testing
-                                sx={{
-                                background:'transparent',
-                                border:'none'
-                                }}>
-                                {iconsMap.more()}
-                            </button>}
-                        </div>
-                        <div sx={{
-                            margin:'5px',
-                            '&:hover':{
-                                cursor:'pointer'
-                            }
-                        }}
-                        onClick={(e)=>handleClose(e)} >
-                            {iconsMap.close()}
-                        </div>
-                        </div>
+                        <TaskActionBar 
+                            handleClose = { handleClose } 
+                            handleShare = {handleShare} 
+                            handleEdit = {handleEdit}
+                            currentTaskStatus = {currentTaskStatus}
+                            editEnabled = { task.editEnabled }  />
+
                         <TaskHeader editEnabled = {task.editEnabled} config = {taskConfig}/>
                         <Container sx={{
                             width:'90%',

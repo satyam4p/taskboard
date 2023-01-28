@@ -111,7 +111,42 @@ export const taskSlice = createSlice({
                 currentTaskStatus: "failed",
                 error: action.payload
             }
-        }
+        },
+
+        updateTaskBegin: (state, action) => {
+
+            return {
+                ...state,
+                currentTaskStatus: "loading"
+            }
+
+        },
+
+        updateTaskSuccess: (state, action) => {
+
+            return {
+                ...state,
+                currentTask: {...state.currentTask, ...action.payload},
+                currentTaskStatus: "succeeded"
+            }
+        },
+
+        updateTaskError: (state, action) => {
+
+            return {
+                ...state,
+                error: action.payload,
+                currentTaskStatus: "failed"
+            }
+        },
+        clearCurrentTask:(state, action)=>{
+            return { 
+                ...state,
+                currentTask: null,
+                currentTaskStatus: 'idle'
+            }
+        }   
+
     },
     extraReducers(builder){/** extra reducer user builder to do some async data fecth/requests and
                                 we can add manual cases which needs to be handled for async requests */
@@ -151,6 +186,9 @@ export const selectCurrentTask = (state)=>state.task.currentTask;
 export const { addTask, createTaskSuccess, 
     createTaskBegin, createTaskError,
     fetchTaskConfigBegin, fetchTaskConfigSuccess,
-    fetchTaskConfigError, fetchOptionsBegin, fetchOptionsSuccess, fetchOptionsError } = taskSlice.actions;
+    fetchTaskConfigError, fetchOptionsBegin,
+    fetchOptionsSuccess, fetchOptionsError,
+    updateTaskBegin, updateTaskSuccess,
+    updateTaskError, clearCurrentTask } = taskSlice.actions;
 
 export default taskSlice.reducer;

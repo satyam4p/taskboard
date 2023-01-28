@@ -1,0 +1,21 @@
+.actions-container{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin: 15px;
+
+    .icons-container {
+        margin: 5px;
+
+        button{
+            background: transparent;
+            border: none;
+        }
+
+        :hover{
+            cursor: pointer;
+        }
+    }
+
+}
+

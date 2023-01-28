@@ -5,6 +5,9 @@ import iconsMap from "../IconsMapper/IconsMap";
 import shortid from "shortid";
 import TextArea from "../Fields/TextArea/TextArea";
 import useAuth from "../../helpers/hooks/useAuth";
+import { selectCurrentTask, selectCurrentTaskStatus } from "../../features/task/taskSlice";
+import { useSelector } from "react-redux";
+
 
 const sampleComments = [
     // {
@@ -18,7 +21,12 @@ const sampleComments = [
 ]
 
 const Comments =(props)=>{
-    
+
+    const currentTask = useSelector(selectCurrentTask);
+    const currentTaskStatus = useSelector(selectCurrentTaskStatus);
+    /**check if the task is cerated if yes then allow adding comments */
+    const isEditable = currentTask && currentTask?._id && props.editEnabled;
+
     const { auth } = useAuth();
 
     return(
@@ -36,7 +44,7 @@ const Comments =(props)=>{
                     <span style={{textTransform:'capitalize'}}>{iconsMap.profile()} {auth?.user?.username}</span>
                 </div>
                 <div>
-                    <TextArea editEnabled = {props.editEnabled}/>
+                    <TextArea editEnabled = {isEditable}/>
                 </div>
             </Card>
             {sampleComments.map((comment, key)=>{
