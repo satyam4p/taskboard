@@ -9,7 +9,6 @@ import { selectCurrentTaskStatus,
          selectStatus,
          selectTaskConfig,
          selectCurrentTask,
-         createTaskSuccess,
          clearCurrentTask } from "../../../features/task/taskSlice";
 /** END */
 import { Box, Container, Flex } from "theme-ui";

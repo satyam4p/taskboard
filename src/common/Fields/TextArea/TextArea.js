@@ -11,21 +11,22 @@ const {TextArea} = Input;
 const TextAreaField =(props)=>{
     const currentTask = useSelector(selectCurrentTask);
     const currentTaskStatus = useSelector(selectCurrentTaskStatus);
-    const [value, setValue] = useState();
-    const entityKey = props?.entityKey;
     const { task, setTask } = useContext(TaskContext)
+    
+    const entityKey = props?.entityKey;
+   
+
+    const [value, setValue] = useState(props.value);
 
     const handleChange = (e)=>{
         e.preventDefault();
         let value = e.target.value
         setValue(value);
-        updateParent(value);
-        
     }
 
-    // useEffect(()=>{
-    //     updateParent(value)
-    // }, [value, setValue]);
+    useEffect(()=>{
+        updateParent(value)
+    }, [value, setValue]);
 
     const updateParent = useCallback(
         debounce( value =>{
@@ -37,7 +38,7 @@ const TextAreaField =(props)=>{
                     }
                 }
             })
-        }, 800), []);
+        }, 400), []);
 
     return(
         <TextArea 

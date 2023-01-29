@@ -15,15 +15,15 @@ const useComments =()=>{
 
 
     const post = async ( payload ) => {
-    
+        
         const URL = urlSchema.Commnets.POST_COMMENT;
         try{
             setLoading(true);
             dispatch(postCommentBegin);
             const result = await axios.post(URL, payload);
-            if(result && result.data){
+            if(result && result.data && result.data.comment){
                 setLoading(false);
-                dispatch(postCommentSuccess(result.data));
+                dispatch(postCommentSuccess(result.data.comment));
                 /** @Todo dispath the post success action and also update the current task with same commnet */ 
             }
         }catch(error){

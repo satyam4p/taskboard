@@ -155,10 +155,12 @@ export const taskSlice = createSlice({
         },
 
         postCommentSuccess: (state, action)=>{
+            const comments = state.currentTask?.comments ? state.currentTask.comments : [];
             return {
                 ...state,
-                currentTask:{...state.currentTask, comments: action.payload},
-                commentStatus: 'succeeded'
+                currentTask:{...state.currentTask, comment: action.payload},
+                comments: [...state.comments, action.payload],
+                commentStatus: 'succeeded',
             }
         },
 
@@ -207,7 +209,8 @@ export const selectError = (state)=>state.task.error;
 export const selectCurrentTaskStatus = (state)=>state.task.currentTaskStatus;
 export const selectTaskConfig = (state)=>state.task.taskConfig;
 export const selectCurrentTask = (state)=>state.task.currentTask;
-export const selectCommentStatus =(state) => state.commentStatus;
+export const selectCommentStatus =(state) => state.task.commentStatus;
+export const selectComments = (state)=> state.task.comments;
 
 export const { addTask, createTaskSuccess, 
     createTaskBegin, createTaskError,
