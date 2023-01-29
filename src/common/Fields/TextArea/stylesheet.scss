@@ -3,8 +3,10 @@
     resize: vertical;
     margin: 0px;
     font-family: monospace;
-    font-size: 1;
+    font-size: 14px;
     height: 80px;
+    width: 100%;
+    padding: 5px;
 }
 .text-area-container:focus{
     outline: 1px solid #7A9D8F;

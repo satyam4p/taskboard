@@ -10,55 +10,62 @@ import { SaveOutlined,
     LoadingOutlined,
     FileAddOutlined,
     DeleteOutlined,
-    UserOutlined
+    UserOutlined,
+    SendOutlined,
 } from '@ant-design/icons';
 
-let style = {
-    fontSize: '20px',
-    fontWeight:'800'
-}
-
 const iconsMap = (()=>{
+    let style = {
+        fontSize: '20px',
+        fontWeight:'800'
+    }
     return {
-        save: ()=>{
-            return <SaveOutlined style={style}></SaveOutlined>
+        save: ( size = 20, weight = 800 )=>{
+            return <SaveOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></SaveOutlined>
         },
-        share: ()=>{
-            return <ShareAltOutlined style={style}></ShareAltOutlined>
+        share: (size = 20, weight = 800)=>{
+            return <ShareAltOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></ShareAltOutlined>
         },
-        edit: ( editEnabled = false )=>{
-            const newStyle = editEnabled ? {...style, color: '#6B8B65'} : {...style}; 
+        edit: ( editEnabled = false, size = 20, weight = 800 )=>{
+            const newStyle = editEnabled ? { fontSize:`${size}px`, fontWeight:`${weight}`, color: '#6B8B65'} : {fontSize:`${size}px`, fontWeight:`${weight}`}; 
             return <EditOutlined style={newStyle}></EditOutlined>
         },
-        close: ()=>{
-            return <CloseCircleOutlined style={style}></CloseCircleOutlined>
+        close: (size = 20, weight = 800)=>{
+            return <CloseCircleOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></CloseCircleOutlined>
         },
-        more: ()=>{
-            return <MoreOutlined style={style}></MoreOutlined>
+        more: (size = 20, weight = 800)=>{
+            return <MoreOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></MoreOutlined>
         },
-        time: ()=>{
-            return <FieldTimeOutlined style={style}></FieldTimeOutlined>
+        time: (size = 20, weight = 800)=>{
+            return <FieldTimeOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></FieldTimeOutlined>
         },
-        user: ()=>{
-            return <UserAddOutlined style={style}></UserAddOutlined>
+        user: (size = 20, weight = 800)=>{
+            return <UserAddOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></UserAddOutlined>
         },
-        tag: ()=>{
-            return <TagsOutlined style={style}></TagsOutlined>
+        tag: (size = 20, weight = 800)=>{
+            return <TagsOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></TagsOutlined>
         },
-        alert : ()=>{
-            return <AlertOutlined style={style}></AlertOutlined>
+        alert : (size = 20, weight = 800)=>{
+            return <AlertOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></AlertOutlined>
         },
-        loading: ()=>{
-            return <LoadingOutlined spin style={style}></LoadingOutlined>
+        loading: (size = 20, weight = 800)=>{
+            return <LoadingOutlined spin style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></LoadingOutlined>
         },
-        create: ()=>{
-            return <FileAddOutlined style={style}></FileAddOutlined>
+        create: (size = 20, weight = 800)=>{
+            return <FileAddOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></FileAddOutlined>
         },
-        delete: ()=>{
-            return <DeleteOutlined style={style}></DeleteOutlined>
+        delete: (size = 20, weight = 800)=>{
+            return <DeleteOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></DeleteOutlined>
         },
-        profile:()=>{
-            return <UserOutlined style={style}></UserOutlined>
+        profile: (size = 20, weight = 800)=>{
+            return <UserOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></UserOutlined>
+        },
+        send: ( size = 20, weight = 800 )=>{
+
+            return <SendOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></SendOutlined>
+        },
+        editNormal: (size = 20, weight = 800)=>{
+            return <EditOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></EditOutlined>
         }
     }
 })();

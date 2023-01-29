@@ -8,7 +8,9 @@ let defaultState = {
             name: null
         },
         taskConfig: {},
-        editEnabled: true
+        editEnabled: true,
+        userComment:null,
+        comments:[]
     }
     return defaultState;
 }

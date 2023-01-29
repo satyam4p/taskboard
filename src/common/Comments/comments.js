@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react";
 import { Card, Container } from "theme-ui";
 import iconsMap from "../IconsMapper/IconsMap";
 import shortid from "shortid";
-import TextArea from "../Fields/TextArea/TextArea";
+import TextAreaField from "../Fields/TextArea/TextArea";
 import useAuth from "../../helpers/hooks/useAuth";
 import { selectCurrentTask, selectCurrentTaskStatus } from "../../features/task/taskSlice";
 import { useSelector } from "react-redux";
+import CommentActions from "./CommentActions/CommentsAction";
 
 
 const sampleComments = [
@@ -26,7 +27,7 @@ const Comments =(props)=>{
     const currentTaskStatus = useSelector(selectCurrentTaskStatus);
     /**check if the task is cerated if yes then allow adding comments */
     const isEditable = currentTask && currentTask?._id && props.editEnabled;
-
+    
     const { auth } = useAuth();
 
     return(
@@ -43,9 +44,11 @@ const Comments =(props)=>{
                 }}>
                     <span style={{textTransform:'capitalize'}}>{iconsMap.profile()} {auth?.user?.username}</span>
                 </div>
-                <div>
-                    <TextArea editEnabled = {isEditable}/>
-                </div>
+                    <TextAreaField 
+                        editEnabled = {isEditable}  
+                        entityKey = "userComment"
+                    />
+                <CommentActions/>
             </Card>
             {sampleComments.map((comment, key)=>{
                 return (

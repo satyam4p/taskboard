@@ -9,7 +9,8 @@ const initialState = {
     comments:[],
     currentTask:null,
     currentTaskStatus:'idle',
-    taskConfig:[]
+    taskConfig:[],
+    commentStatus: 'idle'
 }
 
 export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async ()=>{
@@ -145,7 +146,31 @@ export const taskSlice = createSlice({
                 currentTask: null,
                 currentTaskStatus: 'idle'
             }
-        }   
+        },
+        postCommentBegin: (state, action)=>{
+            return {
+                ...state,
+                commentStatus: 'loading',
+            }
+        },
+
+        postCommentSuccess: (state, action)=>{
+            return {
+                ...state,
+                currentTask:{...state.currentTask, comments: action.payload},
+                commentStatus: 'succeeded'
+            }
+        },
+
+        postCommentError: (state, action)=>{
+
+            return {
+                ...state,
+                commentStatus: 'failed',
+                error: action.payload
+            }
+
+        }
 
     },
     extraReducers(builder){/** extra reducer user builder to do some async data fecth/requests and
@@ -182,6 +207,7 @@ export const selectError = (state)=>state.task.error;
 export const selectCurrentTaskStatus = (state)=>state.task.currentTaskStatus;
 export const selectTaskConfig = (state)=>state.task.taskConfig;
 export const selectCurrentTask = (state)=>state.task.currentTask;
+export const selectCommentStatus =(state) => state.commentStatus;
 
 export const { addTask, createTaskSuccess, 
     createTaskBegin, createTaskError,
@@ -189,6 +215,7 @@ export const { addTask, createTaskSuccess,
     fetchTaskConfigError, fetchOptionsBegin,
     fetchOptionsSuccess, fetchOptionsError,
     updateTaskBegin, updateTaskSuccess,
-    updateTaskError, clearCurrentTask } = taskSlice.actions;
+    updateTaskError, clearCurrentTask,
+    postCommentBegin, postCommentSuccess, postCommentError } = taskSlice.actions;
 
 export default taskSlice.reducer;
