@@ -26,6 +26,17 @@ const Comments =(props)=>{
     const currentTask = useSelector(selectCurrentTask);
     
     let comments = [...useSelector(selectComments)];
+    const getFilteredComments =()=>{
+        let filteredComments = [];
+        debugger;
+        if(currentTask && currentTask?._id){
+            filteredComments = comments.filter(comment => comment?.taskId === currentTask?._id);
+        }
+        return filteredComments;
+    }
+    let filteredComments = getFilteredComments();
+    console.log("filteredComments:: ",filteredComments);
+    
 
     /**check if the task is cerated if yes then allow adding comments */
     const isEditable = currentTask && currentTask?._id;
@@ -76,7 +87,7 @@ const Comments =(props)=>{
                     />
                 <CommentActions setValue = {setValue} actionsEnabled = {isActionEnabled}/>
             </Card>
-            {comments && comments.length ? comments.reverse().map((comment, key) => {
+            {filteredComments && filteredComments.length ? filteredComments.reverse().map((comment, key) => {
                 let localTime  = moment(comment?.postedAt).fromNow();
                 return (
                     <Card key={shortid.generate()} sx={{
