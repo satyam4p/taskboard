@@ -1,26 +1,58 @@
 /** @jsxImportSource theme-ui */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import { Card, Container } from "theme-ui";
 import iconsMap from "../IconsMapper/IconsMap";
 import shortid from "shortid";
-import TextAreaField from "../Fields/TextArea/TextArea";
+// import TextAreaField from "../Fields/TextArea/TextArea";
 import useAuth from "../../helpers/hooks/useAuth";
 import { selectComments, selectCurrentTask, selectCurrentTaskStatus, selectCommentStatus } from "../../features/task/taskSlice";
 import { useSelector } from "react-redux";
 import CommentActions from "./CommentActions/CommentsAction";
 import moment from "moment";
+import TextArea from "antd/lib/input/TextArea";
+import useComments from "../../helpers/hooks/useComments";
+import TaskContext from "../Modals/Task/TaskContext/TaskProvider";
+import debounce from '../../helpers/commonUtils/debounce';
+
 
 const Comments =(props)=>{
-
-    const currentTask = useSelector(selectCurrentTask);
+    const [value, setValue] = useState();
     const currentTaskStatus = useSelector(selectCurrentTaskStatus);
     const commentStatus = useSelector(selectCommentStatus);
+    const [loading, post, deleteComment, edit] = useComments();
+    const entityKey = "userComment";
+    const { auth } = useAuth();
+    const {task, setTask} = useContext(TaskContext);
+    const currentTask = useSelector(selectCurrentTask);
+    
     let comments = [...useSelector(selectComments)];
 
     /**check if the task is cerated if yes then allow adding comments */
-    const isEditable = currentTask && currentTask?._id && props.editEnabled;
-    const { auth } = useAuth();
-    const shouldClear = commentStatus == 'succeeded' ? true : false;
+    const isEditable = currentTask && currentTask?._id;
+
+    useEffect(()=>{
+        updateParent(value)
+    }, [value, setValue]);
+
+    const updateParent = useCallback(
+        debounce( value =>{
+            setTask( prevTask => {
+                if(entityKey){
+                    return {
+                        ...prevTask,
+                        [entityKey]: value
+                    }
+                }
+            })
+        }, 200), []);
+
+    const handleChange = (e)=>{
+        e.preventDefault();
+        let value = e.target.value
+        setValue(value);
+    }
+
+    const isActionEnabled = value && value.trim() && value.length > 0 ? true : false;
 
     return(
         <Container sx={{
@@ -36,16 +68,16 @@ const Comments =(props)=>{
                 }}>
                     <span style={{textTransform:'capitalize'}}>{iconsMap.profile()} {auth?.user?.username}</span>
                 </div>
-                    <TextAreaField 
-                        editEnabled = {isEditable}  
-                        entityKey = "userComment"
-                        shouldClear = {shouldClear}
+                    <TextArea 
+                        disabled = {!isEditable}  
+                        className="text-area-container"
+                        value = {value}
+                        onChange = {e=>handleChange(e)}
                     />
-                <CommentActions />
+                <CommentActions setValue = {setValue} actionsEnabled = {isActionEnabled}/>
             </Card>
-            {comments && comments.length ? comments.reverse().map((comment, key)=>{
-                // console.log(moment(comment?.postedAt,"hh:mm:ss" ).toString());
-                const postedAt = moment(comment?.postedAt,"hh:mm:ss" ).fromNow();
+            {comments && comments.length ? comments.reverse().map((comment, key) => {
+                let localTime  = moment(comment?.postedAt).fromNow();
                 return (
                     <Card key={shortid.generate()} sx={{
                         paddingY:'5px',
@@ -53,8 +85,8 @@ const Comments =(props)=>{
                     <div sx={{
                         marginY:'5px'
                     }}>
-                        <span style={{fontSize:'14px', fontWeight:'500'}}>{iconsMap.profile()} {comment.user?.username}   </span>
-                        <span style={{fontSize:'12px'}}>{postedAt}</span>
+                        <span style={{fontSize:'14px', fontWeight:'500', textTransform: 'capitalize'}}>{iconsMap.profile()} {comment.user?.username}   </span>
+                        <span style={{fontSize:'12px'}}>{localTime}</span>
                     </div>
                     <div style={{padding:'5px'}}>
                         {comment.body}

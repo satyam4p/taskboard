@@ -12,6 +12,7 @@ import { SaveOutlined,
     DeleteOutlined,
     UserOutlined,
     SendOutlined,
+    ClearOutlined
 } from '@ant-design/icons';
 
 const iconsMap = (()=>{
@@ -66,7 +67,10 @@ const iconsMap = (()=>{
         },
         editNormal: (size = 20, weight = 800)=>{
             return <EditOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></EditOutlined>
-        }
+        },
+        clear: (size = 20, weight = 800)=>{
+            return <ClearOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></ClearOutlined>
+        },
     }
 })();
 

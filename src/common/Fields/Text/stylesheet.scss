@@ -1,5 +1,5 @@
 .text-container{
-    border: 0.5px solid #85888A;
+    border: 0.5px solid #C2C3C4;
     border-radius: 5px;
     height: 2em;
 }
@@ -16,7 +16,7 @@
 }
 
 .text-container:focus{
-    outline: 1px solid #7A9D8F;
-    border: none;
+    border: 1px solid #7A9D8F;
+    outline: none;
 }
 
