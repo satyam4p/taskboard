@@ -28,7 +28,6 @@ const Comments =(props)=>{
     let comments = [...useSelector(selectComments)];
     const getFilteredComments =()=>{
         let filteredComments = [];
-        debugger;
         if(currentTask && currentTask?._id){
             filteredComments = comments.filter(comment => comment?.taskId === currentTask?._id);
         }
