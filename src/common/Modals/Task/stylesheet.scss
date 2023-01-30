@@ -1,3 +1,17 @@
+.task-modal-container{
+    z-Index:400;
+    width: 36%;
+    height: 80vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-45%);
+    border-radius: 5px;
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+    overflow-y: auto;
+    font-size: 1;
+}
+
 .task-modal-container::-webkit-scrollbar-thumb{
     border-radius: 10px;
 }

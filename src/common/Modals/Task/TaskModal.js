@@ -1,33 +1,37 @@
 /** @jsxImportSource theme-ui */
+/** OOB imports */
 import React,{Suspense, useEffect, useState, useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Box, Container } from "theme-ui";
+
+/** Contexts */
 import TaskContext from "./TaskContext/TaskProvider";
-/** testing START*/
-import { useSelector, useDispatch, connect } from "react-redux";
-import { selectCurrentTaskStatus, 
-         selectAllTasks, 
-         selectError, 
-         selectStatus,
-         selectTaskConfig,
-         selectCurrentTask,
-         clearCurrentTask } from "../../../features/task/taskSlice";
-/** END */
-import { Box, Container, Flex } from "theme-ui";
+
+/** custom components */
+import TaskHeader from "./TaskModalHeader/TaskHeader"; 
+import TaskActionBar from "./TaskActionsBar/TaskActionBar";
 import TextLoader from "../../Loaders/simpleTextLoader";
 import FieldMapper from "../../Fields/FieldMappingMaster";
-import iconsMap from "../../IconsMapper/IconsMap";
 import TextEditor from "../../TextEditor/TextEditor";
-import './stylesheet.scss';
 
-/** Helpers */
-import TaskResolver from "../Helpers/ModalResolver/TaskResolver";
-import TaskHeader from "./TaskModalHeader/TaskHeader";
+/** Helper custom hooks */
 import useCreateAndGetTask from "../../../helpers/hooks/useCreateAndGetTask";
 import useTaskConfig from "../../../helpers/hooks/useTaskConfig";
-import useNotification from "../../Notification/helpers/useNotification";
-import Notification from "../../Notification/Notification";
-import TaskActionBar from "./TaskActionsBar/TaskActionBar";
 import useUpdateTask from "../../../helpers/hooks/useUpdateTask";
 
+/**custom redux helpers */
+import { selectCurrentTaskStatus, 
+    selectAllTasks, 
+    selectError, 
+    selectStatus,
+    selectTaskConfig,
+    selectCurrentTask,
+    clearCurrentTask } from "../../../features/task/taskSlice";
+
+/** Styling */
+import './stylesheet.scss';
+
+/**lazy components */
 const Comments = React.lazy(()=>import('../../Comments/comments'));
 
 const TaskModal=(props)=>{
@@ -77,8 +81,6 @@ const TaskModal=(props)=>{
                 setResult(result);
             }
         }
-        
-       
     }
 
     const handleShare=(e)=>{
@@ -96,20 +98,12 @@ const TaskModal=(props)=>{
             })
     }
 
+    const handleMore =(e)=>{
+        e.preventDefault();
+    }
+
     return(
-        <div className="task-modal-container" sx={{
-            zIndex:'400',
-            width:'36%',
-            height:'80vh',
-            position:'absolute',
-            top:'50%',
-            left:'50%',
-            transform:'translate(-50%,-45%)',
-            borderRadius:'5px',
-            boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.75)',
-            overflowY:'auto',
-            fontSize:1
-        }}>
+        <div className="task-modal-container">
             {
                 (configLoaded && (currentTaskStatus == "idle" || 
                                 currentTaskStatus == "succeeded" || 
@@ -120,6 +114,7 @@ const TaskModal=(props)=>{
                             handleClose = { handleClose } 
                             handleShare = {handleShare} 
                             handleEdit = {handleEdit}
+                            handleMore = {handleMore}
                             currentTaskStatus = {currentTaskStatus}
                             editEnabled = { task.editEnabled }  />
 

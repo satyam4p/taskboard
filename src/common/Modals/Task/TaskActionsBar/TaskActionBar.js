@@ -2,7 +2,7 @@ import React from "react";
 import iconsMap from "../../../IconsMapper/IconsMap";
 import './stylesheet.scss';
 
-const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare, editEnabled}) => {
+const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare, editEnabled, handleMore}) => {
 
     return(
         <div className="actions-container">
@@ -35,6 +35,7 @@ const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare,
             </div>
             <div className="icons-container">
                 {<button
+                    onClick={e=>handleMore(e)}
                     sx={{
                     background:'transparent',
                     border:'none'
