@@ -1,0 +1,19 @@
+.drawer-container{
+    width: 18%;
+    height: 86vh;
+    background-color: #F6F6F6;
+    display: block;
+    position: fixed;
+    z-index: 50;
+    top: calc(100vh - 90vh);
+}
+.show{
+    left: 13.5%;
+    transition: all 0.2s ease-in;
+}
+
+.hide{
+    left: -100%;
+    transition: all 0.2s ease-out;
+}
+

@@ -1,5 +1,6 @@
 /** @jsxImportSource theme-ui */
 import { Flex, } from 'theme-ui';
+import AddDrawer from '../../common/AddDrawer/AddDrawer';
 import Popover from '../Popover/Popover';
 import { CarryOutOutlined,
         FundOutlined,
@@ -7,6 +8,8 @@ import { CarryOutOutlined,
         SettingOutlined,
         PlusSquareOutlined    
     } from '@ant-design/icons';
+import iconsMap from '../../common/IconsMapper/IconsMap';
+import { useState } from 'react';
 
 const actions = [
     {
@@ -21,8 +24,18 @@ const actions = [
     }
 ]
 
+
+
 function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
 
+    const [hoverStyle, setHoverStyle] = useState({display:'none'});
+    const [ showDrawer, setDrawer] = useState(false);
+
+    const addDrawer = ()=>{
+
+        return <AddDrawer showDrawer = {showDrawer}/>
+    }
+    console.log("showdraer:: ",showDrawer)
     return(
         <>
         <Flex sx={{
@@ -79,6 +92,9 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                         alignSelf:'center',
                     }}>
                         <button
+                            onMouseEnter= {()=>setHoverStyle({display:'block'})}
+                            onMouseLeave= {()=>setHoverStyle({display:'none'})}
+                            onClick={()=>setDrawer(prev=>!prev)}
                             sx={{
                                 width:'100%',
                                 height:'inherit',
@@ -95,9 +111,15 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                                 },
                                 display:'flex',
                                 alignItems:'center',
-                            }}>{<CarryOutOutlined style={{
-                                fontSize:'16px'
-                            }}/>}&nbsp;Recent Tasks</button>
+                                justifyContent:'space-between'
+                            }}>
+                                <div>
+                                    {<CarryOutOutlined style={{
+                                            fontSize:'16px'
+                                        }}/>}&nbsp;Recent Tasks
+                                </div>
+                                <span style={hoverStyle}>{iconsMap.doubleRightArror(16)}</span>
+                        </button>
                     </div>
                     <div sx={{
                         width:'85%',
@@ -168,6 +190,8 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                     alignSelf:'center'
                 }}>
                     <button
+                        // onMouseEnter= {()=>setHoverStyle({display:'block'})}
+                        // onMouseLeave= {()=>setHoverStyle({display:'none'})}
                          sx={{
                             width:'100%',
                             height:'inherit',
@@ -184,12 +208,19 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                             },
                             display:'flex',
                             alignItems:'center',
-                        }}>{<SettingOutlined style={{
-                            fontSize:'16px'
-                        }}/>}&nbsp;Settings</button>
+                            justifyContent:'space-between'
+                        }}>
+                            <div>
+                            {<SettingOutlined style={{
+                                fontSize:'16px'
+                                }}/>}&nbsp;Settings
+                            </div>
+                            {/* <span style={hoverStyle}>{iconsMap.doubleRightArror(16)}</span> */}
+                    </button>
                 </div>
             </Flex>
         </Flex>
+        {addDrawer()}
         </>
     )
 
