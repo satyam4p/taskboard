@@ -10,6 +10,7 @@ import { CarryOutOutlined,
     } from '@ant-design/icons';
 import iconsMap from '../../common/IconsMapper/IconsMap';
 import { useState } from 'react';
+import useAxiosPrivate from '../../helpers/hooks/useAxiosPrivate';
 
 const actions = [
     {
@@ -30,12 +31,12 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
 
     const [hoverStyle, setHoverStyle] = useState({display:'none'});
     const [ showDrawer, setDrawer] = useState(false);
-
+    const axiosPrivate = useAxiosPrivate();
     const addDrawer = ()=>{
-
+        
         return <AddDrawer showDrawer = {showDrawer}/>
     }
-    console.log("showdraer:: ",showDrawer)
+
     return(
         <>
         <Flex sx={{
