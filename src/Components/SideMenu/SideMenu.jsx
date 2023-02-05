@@ -1,6 +1,7 @@
 /** @jsxImportSource theme-ui */
 import { Flex, } from 'theme-ui';
 import AddDrawer from '../../common/AddDrawer/AddDrawer';
+import { useDispatch, useSelector } from "react-redux";
 import Popover from '../Popover/Popover';
 import { CarryOutOutlined,
         FundOutlined,
@@ -11,6 +12,8 @@ import { CarryOutOutlined,
 import iconsMap from '../../common/IconsMapper/IconsMap';
 import { useState } from 'react';
 import useAxiosPrivate from '../../helpers/hooks/useAxiosPrivate';
+import urlSchema from '../../network/urlSchema/urlSchema.json';
+import { fetchDrawerDetailsBegin, fetchDrawerDetailsSuccess, fetchDrawerDetailsError } from '../../features/Drawer/drawerSlice';
 
 const actions = [
     {
@@ -31,10 +34,26 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
 
     const [hoverStyle, setHoverStyle] = useState({display:'none'});
     const [ showDrawer, setDrawer] = useState(false);
-    const axiosPrivate = useAxiosPrivate();
+    const axios = useAxiosPrivate();
     const addDrawer = ()=>{
         
         return <AddDrawer showDrawer = {showDrawer}/>
+    }
+    const dispatch = useDispatch();
+    const handleMenuAction = async (type)=>{
+        if(showDrawer){
+            setDrawer(prev=>!prev);
+        }else{
+            setDrawer(prev=>!prev);
+            dispatch(fetchDrawerDetailsBegin());
+            const url = urlSchema.Drawer[type];
+            const result = await axios.get(url);
+            if(result && result.data){
+                dispatch(fetchDrawerDetailsSuccess(result.data))
+            }else{
+                dispatch(fetchDrawerDetailsError(result.data));
+            }
+        }
     }
 
     return(
@@ -95,7 +114,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                         <button
                             onMouseEnter= {()=>setHoverStyle({display:'block'})}
                             onMouseLeave= {()=>setHoverStyle({display:'none'})}
-                            onClick={()=>setDrawer(prev=>!prev)}
+                            onClick={()=>handleMenuAction('recent_tasks')}
                             sx={{
                                 width:'100%',
                                 height:'inherit',
