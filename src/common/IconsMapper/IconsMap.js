@@ -13,7 +13,9 @@ import { SaveOutlined,
     UserOutlined,
     SendOutlined,
     ClearOutlined,
-    DoubleRightOutlined
+    DoubleRightOutlined,
+    SearchOutlined
+
 } from '@ant-design/icons';
 
 const iconsMap = (()=>{
@@ -75,6 +77,9 @@ const iconsMap = (()=>{
         doubleRightArror: (size = 20, weight = 800)=>{
             return <DoubleRightOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></DoubleRightOutlined>
         },
+        search: (size = 20, weight = 800)=>{
+            return <SearchOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></SearchOutlined>
+        }
     }
 })();
 
