@@ -23,7 +23,7 @@ const LookupField = (props) => {
     const {task, setTask} = useContext(TaskContext);
 
     const displayValue = (()=>{
-      if(currentTask && currentTask[entityKey]){
+      if(currentTask && currentTask[entityKey] && currentTask?.choices && currentTask?.choices.length){
         console.log("currentTask[entityKey]:: ",currentTask[entityKey])
          return currentTask?.choices.filter(choice=>choice.id === currentTask[entityKey])[0].username;
       }
