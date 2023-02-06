@@ -11,11 +11,15 @@ import { selectDrawerDetails, selectDrawerError, selectDrawerStatus } from '../.
 import iconsMap from '../IconsMapper/IconsMap';
 
 const {Search} = Input;
-const Record = ({title, status})=>{
+const Record = ({title, status, label})=>{
 
     return(
         <div className='record-Container'>
-            <Tag className='status-contaienr'>{status}</Tag>
+            <div className='tag-container'>
+                <Tag className={`status-tag ${status.toLowerCase().split(" ").join("_")}`} >{status}</Tag>
+                <Tag className={`label-tag ${label.toLowerCase().split(" ").join("_")}`} >{label}</Tag>
+            </div>
+            
             <span className='title-container'>{title}</span>
         </div>
     ) 
@@ -86,9 +90,15 @@ const AddDrawer = ({showDrawer, config})=>{
                     onSearch = { handleSearch }
                 />
             </div>
+            <div className='break'/>
             {drawerStatus === 'succeeded' ? 
                 tasks && tasks.length ? tasks.map((data,key)=>{
-                    return <Record key={shortId.generate()} status={data?.status} title = {data?.name}/>
+                    return <Record 
+                        key={shortId.generate()} 
+                        status={data?.status} 
+                        title = {data?.name}
+                        label = {data?.label}    
+                    />
                 })
                 :
                 <span className='no-result'> No Results found</span>
