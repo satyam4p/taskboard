@@ -14,6 +14,8 @@ import useComments from "../../helpers/hooks/useComments";
 import TaskContext from "../Modals/Task/TaskContext/TaskProvider";
 import debounce from '../../helpers/commonUtils/debounce';
 import useGetComments from "../../helpers/hooks/useGetCommens";
+import { cloneDeep } from "lodash";
+import CommentsSkeleton from "./Skeleton/CommentsSkeleton";
 
 
 const Comments =(props)=>{
@@ -21,22 +23,14 @@ const Comments =(props)=>{
     const [value, setValue] = useState();
     const currentTaskStatus = useSelector(selectCurrentTaskStatus);
     const commentStatus = useSelector(selectCommentStatus);
-    const [loading, post, deleteComment, edit] = useComments();
     const entityKey = "userComment";
     const { auth } = useAuth();
     const {task, setTask} = useContext(TaskContext);
     const currentTask = useSelector(selectCurrentTask);
     
-    let comments = [...useSelector(selectComments)];
-    const getFilteredComments =()=>{
-        let filteredComments = [];
-        if(currentTask && currentTask?._id){
-            filteredComments = comments.filter(comment => comment?.taskId === currentTask?._id);
-        }
-        return filteredComments;
-    }
-    let filteredComments = getFilteredComments();
-    console.log("filteredComments:: ",filteredComments);
+    let comments = useSelector(selectComments);
+
+    const taskComments = comments && comments.length ? cloneDeep(comments) : [];
     const [fetching, getComments] = useGetComments();
 
     /**check if the task is cerated if yes then allow adding comments */
@@ -94,24 +88,29 @@ const Comments =(props)=>{
                     />
                 <CommentActions setValue = {setValue} actionsEnabled = {isActionEnabled}/>
             </Card>
-            {filteredComments && filteredComments.length ? filteredComments.reverse().map((comment, key) => {
-                let localTime  = moment(comment?.postedAt).fromNow();
-                return (
-                    <Card key={shortid.generate()} sx={{
-                        paddingY:'5px',
-                    }}>
-                    <div sx={{
-                        marginY:'5px'
-                    }}>
-                        <span style={{fontSize:'14px', fontWeight:'500', textTransform: 'capitalize'}}>{iconsMap.profile()} {comment.user?.username}   </span>
-                        <span style={{fontSize:'12px'}}>{localTime}</span>
-                    </div>
-                    <div style={{padding:'5px'}}>
-                        {comment.body}
-                    </div>
-                </Card>
-                )
-            }) : null } 
+            {commentStatus == "loading" ?
+                <CommentsSkeleton/>
+                :
+                taskComments && taskComments.length ? taskComments.reverse().map((comment, key) => {
+                    let localTime  = moment(comment?.postedAt).fromNow();
+                    return (
+                        <Card key={shortid.generate()} sx={{
+                            paddingY:'5px',
+                        }}>
+                        <div sx={{
+                            marginY:'5px'
+                        }}>
+                            <span style={{fontSize:'14px', fontWeight:'500', textTransform: 'capitalize'}}>{iconsMap.profile()} {comment.user?.username}   </span>
+                            <span style={{fontSize:'12px'}}>{localTime}</span>
+                        </div>
+                        <div style={{padding:'5px'}}>
+                            {comment.body}
+                        </div>
+                    </Card>
+                    )
+                }) : null  
+            }
+            
         </Container>
     )
 }

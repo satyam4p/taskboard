@@ -180,7 +180,6 @@ export const taskSlice = createSlice({
         },
 
         postCommentSuccess: (state, action)=>{
-            const comments = state.currentTask?.comments ? state.currentTask.comments : [];
             return {
                 ...state,
                 currentTask:{...state.currentTask, comment: action.payload},
@@ -197,6 +196,26 @@ export const taskSlice = createSlice({
                 error: action.payload
             }
 
+        },
+        fetchTaskCommentsBegin: (state, action) => {
+            return {
+                ...state,
+                commentStatus: 'loading'
+            }
+        },
+        fetchTaskCommentsSuccess: (state, action) => {
+            return {
+                ...state,
+                comments: action.payload,
+                commentStatus: 'succeeded'
+            }
+        },
+        fetchTaskCommentsError:(state, action) => {
+            return {
+                ...state,
+                commentStatus: 'failed',
+                error: action.payload
+            }
         }
 
     },
@@ -213,17 +232,6 @@ export const taskSlice = createSlice({
             state.status = 'failed'
             state.error = action.error.message
         })
-        // .addCase(createTask.fulfilled, (state, action)=>{
-        //     state.currentTask = action.payload;
-        //     state.currentTaskStatus = "succeeded"
-        // })
-        // .addCase(createTask.pending, (state, action)=>{
-        //     state.currentTaskStatus = "loading";
-        // })
-        // .addCase(createTask.rejected, (state, action)=>{
-        //     state.currentTaskStatus = "failed";
-        //     state.error = action.error.message;
-        // })
     }
 
 })
@@ -245,6 +253,7 @@ export const { addTask, createTaskSuccess,
     updateTaskBegin, updateTaskSuccess,
     updateTaskError, clearCurrentTask,
     postCommentBegin, postCommentSuccess, postCommentError,
-    fetchTaskBegin, fetchTaskSuccess, fetchTaskError } = taskSlice.actions;
+    fetchTaskBegin, fetchTaskSuccess, fetchTaskError,
+    fetchTaskCommentsBegin, fetchTaskCommentsSuccess, fetchTaskCommentsError } = taskSlice.actions;
 
 export default taskSlice.reducer;
