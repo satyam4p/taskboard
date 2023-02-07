@@ -1,20 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Tag } from 'antd';
 import DrawerLoader from './loader/DrawerLoader';
 import { useDispatch, useSelector } from "react-redux";
 import { Input } from 'antd';
 import debounce from '../../helpers/commonUtils/debounce';
 import shortId from 'shortid';
+import ModalContext from '../../context/ModalProvider';
 /** custom style */
 import './stylesheet.scss';
 import { selectDrawerDetails, selectDrawerError, selectDrawerStatus } from '../../features/Drawer/drawerSlice';
 import iconsMap from '../IconsMapper/IconsMap';
+import { createTaskSuccess } from '../../features/task/taskSlice';
+import useGetTask from '../../helpers/hooks/useGetTask';
 
 const {Search} = Input;
-const Record = ({title, status, label})=>{
+const Record = ({title, status, label, context}) => {
+
+    const {modalType, setModalType} = useContext(ModalContext);
+    const [loading, getTask] = useGetTask();
+
+    const handleRecordAction=(e)=>{
+        e.preventDefault();
+        setModalType(prev=>{
+            if(!prev.isVisible){
+                return {
+                    isVisible: true,
+                    type: 'task'
+                }
+            }
+            return prev;
+        });
+        getTask(context?._id);
+
+    }
 
     return(
-        <div className='record-Container'>
+        <div className='record-Container' onClick={handleRecordAction}>
             <div className='tag-container'>
                 <Tag className={`status-tag ${status.toLowerCase().split(" ").join("_")}`} >{status}</Tag>
                 <Tag className={`label-tag ${label.toLowerCase().split(" ").join("_")}`} >{label}</Tag>
@@ -97,7 +118,8 @@ const AddDrawer = ({showDrawer, config})=>{
                         key={shortId.generate()} 
                         status={data?.status} 
                         title = {data?.name}
-                        label = {data?.label}    
+                        label = {data?.label}
+                        context = {data} 
                     />
                 })
                 :

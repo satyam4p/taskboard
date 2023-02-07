@@ -13,9 +13,11 @@ import TextArea from "antd/lib/input/TextArea";
 import useComments from "../../helpers/hooks/useComments";
 import TaskContext from "../Modals/Task/TaskContext/TaskProvider";
 import debounce from '../../helpers/commonUtils/debounce';
+import useGetComments from "../../helpers/hooks/useGetCommens";
 
 
 const Comments =(props)=>{
+
     const [value, setValue] = useState();
     const currentTaskStatus = useSelector(selectCurrentTaskStatus);
     const commentStatus = useSelector(selectCommentStatus);
@@ -35,10 +37,16 @@ const Comments =(props)=>{
     }
     let filteredComments = getFilteredComments();
     console.log("filteredComments:: ",filteredComments);
-    
+    const [fetching, getComments] = useGetComments();
 
     /**check if the task is cerated if yes then allow adding comments */
     const isEditable = currentTask && currentTask?._id;
+
+    useEffect(()=>{
+        if(currentTask && currentTask?._id){
+            getComments(currentTask?._id);
+        }
+    },[])
 
     useEffect(()=>{
         updateParent(value)

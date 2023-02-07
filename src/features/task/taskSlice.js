@@ -64,11 +64,36 @@ export const taskSlice = createSlice({
             }
         },
         fetchOptionsError: (state, action)=>{
+
             return {
                 ...state,
                 status: 'failed',
                 error: action.payload
             }
+
+        },
+        fetchTaskBegin: (state, action)=>{
+            return {
+                ...state,
+                currentTaskStatus: 'loading'
+            }
+        },
+        fetchTaskSuccess: (state, action)=>{
+
+            return {
+                ...state,
+                currentTask: {...state.currentTask, ...action.payload},
+                currentTaskStatus: "succeeded"
+            }
+        },
+        fetchTaskError: (state, action)=>{
+
+            return {    
+                ...state,
+                currentTaskStatus: 'failed',
+                error: action.payload
+            }
+
         },
         /**typical format for reducer in a slice is::
          * START: 
@@ -219,6 +244,7 @@ export const { addTask, createTaskSuccess,
     fetchOptionsSuccess, fetchOptionsError,
     updateTaskBegin, updateTaskSuccess,
     updateTaskError, clearCurrentTask,
-    postCommentBegin, postCommentSuccess, postCommentError } = taskSlice.actions;
+    postCommentBegin, postCommentSuccess, postCommentError,
+    fetchTaskBegin, fetchTaskSuccess, fetchTaskError } = taskSlice.actions;
 
 export default taskSlice.reducer;
