@@ -12,7 +12,7 @@ const DecoratedFieldHOC = ( props ) =>{
                 display:'flex',
                 flexDirection:'row',
                 alignItems:'center',
-                margin:'5px',
+                margin:'4px',
             }}>
                 <div sx={{
                     width:'20%',

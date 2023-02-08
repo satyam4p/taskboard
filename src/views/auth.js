@@ -122,7 +122,7 @@ function Auth(){
                         padding:'2px',
                         alignItems:'center',
                         height:'100%',
-                        fontSize:1
+                        fontSize:0
                     }}>
                         <Text sx={{
                             marginX:'10px'
@@ -152,7 +152,7 @@ function Auth(){
                     width:'45%',               
                 }}>
                     <Text sx={{
-                        fontSize:5,
+                        fontSize:4,
                         fontWeight:1,
                         padding:'5px'
                     }}>
@@ -168,7 +168,7 @@ function Auth(){
                     ref={errRef}>{errorMessage}</Text>
                     <Box sx={{
                         marginTop:'15px',
-                        fontSize:1
+                        fontSize:0
                     }} as={"form"} onSubmit={(e)=>handleSubmit(e)}>
                         <Label sx={{
                             padding:'5px',
@@ -222,7 +222,7 @@ function Auth(){
                             background:'#123E2C',
                             color:'#ffff',
                             margin:'5px',
-                            fontWeight:1
+                            fontWeight:0
                         }} type='submit'>Sign In</Button>
                     </Box>
                 </Container>

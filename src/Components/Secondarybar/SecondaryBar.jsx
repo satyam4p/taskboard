@@ -14,7 +14,7 @@ function SecondaryBar({
         <>
             <Flex sx={{
                 width:['95%', null, null],
-                height:'54px',
+                height:'45px',
                 bg:'lightblue',
                 alignSelf:'baseline',
                 marginLeft:'calc(100% - 97.5%)',
@@ -26,8 +26,8 @@ function SecondaryBar({
                 justifyContent:'space-between'
             }}>
                 <Button sx={{
-                    width:'40px',
-                    height:'40px',
+                    width:'35px',
+                    height:'35px',
                     mx:'10px',
                     bg:'inherit',
                     padding:'5px',
@@ -62,8 +62,8 @@ function SecondaryBar({
                 onClick={()=>setToggleProile(!toggleProfile)}
                 sx={{
                     borderRadius:'50%',
-                    width:'40px',
-                    height:'40px',
+                    width:'30px',
+                    height:'30px',
                     bg:'#88AF9F',
                     mx:'10px'
                 }}/>

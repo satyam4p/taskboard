@@ -69,18 +69,19 @@ const Comments =(props)=>{
     return(
         <Container sx={{
             marginY:'5px',
-            fontSize:1
+            fontSize:0
         }}>
             <Card sx={{
                         marginY:'8px',
-                        paddingY:'5px',
+                        paddingY:'4px',
                     }}>
                 <div sx={{
-                    marginY:'5px'
+                    marginY:'4px'
                 }}>
-                    <span style={{textTransform:'capitalize'}}>{iconsMap.profile()} {auth?.user?.username}</span>
+                    <span style={{textTransform:'capitalize'}}>{iconsMap.profile(16)} {auth?.user?.username}</span>
                 </div>
                     <TextArea 
+                        style={{fontSize:'12px'}}
                         disabled = {!isEditable}  
                         className="text-area-container"
                         value = {value}
@@ -95,15 +96,15 @@ const Comments =(props)=>{
                     let localTime  = moment(comment?.postedAt).fromNow();
                     return (
                         <Card key={shortid.generate()} sx={{
-                            paddingY:'5px',
+                            paddingY:'4px',
                         }}>
                         <div sx={{
-                            marginY:'5px'
+                            marginY:'4px'
                         }}>
-                            <span style={{fontSize:'14px', fontWeight:'500', textTransform: 'capitalize'}}>{iconsMap.profile()} {comment.user?.username}   </span>
-                            <span style={{fontSize:'12px'}}>{localTime}</span>
+                            <span style={{fontSize:'12px', fontWeight:'500', textTransform: 'capitalize'}}>{iconsMap.profile(16)} {comment.user?.username}   </span>
+                            <span style={{fontSize:'10px'}}>{localTime}</span>
                         </div>
-                        <div style={{padding:'5px'}}>
+                        <div style={{padding:'4px', fontWeight:'normal'}}>
                             {comment.body}
                         </div>
                     </Card>

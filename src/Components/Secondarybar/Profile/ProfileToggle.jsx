@@ -25,10 +25,10 @@ const ProfileTogggle =(props)=>{
             height:'400px',
             background:'#F6F6F6',
             position:'absolute',
-            top:'80px',
+            top:'70px',
             right:'40px',
             borderRadius:'4px',
-            zIndex:'300'
+            zIndex:'300',
         }}>
             <Flex sx={{
                 flexDirection:'column',
@@ -39,7 +39,7 @@ const ProfileTogggle =(props)=>{
                     width:'95%',
                     mx:'5px',
                     my:'5px',
-                    alignSelf:'center'
+                    alignSelf:'center',
                 }}>
                     <button
                          sx={{
@@ -49,7 +49,7 @@ const ProfileTogggle =(props)=>{
                             borderRadius:'5px',
                             bg:'transparent',
                             margin:0,
-                            padding:'8px',
+                            padding:'5px',
                             textAlign:'left',
                             alignSelf:'center',
                             '&:hover':{
@@ -58,6 +58,7 @@ const ProfileTogggle =(props)=>{
                             },
                             display:'flex',
                             alignItems:'center',
+                            fontSize:"12px"
                         }}>Your Profle</button>
                 </div>
                 <div sx={{
@@ -81,7 +82,7 @@ const ProfileTogggle =(props)=>{
                             borderRadius:'5px',
                             bg:'transparent',
                             margin:0,
-                            padding:'8px',
+                            padding:'5px',
                             textAlign:'left',
                             alignSelf:'center',
                             '&:hover':{
@@ -90,6 +91,7 @@ const ProfileTogggle =(props)=>{
                             },
                             display:'flex',
                             alignItems:'center',
+                            fontSize:"12px"
                         }}
                         onClick={e=>handlLogout(e)}
                         >Sign Out</button>
@@ -102,7 +104,7 @@ const ProfileTogggle =(props)=>{
                             borderRadius:'5px',
                             bg:'transparent',
                             margin:0,
-                            padding:'8px',
+                            padding:'5px',
                             textAlign:'left',
                             alignSelf:'center',
                             '&:hover':{
@@ -111,6 +113,7 @@ const ProfileTogggle =(props)=>{
                             },
                             display:'flex',
                             alignItems:'center',
+                            fontSize:"12px"
                         }}
                         onClick={e=>handlLogout(e, 'all')}
                         >Sign Out All</button>

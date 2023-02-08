@@ -29,7 +29,7 @@ const Popover=( { actions, setToggleAddMenu } )=>{
             <ul sx={{
                 px:'10px',
                 listStyle:'none',
-                fontSize:1
+                fontSize:0
             }}>
                 {actions.map(( action,key )=>{
 

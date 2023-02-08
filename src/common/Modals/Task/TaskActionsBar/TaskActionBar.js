@@ -9,8 +9,8 @@ const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare,
             <div className="icons-container">
                 {<button type="submit" disabled={!editEnabled}> 
                 { currentTaskStatus === "loading" 
-                    ? <span style={{color:'green'}}>Creating...{iconsMap.loading()}</span> 
-                    : editEnabled && currentTaskStatus !== "succeeded" ? iconsMap.create() : iconsMap.save() } 
+                    ? <span style={{color:'green'}}>Creating...{iconsMap.loading(18)}</span> 
+                    : editEnabled && currentTaskStatus !== "succeeded" ? iconsMap.create(18) : iconsMap.save(18) } 
                 </button>}
             </div>
             <div className="icons-container">
@@ -20,7 +20,7 @@ const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare,
                 }}
                 onClick={(e)=>handleShare(e)}
                 >
-                    {iconsMap.share()}
+                    {iconsMap.share(18)}
                 </button>}
             </div>
             <div className="icons-container">
@@ -30,7 +30,7 @@ const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare,
                     background:'transparent',
                     border:'none'
                 }}>
-                    {iconsMap.edit(editEnabled)}
+                    {iconsMap.edit(editEnabled, 18)}
                 </button>}
             </div>
             <div className="icons-container">
@@ -40,12 +40,12 @@ const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare,
                     background:'transparent',
                     border:'none'
                     }}>
-                    {iconsMap.more()}
+                    {iconsMap.more(18)}
                 </button>}
             </div>
             <div className="icons-container"
                 onClick={(e)=>handleClose(e)}>
-                {iconsMap.close()}
+                {iconsMap.close(18)}
             </div>
         </div>
     )

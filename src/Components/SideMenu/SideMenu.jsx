@@ -59,9 +59,9 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
     return(
         <>
         <Flex sx={{
-                width:'13%',
+                width:'12%',
                 height:'86vh',
-                top:`calc(100vh - 90vh)`,
+                top:`calc(100vh - 89vh)`,
                 bg:'black',
                 position:'absolute',
                 display:'block',
@@ -83,8 +83,8 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                     flexDirection:'column',
                 }}>
                     <button sx={{
-                            width:'35px',
-                            height:'35px',
+                            width:'25px',
+                            height:'25px',
                             background:'transparent',
                             borderRadius:'20%',
                             border:'none',
@@ -95,7 +95,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                         onClick={()=>setToggleAddMenu(!toggleAddMenu)}
                         >
                             {<PlusSquareOutlined style={{
-                                fontSize:'20px'
+                                fontSize:'18px'
                             }}/>}
                         </button>
                         {
@@ -122,7 +122,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                                 borderRadius:'5px',
                                 bg:'transparent',
                                 margin:0,
-                                padding:'8px',
+                                padding:'4px',
                                 textAlign:'left',
                                 alignSelf:'center',
                                 '&:hover':{
@@ -135,10 +135,10 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                             }}>
                                 <div>
                                     {<CarryOutOutlined style={{
-                                            fontSize:'16px'
+                                            fontSize:'12px'
                                         }}/>}&nbsp;Recent Tasks
                                 </div>
-                                <span style={hoverStyle}>{iconsMap.doubleRightArror(16)}</span>
+                                <span style={hoverStyle}>{iconsMap.doubleRightArror(12)}</span>
                         </button>
                     </div>
                     <div sx={{
@@ -155,7 +155,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                                 borderRadius:'5px',
                                 bg:'transparent',
                                 margin:0,
-                                padding:'8px',
+                                padding:'4px',
                                 textAlign:'left',
                                 alignSelf:'center',
                                 '&:hover':{
@@ -165,7 +165,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                                 display:'flex',
                                 alignItems:'center',
                             }}>{<FundOutlined style={{
-                                fontSize:'16px'
+                                fontSize:'12px'
                             }}/>}&nbsp;Board</button>
                     </div>
                     <div sx={{
@@ -182,7 +182,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                                 borderRadius:'5px',
                                 bg:'transparent',
                                 margin:0,
-                                padding:'8px',
+                                padding:'4px',
                                 textAlign:'left',
                                 alignSelf:'center',
                                 '&:hover':{
@@ -192,7 +192,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                                 display:'flex',
                                 alignItems:'center',
                             }}>{<FileZipOutlined style={{
-                                fontSize:'16px'
+                                fontSize:'12px'
                             }}/>}&nbsp;Archive</button>
                     </div>
                     <div sx={{
@@ -219,7 +219,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                             borderRadius:'5px',
                             bg:'transparent',
                             margin:0,
-                            padding:'8px',
+                            padding:'4px',
                             textAlign:'left',
                             alignSelf:'center',
                             '&:hover':{
@@ -232,7 +232,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                         }}>
                             <div>
                             {<SettingOutlined style={{
-                                fontSize:'16px'
+                                fontSize:'12px'
                                 }}/>}&nbsp;Settings
                             </div>
                             {/* <span style={hoverStyle}>{iconsMap.doubleRightArror(16)}</span> */}

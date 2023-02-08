@@ -131,7 +131,7 @@ const TaskModal=(props)=>{
                                 display:'flex',
                                 alignItems:'center',
                                 flexDirection:'column',
-                                margin:'5px',
+                                margin:'4px',
                             }}>
                                 { taskConfig.map((field, key)=>{
                                     if(field.entityKey != "name" && field.entityKey != "description"){
@@ -154,11 +154,11 @@ const TaskModal=(props)=>{
                     <Container
                         sx={{
                             width:'90%',
-                            marginTop:'30px'
+                            marginTop:'20px'
                         }}>
                         <div sx={{
                             borderBottom:'0.5px solid #DEDEDE',
-                            width:'30%',
+                            width:'28%',
                             display:'flex',
                             justifyContent:'space-between'
                         }}>
@@ -169,7 +169,7 @@ const TaskModal=(props)=>{
                                 borderRight:'none',
                                 bg:'transparent',
                                 padding:'4px',
-                                fontSize:1,
+                                fontSize:0,
                                 '&:hover':{
                                     bg:'#F6F6F6'
                                 },
@@ -185,7 +185,7 @@ const TaskModal=(props)=>{
                                 borderRight:'none',
                                 bg:'transparent',
                                 padding:'4px',
-                                fontSize:1,
+                                fontSize:0,
                                 '&:hover':{
                                     bg:'#F6F6F6'
                                 }
