@@ -27,7 +27,7 @@ const LookupField = (props) => {
         console.log("currentTask[entityKey]:: ",currentTask[entityKey])
          return currentTask?.choices.filter(choice=>choice.id === currentTask[entityKey])[0].username;
       }
-      return '';
+      return null;
     })()
 
     const [value, setValue] = useState( displayValue );
@@ -50,8 +50,7 @@ const LookupField = (props) => {
       
       try {
         dispatch(fetchOptionsBegin());
-        
-        const url = urlSchema.Users.GET_ALL_USERS;
+        const url = urlSchema.Choices.GETC_CHOICES.replace("value", entityKey);
         const usersList = await axiosPrivate.get(url);
 
         if(usersList && usersList.data) {
@@ -63,6 +62,9 @@ const LookupField = (props) => {
         dispatch(fetchOptionsError(error));
       }
     }
+    useEffect(()=>{
+      getOptions();
+    },[])
 
     useEffect(()=>{
       if(options && options.length > 0){

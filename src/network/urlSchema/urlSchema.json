@@ -6,9 +6,8 @@
         "GET_TASK": "/tasks/:id",
         "CREATE_TASK": "/tasks/create"
     },
-    "Users":{
-        "GET_ALL_USERS": "/auth/users",
-        "GET_USER": "/auth/me"
+    "Choices":{
+        "GETC_CHOICES":"/choices?entityKey=value"
     },
     "Config": {
         "GET_CONFIG": "/config/:id",
