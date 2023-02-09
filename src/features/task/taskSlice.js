@@ -169,7 +169,8 @@ export const taskSlice = createSlice({
             return { 
                 ...state,
                 currentTask: null,
-                currentTaskStatus: 'idle'
+                currentTaskStatus: 'idle',
+                comments: []
             }
         },
         postCommentBegin: (state, action)=>{

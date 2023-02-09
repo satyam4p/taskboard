@@ -92,7 +92,7 @@ const LookupField = (props) => {
           (
             <Select 
               className={'lookup-container'}
-              value = { value }
+              value = { value || displayValue }
               arrow = {
                 <Box
                   as="svg"
