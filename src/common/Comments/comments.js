@@ -102,7 +102,7 @@ const Comments =(props)=>{
                             marginY:'4px'
                         }}>
                             <span style={{fontSize:'12px', fontWeight:'500', textTransform: 'capitalize'}}>{iconsMap.profile(16)} {comment.user?.username}   </span>
-                            <span style={{fontSize:'10px'}}>{localTime}</span>
+                            <span style={{fontSize:'10px', fontWeight:'normal'}}>{localTime}</span>
                         </div>
                         <div style={{padding:'4px', fontWeight:'normal'}}>
                             {comment.body}
