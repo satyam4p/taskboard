@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 import { Flex, } from 'theme-ui';
 import AddDrawer from '../../common/AddDrawer/AddDrawer';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Popover from '../Popover/Popover';
 import { CarryOutOutlined,
         FundOutlined,
@@ -62,7 +62,6 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                 width:'12%',
                 height:'86vh',
                 top:`calc(100vh - 89vh)`,
-                bg:'black',
                 position:'absolute',
                 display:'block',
                 bg:'#F6F6F6',

@@ -33,14 +33,6 @@ const DrawerLoader = () =>{
        
     }
 
-    const LargeBar = ()=>{
-        return (
-            <div className='large-bar'></div>
-        )
-    }
-
-
-
     return (
         <div className='drawer-loader-container'>
             <SmallBar size = {3}/>

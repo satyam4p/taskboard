@@ -1,5 +1,4 @@
 /** @jsxImportSource theme-ui */
-import React, { useState } from 'react';
 import { Flex } from 'theme-ui';
 import { Button } from 'theme-ui';
 import ProfileTogggle from './Profile/ProfileToggle';
@@ -15,7 +14,6 @@ function SecondaryBar({
             <Flex sx={{
                 width:['95%', null, null],
                 height:'45px',
-                bg:'lightblue',
                 alignSelf:'baseline',
                 marginLeft:'calc(100% - 97.5%)',
                 marginTop:'1.5%',

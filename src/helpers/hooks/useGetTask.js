@@ -31,7 +31,7 @@ const useGetTask = ()=>{
             console.log("an error occured while fetching task:: ",error);
         }
     }
-    return [loading, getTask];
+    return getTask;
 
 }
 

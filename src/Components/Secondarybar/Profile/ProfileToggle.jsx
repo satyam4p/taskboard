@@ -1,5 +1,4 @@
 /** @jsxImportSource theme-ui */
-import React,{useEffect} from "react";
 import { Box, Flex } from "theme-ui";
 import useAuth from "../../../helpers/hooks/useAuth";
 import useAxiosPrivate from "../../../helpers/hooks/useAxiosPrivate";

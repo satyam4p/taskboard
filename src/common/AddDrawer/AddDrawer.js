@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Tag } from 'antd';
 import DrawerLoader from './loader/DrawerLoader';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Input } from 'antd';
 import debounce from '../../helpers/commonUtils/debounce';
 import shortId from 'shortid';
@@ -9,15 +9,13 @@ import ModalContext from '../../context/ModalProvider';
 /** custom style */
 import './stylesheet.scss';
 import { selectDrawerDetails, selectDrawerError, selectDrawerStatus } from '../../features/Drawer/drawerSlice';
-import iconsMap from '../IconsMapper/IconsMap';
-import { createTaskSuccess } from '../../features/task/taskSlice';
 import useGetTask from '../../helpers/hooks/useGetTask';
 
 const {Search} = Input;
 const Record = ({title, status, label, context}) => {
 
-    const {modalType, setModalType} = useContext(ModalContext);
-    const [loading, getTask] = useGetTask();
+    const { setModalType } = useContext(ModalContext);
+    const getTask = useGetTask();
 
     const handleRecordAction=(e)=>{
         e.preventDefault();
@@ -51,7 +49,6 @@ const AddDrawer = ({showDrawer, config})=>{
 
     const drawerStatus = useSelector(selectDrawerStatus);
     const drawerDetails = useSelector(selectDrawerDetails);
-    const drawerError = useSelector(selectDrawerError);
     const titles = drawerDetails && drawerDetails.length ? drawerDetails.map(detail=>detail.name) : [];
     const [tasks, setTasks] = useState([]);
     useEffect(()=>{
@@ -76,6 +73,7 @@ const AddDrawer = ({showDrawer, config})=>{
                     if(name.includes(search.toLowerCase())){
                         return task;
                     }
+                    return;
                 });
                 setTasks(searchedResult);
             }
@@ -95,6 +93,7 @@ const AddDrawer = ({showDrawer, config})=>{
                     if(name.includes(search.toLowerCase())){
                         return task;
                     }
+                    return;
                 });
                 setTasks(searchedResult);
             }

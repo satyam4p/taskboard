@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { routes } from './routes';
 import { Route, Routes } from 'react-router';
 import Layout from './Components/Layout';

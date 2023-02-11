@@ -26,13 +26,13 @@ const PersistUser =()=>{
         !auth?.token ? verifyRefreshToken() : setLoading(false);
 
         return () => isMounted = false;
-    },[])
+    },[auth?.token, refresh])
 
-    useEffect(() => {
-        console.log(`isLoading: ${isLoading}`)
-        console.log(`aT: ${JSON.stringify(auth)}`)
-        console.log(`aT: ${JSON.stringify(auth?.token)}`)
-    }, [isLoading])
+    // useEffect(() => {
+    //     console.log(`isLoading: ${isLoading}`)
+    //     console.log(`aT: ${JSON.stringify(auth)}`)
+    //     console.log(`aT: ${JSON.stringify(auth?.token)}`)
+    // }, [isLoading])
 
     return(
         <>

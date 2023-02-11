@@ -34,14 +34,11 @@ const useComments =()=>{
         
     }
 
-    const deleteComment = async () => {
+    // const deleteComment = async () => {
 
-    }
+    // }
 
-    const edit = async () => {
-
-    }
-    return [loading, post, deleteComment, edit];
+    return post;
 }
 
 export default useComments;

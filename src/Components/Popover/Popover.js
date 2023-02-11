@@ -4,7 +4,6 @@ import useActions from "../../helpers/hooks/useActions";
 import useModals from "../../helpers/hooks/useModals";
 
 const Popover=( { actions, setToggleAddMenu } )=>{
-    const {isVisible, modalType } = useModals();
     const execute = useActions();
     const handleAction=(action)=>{
         execute(action);

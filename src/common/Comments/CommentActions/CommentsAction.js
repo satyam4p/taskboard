@@ -2,17 +2,15 @@ import { useContext } from 'react';
 import TaskContext from '../../Modals/Task/TaskContext/TaskProvider';
 import './stylesheet.scss'
 import iconsMap from '../../IconsMapper/IconsMap';
-import { Popover } from 'antd';
 import useComments from '../../../helpers/hooks/useComments';
 import useAuth from '../../../helpers/hooks/useAuth';
 import { selectCurrentTask } from '../../../features/task/taskSlice';
 import { useSelector } from 'react-redux';
-import moment from 'moment';
 
 const CommentActions = (props) => {
-    const [loading, post, deleteComment, edit] = useComments();
+    const post = useComments();
     const { auth } = useAuth();
-    const {task, setTask} = useContext(TaskContext);
+    const { task } = useContext(TaskContext);
     const currenTask = useSelector(selectCurrentTask);
     const handlePost = ()=>{
         
