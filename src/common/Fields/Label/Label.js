@@ -33,7 +33,7 @@ const LabelField = (props)=>{
                     taskData: taskClone.taskData
                 }   
                });
-         }, 400), []);
+         }, 400), [setTask,value]);
     return(
         <div>
            <Select sx = {{

@@ -1,7 +1,6 @@
 /** @jsxImportSource theme-ui */
 import React from "react";
 import useActions from "../../helpers/hooks/useActions";
-import useModals from "../../helpers/hooks/useModals";
 
 const Popover=( { actions, setToggleAddMenu } )=>{
     const execute = useActions();

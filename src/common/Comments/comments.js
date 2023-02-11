@@ -33,8 +33,7 @@ const Comments =(props)=>{
 
     /**check if the task is cerated if yes then allow adding comments */
     const isEditable = currentTask && currentTask?._id;
-    const updateParent = useCallback(
-        debounce( value =>{
+    const updateParent = useCallback(debounce( value =>{
             setTask( prevTask => {
                 if(entityKey){
                     return {
@@ -43,7 +42,7 @@ const Comments =(props)=>{
                     }
                 }
             })
-        }, 200), [setTask]);
+        }, 200));
         
     useEffect(()=>{
         if(currentTask && currentTask?._id){

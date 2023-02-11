@@ -8,7 +8,7 @@ import shortId from 'shortid';
 import ModalContext from '../../context/ModalProvider';
 /** custom style */
 import './stylesheet.scss';
-import { selectDrawerDetails, selectDrawerError, selectDrawerStatus } from '../../features/Drawer/drawerSlice';
+import { selectDrawerDetails, selectDrawerStatus } from '../../features/Drawer/drawerSlice';
 import useGetTask from '../../helpers/hooks/useGetTask';
 
 const {Search} = Input;
@@ -73,7 +73,7 @@ const AddDrawer = ({showDrawer, config})=>{
                     if(name.includes(search.toLowerCase())){
                         return task;
                     }
-                    return;
+                    return [];
                 });
                 setTasks(searchedResult);
             }
@@ -93,7 +93,7 @@ const AddDrawer = ({showDrawer, config})=>{
                     if(name.includes(search.toLowerCase())){
                         return task;
                     }
-                    return;
+                    return [];
                 });
                 setTasks(searchedResult);
             }
