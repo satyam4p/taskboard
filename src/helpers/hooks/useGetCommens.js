@@ -34,7 +34,7 @@ const useGetComments =()=>{
         }
     
     }
-    return [fetching, getComments];
+    return getComments;
 
 }
 

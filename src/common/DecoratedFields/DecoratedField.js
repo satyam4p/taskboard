@@ -1,5 +1,4 @@
 /** @jsxImportSource theme-ui */
-import React, { useState } from "react";
 import iconsMap from "../IconsMapper/IconsMap";
 
 const DecoratedFieldHOC = ( props ) =>{

@@ -10,7 +10,6 @@ import { useSelector } from "react-redux";
 import CommentActions from "./CommentActions/CommentsAction";
 import moment from "moment";
 import TextArea from "antd/lib/input/TextArea";
-import useComments from "../../helpers/hooks/useComments";
 import TaskContext from "../Modals/Task/TaskContext/TaskProvider";
 import debounce from '../../helpers/commonUtils/debounce';
 import useGetComments from "../../helpers/hooks/useGetCommens";
@@ -21,31 +20,19 @@ import CommentsSkeleton from "./Skeleton/CommentsSkeleton";
 const Comments =(props)=>{
 
     const [value, setValue] = useState();
-    const currentTaskStatus = useSelector(selectCurrentTaskStatus);
     const commentStatus = useSelector(selectCommentStatus);
     const entityKey = "userComment";
     const { auth } = useAuth();
-    const {task, setTask} = useContext(TaskContext);
+    const {setTask} = useContext(TaskContext);
     const currentTask = useSelector(selectCurrentTask);
     
     let comments = useSelector(selectComments);
 
     const taskComments = comments && comments.length ? cloneDeep(comments) : [];
-    const [fetching, getComments] = useGetComments();
+    const getComments = useGetComments();
 
     /**check if the task is cerated if yes then allow adding comments */
     const isEditable = currentTask && currentTask?._id;
-
-    useEffect(()=>{
-        if(currentTask && currentTask?._id){
-            getComments(currentTask?._id);
-        }
-    },[])
-
-    useEffect(()=>{
-        updateParent(value)
-    }, [value, setValue]);
-
     const updateParent = useCallback(
         debounce( value =>{
             setTask( prevTask => {
@@ -56,7 +43,19 @@ const Comments =(props)=>{
                     }
                 }
             })
-        }, 200), []);
+        }, 200), [setTask]);
+        
+    useEffect(()=>{
+        if(currentTask && currentTask?._id){
+            getComments(currentTask?._id);
+        }
+    },[currentTask])
+
+    useEffect(()=>{
+        updateParent(value)
+    }, [value, setValue, updateParent]);
+
+    
 
     const handleChange = (e)=>{
         e.preventDefault();
@@ -89,7 +88,7 @@ const Comments =(props)=>{
                     />
                 <CommentActions setValue = {setValue} actionsEnabled = {isActionEnabled}/>
             </Card>
-            {commentStatus == "loading" ?
+            {commentStatus === "loading" ?
                 <CommentsSkeleton/>
                 :
                 taskComments && taskComments.length ? taskComments.reverse().map((comment, key) => {
