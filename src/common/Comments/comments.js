@@ -5,7 +5,7 @@ import iconsMap from "../IconsMapper/IconsMap";
 import shortid from "shortid";
 // import TextAreaField from "../Fields/TextArea/TextArea";
 import useAuth from "../../helpers/hooks/useAuth";
-import { selectComments, selectCurrentTask, selectCurrentTaskStatus, selectCommentStatus } from "../../features/task/taskSlice";
+import { selectComments, selectCurrentTask, selectCommentStatus } from "../../features/task/taskSlice";
 import { useSelector } from "react-redux";
 import CommentActions from "./CommentActions/CommentsAction";
 import moment from "moment";
@@ -42,7 +42,7 @@ const Comments =(props)=>{
                     }
                 }
             })
-        }, 200));
+        }, 200),[setTask]);
         
     useEffect(()=>{
         if(currentTask && currentTask?._id){

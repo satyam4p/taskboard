@@ -1,4 +1,4 @@
-import { useEffect, useState , useRef, useContext} from 'react';
+import { useEffect, useState , useRef} from 'react';
 // import AxiosAjax from '../network/axiosAjax';
 import useAuth from '../helpers/hooks/useAuth';
 import { useNavigate, useLocation } from 'react-router';
@@ -22,29 +22,29 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 function Auth(){
 
-    const { auth, setAuth } = useAuth();
+    const { setAuth } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
 
     const errRef = useRef();
     const [email, setemail] = useState("");
-    const [validEmail, setValidEmail ] = useState(false);
-    const [userFocus, setUserFocus] = useState();
+    // const [validEmail, setValidEmail ] = useState(false);
+    // const [userFocus, setUserFocus] = useState();
 
     const [password, setPassword] = useState("");
-    const [validPassword, setValidPassword] = useState(false);
-    const [passwordFocus, setPasswordFocus] = useState();
+    // const [validPassword, setValidPassword] = useState(false);
+    // const [passwordFocus, setPasswordFocus] = useState();
 
     const [errorMessage, setErrorMessage] = useState('');
 
-    useEffect(()=>{
-        setValidEmail(EMAIL_REGEX.test(email));
-    },[email]);
+    // useEffect(()=>{
+    //     setValidEmail(EMAIL_REGEX.test(email));
+    // },[email]);
 
-    useEffect(()=>{
-        setValidPassword(PWD_REGEX.test(password));
-    },[password]);
+    // useEffect(()=>{
+    //     setValidPassword(PWD_REGEX.test(password));
+    // },[password]);
 
     useEffect(()=>{
         setErrorMessage('');
@@ -69,7 +69,7 @@ function Auth(){
                 },
                 withCredentials:true
              });
-            if(response.status == 200){
+            if(response.status === 200){
                 const user = response.data?.user;
                 const token = response.data?.token;
                 setemail('');
@@ -83,7 +83,7 @@ function Auth(){
         }catch(err){
             if(!err?.response){
                 setErrorMessage("No Server Reponse");
-            }else if(err?.response.status == 401){
+            }else if(err?.response.status === 401){
                 const errorMsg = err.response.data?.message;
                 setErrorMessage(errorMsg);
             }else{
