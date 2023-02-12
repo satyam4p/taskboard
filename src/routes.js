@@ -1,7 +1,4 @@
 import React from 'react'
-;import { BrowserRouter, Switch } from 'react-router-dom';
-import { Navigate, Route } from 'react-router';
-import RequireAuth from './Components/RequireAuth';
 
 const Login = React.lazy(()=> import('./views/auth'));
 const Logout = React.lazy(()=> import('./views/logout'));
