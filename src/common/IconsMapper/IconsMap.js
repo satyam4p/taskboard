@@ -19,10 +19,6 @@ import { SaveOutlined,
 } from '@ant-design/icons';
 
 const iconsMap = (()=>{
-    let style = {
-        fontSize: '20px',
-        fontWeight:'800'
-    }
     return {
         save: ( size = 20, weight = 800 )=>{
             return <SaveOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></SaveOutlined>

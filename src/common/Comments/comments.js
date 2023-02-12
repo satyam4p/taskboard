@@ -42,13 +42,13 @@ const Comments =(props)=>{
                     }
                 }
             })
-        }, 200),[setTask]);
+        }, 200),[]);
         
     useEffect(()=>{
         if(currentTask && currentTask?._id){
             getComments(currentTask?._id);
         }
-    },[currentTask])
+    },[])
 
     useEffect(()=>{
         updateParent(value)

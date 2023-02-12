@@ -5,13 +5,12 @@ import TaskContext from "../../Modals/Task/TaskContext/TaskProvider";
 import { cloneDeep } from "lodash";
 import debounce from "../../../helpers/commonUtils/debounce";
 import { useSelector } from "react-redux";
-import { selectCurrentTask, selectCurrentTaskStatus } from "../../../features/task/taskSlice";
+import { selectCurrentTask } from "../../../features/task/taskSlice";
 import './stylesheet.scss'
 
 const TextField = (props) => {
-    const {task, setTask} = useContext(TaskContext);
+    const {setTask} = useContext(TaskContext);
     const currentTask = useSelector(selectCurrentTask);
-    const currentTaskStatus = useSelector(selectCurrentTaskStatus);
     const entityKey = props.config?.entityKey || "name";
     const [textValue, setValue] = useState( currentTask && currentTask[entityKey] ? currentTask[entityKey] :  null);
     const handleChange = ( event ) =>{
@@ -29,7 +28,7 @@ const TextField = (props) => {
             /** this 'status' value in taskData is hardCoded but should be actually picked from configuration and updated accordingly */
             setTask(prevTask=>{
                 let taskClone = cloneDeep(prevTask);
-                if(props.type && props.type == "header"){
+                if(props.type && props.type === "header"){
                     taskClone.taskData['name'] = value;    
                 }else{
                     taskClone.taskData['status'] = value;
