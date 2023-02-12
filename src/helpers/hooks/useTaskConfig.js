@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState } from "react";
+import { useState } from "react";
 import { fetchTaskConfigBegin, fetchTaskConfigSuccess, fetchTaskConfigError } from "../../features/task/taskSlice";
 import useAxiosPrivate from "./useAxiosPrivate";
 import { useDispatch } from "react-redux";

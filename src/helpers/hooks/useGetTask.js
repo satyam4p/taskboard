@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import useAxiosPrivate from './useAxiosPrivate';
 import urlSchema from '../../network/urlSchema/urlSchema.json';
 import { fetchTaskBegin, fetchTaskSuccess, fetchTaskError } from "../../features/task/taskSlice";
