@@ -1,10 +1,8 @@
-import {useState, useEffect} from 'react';
 import useModals from './useModals';
 
 
 const useActions=()=>{
     const { modalType, setModalType } = useModals();
-    console.log("modalType:: ",modalType);
     const execute=({type, action})=>{
         switch (action){
             case 'create':
@@ -20,6 +18,7 @@ const useActions=()=>{
                         type
                     }
                 });
+                break;
             default:
                 return;
         }

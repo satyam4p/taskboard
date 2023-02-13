@@ -1,5 +1,4 @@
-import urlSchema from '../../network/urlSchema/urlSchema.json';
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
