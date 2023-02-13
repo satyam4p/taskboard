@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios, { axiosPrivate } from "../../network/axios";
+import axios from "../../network/axios";
 import urlSchema from '../../network/urlSchema/urlSchema.json';
 
 const initialState = {
