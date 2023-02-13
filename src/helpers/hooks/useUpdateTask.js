@@ -9,7 +9,6 @@ import { updateTaskBegin, updateTaskSuccess, updateTaskError } from "../../featu
 
 const useUpdateTask =() => {
     const { setTask } = useContext(TaskContext);
-    const [ updatedTask, setUpdatedTask ] = useState();
     const [updateLoading, setLoading] = useState();
     const show  = useNotification();
     const dispatch = useDispatch();
@@ -25,7 +24,6 @@ const useUpdateTask =() => {
             const updatedTask = await axios.patch(UPDATE_URL, payload);
             if(updatedTask){
                 setLoading(false);
-                setUpdatedTask(updatedTask?.data);
                 show("Task Updated successfully", "success");
                 setTask(prevTask=>{
                     return {
