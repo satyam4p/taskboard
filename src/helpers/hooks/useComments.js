@@ -1,14 +1,11 @@
-import { useState } from "react";
 import useAxiosPrivate from "./useAxiosPrivate"
 import urlSchema from '../../network/urlSchema/urlSchema.json';
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { postCommentBegin, postCommentSuccess, postCommentError } from "../../features/task/taskSlice";
 
 
 
 const useComments =()=>{
-
-    const [ loading, setLoading ] = useState(false);
 
     const dispatch = useDispatch();
     const axios = useAxiosPrivate();
@@ -18,16 +15,13 @@ const useComments =()=>{
         
         const URL = urlSchema.Commnets.POST_COMMENT;
         try{
-            setLoading(true);
             dispatch(postCommentBegin);
             const result = await axios.post(URL, payload);
             if(result && result.data && result.data.comment){
-                setLoading(false);
                 dispatch(postCommentSuccess(result.data.comment));
                 /** @Todo dispath the post success action and also update the current task with same commnet */ 
             }
         }catch(error){
-            setLoading(false);
             dispatch(postCommentError(error));
             console.log("an error occured while posting comment: ",error);
         }
