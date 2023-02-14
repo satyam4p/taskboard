@@ -21,9 +21,6 @@ import useUpdateTask from "../../../helpers/hooks/useUpdateTask";
 
 /**custom redux helpers */
 import { selectCurrentTaskStatus, 
-    selectAllTasks, 
-    selectError, 
-    selectStatus,
     selectTaskConfig,
     selectCurrentTask,
     clearCurrentTask } from "../../../features/task/taskSlice";
@@ -42,7 +39,7 @@ const TaskModal=(props)=>{
     
     useEffect(()=>{
         fetchConfig();
-    },[]);
+    },[fetchConfig]);
     const [activeTab, setActiveTab] = useState('comments');
     const dispatch = useDispatch();
     const currentTaskStatus = useSelector(selectCurrentTaskStatus);

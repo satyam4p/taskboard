@@ -33,7 +33,10 @@ const Comments =(props)=>{
 
     /**check if the task is cerated if yes then allow adding comments */
     const isEditable = currentTask && currentTask?._id;
-    const updateParent = useCallback(debounce( value =>{
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const updateParent = useCallback(
+        debounce( value =>{
             setTask( prevTask => {
                 if(entityKey){
                     return {
@@ -42,12 +45,15 @@ const Comments =(props)=>{
                     }
                 }
             })
-        }, 200),[]);
+        }, 200), []
+    );
         
+
     useEffect(()=>{
         if(currentTask && currentTask?._id){
             getComments(currentTask?._id);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     useEffect(()=>{

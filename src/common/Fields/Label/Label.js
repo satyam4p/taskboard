@@ -17,22 +17,26 @@ const LabelField = (props)=>{
         e.preventDefault();
         setValue(e.target.value);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const updateParentState = useCallback(
+        debounce(value=>{
+            /** this 'status' value in taskData is hardCoded but should be actually picked from configuration and updated accordingly */
+            setTask(prevTask=>{
+               let taskClone = cloneDeep(prevTask);
+               taskClone.taskData['label'] = value;
+               return {
+                   ...prevTask,
+                   taskData: taskClone.taskData
+               }   
+              });
+        }, 400), [setTask,value]);
+
     useEffect(()=>{
         updateParentState(value);
-     },[value, setValue])
+     },[value, setValue, updateParentState])
  
-     const updateParentState = useCallback(
-         debounce(value=>{
-             /** this 'status' value in taskData is hardCoded but should be actually picked from configuration and updated accordingly */
-             setTask(prevTask=>{
-                let taskClone = cloneDeep(prevTask);
-                taskClone.taskData['label'] = value;
-                return {
-                    ...prevTask,
-                    taskData: taskClone.taskData
-                }   
-               });
-         }, 400), [setTask,value]);
+    
     return(
         <div>
            <Select sx = {{

@@ -46,7 +46,7 @@ const LookupField = (props) => {
       await getOptions();
     }
 
-    const getOptions = async ()=> {
+    const getOptions = useCallback( async ()=> {
       
       try {
         dispatch(fetchOptionsBegin());
@@ -61,17 +61,9 @@ const LookupField = (props) => {
       }catch(error) {
         dispatch(fetchOptionsError(error));
       }
-    }
-    useEffect(()=>{
-      getOptions();
-    },[])
+    }, [dispatch, axiosPrivate, entityKey]) 
 
-    useEffect(()=>{
-      if(options && options.length > 0){
-        updateParentState(options.filter(user=>user.username === value));
-      }
-    },[value, setValue]);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const updateParentState = useCallback(
       debounce((value)=>{
         setTask((prevTask)=>{
@@ -84,6 +76,18 @@ const LookupField = (props) => {
           }
         })
       }, 4),[]);
+
+    useEffect(()=>{
+      getOptions();
+    },[ getOptions ])
+
+    useEffect(()=>{
+      if(options && options.length > 0){
+        updateParentState(options.filter(user=>user.username === value));
+      }
+    },[value, setValue, updateParentState, options]);
+
+    
 
   return(
     <div className='wrapper'>

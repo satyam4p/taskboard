@@ -30,16 +30,10 @@ const TextEditor = (props)=>{
 
         setEditorState(editorStateInitial);
 
-    },[]);
+    },[currentTask]);
 
     const { setTask } = useContext(TaskContext); 
-    
-    useEffect(()=>{
-        if(editorState !== undefined){
-            updateParentState(editorState);
-        }
-    },[ editorState ]);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const updateParentState = useCallback(
         debounce((editorState)=>{
             setTask(prevTask=>{
@@ -53,6 +47,12 @@ const TextEditor = (props)=>{
                 }});
         },4),[])
 
+    useEffect(()=>{
+        if(editorState !== undefined){
+            updateParentState(editorState);
+        }
+    },[ editorState, updateParentState]);
+    
     return(
         <div className= 'text-editor--container'>
             <Editor

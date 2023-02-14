@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { fetchTaskConfigBegin, fetchTaskConfigSuccess, fetchTaskConfigError } from "../../features/task/taskSlice";
 import useAxiosPrivate from "./useAxiosPrivate";
 import { useDispatch } from "react-redux";
@@ -9,10 +9,9 @@ const useTaskConfig = ()=>{
     const { auth } = useAuth();
     const dispatch = useDispatch();
     const [configLoaded, setLoading] = useState(false);
-    const [config, setConfig] = useState();
     const axiosprivate = useAxiosPrivate();
     const config_id = auth.user?._id;
-    const fetchConfig = async () =>{
+    const fetchConfig = useCallback(async () =>{
         const URL = urlSchema.Config.GET_CONFIG.replace(":id",config_id);
         try{
             setLoading(true);
@@ -22,13 +21,12 @@ const useTaskConfig = ()=>{
                 setLoading(true);
                 const config = Object.values(result.data);
                 dispatch(fetchTaskConfigSuccess(config));
-                setConfig(result.data);
             }
         }catch(error){
             setLoading(true);
             dispatch(fetchTaskConfigError(error));
         }
-    }
+    },[ axiosprivate, config_id, dispatch ]) 
     return [configLoaded, fetchConfig];
 }
 
