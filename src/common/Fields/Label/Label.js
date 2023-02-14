@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
-import { Tag } from "antd";
 import './stylesheet.scss'
 import { Select, Box } from "theme-ui";
 import TaskContext from "../../Modals/Task/TaskContext/TaskProvider";
@@ -10,7 +9,7 @@ import { selectCurrentTask } from "../../../features/task/taskSlice";
 
 const LabelField = (props)=>{
     const currentTask = useSelector(selectCurrentTask);
-    const {task, setTask} = useContext(TaskContext);
+    const { setTask } = useContext(TaskContext);
     const entityKey = props.config ? props.config?.entityKey : ''; 
     const [value, setValue] = useState( currentTask && currentTask[entityKey] ? currentTask[entityKey] : "Bug" );
     const labelOptions = ["Bug", "RCA", "Task"]

@@ -2,7 +2,7 @@ import useModals from './useModals';
 
 
 const useActions=()=>{
-    const { modalType, setModalType } = useModals();
+    const { setModalType } = useModals();
     const execute=({type, action})=>{
         switch (action){
             case 'create':

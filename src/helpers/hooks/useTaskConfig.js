@@ -29,7 +29,7 @@ const useTaskConfig = ()=>{
             dispatch(fetchTaskConfigError(error));
         }
     }
-    return [configLoaded, fetchConfig, config];
+    return [configLoaded, fetchConfig];
 }
 
 export default useTaskConfig;

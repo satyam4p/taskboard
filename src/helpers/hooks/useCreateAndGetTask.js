@@ -8,7 +8,7 @@ import TaskContext from "../../common/Modals/Task/TaskContext/TaskProvider";
 
 
 const useCreateAndGetTask = () => {
-    const {task, setTask} = useContext(TaskContext);
+    const {setTask} = useContext(TaskContext);
     const axiosPrivate = useAxiosPrivate();
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState();
@@ -48,7 +48,7 @@ const useCreateAndGetTask = () => {
         }
             
     }    
-    return [loading, create, data];
+    return create;
 }
 
 export default useCreateAndGetTask;

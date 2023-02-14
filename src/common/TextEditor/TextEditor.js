@@ -1,6 +1,6 @@
 import React, {useEffect, useContext, useState, useCallback} from 'react';
 import {Editor} from 'react-draft-wysiwyg';
-import { EditorState, ContentState, convertToRaw, convertFromRaw } from 'draft-js';
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import TaskContext from '../Modals/Task/TaskContext/TaskProvider';
 import './stylesheet.scss';
@@ -32,7 +32,7 @@ const TextEditor = (props)=>{
 
     },[]);
 
-    const { task, setTask } = useContext(TaskContext); 
+    const { setTask } = useContext(TaskContext); 
     
     useEffect(()=>{
         if(editorState !== undefined){

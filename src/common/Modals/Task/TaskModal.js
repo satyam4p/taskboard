@@ -36,20 +36,15 @@ const Comments = React.lazy(()=>import('../../Comments/comments'));
 
 const TaskModal=(props)=>{
     const { task, setTask } = useContext( TaskContext );
-    const [loading, create, data] = useCreateAndGetTask();
-    const [updateLoading, update] = useUpdateTask();
-    const [result, setResult] = useState(undefined);
-    const [configLoaded, fetchConfig, config] = useTaskConfig();
+    const create = useCreateAndGetTask();
+    const update = useUpdateTask();
+    const [configLoaded, fetchConfig] = useTaskConfig();
     
     useEffect(()=>{
         fetchConfig();
     },[]);
-
     const [activeTab, setActiveTab] = useState('comments');
     const dispatch = useDispatch();
-    const tasks = useSelector(selectAllTasks);
-    const status = useSelector(selectStatus);
-    const taskError = useSelector(selectError);
     const currentTaskStatus = useSelector(selectCurrentTaskStatus);
     const taskConfig = useSelector(selectTaskConfig);
     const currentTask = useSelector(selectCurrentTask);
@@ -71,15 +66,9 @@ const TaskModal=(props)=>{
     const handleSubmit = (e)=>{
         e.preventDefault();
         if(currentTask?._id){
-            const result = update(currentTask?._id, task.taskData);
-            if(!updateLoading){
-                setResult(result);
-            }
+            update(currentTask?._id, task.taskData);
         }else{
-            const result = create(task.taskData);
-            if(!loading){
-                setResult(result);
-            }
+            create(task.taskData);
         }
     }
 
@@ -105,9 +94,9 @@ const TaskModal=(props)=>{
     return(
         <div className="task-modal-container">
             {
-                (configLoaded && (currentTaskStatus == "idle" || 
-                                currentTaskStatus == "succeeded" || 
-                                currentTaskStatus == "failed" )) ? 
+                (configLoaded && (currentTaskStatus === "idle" || 
+                                currentTaskStatus === "succeeded" || 
+                                currentTaskStatus === "failed" )) ? 
                 <>
                     <Box as={'form'} onSubmit = {(e)=>{handleSubmit(e)}}>
                         <TaskActionBar 
@@ -134,7 +123,7 @@ const TaskModal=(props)=>{
                                 margin:'4px',
                             }}>
                                 { taskConfig.map((field, key)=>{
-                                    if(field.entityKey != "name" && field.entityKey != "description"){
+                                    if(field.entityKey !== "name" && field.entityKey !== "description"){
                                         return(
                                             <FieldMapper
                                                 config = {field}
@@ -147,6 +136,7 @@ const TaskModal=(props)=>{
                                             />
                                         )
                                     }
+                                    return null;
                                 })}
                             </div>
                         </Container>
@@ -163,7 +153,7 @@ const TaskModal=(props)=>{
                             justifyContent:'space-between'
                         }}>
                             <button sx={{
-                                borderBottom:()=>activeTab=='comments' ? '2px solid #476451' : 'none',
+                                borderBottom:()=>activeTab ==='comments' ? '2px solid #476451' : 'none',
                                 borderTop:'none',
                                 borderLeft:'none',
                                 borderRight:'none',
@@ -179,7 +169,7 @@ const TaskModal=(props)=>{
                                 <span>Comments</span>
                             </button>
                             <button sx={{
-                                borderBottom:()=>activeTab=='description' ? '2px solid #476451' : 'none',
+                                borderBottom:()=>activeTab ==='description' ? '2px solid #476451' : 'none',
                                 borderTop:'none',
                                 borderLeft:'none',
                                 borderRight:'none',

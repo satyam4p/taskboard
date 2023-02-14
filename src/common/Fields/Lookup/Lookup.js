@@ -20,7 +20,7 @@ const LookupField = (props) => {
     const [options, setOptions] = useState( currentTask && currentTask?.choices ? currentTask?.choices : []);
 
     const entityKey = props.config && props.config?.entityKey ?  props.config?.entityKey : null;
-    const {task, setTask} = useContext(TaskContext);
+    const { setTask } = useContext(TaskContext);
 
     const displayValue = (()=>{
       if(currentTask && currentTask[entityKey] && currentTask?.choices && currentTask?.choices.length){

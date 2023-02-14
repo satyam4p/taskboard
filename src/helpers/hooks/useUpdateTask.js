@@ -9,7 +9,6 @@ import { updateTaskBegin, updateTaskSuccess, updateTaskError } from "../../featu
 
 const useUpdateTask =() => {
     const { setTask } = useContext(TaskContext);
-    const [updateLoading, setLoading] = useState();
     const show  = useNotification();
     const dispatch = useDispatch();
     const axios = useAxiosPrivate();
@@ -19,11 +18,9 @@ const useUpdateTask =() => {
         const UPDATE_URL = urlSchema.Tasks.PATCH_TASK.replace(':id', taskId);
 
         try{
-            setLoading(true);
             dispatch(updateTaskBegin());
             const updatedTask = await axios.patch(UPDATE_URL, payload);
             if(updatedTask){
-                setLoading(false);
                 show("Task Updated successfully", "success");
                 setTask(prevTask=>{
                     return {
@@ -34,7 +31,6 @@ const useUpdateTask =() => {
                 dispatch(updateTaskSuccess(updatedTask?.data))
             }
         }catch(error){
-            setLoading(false);
             console.log("error:: ",error);
             show("some error occured", "warning");
             dispatch(updateTaskError(error));
@@ -42,7 +38,7 @@ const useUpdateTask =() => {
 
     }
 
-    return [updateLoading, update];
+    return update;
 
 }
 
