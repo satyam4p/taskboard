@@ -19,10 +19,7 @@ const TextField = (props) => {
         setValue(value);
     }
 
-    useEffect(()=>{
-       updateParentState(textValue);
-    },[textValue, setValue])
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const updateParentState = useCallback(
         debounce(value=>{
             /** this 'status' value in taskData is hardCoded but should be actually picked from configuration and updated accordingly */
@@ -39,6 +36,12 @@ const TextField = (props) => {
                 }
             });
         }, 400), []);
+
+    useEffect(()=>{
+       updateParentState(textValue);
+    },[textValue, setValue, updateParentState])
+
+    
 
     return(
         <Input

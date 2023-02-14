@@ -17,10 +17,7 @@ const TextAreaField =(props)=>{
         setValue(value);
     }
 
-    useEffect(()=>{
-        updateParent(value)
-    }, [value, setValue]);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const updateParent = useCallback(
         debounce( value =>{
             setTask( prevTask => {
@@ -32,6 +29,12 @@ const TextAreaField =(props)=>{
                 }
             })
         }, 400), []);
+
+    useEffect(()=>{
+        updateParent(value)
+    }, [value, setValue, updateParent]);
+
+    
 
     return(
         <TextArea 
