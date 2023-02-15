@@ -52,7 +52,6 @@ function Auth(){
 
     const handleSubmit= async (event)=>{
         event.preventDefault();
-        console.log("env:: ",process.env);
         const isEmailValid = EMAIL_REGEX.test(email);
         const isPwdValid = PWD_REGEX.test(password);
         if(!isEmailValid || !isPwdValid){
