@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const BASE_URL= process.env.NODE_ENV === "development" ? "http://localhost:9000" : process.env.REACT_APP_DOMAIN_URL;
+const BASE_URL= process.env.NODE_ENV === "development" ? "http://localhost:9000" : "https://taskboar-app.onrender.com";
 
 export default axios.create({
     baseURL:BASE_URL,
