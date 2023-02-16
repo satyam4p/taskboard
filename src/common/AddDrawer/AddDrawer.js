@@ -45,7 +45,7 @@ const Record = ({title, status, label, context}) => {
 
 }
 
-const AddDrawer = ({showDrawer, config})=>{
+const AddDrawer = ({showDrawer, config, showSideMenu})=>{
 
     const drawerStatus = useSelector(selectDrawerStatus);
     const drawerDetails = useSelector(selectDrawerDetails);
@@ -101,7 +101,7 @@ const AddDrawer = ({showDrawer, config})=>{
     }
 
     return(
-        <div className={`drawer-container ${showDrawer ? 'show' : 'hide'}`}>
+        <div className={`drawer-container ${showDrawer ? 'show' : 'hide'} ${showSideMenu ? 'showSideMenu' : ""}` }>
             <div className='search-container'>
                 <Search 
                     className='antd-search' 

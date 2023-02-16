@@ -37,7 +37,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
     const axios = useAxiosPrivate();
     const addDrawer = ()=>{
         
-        return <AddDrawer showDrawer = {showDrawer}/>
+        return <AddDrawer showDrawer = {showDrawer} showSideMenu = {showSideMenu}/>
     }
     const dispatch = useDispatch();
     const handleMenuAction = async (type)=>{

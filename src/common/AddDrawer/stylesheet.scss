@@ -113,8 +113,14 @@
     }
 
 }
-.show{
+
+.show.showSideMenu{
     left: 12.2%;
+    transition: all 0.2s ease-in;
+}
+
+.show{
+    left: 0.5%;
     transition: all 0.2s ease-in;
 }
 
