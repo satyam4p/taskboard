@@ -1,13 +1,14 @@
 /** @jsxImportSource theme-ui */
 import { Flex } from 'theme-ui';
-import { Button } from 'theme-ui';
 import ProfileTogggle from './Profile/ProfileToggle';
+import './stylesheet.scss';
 
 function SecondaryBar({ 
     setToggleSideMenu, 
     toggleProfile,
     setToggleProile,
-    setToggleAddMenu }){
+    setToggleAddMenu,
+    showSideMenu }){
 
     return(
         <>
@@ -23,48 +24,17 @@ function SecondaryBar({
                 alignItems:'center',
                 justifyContent:'space-between'
             }}>
-                <Button sx={{
-                    width:'35px',
-                    height:'35px',
-                    mx:'10px',
-                    bg:'inherit',
-                    padding:'5px',
-                    display:'flex',
-                    flexDirection:'column',
-                    justifyContent:'space-evenly'
-                    }} 
-                    onClick={()=>{
+                <button className='hamburger-btn'
+                        onClick={()=>{
                         setToggleSideMenu((prev)=>!prev)
-                        setToggleAddMenu(false);
+                        setToggleAddMenu(false)
                     }}>
-                        <div sx={{
-                            width:'100%',
-                            height:'4px',
-                            bg:'#014421',
-                            }}
-                        />
-                        <div sx={{
-                            width:'100%',
-                            height:'4px',
-                            bg:'#014421',
-                            }} 
-                        />
-                        <div sx={{
-                            width:'100%',
-                            height:'4px',
-                            bg:'#014421',
-                            }}
-                        />
-                </Button>
-                <Button 
-                onClick={()=>setToggleProile(!toggleProfile)}
-                sx={{
-                    borderRadius:'50%',
-                    width:'30px',
-                    height:'30px',
-                    bg:'#88AF9F',
-                    mx:'10px'
-                }}/>
+                        <div className={`bar bar1 ${showSideMenu ? 'showSideMenu' : '' }`}/>
+                        <div className={`bar bar2 ${showSideMenu ? 'showSideMenu' : '' }`} />
+                        <div className={`bar bar3 ${showSideMenu ? 'showSideMenu' : '' }`} />
+                </button>
+                <button className='profile-btn'
+                        onClick={()=>setToggleProile(!toggleProfile)} />
             </Flex>
 
             {toggleProfile && <ProfileTogggle />}

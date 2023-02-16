@@ -24,6 +24,7 @@ function Home(props){
                 setToggleAddMenu = {setToggleAddMenu}
             />
             <SecondaryBar
+                showSideMenu = {toggleSideMenu}
                 setToggleSideMenu = {setToggleSideMenu}
                 setToggleProile = {setToggleProile}
                 toggleProfile = {toggleProfile}
