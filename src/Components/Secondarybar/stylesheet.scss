@@ -22,7 +22,7 @@
     border: none;
 }
 .bar{
-    width: 100%;
+    width: 90%;
     height: 4px;
     background-color: #014421;
     transition: all .5s ease-in-out;
@@ -37,11 +37,11 @@
 .bar1.showSideMenu{
     position: absolute;
     transform: rotate(45deg);
-    width: 28px;
+    width: 24px;
 
 }
 .bar3.showSideMenu{
     position: absolute;
     transform: rotate(-45deg) ;
-    width: 28px;
+    width: 24px;
 }

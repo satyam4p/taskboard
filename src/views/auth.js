@@ -92,6 +92,12 @@ function Auth(){
             errRef.current.focus();
         }
     }
+
+    const handleSignUp = (event)=>{
+        event.preventDefault();
+
+    }
+
     return(
         <Flex>
             <Flex
@@ -130,6 +136,7 @@ function Auth(){
                             Don't have an account? 
                         </Text>
                         <Button
+                            onClick={e=>handleSignUp(e)}
                             sx={{
                                 background:'#123E2C',
                                 color:'#FFFF',
