@@ -31,10 +31,10 @@ const Tooltip=({children})=>{
 }
 
 const Content = ({children}) =>{
-
+    const {text} = useTooltipContext();
     return(
         <p className='tooltip-text'>
-            {children}
+            {text}
         </p>
     )
 }
