@@ -8,7 +8,7 @@ const Home = React.lazy(()=> import('./views/home'));
 const routes = [
     /**auth routes */
     { path: '/login', component: Login, AuthRequired: false },
-    { path: 'logout', component: Logout, AuthRequired: false},
+    { path: '/logout', component: Logout, AuthRequired: false},
 
     /**private routes */
     { path:'/', name:'Home', component: Home, AuthRequired: true},
