@@ -10,6 +10,7 @@ const useSideMenuContext = ()=> {
     const context = useContext(SideMenuContext);
 
     if(!context){
+        
         throw new Error("Children cannot be rendered outside compound component parent");
     }
 
@@ -26,6 +27,19 @@ const Sidebar = ({ children, showSideMenu })=>{
         <SideMenuContext.Provider value={{activeIndex, setActiveIndex, panel, setPanel}}>
             <div className={`sidemenu-container ${showSideMenu ? 'show' : 'hide'}`}>
                 { children }
+                <Sidebar.SidePanels>
+                    {panel?.show && panel?.panelData && panel?.panelData.length ? 
+                        panel.panelData.map((data, index)=>{
+                            return(
+                                <Sidebar.SidePanelIndex key={index}>
+                                    {data.name}
+                                </Sidebar.SidePanelIndex>
+                            )
+                        })
+                        :
+                        null
+                    }
+                </Sidebar.SidePanels>
             </div>
         </SideMenuContext.Provider>
     )
@@ -34,36 +48,53 @@ const Sidebar = ({ children, showSideMenu })=>{
 const MenuList = ({children})=>{
 
     const { activeIndex, setActiveIndex, panel, setPanel} = useSideMenuContext();
-    const onActive = (index, hasPanel)=>{
-        setActiveIndex(index);
-        if(hasPanel){
+    const onActive = (index, hasPanel, panelData)=>{
+        if(hasPanel && activeIndex !== index){
+            setPanel(prev=>{
+                return {
+                    show: true,
+                    index,
+                    panelData
+                }
+            })
+            setActiveIndex(index);
+            return;
+        }else if(hasPanel){
             setPanel(prev=>{
                 if(prev?.show){
                     return {
+                        ...prev,
                         show:false,
-                        index
+                        index,
+                        panelData:[]
                     }
                 }else{
                     return {
+                        ...prev,
                         show: true,
-                        index
+                        index,
+                        panelData
                     }
                 }
             })
+            
         }
         if(panel?.show){
             setPanel(prev=>{
                 return {
+                    ...prev,
                     index,
-                    show: false
+                    show: false,
+                    panelData:null
                 }
             })
         }
+        setActiveIndex(index);
     }
 
     const Children = React.Children.map( children, (child, index)=>{
         if(child.type === MenuIndex){
-            return React.cloneElement( child, { activeIndex: activeIndex === index, onActive, index});
+            return React.cloneElement( child, { isActive: activeIndex === index, onActive, index});
         }else{
             return child;
         }
@@ -79,14 +110,14 @@ const MenuList = ({children})=>{
 
 Sidebar.MenuList = MenuList;
 
-const MenuIndex = ({children, activeIndex, onActive, index, arrowOnHover, hasPanel })=>{
+const MenuIndex = ({children, isActive, onActive, index, arrowOnHover, hasPanel, panelData})=>{
 
     const [arrow, setArrow] = useState(false);
     const showArrow = ()=> arrowOnHover ? arrow ? setArrow(false) : setArrow(true) : null;
 
     return(
-        <div className={`menu__index ${activeIndex ? 'active' : ''}`}
-            onClick={()=>onActive(index, hasPanel)}
+        <div className={`menu__index ${isActive ? 'active' : ''}`}
+            onClick={()=>onActive(index, hasPanel, panelData)}
             onMouseOver={()=>showArrow()} 
             onMouseLeave={()=>showArrow()}>
 
@@ -102,6 +133,7 @@ const SidePanels = ({ children })=>{
 
     const { activeIndex, panel } = useSideMenuContext();
     console.log("panel:: ",panel);
+
     return(
         <div className={`sidemenu__sidePanels ${activeIndex && panel?.show ? 'show' : 'hide'}`}>
             { children }
@@ -111,7 +143,7 @@ const SidePanels = ({ children })=>{
 
 Sidebar.SidePanels = SidePanels;
 
-const SidePanel = ({ children })=>{
+const SidePanelIndex = ({ children })=>{
 
     return(
         <div className={`sidemenu__sidepanel`}>
@@ -121,6 +153,7 @@ const SidePanel = ({ children })=>{
 
 }
 
-Sidebar.SidePanel = SidePanel;
+Sidebar.SidePanelIndex = SidePanelIndex;
+
 
 export default Sidebar;
