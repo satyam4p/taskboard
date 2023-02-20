@@ -1,6 +1,8 @@
 import React,{ useState, useContext, createContext } from "react";
 import './Stylesheet.scss';
 import iconsMap from "../IconsMapper/IconsMap";
+import shortid from "shortid";
+import { Tag } from 'antd';
 
 
 const SideMenuContext = createContext();
@@ -20,9 +22,8 @@ const useSideMenuContext = ()=> {
 
 const Sidebar = ({ children, showSideMenu })=>{
 
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState();
     const [panel, setPanel] = useState({})
-
     return(
         <SideMenuContext.Provider value={{activeIndex, setActiveIndex, panel, setPanel}}>
             <div className={`sidemenu-container ${showSideMenu ? 'show' : 'hide'}`}>
@@ -31,9 +32,7 @@ const Sidebar = ({ children, showSideMenu })=>{
                     {panel?.show && panel?.panelData && panel?.panelData.length ? 
                         panel.panelData.map((data, index)=>{
                             return(
-                                <Sidebar.SidePanelIndex key={index}>
-                                    {data.name}
-                                </Sidebar.SidePanelIndex>
+                                <Sidebar.SidePanelIndex key={shortid.generate()+index} status={data.status} label={data.label} title={data.name}/>
                             )
                         })
                         :
@@ -133,9 +132,9 @@ const SidePanels = ({ children })=>{
 
     const { activeIndex, panel } = useSideMenuContext();
     console.log("panel:: ",panel);
-
+    console.log("active index:: ",activeIndex);
     return(
-        <div className={`sidemenu__sidePanels ${activeIndex && panel?.show ? 'show' : 'hide'}`}>
+        <div className={`sidemenu__sidePanels ${ activeIndex && panel.show ? 'show' : 'hide'}`}>
             { children }
         </div>
     )
@@ -143,10 +142,15 @@ const SidePanels = ({ children })=>{
 
 Sidebar.SidePanels = SidePanels;
 
-const SidePanelIndex = ({ children })=>{
+const SidePanelIndex = ({ children, status, label, title })=>{
 
     return(
         <div className={`sidemenu__sidepanel`}>
+            <div className='sidepanel_index_tag-container'>
+                <Tag className={`sidepanel_index_status-tag ${status.toLowerCase().split(" ").join("_")}`} >{status}</Tag>
+                <Tag className={`sidepanel_index_label-tag ${label.toLowerCase().split(" ").join("_")}`} >{label}</Tag>
+            </div>
+            <span className='sipanel_index_title-container'>{title}</span>
             { children }
         </div>
     )

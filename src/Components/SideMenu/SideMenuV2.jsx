@@ -64,7 +64,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
         <div>
         <Sidebar showSideMenu={showSideMenu}>
             <Sidebar.MenuList>
-                <Sidebar.MenuIndex arrowOnHover hasPanel panelData = {data}>
+                <Sidebar.MenuIndex>
                     Board
                 </Sidebar.MenuIndex>
                 <Sidebar.MenuIndex arrowOnHover hasPanel panelData = {data}>
