@@ -73,7 +73,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                 <Sidebar.MenuIndex>
                     Archive
                 </Sidebar.MenuIndex>
-                <Sidebar.MenuIndex bottom >
+                <Sidebar.MenuIndex bottom arrowOnHover hasPanel>
                     Settings
                 </Sidebar.MenuIndex>
             </Sidebar.MenuList>
