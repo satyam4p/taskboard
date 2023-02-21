@@ -3,6 +3,8 @@ import './Stylesheet.scss';
 import iconsMap from "../IconsMapper/IconsMap";
 import shortid from "shortid";
 import { Tag } from 'antd';
+import ModalContext from "../../context/ModalProvider";
+import useGetTask from "../../helpers/hooks/useGetTask";
 
 
 const SideMenuContext = createContext();
@@ -24,6 +26,7 @@ const Sidebar = ({ children, showSideMenu })=>{
 
     const [activeIndex, setActiveIndex] = useState();
     const [panel, setPanel] = useState({})
+
     return(
         <SideMenuContext.Provider value={{activeIndex, setActiveIndex, panel, setPanel}}>
             <div className={`sidemenu-container ${showSideMenu ? 'show' : 'hide'}`}>
@@ -32,7 +35,7 @@ const Sidebar = ({ children, showSideMenu })=>{
                     {panel?.show && panel?.panelData && panel?.panelData.length ? 
                         panel.panelData.map((data, index)=>{
                             return(
-                                <Sidebar.SidePanelIndex key={shortid.generate()+index} status={data.status} label={data.label} title={data.name}/>
+                                <Sidebar.SidePanelIndex key={shortid.generate()+index} status={data.status} label={data.label} title={data.name} id = {data?._id}/>
                             )
                         })
                         :
@@ -109,13 +112,13 @@ const MenuList = ({children})=>{
 
 Sidebar.MenuList = MenuList;
 
-const MenuIndex = ({children, isActive, onActive, index, arrowOnHover, hasPanel, panelData})=>{
+const MenuIndex = ({children, isActive, onActive, index, arrowOnHover, hasPanel, panelData, bottom = false})=>{
 
     const [arrow, setArrow] = useState(false);
     const showArrow = ()=> arrowOnHover ? arrow ? setArrow(false) : setArrow(true) : null;
 
     return(
-        <div className={`menu__index ${isActive ? 'active' : ''}`}
+        <div className={`menu__index ${isActive ? 'active' : '' } ${bottom ? 'bottom': ''}`}
             onClick={()=>onActive(index, hasPanel, panelData)}
             onMouseOver={()=>showArrow()} 
             onMouseLeave={()=>showArrow()}>
@@ -131,21 +134,41 @@ Sidebar.MenuIndex = MenuIndex;
 const SidePanels = ({ children })=>{
 
     const { activeIndex, panel } = useSideMenuContext();
-    console.log("panel:: ",panel);
-    console.log("active index:: ",activeIndex);
+    const { setModalType } = useContext(ModalContext);
+    const getTask = useGetTask();
+    const handleAction = (id)=>{
+        setModalType(prev=>{
+            if(!prev.isVisible){
+                return {
+                    isVisible: true,
+                    type: 'task'
+                }
+            }
+            return prev;
+        });
+        getTask(id);
+    }
+
+    const Children = React.Children.map(children, (child, index)=>{
+        if(child.type === SidePanelIndex){
+            return React.cloneElement(child, { handleAction })
+        }
+        return child;
+    })
+
     return(
         <div className={`sidemenu__sidePanels ${ activeIndex && panel.show ? 'show' : 'hide'}`}>
-            { children }
+            { Children }
         </div>
     )
 }
 
 Sidebar.SidePanels = SidePanels;
 
-const SidePanelIndex = ({ children, status, label, title })=>{
-
+const SidePanelIndex = ({ children, status, label, title, handleAction, id })=>{
+    
     return(
-        <div className={`sidemenu__sidepanel`}>
+        <div className={`sidemenu__sidepanel`} onClick = {()=>handleAction(id)}>
             <div className='sidepanel_index_tag-container'>
                 <Tag className={`sidepanel_index_status-tag ${status.toLowerCase().split(" ").join("_")}`} >{status}</Tag>
                 <Tag className={`sidepanel_index_label-tag ${label.toLowerCase().split(" ").join("_")}`} >{label}</Tag>

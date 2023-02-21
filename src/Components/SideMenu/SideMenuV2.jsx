@@ -73,6 +73,9 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                 <Sidebar.MenuIndex>
                     Archive
                 </Sidebar.MenuIndex>
+                <Sidebar.MenuIndex bottom >
+                    Settings
+                </Sidebar.MenuIndex>
             </Sidebar.MenuList>
         </Sidebar>
         </div>

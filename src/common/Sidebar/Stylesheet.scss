@@ -36,6 +36,11 @@
         justify-content: space-between;
         z-index: 100;
     }
+    .menu__index.bottom{
+        bottom: 2%;
+        position: fixed;
+        padding: inherit;
+    }
     .menu__index:hover{
         background: #DFDFDF;
         cursor: pointer;
@@ -44,6 +49,9 @@
     .menu__index.active{
         background: #DFDFDF;
     }
+
+    
+
     .sidemenu__sidePanels{
         width: 140%;
         height: 86vh;
