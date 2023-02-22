@@ -91,7 +91,7 @@ const MenuList = ({children})=>{
                 }
             })
         }
-        setActiveIndex(index);
+        activeIndex === index ? setActiveIndex(null) : setActiveIndex(index);
     }
 
     const Children = React.Children.map( children, (child, index)=>{
