@@ -50,7 +50,10 @@ const Sidebar = ({ children, showSideMenu })=>{
 const MenuList = ({children})=>{
 
     const { activeIndex, setActiveIndex, panel, setPanel} = useSideMenuContext();
-    const onActive = (index, hasPanel, panelData)=>{
+    const onActive = (index, hasPanel, panelData, handleIndexAction, children)=>{
+        if(typeof handleIndexAction === "function"){
+            handleIndexAction(children)
+        }
         if(hasPanel && activeIndex !== index){
             setPanel(prev=>{
                 return {
@@ -79,7 +82,6 @@ const MenuList = ({children})=>{
                     }
                 }
             })
-            
         }
         if(panel?.show){
             setPanel(prev=>{
@@ -112,14 +114,15 @@ const MenuList = ({children})=>{
 
 Sidebar.MenuList = MenuList;
 
-const MenuIndex = ({children, isActive, onActive, index, arrowOnHover, hasPanel, panelData, bottom = false, handleIndexAction = undefined})=>{
+const MenuIndex = ({children, isActive, onActive, index, arrowOnHover, 
+    hasPanel, panelData, bottom = false, handleIndexAction = undefined})=>{
 
     const [arrow, setArrow] = useState(false);
     const showArrow = ()=> arrowOnHover ? arrow ? setArrow(false) : setArrow(true) : null;
-
+    console.log("Panel data: ",panelData);
     return(
         <div className={`menu__index ${isActive ? 'active' : '' } ${bottom ? 'bottom': ''}`}
-            onClick={()=>onActive(index, hasPanel, panelData, handleIndexAction)}
+            onClick={()=>onActive(index, hasPanel, panelData, handleIndexAction, children)}
             onMouseOver={()=>showArrow()} 
             onMouseLeave={()=>showArrow()}>
 
