@@ -25,7 +25,7 @@ const useSideMenuContext = ()=> {
 const Sidebar = ({ children, showSideMenu })=>{
 
     const [activeIndex, setActiveIndex] = useState();
-    const [panel, setPanel] = useState({})
+    const [panel, setPanel] = useState({});
 
     return(
         <SideMenuContext.Provider value={{activeIndex, setActiveIndex, panel, setPanel}}>
@@ -112,14 +112,14 @@ const MenuList = ({children})=>{
 
 Sidebar.MenuList = MenuList;
 
-const MenuIndex = ({children, isActive, onActive, index, arrowOnHover, hasPanel, panelData, bottom = false})=>{
+const MenuIndex = ({children, isActive, onActive, index, arrowOnHover, hasPanel, panelData, bottom = false, handleIndexAction = undefined})=>{
 
     const [arrow, setArrow] = useState(false);
     const showArrow = ()=> arrowOnHover ? arrow ? setArrow(false) : setArrow(true) : null;
 
     return(
         <div className={`menu__index ${isActive ? 'active' : '' } ${bottom ? 'bottom': ''}`}
-            onClick={()=>onActive(index, hasPanel, panelData)}
+            onClick={()=>onActive(index, hasPanel, panelData, handleIndexAction)}
             onMouseOver={()=>showArrow()} 
             onMouseLeave={()=>showArrow()}>
 
