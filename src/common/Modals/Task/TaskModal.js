@@ -84,10 +84,6 @@ const TaskModal=(props)=>{
             })
     }
 
-    const handleMore =(e)=>{
-        e.preventDefault();
-    }
-
     return(
         <div className="task-modal-container">
             {
@@ -100,7 +96,6 @@ const TaskModal=(props)=>{
                             handleClose = { handleClose } 
                             handleShare = {handleShare} 
                             handleEdit = {handleEdit}
-                            handleMore = {handleMore}
                             currentTaskStatus = {currentTaskStatus}
                             editEnabled = { task.editEnabled }  />
 

@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
+import shortid from "shortid";
 import iconsMap from "../../../IconsMapper/IconsMap";
 import './stylesheet.scss';
 
-const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare, editEnabled, handleMore}) => {
 
+const MoreOptions = (props)=>{
+
+    const options = ["Archive", "Delete Task", "Save and Exit"]
+
+    return(
+    <div className="more-options-container">
+       {options.map((option, index)=>{
+        return (
+            <div className = "options-index" key={shortid.generate()+index} >
+                {option}
+            </div>
+        )
+       })}
+    </div>)
+
+}
+
+const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare, editEnabled}) => {
+
+    const [showMore, setMore] = useState(false);
+    const handleMore =(e)=>{
+        e.preventDefault();
+        setMore(!showMore);
+    }
     return(
         <div className="actions-container">
             <div className="icons-container">
@@ -42,6 +66,7 @@ const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare,
                     }}>
                     {iconsMap.more(18)}
                 </button>}
+                { showMore ? <MoreOptions/> : null}
             </div>
             <div className="icons-container"
                 onClick={(e)=>handleClose(e)}>
@@ -51,5 +76,6 @@ const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare,
     )
 
 }
+
 
 export default TaskActionBar;
