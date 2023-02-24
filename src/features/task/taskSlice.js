@@ -217,7 +217,30 @@ export const taskSlice = createSlice({
                 commentStatus: 'failed',
                 error: action.payload
             }
+        },
+        deleteTaskBegin: ( state, action )=>{
+            return {
+                ...state,
+                currentTaskStatus: "loading",
+            }
+        },
+        deleteTaskSuccess: ( state, action )=>{
+            
+            return {
+                ...state,
+                currentTask: null,
+                currentTaskStatus: "succeeded"
+            }
+        },
+        deleteTaskError: ( state, action )=>{
+            return {
+                ...state,
+                currentTaskStatus: "failed",
+                error: action.payload
+            }
         }
+
+
 
     },
     extraReducers(builder){/** extra reducer user builder to do some async data fecth/requests and
@@ -255,6 +278,7 @@ export const { addTask, createTaskSuccess,
     updateTaskError, clearCurrentTask,
     postCommentBegin, postCommentSuccess, postCommentError,
     fetchTaskBegin, fetchTaskSuccess, fetchTaskError,
-    fetchTaskCommentsBegin, fetchTaskCommentsSuccess, fetchTaskCommentsError } = taskSlice.actions;
+    fetchTaskCommentsBegin, fetchTaskCommentsSuccess, fetchTaskCommentsError,
+    deleteTaskBegin, deleteTaskSuccess, deleteTaskError } = taskSlice.actions;
 
 export default taskSlice.reducer;

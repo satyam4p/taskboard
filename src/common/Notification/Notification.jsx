@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useAuth from '../../helpers/hooks/useAuth';
 import './stylesheet.scss';
 
 
 const Notification = () => {
-    const { setNotification, notificationType, notificationText } = useAuth();
+    const { showNotification, setNotification, notificationType, notificationText } = useAuth();
+
+    useEffect(()=>{
+        let timer = null;
+        if(showNotification){
+            timer = setTimeout(()=>{
+                setNotification(false);
+            }, 2000);
+        }
+
+        return ()=>clearTimeout(timer);
+    },[showNotification]);
 
     return(
         <div className={`notification ${notificationType}`}>

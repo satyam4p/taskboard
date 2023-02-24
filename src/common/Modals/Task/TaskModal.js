@@ -18,6 +18,7 @@ import TextEditor from "../../TextEditor/TextEditor";
 import useCreateAndGetTask from "../../../helpers/hooks/useCreateAndGetTask";
 import useTaskConfig from "../../../helpers/hooks/useTaskConfig";
 import useUpdateTask from "../../../helpers/hooks/useUpdateTask";
+import useDeleteTask from "../../../helpers/hooks/useDeleteTask";
 
 /**custom redux helpers */
 import { selectCurrentTaskStatus, 
@@ -35,6 +36,7 @@ const TaskModal=(props)=>{
     const { task, setTask } = useContext( TaskContext );
     const create = useCreateAndGetTask();
     const update = useUpdateTask();
+    const deleteTask = useDeleteTask();
     const [configLoaded, fetchConfig] = useTaskConfig();
     
     useEffect(()=>{
@@ -84,6 +86,22 @@ const TaskModal=(props)=>{
             })
     }
 
+    const handleMoreAction = ( identifier )=>{
+
+        const identifierSmall = identifier.toLowerCase();
+        if(identifierSmall === "delete task"){
+            const taskId = currentTask?._id;
+            deleteTask(taskId);
+            props.setModalType((prev)=>{
+                return {
+                    ...prev,
+                    isVisible:false
+                }
+            })
+        }
+
+    }
+
     return(
         <div className="task-modal-container">
             {
@@ -97,7 +115,9 @@ const TaskModal=(props)=>{
                             handleShare = {handleShare} 
                             handleEdit = {handleEdit}
                             currentTaskStatus = {currentTaskStatus}
-                            editEnabled = { task.editEnabled }  />
+                            editEnabled = { task.editEnabled }  
+                            handleMoreAction = {handleMoreAction}
+                            />
 
                         <TaskHeader editEnabled = {task.editEnabled} config = {taskConfig}/>
                         <Container sx={{
