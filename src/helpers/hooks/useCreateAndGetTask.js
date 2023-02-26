@@ -5,6 +5,7 @@ import { createTaskSuccess, createTaskBegin, createTaskError } from "../../featu
 import urlSchema from '../../network/urlSchema/urlSchema.json';
 import useNotification from "../../common/Notification/helpers/useNotification";
 import TaskContext from "../../common/Modals/Task/TaskContext/TaskProvider";
+import useDrawerDetails from "./useDrawerDetails";
 
 
 const useCreateAndGetTask = () => {
@@ -12,6 +13,7 @@ const useCreateAndGetTask = () => {
     const axiosPrivate = useAxiosPrivate();
     const dispatch = useDispatch();
     const show  = useNotification();
+    const fetchDrawerDetails = useDrawerDetails();
     const create = async ( payload )=>{
         dispatch(createTaskBegin());
 
@@ -28,6 +30,7 @@ const useCreateAndGetTask = () => {
                         editEnabled : false
                     }
                 })
+                fetchDrawerDetails("Recent Tasks");
             }
 
         }catch(error){

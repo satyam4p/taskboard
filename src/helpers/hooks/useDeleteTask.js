@@ -1,13 +1,12 @@
-import { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import useAxiosPrivate from "./useAxiosPrivate";
 import urlSchema from '../../network/urlSchema/urlSchema.json';
-import TaskContext from "../../common/Modals/Task/TaskContext/TaskProvider";
 import useNotification from "../../common/Notification/helpers/useNotification";
 import { deleteTaskBegin, deleteTaskSuccess, deleteTaskError } from "../../features/task/taskSlice";
+import useDrawerDetails from "./useDrawerDetails";
 
 const useDeleteTask = ()=>{
-
+    const fetchDrawerDetails = useDrawerDetails();
     const axiosPrivate = useAxiosPrivate();
     const dispatch = useDispatch();
     const show = useNotification();
@@ -21,6 +20,7 @@ const useDeleteTask = ()=>{
             if(result){
                 dispatch(deleteTaskSuccess);
                 show("Task deleted Successfully", "success");
+                fetchDrawerDetails("Recent Tasks");
             }
         }catch(error){
             dispatch(deleteTaskError);

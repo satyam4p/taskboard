@@ -1,27 +1,20 @@
 /** @jsxImportSource theme-ui */
 import Sidebar from "../../common/Sidebar/Sidebar";
-import { fetchDrawerDetailsBegin, fetchDrawerDetailsSuccess, fetchDrawerDetailsError, 
-    selectDrawerDetails } from "../../features/Drawer/drawerSlice";
-import useAxiosPrivate from "../../helpers/hooks/useAxiosPrivate";
-import { useDispatch, useSelector } from "react-redux";
-import urlSchema from '../../network/urlSchema/urlSchema.json';
+import { selectDrawerDetails } from "../../features/Drawer/drawerSlice";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import useDrawerDetails from "../../helpers/hooks/useDrawerDetails";
+import shortid from "shortid";
 
 function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
-    const axios = useAxiosPrivate();
-    const dispatch = useDispatch()
     const [tasks, setTasks] = useState([]);
     const drawerDetails = useSelector(selectDrawerDetails);
-    const handleIndexAction = async (type) =>{
-        const strtype = type.split(" ").join("_").toLowerCase();
-        dispatch(fetchDrawerDetailsBegin());
-            const url = urlSchema.Drawer[strtype];
-            const result = await axios.get(url);
-            if(result && result.data){
-                dispatch(fetchDrawerDetailsSuccess(result.data))
-            }else{
-                dispatch(fetchDrawerDetailsError(result.data));
-            }
+    const fetchDrawerDetails = useDrawerDetails();
+
+    const handleIndexAction = (type)=>{
+
+        fetchDrawerDetails(type);
+
     }
 
     useEffect(()=>{
@@ -31,7 +24,6 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
         }
 
     },[drawerDetails]);
-    console.log("tasks:: ", tasks);
     
     return(
         <div>
@@ -50,6 +42,17 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                     Settings
                 </Sidebar.MenuIndex>
             </Sidebar.MenuList>
+            <Sidebar.SidePanels>
+                    {tasks && tasks.length ? 
+                        tasks.map((data, index)=>{
+                            return(
+                                <Sidebar.SidePanelIndex key={shortid.generate()+index} status={data.status} label={data.label} title={data.name} id = {data?._id}/>
+                            )
+                        })
+                        :
+                        null
+                    }
+            </Sidebar.SidePanels>
         </Sidebar>
         </div>
     )

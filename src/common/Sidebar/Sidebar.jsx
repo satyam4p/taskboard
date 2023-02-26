@@ -1,7 +1,6 @@
 import React,{ useState, useContext, createContext } from "react";
 import './Stylesheet.scss';
 import iconsMap from "../IconsMapper/IconsMap";
-import shortid from "shortid";
 import { Tag } from 'antd';
 import ModalContext from "../../context/ModalProvider";
 import useGetTask from "../../helpers/hooks/useGetTask";
@@ -15,7 +14,7 @@ const useSideMenuContext = ()=> {
 
     if(!context){
         
-        throw new Error("Children cannot be rendered outside compound component parent");
+        throw new Error("Children cannot be rendered outside Sidebar parent component");
     }
 
     return context;
@@ -31,7 +30,7 @@ const Sidebar = ({ children, showSideMenu })=>{
         <SideMenuContext.Provider value={{activeIndex, setActiveIndex, panel, setPanel}}>
             <div className={`sidemenu-container ${showSideMenu ? 'show' : 'hide'}`}>
                 { children }
-                <Sidebar.SidePanels>
+                {/* <Sidebar.SidePanels>
                     {panel?.show && panel?.panelData && panel?.panelData.length ? 
                         panel.panelData.map((data, index)=>{
                             return(
@@ -41,7 +40,7 @@ const Sidebar = ({ children, showSideMenu })=>{
                         :
                         null
                     }
-                </Sidebar.SidePanels>
+                </Sidebar.SidePanels> */}
             </div>
         </SideMenuContext.Provider>
     )
