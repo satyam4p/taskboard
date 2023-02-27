@@ -66,7 +66,7 @@ const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare,
                     background:'transparent',
                     border:'none'
                     }}>
-                    {iconsMap.more(18)}
+                    {iconsMap.more(18, 800, showMore)}
                 </button>}
                 { showMore ? <MoreOptions handleMoreAction = {handleMoreAction}/> : null}
             </div>

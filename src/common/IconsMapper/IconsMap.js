@@ -33,8 +33,8 @@ const iconsMap = (()=>{
         close: (size = 20, weight = 800)=>{
             return <CloseCircleOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></CloseCircleOutlined>
         },
-        more: (size = 20, weight = 800)=>{
-            return <MoreOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></MoreOutlined>
+        more: (size = 20, weight = 800, active = false)=>{
+            return <MoreOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}} rotate={active ? 90 : 0}></MoreOutlined>
         },
         time: (size = 20, weight = 800)=>{
             return <FieldTimeOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></FieldTimeOutlined>
