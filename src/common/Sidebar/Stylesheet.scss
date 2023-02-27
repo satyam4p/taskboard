@@ -62,6 +62,7 @@
         border-radius: 4px;
         padding: 5px;
         z-index: 0;
+        font-size: 12px;
     }
     .sidemenu__sidePanels.show{
         left: 101%;
@@ -79,13 +80,13 @@
         padding: 4px;
         border-radius: 5px;
         margin: 4px 0px;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 500;
         .sidepanel_index_tag-container{
             display: flex;
             flex-direction: row;
             align-items: center;
-
+            padding: 4px 0px;
             .sidepanel_index_status-tag{
                 font-size: 10px;
                 font-weight: 400;
