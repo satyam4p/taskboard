@@ -154,10 +154,10 @@ const SidePanels = ({ children, id })=>{
 
 Sidebar.SidePanels = SidePanels;
 
-const SidePanelIndex = ({ children, options, handleAction})=>{
+const SidePanelIndex = ({ children, handleAction, options })=>{
     if(options){
         return (
-            <div className={`sidemenu__sidepanel`} onClick = {()=>handleAction()}>
+            <div className={`sidemenu__sidepanel`} onClick = {()=>handleAction(options?.id)}>
             <div className='sidepanel_index_tag-container'>
                 <Tag className={`sidepanel_index_status-tag ${options?.status.toLowerCase().split(" ").join("_")}`} >{options?.status}</Tag>
                 <Tag className={`sidepanel_index_label-tag ${options?.label.toLowerCase().split(" ").join("_")}`} >{options?.label}</Tag>
