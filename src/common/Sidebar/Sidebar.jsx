@@ -23,24 +23,13 @@ const useSideMenuContext = ()=> {
 
 const Sidebar = ({ children, showSideMenu })=>{
 
-    const [activeIndex, setActiveIndex] = useState();
+    const [activeIndex, setActiveIndex] = useState({});
     const [panel, setPanel] = useState({});
 
     return(
         <SideMenuContext.Provider value={{activeIndex, setActiveIndex, panel, setPanel}}>
             <div className={`sidemenu-container ${showSideMenu ? 'show' : 'hide'}`}>
                 { children }
-                {/* <Sidebar.SidePanels>
-                    {panel?.show && panel?.panelData && panel?.panelData.length ? 
-                        panel.panelData.map((data, index)=>{
-                            return(
-                                <Sidebar.SidePanelIndex key={shortid.generate()+index} status={data.status} label={data.label} title={data.name} id = {data?._id}/>
-                            )
-                        })
-                        :
-                        null
-                    }
-                </Sidebar.SidePanels> */}
             </div>
         </SideMenuContext.Provider>
     )
@@ -49,19 +38,19 @@ const Sidebar = ({ children, showSideMenu })=>{
 const MenuList = ({children})=>{
 
     const { activeIndex, setActiveIndex, panel, setPanel} = useSideMenuContext();
-    const onActive = (index, hasPanel, panelData, handleIndexAction, children)=>{
+    const onActive = (index, hasPanel, panelData, handleIndexAction, children, id)=>{
         if(typeof handleIndexAction === "function"){
             handleIndexAction(children)
         }
-        if(hasPanel && activeIndex !== index){
+        if(hasPanel && activeIndex?.index !== index){
             setPanel(prev=>{
                 return {
                     show: true,
                     index,
-                    panelData
+                    panelData,
                 }
             })
-            setActiveIndex(index);
+            setActiveIndex({index, id});
             return;
         }else if(hasPanel){
             setPanel(prev=>{
@@ -70,14 +59,14 @@ const MenuList = ({children})=>{
                         ...prev,
                         show:false,
                         index,
-                        panelData:[]
+                        panelData:[],
                     }
                 }else{
                     return {
                         ...prev,
                         show: true,
                         index,
-                        panelData
+                        panelData,
                     }
                 }
             })
@@ -92,12 +81,12 @@ const MenuList = ({children})=>{
                 }
             })
         }
-        activeIndex === index ? setActiveIndex(null) : setActiveIndex(index);
+        activeIndex?.index === index ? setActiveIndex(null) : setActiveIndex({index, id});
     }
 
     const Children = React.Children.map( children, (child, index)=>{
         if(child.type === MenuIndex){
-            return React.cloneElement( child, { isActive: activeIndex === index, onActive, index});
+            return React.cloneElement( child, { isActive: activeIndex?.index === index, onActive, index});
         }else{
             return child;
         }
@@ -114,14 +103,13 @@ const MenuList = ({children})=>{
 Sidebar.MenuList = MenuList;
 
 const MenuIndex = ({children, isActive, onActive, index, arrowOnHover, 
-    hasPanel, panelData, bottom = false, handleIndexAction = undefined})=>{
+    hasPanel, panelData, bottom = false, handleIndexAction = undefined, id})=>{
 
     const [arrow, setArrow] = useState(false);
     const showArrow = ()=> arrowOnHover ? arrow ? setArrow(false) : setArrow(true) : null;
-    console.log("Panel data: ",panelData);
     return(
         <div className={`menu__index ${isActive ? 'active' : '' } ${bottom ? 'bottom': ''}`}
-            onClick={()=>onActive(index, hasPanel, panelData, handleIndexAction, children)}
+            onClick={()=>onActive(index, hasPanel, panelData, handleIndexAction, children, id)}
             onMouseOver={()=>showArrow()} 
             onMouseLeave={()=>showArrow()}>
 
@@ -133,8 +121,7 @@ const MenuIndex = ({children, isActive, onActive, index, arrowOnHover,
 
 Sidebar.MenuIndex = MenuIndex;
 
-const SidePanels = ({ children })=>{
-
+const SidePanels = ({ children, id })=>{
     const { activeIndex, panel } = useSideMenuContext();
     const { setModalType } = useContext(ModalContext);
     const getTask = useGetTask();
@@ -159,7 +146,7 @@ const SidePanels = ({ children })=>{
     })
 
     return(
-        <div className={`sidemenu__sidePanels ${ activeIndex && panel.show ? 'show' : 'hide'}`}>
+        <div className={`sidemenu__sidePanels ${ activeIndex?.index && activeIndex?.id === id && panel.show ? 'show' : 'hide'}`}>
             { Children }
         </div>
     )
@@ -167,16 +154,22 @@ const SidePanels = ({ children })=>{
 
 Sidebar.SidePanels = SidePanels;
 
-const SidePanelIndex = ({ children, status, label, title, handleAction, id })=>{
-    
-    return(
-        <div className={`sidemenu__sidepanel`} onClick = {()=>handleAction(id)}>
+const SidePanelIndex = ({ children, options, handleAction})=>{
+    if(options){
+        return (
+            <div className={`sidemenu__sidepanel`} onClick = {()=>handleAction()}>
             <div className='sidepanel_index_tag-container'>
-                <Tag className={`sidepanel_index_status-tag ${status.toLowerCase().split(" ").join("_")}`} >{status}</Tag>
-                <Tag className={`sidepanel_index_label-tag ${label.toLowerCase().split(" ").join("_")}`} >{label}</Tag>
+                <Tag className={`sidepanel_index_status-tag ${options?.status.toLowerCase().split(" ").join("_")}`} >{options?.status}</Tag>
+                <Tag className={`sidepanel_index_label-tag ${options?.label.toLowerCase().split(" ").join("_")}`} >{options?.label}</Tag>
             </div>
-            <span className='sipanel_index_title-container'>{title}</span>
+            <span className='sipanel_index_title-container'>{options?.name}</span>
             { children }
+        </div>    
+        )
+    }
+    return(
+        <div>
+            {children}
         </div>
     )
 

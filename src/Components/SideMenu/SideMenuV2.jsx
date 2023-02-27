@@ -32,21 +32,27 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                 <Sidebar.MenuIndex>
                     Board
                 </Sidebar.MenuIndex>
-                <Sidebar.MenuIndex arrowOnHover hasPanel panelData = {tasks} handleIndexAction = {handleIndexAction}>
+                <Sidebar.MenuIndex id = {"recent_tasks"} arrowOnHover hasPanel panelData = {tasks} handleIndexAction = {handleIndexAction}>
                     Recent Tasks
                 </Sidebar.MenuIndex>
                 <Sidebar.MenuIndex>
                     Archive
                 </Sidebar.MenuIndex>
-                <Sidebar.MenuIndex bottom arrowOnHover hasPanel>
+                <Sidebar.MenuIndex id = {"settings"} bottom arrowOnHover hasPanel>
                     Settings
                 </Sidebar.MenuIndex>
             </Sidebar.MenuList>
-            <Sidebar.SidePanels>
+            <Sidebar.SidePanels id = {"recent_tasks"}>
                     {tasks && tasks.length ? 
-                        tasks.map((data, index)=>{
+                        tasks.map(({status, label, name, _id}, index)=>{
+                            const options = {
+                                status,
+                                label,
+                                name,
+                                id: _id
+                            }
                             return(
-                                <Sidebar.SidePanelIndex key={shortid.generate()+index} status={data.status} label={data.label} title={data.name} id = {data?._id}/>
+                                <Sidebar.SidePanelIndex key={shortid.generate()+index} options = {options}/>
                             )
                         })
                         :
