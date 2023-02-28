@@ -35,14 +35,16 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                 <Sidebar.MenuIndex>
                     <button 
                         style={{
-                            textAlign:'center',
                             width:'100%', 
                             border:'1px solid #88AF9F', 
-                            background:'#BBD2C8', 
+                            background:'#6DBF97', 
                             borderRadius:'5px',
-                            height:'25px'
+                            height:'25px',
+                            display:"flex",
+                            alignItems:"center",
+                            fontSize:'12px'
                             }} onClick = {()=>execute({action: "create", type: "task"})}>
-                        Create
+                        {iconsMap.add()}&nbsp;Create
                     </button>
                 </Sidebar.MenuIndex>
                 <Sidebar.MenuIndex>

@@ -8,7 +8,8 @@
     transition: all 0.3s;
     z-index: 100;
     font-family: "Noto Sans", Frutiger, Calibri, Myriad, Arial, Ubuntu, Helvetica,-apple-system;
-    font-size: 14px;
+    font-size: 12px;
+    border-radius: 4px;
 
     .sidemenu__list{
         flex-direction: column;
@@ -43,6 +44,8 @@
     }
     .menu__index:first-child{
         background: #F6F6F6;
+        padding: 0px;
+        margin: 0px 0px 5px 0px;
     }
     .menu__index:first-child:hover{
         background: #F6F6F6;
