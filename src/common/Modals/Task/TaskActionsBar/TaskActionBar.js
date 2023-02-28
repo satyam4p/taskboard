@@ -4,7 +4,7 @@ import iconsMap from "../../../IconsMapper/IconsMap";
 import './stylesheet.scss';
 
 
-const MoreOptions = ({handleMoreAction})=>{
+const MoreOptions = ({handleMoreAction, currentTaskStatus})=>{
 
     const options = ["Archive", "Delete Task", "Save and Exit"]
 
@@ -12,9 +12,9 @@ const MoreOptions = ({handleMoreAction})=>{
     <div className="more-options-container">
        {options.map((option, index)=>{
         return (
-            <div className = "options-index" key={shortid.generate()+index} onClick={()=>handleMoreAction(option)} >
+            <button disabled= {currentTaskStatus && currentTaskStatus !== "succeeded"} className = "options-index" key={shortid.generate()+index} onClick={()=>handleMoreAction(option)} >
                 {option}
-            </div>
+            </button>
         )
        })}
     </div>)
@@ -68,7 +68,7 @@ const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare,
                     }}>
                     {iconsMap.more(18, 800, showMore)}
                 </button>}
-                { showMore ? <MoreOptions handleMoreAction = {handleMoreAction}/> : null}
+                { showMore ? <MoreOptions handleMoreAction = {handleMoreAction} currentTaskStatus = {currentTaskStatus}/> : null}
             </div>
             <div className="icons-container"
                 onClick={(e)=>handleClose(e)}>

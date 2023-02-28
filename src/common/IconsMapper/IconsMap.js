@@ -14,7 +14,12 @@ import { SaveOutlined,
     SendOutlined,
     ClearOutlined,
     DoubleRightOutlined,
-    SearchOutlined
+    SearchOutlined,
+    CarryOutOutlined,
+    FundOutlined,
+    FileZipOutlined,
+    SettingOutlined,
+    PlusSquareOutlined
 
 } from '@ant-design/icons';
 
@@ -71,11 +76,26 @@ const iconsMap = (()=>{
             return <ClearOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></ClearOutlined>
         },
         doubleRightArror: (size = 20, weight = 800)=>{
-            return <DoubleRightOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></DoubleRightOutlined>
+            return <DoubleRightOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`, alignSelf:'end'}}></DoubleRightOutlined>
         },
         search: (size = 20, weight = 800)=>{
             return <SearchOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></SearchOutlined>
-        }
+        },
+        recentTasks: (size = 14, weight = 800)=>{
+            return <CarryOutOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></CarryOutOutlined>
+        },
+        board: (size = 14, weight = 800)=>{
+            return <FundOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></FundOutlined>
+        },
+        archive: (size = 14, weight = 800)=>{
+            return <FileZipOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></FileZipOutlined>
+        },
+        settings: (size = 14, weight = 800)=>{
+            return <SettingOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></SettingOutlined>
+        },
+        add: (size = 14, weight = 800)=>{
+            return <PlusSquareOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></PlusSquareOutlined>
+        },
     }
 })();
 

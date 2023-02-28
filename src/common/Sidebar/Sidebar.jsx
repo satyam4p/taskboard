@@ -40,7 +40,7 @@ const MenuList = ({children})=>{
     const { activeIndex, setActiveIndex, panel, setPanel} = useSideMenuContext();
     const onActive = (index, hasPanel, panelData, handleIndexAction, children, id)=>{
         if(typeof handleIndexAction === "function"){
-            handleIndexAction(children)
+            handleIndexAction(id)
         }
         if(hasPanel && activeIndex?.index !== index){
             setPanel(prev=>{
@@ -114,7 +114,10 @@ const MenuIndex = ({children, isActive, onActive, index, arrowOnHover,
             onMouseLeave={()=>showArrow()}>
 
             {children}
-            {arrow ? iconsMap.doubleRightArror(14) : null}
+            <div>
+                {arrow ?iconsMap.doubleRightArror(14) : null}
+            </div>
+            
         </div>
     )
 }
