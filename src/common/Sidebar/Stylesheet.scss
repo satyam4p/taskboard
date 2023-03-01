@@ -120,25 +120,25 @@
                 color: #000000;
             }
             .sidepanel_index_status-tag.in_progress{
-                background-color: #D5D5D5;
+                background-color: $gray-3;
             }
             .sidepanel_index_status-tag.complete{
-                background-color: #93D4BE;
+                background-color: $green-3;
             }
             .sidepanel_index_status-tag.new{
-                background-color: #ACD9FF;
+                background-color: $blue-3;
             }
             .sidepanel_index_status-tag.closed{
-                background-color: #FAA6AA;
+                background-color: $red-2;
             }
             .sidepanel_index_label-tag.rca{
-                background-color: #C8C8F0;
+                background-color: $grape-3;
             }
             .sidepanel_index_label-tag.bug{
-                background-color: #FAA6AA;
+                background-color: $red-2;
             }
             .sidepanel_index_label-tag.task{
-                background-color: #FBEFD1;
+                background-color: $yellow-1;
             }
 
         }
