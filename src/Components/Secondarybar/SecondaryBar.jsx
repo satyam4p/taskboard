@@ -12,18 +12,7 @@ function SecondaryBar({
 
     return(
         <>
-            <Flex sx={{
-                width:['95%', null, null],
-                height:'45px',
-                alignSelf:'baseline',
-                marginLeft:'calc(100% - 97.5%)',
-                marginTop:'1.5%',
-                borderRadius:10,
-                bg:'#F6F6F6',
-                display:'flex',
-                alignItems:'center',
-                justifyContent:'space-between'
-            }}>
+            <div className = {`secondary-bar-container`}>
                 <button className='hamburger-btn'
                         onClick={()=>{
                         setToggleSideMenu((prev)=>!prev)
@@ -35,7 +24,7 @@ function SecondaryBar({
                 </button>
                 <button className='profile-btn'
                         onClick={()=>setToggleProile(!toggleProfile)} />
-            </Flex>
+            </div>
 
             {toggleProfile && <ProfileTogggle />}
         </>

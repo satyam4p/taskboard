@@ -1,3 +1,17 @@
+.secondary-bar-container{
+    width: 95%;
+    height: 45px;
+    align-self: baseline;
+    margin-left:calc(100% - 97.5%);
+    border-radius:10px;
+    background: #F6F6F6;
+    position: absolute;
+    display: flex;
+    top: 3%;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .hamburger-btn{
     width: 35px;
     height: 35px;

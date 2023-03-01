@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import Sidebar from "../../common/Sidebar/Sidebar";
 import { selectDrawerDetails } from "../../features/Drawer/drawerSlice";
 import { useSelector } from "react-redux";
@@ -7,9 +6,12 @@ import useDrawerDetails from "../../helpers/hooks/useDrawerDetails";
 import shortid from "shortid";
 import useActions from "../../helpers/hooks/useActions";
 import iconsMap from "../../common/IconsMapper/IconsMap";
+import ThemeContext from "../../theme/themeContext";
+import { useContext } from "react";
 
 
 function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
+    const { theme } = useContext(ThemeContext);
     const [tasks, setTasks] = useState([]);
     const drawerDetails = useSelector(selectDrawerDetails);
     const fetchDrawerDetails = useDrawerDetails();
@@ -42,13 +44,15 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                             height:'25px',
                             display:"flex",
                             alignItems:"center",
-                            fontSize:'12px'
+                            fontSize:'12px',
+                            margin:'10px 0px 0px 0px'
+                            
                             }} onClick = {()=>execute({action: "create", type: "task"})}>
                         {iconsMap.add()}&nbsp;Create
                     </button>
                 </Sidebar.MenuIndex>
                 <Sidebar.MenuIndex>
-                    <div className="title-container">
+                    <div className={`title-container`}>
                         {iconsMap.board()}&nbsp;Board
                     </div>
                 </Sidebar.MenuIndex>

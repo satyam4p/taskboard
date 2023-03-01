@@ -25,10 +25,9 @@ const Sidebar = ({ children, showSideMenu })=>{
 
     const [activeIndex, setActiveIndex] = useState({});
     const [panel, setPanel] = useState({});
-
     return(
         <SideMenuContext.Provider value={{activeIndex, setActiveIndex, panel, setPanel}}>
-            <div className={`sidemenu-container ${showSideMenu ? 'show' : 'hide'}`}>
+            <div className={`sidemenu-container ${showSideMenu ? 'show' : 'hide'} sidebar`}>
                 { children }
             </div>
         </SideMenuContext.Provider>
@@ -108,7 +107,7 @@ const MenuIndex = ({children, isActive, onActive, index, arrowOnHover,
     const [arrow, setArrow] = useState(false);
     const showArrow = ()=> arrowOnHover ? arrow ? setArrow(false) : setArrow(true) : null;
     return(
-        <div className={`menu__index ${isActive ? 'active' : '' } ${bottom ? 'bottom': ''}`}
+        <div className={`menu__index sidebar-index ${isActive ? 'active' : '' } ${bottom ? 'bottom': ''}`}
             onClick={()=>onActive(index, hasPanel, panelData, handleIndexAction, children, id)}
             onMouseOver={()=>showArrow()} 
             onMouseLeave={()=>showArrow()}>
@@ -149,7 +148,7 @@ const SidePanels = ({ children, id })=>{
     })
 
     return(
-        <div className={`sidemenu__sidePanels ${ activeIndex?.index && activeIndex?.id === id && panel.show ? 'show' : 'hide'}`}>
+        <div className={`sidemenu__sidePanels ${ activeIndex?.index && activeIndex?.id === id && panel.show ? 'show' : 'hide'} sidebar`}>
             { Children }
         </div>
     )
@@ -160,7 +159,7 @@ Sidebar.SidePanels = SidePanels;
 const SidePanelIndex = ({ children, handleAction, options })=>{
     if(options){
         return (
-            <div className={`sidemenu__sidepanel`} onClick = {()=>handleAction(options?.id)}>
+            <div className={`sidemenu__sidepanel sidebar-index`} onClick = {()=>handleAction(options?.id)}>
             <div className='sidepanel_index_tag-container'>
                 <Tag className={`sidepanel_index_status-tag ${options?.status.toLowerCase().split(" ").join("_")}`} >{options?.status}</Tag>
                 <Tag className={`sidepanel_index_label-tag ${options?.label.toLowerCase().split(" ").join("_")}`} >{options?.label}</Tag>
