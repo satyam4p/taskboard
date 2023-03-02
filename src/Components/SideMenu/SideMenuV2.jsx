@@ -6,12 +6,10 @@ import useDrawerDetails from "../../helpers/hooks/useDrawerDetails";
 import shortid from "shortid";
 import useActions from "../../helpers/hooks/useActions";
 import iconsMap from "../../common/IconsMapper/IconsMap";
-import ThemeContext from "../../theme/themeContext";
-import { useContext } from "react";
 
 
 function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
-    const { theme } = useContext(ThemeContext);
+
     const [tasks, setTasks] = useState([]);
     const drawerDetails = useSelector(selectDrawerDetails);
     const fetchDrawerDetails = useDrawerDetails();

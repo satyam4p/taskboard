@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import React, { useEffect, useState, useContext, useCallback } from "react";
-import { Card, Container } from "theme-ui";
+import { Card } from "theme-ui";
 import iconsMap from "../IconsMapper/IconsMap";
 import shortid from "shortid";
 import ThemeContext from "../../theme/themeContext";

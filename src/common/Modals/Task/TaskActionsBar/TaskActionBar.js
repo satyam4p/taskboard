@@ -1,8 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import shortid from "shortid";
 import iconsMap from "../../../IconsMapper/IconsMap";
 import './stylesheet.scss';
-import ThemeContext from "../../../../theme/themeContext";
 
 
 const MoreOptions = ({handleMoreAction, currentTaskStatus})=>{
@@ -23,8 +22,6 @@ const MoreOptions = ({handleMoreAction, currentTaskStatus})=>{
 }
 
 const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare, editEnabled, handleMoreAction}) => {
-
-    const {theme} = useContext(ThemeContext);
 
     const [showMore, setMore] = useState(false);
     const handleMore =(e)=>{

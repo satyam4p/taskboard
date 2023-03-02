@@ -6,7 +6,6 @@ import { Box, Container } from "theme-ui";
 
 /** Contexts */
 import TaskContext from "./TaskContext/TaskProvider";
-import ThemeContext from "../../../theme/themeContext";
 
 /** custom components */
 import TaskHeader from "./TaskModalHeader/TaskHeader"; 
@@ -34,7 +33,7 @@ import './stylesheet.scss';
 const Comments = React.lazy(()=>import('../../Comments/comments'));
 
 const TaskModal=(props)=>{
-    
+
     const { task, setTask } = useContext( TaskContext );
     const create = useCreateAndGetTask();
     const update = useUpdateTask();
