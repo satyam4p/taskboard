@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import shortid from "shortid";
 import iconsMap from "../../../IconsMapper/IconsMap";
 import './stylesheet.scss';
+import ThemeContext from "../../../../theme/themeContext";
 
 
 const MoreOptions = ({handleMoreAction, currentTaskStatus})=>{
@@ -23,6 +24,8 @@ const MoreOptions = ({handleMoreAction, currentTaskStatus})=>{
 
 const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare, editEnabled, handleMoreAction}) => {
 
+    const {theme} = useContext(ThemeContext);
+
     const [showMore, setMore] = useState(false);
     const handleMore =(e)=>{
         e.preventDefault();
@@ -33,46 +36,57 @@ const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare,
     return(
         <div className="actions-container">
             <div className="icons-container">
-                {<button type="submit" disabled={!editEnabled}> 
+                <button className="icon" type="submit" disabled={!editEnabled}> 
                 { currentTaskStatus === "loading" 
                     ? <span style={{color:'green'}}>Creating...{iconsMap.loading(18)}</span> 
                     : editEnabled && currentTaskStatus !== "succeeded" ? iconsMap.create(18) : iconsMap.save(18) } 
-                </button>}
+                </button>
             </div>
             <div className="icons-container">
-                {<button sx={{
+                <button className="icon" sx={{
                     background:'transparent',
                     border:'none'
                 }}
                 onClick={(e)=>handleShare(e)}
                 >
                     {iconsMap.share(18)}
-                </button>}
+                </button>
             </div>
             <div className="icons-container">
-                {<button 
-                onClick={e=>handleEdit(e)}
-                sx={{
-                    background:'transparent',
-                    border:'none'
-                }}>
-                    {iconsMap.edit(editEnabled, 18)}
-                </button>}
+                <button 
+                    className="icon"
+                    onClick={e=>handleEdit(e)}
+                    sx={{
+                        background:'transparent',
+                        border:'none'
+                    }}>
+                        {iconsMap.edit(editEnabled, 18)}
+                </button>
             </div>
             <div className="icons-container">
-                {<button
+                <button
+                    className="icon"
                     onClick={e=>handleMore(e)}
                     sx={{
                     background:'transparent',
                     border:'none'
                     }}>
                     {iconsMap.more(18, 800, showMore)}
-                </button>}
+                </button>
                 { showMore ? <MoreOptions handleMoreAction = {handleMoreAction} currentTaskStatus = {currentTaskStatus}/> : null}
             </div>
             <div className="icons-container"
                 onClick={(e)=>handleClose(e)}>
-                {iconsMap.close(18)}
+                    <button 
+                    className="icon"
+                    onClick={e=>handleEdit(e)}
+                    sx={{
+                        background:'transparent',
+                        border:'none'
+                    }}>
+                        {iconsMap.close(18)}
+                </button>
+               
             </div>
         </div>
     )

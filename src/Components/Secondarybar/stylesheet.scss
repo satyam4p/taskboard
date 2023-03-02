@@ -1,3 +1,5 @@
+@use '../../theme//colors.scss' as *;
+
 .secondary-bar-container{
     width: 95%;
     height: 45px;
@@ -10,6 +12,29 @@
     top: 3%;
     align-items: center;
     justify-content: space-between;
+
+    .right-section{
+        width: 6%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .theme-change-btn{
+            border: none;
+            background-color: transparent;
+            padding: 0px;
+            margin: 0px;
+            color: $dark-7;
+        }
+        .theme-change-btn:hover{
+            color: $grape-7;
+        }
+    }
+}
+
+.secodnary-dark{
+    background-color: $gray-4;
 }
 
 .hamburger-btn{
@@ -26,6 +51,10 @@
     transition: all .5s ease-in-out;
     position: relative;
 }
+.hamburger-btn:hover{
+    background-color: $dark-0;
+
+}
 .profile-btn{
     border-radius: 50%;
     width: 30px;
@@ -35,6 +64,7 @@
     margin-right: 10px;
     border: none;
 }
+
 .bar{
     width: 90%;
     height: 4px;

@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext, useCallback } from "react";
 import { Card, Container } from "theme-ui";
 import iconsMap from "../IconsMapper/IconsMap";
 import shortid from "shortid";
+import ThemeContext from "../../theme/themeContext";
 // import TextAreaField from "../Fields/TextArea/TextArea";
 import useAuth from "../../helpers/hooks/useAuth";
 import { selectComments, selectCurrentTask, selectCommentStatus } from "../../features/task/taskSlice";
@@ -19,6 +20,7 @@ import CommentsSkeleton from "./Skeleton/CommentsSkeleton";
 
 const Comments =(props)=>{
 
+    const {theme} = useContext(ThemeContext);
     const [value, setValue] = useState();
     const commentStatus = useSelector(selectCommentStatus);
     const entityKey = "userComment";
@@ -71,28 +73,23 @@ const Comments =(props)=>{
     const isActionEnabled = value && value.trim() && value.length > 0 ? true : false;
 
     return(
-        <Container sx={{
-            marginY:'5px',
-            fontSize:0
-        }}>
-            <Card sx={{
+        <div className="comments-container">
+            <div className="section-comment" sx={{
                         marginY:'8px',
                         paddingY:'4px',
                     }}>
-                <div sx={{
-                    marginY:'4px'
-                }}>
+                <div className="username-text">
                     <span style={{textTransform:'capitalize'}}>{iconsMap.profile(16)} {auth?.user?.username}</span>
                 </div>
                     <TextArea 
                         style={{fontSize:'12px'}}
                         disabled = {!isEditable}  
-                        className="text-area-container"
+                        className={`text-area-container ${theme}`}
                         value = {value}
                         onChange = {e=>handleChange(e)}
                     />
                 <CommentActions setValue = {setValue} actionsEnabled = {isActionEnabled}/>
-            </Card>
+            </div>
             {commentStatus === "loading" ?
                 <CommentsSkeleton/>
                 :
@@ -116,7 +113,7 @@ const Comments =(props)=>{
                 }) : null  
             }
             
-        </Container>
+        </div>
     )
 }
 
