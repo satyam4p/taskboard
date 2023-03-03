@@ -174,7 +174,7 @@ const TaskModal=(props)=>{
                                 padding:'4px',
                                 fontSize:0,
                                 '&:hover':{
-                                    bg:'#F6F6F6'
+                                    border:'1px solid #F6F6F6'
                                 },
                             }}
                             onClick={e=>toggleTab(e,'comments')}
@@ -190,7 +190,7 @@ const TaskModal=(props)=>{
                                 padding:'4px',
                                 fontSize:0,
                                 '&:hover':{
-                                    bg:'#F6F6F6'
+                                    border:'1px solid #F6F6F6'
                                 }
                                 
                             }}
