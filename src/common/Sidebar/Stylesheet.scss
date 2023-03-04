@@ -70,13 +70,14 @@
 
     .sidemenu__sidePanels{
         width: 140%;
-        height: 86vh;
+        max-height: 86vh;
         display: block;
         position: absolute;
         top: 0%;
         border-radius: 4px;
         z-index: 0;
         font-size: 14px;
+        overflow-y: auto;
     }
     .sidemenu__sidePanels.show{
         left: 101%;
