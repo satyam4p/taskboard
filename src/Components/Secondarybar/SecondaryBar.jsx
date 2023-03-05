@@ -31,11 +31,13 @@ function SecondaryBar({
                             {iconsMap.theme(24)}
                         </button>
                         <button className='profile-btn'
-                                onClick={()=>setToggleProile(!toggleProfile)} />
+                                onClick={()=>setToggleProile(!toggleProfile)}>
+                                
+                        </button>
+
                     </div>
                     
                 </div>
-
                 {toggleProfile && <ProfileTogggle />}
             </>
 
