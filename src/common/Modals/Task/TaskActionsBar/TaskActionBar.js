@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import shortid from "shortid";
 import iconsMap from "../../../IconsMapper/IconsMap";
 import './stylesheet.scss';
+import useTheme from '../../../../helpers/hooks/useTheme';
 
 
 const MoreOptions = ({handleMoreAction, currentTaskStatus})=>{
 
     const options = ["Archive", "Delete Task", "Save and Exit"]
-
+    const [changeTheme, theme] = useTheme();
     return(
-    <div className="more-options-container">
+    <div className={`more-options-container ${theme === 'light' ? 'bg-light' : 'bg-dark'}`}>
        {options.map((option, index)=>{
         return (
             <button disabled= {currentTaskStatus && currentTaskStatus !== "succeeded"} className = "options-index" key={shortid.generate()+index} onClick={()=>handleMoreAction(option)} >

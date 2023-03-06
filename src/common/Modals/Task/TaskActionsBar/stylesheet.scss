@@ -1,3 +1,5 @@
+@use '../../../../theme/colors.scss' as *;
+
 .actions-container{
     display: flex;
     align-items: center;
@@ -19,7 +21,6 @@
         .more-options-container{
             min-width: 100px;
             min-height: 100px;
-            background-color: #F6F6F6;
             border: none;
             border-radius: 5px;
             display: flex;
@@ -40,8 +41,25 @@
                 border-radius: 5px;
                 font-size: inherit;
             }
-            .options-index:hover{
+            :hover{
                 background: #D5D5D5;
+            }
+        }
+
+        .bg-light{
+            background-color: $gray-1;
+            color: $dark-9;
+            :hover{
+                background: $gray-3;
+            }
+        }
+
+        .bg-dark{
+            background-color: $dark-5;
+            color: $white;
+
+            :hover{
+                background: $dark-9;
             }
         }
     }
