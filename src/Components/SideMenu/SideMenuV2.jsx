@@ -15,9 +15,15 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
     const fetchDrawerDetails = useDrawerDetails();
     const execute = useActions();
     const handleIndexAction = (type)=>{
-
-        fetchDrawerDetails(type);
-
+        if(type === "board"){
+            const locationHash = window.location.hash;
+            console.log("currentHash:: ",locationHash);
+            let newHash = locationHash.replace('',"/board");
+            console.log("newhash:: ",newHash);
+            window.history.pushState({}, null, newHash);
+        }else{
+            fetchDrawerDetails(type);
+        }
     }
 
     useEffect(()=>{
@@ -49,7 +55,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                         {iconsMap.add()}&nbsp;Create
                     </button>
                 </Sidebar.MenuIndex>
-                <Sidebar.MenuIndex>
+                <Sidebar.MenuIndex  id = {"board"} handleIndexAction = {handleIndexAction}>
                     <div className={`title-container`}>
                         {iconsMap.board()}&nbsp;Board
                     </div>
