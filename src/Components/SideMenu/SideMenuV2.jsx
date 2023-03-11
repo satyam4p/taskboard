@@ -53,7 +53,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                 </Sidebar.MenuIndex>
                 <Sidebar.MenuIndex  id = {"board"} handleIndexAction = {handleIndexAction}>
                     <div className={`title-container`}>
-                        <Link to={"board"}> {iconsMap.board()}&nbsp;Board</Link>
+                        <Link style={{textDecoration:'none'}} to={"board"}> {iconsMap.board()}&nbsp;Board</Link>
                        
                     </div>
                 </Sidebar.MenuIndex>

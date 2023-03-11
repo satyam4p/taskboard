@@ -7,6 +7,7 @@ import useModals from '../helpers/hooks/useModals';
 import { TaskProvider } from '../common/Modals/Task/TaskContext/TaskProvider';
 import Notification from '../common/Notification/Notification';
 import ThemeContext from '../theme/themeContext';
+import '../theme/_main.scss';
 
 const TaskModal = React.lazy(()=>import('../common/Modals/Task/TaskModal'));
 
