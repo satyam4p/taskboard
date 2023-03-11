@@ -1,12 +1,14 @@
 import Sidebar from "../../common/Sidebar/Sidebar";
 import { selectDrawerDetails } from "../../features/Drawer/drawerSlice";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useDrawerDetails from "../../helpers/hooks/useDrawerDetails";
 import shortid from "shortid";
 import useActions from "../../helpers/hooks/useActions";
 import iconsMap from "../../common/IconsMapper/IconsMap";
 import { Link } from "react-router-dom";
+import './stylesheet.scss';
+import ThemeContext from "../../theme/themeContext";
 
 
 function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
@@ -19,8 +21,9 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
         if(type !== "board" ){
             fetchDrawerDetails(type);
         }
-            
     }
+
+    const {theme} = useContext(ThemeContext);
 
     useEffect(()=>{
 
@@ -31,7 +34,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
     },[drawerDetails]);
     
     return(
-        <div>
+        <div className="sidemenu-parent">
         <Sidebar showSideMenu={showSideMenu}>
             <Sidebar.MenuList>
                 <Sidebar.MenuIndex>
@@ -53,8 +56,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                 </Sidebar.MenuIndex>
                 <Sidebar.MenuIndex  id = {"board"} handleIndexAction = {handleIndexAction}>
                     <div className={`title-container`}>
-                        <Link style={{textDecoration:'none'}} to={"board"}> {iconsMap.board()}&nbsp;Board</Link>
-                       
+                        <Link style={{textDecoration:'none', color:`${theme === "light" ? '#000000' : '#FFFFFF'}`}} to={"board"}> {iconsMap.board()}&nbsp;Board</Link>
                     </div>
                 </Sidebar.MenuIndex>
                 <Sidebar.MenuIndex id = {"recent_tasks"} arrowOnHover hasPanel panelData = {tasks} handleIndexAction = {handleIndexAction}>
