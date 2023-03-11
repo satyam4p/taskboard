@@ -6,6 +6,7 @@ import useDrawerDetails from "../../helpers/hooks/useDrawerDetails";
 import shortid from "shortid";
 import useActions from "../../helpers/hooks/useActions";
 import iconsMap from "../../common/IconsMapper/IconsMap";
+import { Link } from "react-router-dom";
 
 
 function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
@@ -15,15 +16,10 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
     const fetchDrawerDetails = useDrawerDetails();
     const execute = useActions();
     const handleIndexAction = (type)=>{
-        if(type === "board"){
-            const locationHash = window.location.hash;
-            console.log("currentHash:: ",locationHash);
-            let newHash = locationHash.replace('',"/board");
-            console.log("newhash:: ",newHash);
-            window.history.pushState({}, null, newHash);
-        }else{
+        if(type !== "board" ){
             fetchDrawerDetails(type);
         }
+            
     }
 
     useEffect(()=>{
@@ -57,7 +53,8 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                 </Sidebar.MenuIndex>
                 <Sidebar.MenuIndex  id = {"board"} handleIndexAction = {handleIndexAction}>
                     <div className={`title-container`}>
-                        {iconsMap.board()}&nbsp;Board
+                        <Link to={"board"}> {iconsMap.board()}&nbsp;Board</Link>
+                       
                     </div>
                 </Sidebar.MenuIndex>
                 <Sidebar.MenuIndex id = {"recent_tasks"} arrowOnHover hasPanel panelData = {tasks} handleIndexAction = {handleIndexAction}>

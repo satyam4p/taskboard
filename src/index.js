@@ -1,31 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import { ThemeProvider } from 'theme-ui';
 import theme from './theme/theme';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import {AuthProvider} from './context/AuthProvider';
 import { ModalProvider } from './context/ModalProvider';
 import { store } from './store/store';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from './theme/themeContext';
+import { routes } from './routes';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}> 
-        <BrowserRouter>
           <AuthProvider>
             <ModalProvider>
-              <Routes>
+              {/* <Routes>
                 <Route path='/*' element={<App />} />
-              </Routes>
+                
+              </Routes> */}
+              <RouterProvider router={routes}/>
             </ModalProvider>
           </AuthProvider>
-        </BrowserRouter>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { routes } from './routes';
+import { routes } from './routes.js';
 import { Route, Routes } from 'react-router';
 import Layout from './Components/Layout';
 import RequireAuth from './Components/RequireAuth';
@@ -8,6 +8,7 @@ import PersistUser from './Components/PersistUser';
 import './theme/_main.scss';
 
 function App() {
+
   return (
     <div className={`main-container`}>
       <React.Fragment>
@@ -21,7 +22,7 @@ function App() {
                       <Route path={routes.path} element={<routes.component/>} key={shortid.generate()+key}/>
                     </Route>
                   </Route>
-                )  
+                )
               }
               return <Route path={routes.path} element={<routes.component/>} key={shortid.generate()+key}/>
             })}
