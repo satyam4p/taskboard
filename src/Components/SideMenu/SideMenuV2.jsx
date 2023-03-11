@@ -7,7 +7,6 @@ import shortid from "shortid";
 import useActions from "../../helpers/hooks/useActions";
 import iconsMap from "../../common/IconsMapper/IconsMap";
 import { Link } from "react-router-dom";
-import './stylesheet.scss';
 import ThemeContext from "../../theme/themeContext";
 
 
