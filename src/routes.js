@@ -4,9 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 const Login = React.lazy(()=> import('./views/auth'));
 const Logout = React.lazy(()=> import('./views/logout'));
 
-const Home = React.lazy(()=> import('./views/home'));
+const Home = React.lazy(()=> import('./views/Layout/Layout'));
 const Board = React.lazy(()=>import('./views/Board/board'));
-const Layout = React.lazy(()=>import('./Components/Layout'));
 
 
 const routes = createBrowserRouter([
@@ -36,7 +35,7 @@ const routes = createBrowserRouter([
         name:'Home',
         element: (
           <React.Suspense>
-            <Home/>,
+            <Home/>
           </React.Suspense>  
         ),
         AuthRequired: true,
