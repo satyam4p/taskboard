@@ -1,4 +1,5 @@
 import React, { useState,Suspense, useContext } from 'react';
+import { Outlet } from 'react-router';
 import SecondaryBar from '../Components/Secondarybar/SecondaryBar';
 import SideMenu from '../Components/SideMenu/SideMenuV2';
 // import SideMenu from '../Components/SideMenu/SideMenu';
@@ -42,6 +43,7 @@ function Home(props){
                 </Suspense>   
             }
             {showNotification && <Notification/>}
+            <Outlet/>
         </div>
     )
 
