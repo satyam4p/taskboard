@@ -1,17 +1,19 @@
+import { replace } from "lodash";
 import { useLocation, Navigate, Outlet } from "react-router";
 import useAuth from "../helpers/hooks/useAuth";
+import { authProvider } from "../helpers/authProvider/authProvider";
 
-const RequireAuth=()=>{
+const RequireAuth=({children})=>{
 
     const { auth } = useAuth();
     const location = useLocation();
 
-    return (
-        auth?.token && auth?.user 
-        ? <Outlet />
-        : <Navigate to="/login" state={{from: location}} replace/>
-    )
-
+    if( !auth || !auth?.isAuthenticated){
+        return (
+            <Navigate to={"/login"} state={{from: location}} replace/>
+        )
+    }
+    return children;
 }
 
 export default RequireAuth;

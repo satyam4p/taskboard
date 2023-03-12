@@ -1,4 +1,9 @@
 {
+    "Auth":{
+        "LOGIN": "/auth/login",
+        "LOGOUT": "auth/logout",
+        "LOGOUT_ALL": "auth/logoutAll"
+    },
     "Tasks":{
         "FETCH_ALL": "/tasks",
         "PATCH_TASK": "/tasks/updateStatus/:id",

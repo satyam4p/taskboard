@@ -1,5 +1,7 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import PersistUser from './Components/PersistUser';
+import RequireAuth from './Components/RequireAuth';
 
 const Login = React.lazy(()=> import('./views/auth'));
 const Logout = React.lazy(()=> import('./views/logout'));
@@ -35,7 +37,11 @@ const routes = createBrowserRouter([
         name:'Home',
         element: (
           <React.Suspense>
-            <Home/>
+             <PersistUser>
+                <RequireAuth>
+                    <Home/>
+                </RequireAuth>
+            </PersistUser>
           </React.Suspense>  
         ),
         AuthRequired: true,

@@ -13,7 +13,7 @@ const useRefreshToken=()=>{
         setAuth(prev=>{
             console.log("prev:: ",prev.token);
             console.log("new:: ",response?.data?.token);
-            return {...prev, user: response?.data?.user, token:response?.data?.token};
+            return {...prev, isAuthenticated:true, user: response?.data?.user, token:response?.data?.token};
         });
         return response.data?.token;
     }

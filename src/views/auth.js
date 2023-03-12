@@ -22,7 +22,7 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 function Auth(){
 
-    const { setAuth } = useAuth();
+    const { auth, setAuth, signIn } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -61,25 +61,13 @@ function Auth(){
         }
 
         try{
-            const response = await axios.post(AUTH_LOGIN_URL,
-            { email, password },
-             {
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                withCredentials:true
-             });
-            if(response.status === 200){
-                const user = response.data?.user;
-                const token = response.data?.token;
-                setemail('');
-                setPassword('');
-                setAuth({
-                    user,
-                    token
-                });
-                navigate( from, {replace: true});
-            }
+            signIn({email, password}, (isAuthenticated)=>{
+                if(isAuthenticated){
+                    setemail('');
+                    setPassword('');
+                    navigate( from, {replace: true});
+                }
+            })
         }catch(err){
             if(!err?.response){
                 setErrorMessage("No Server Reponse");

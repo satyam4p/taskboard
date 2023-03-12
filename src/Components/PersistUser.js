@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import useRefreshToken from '../helpers/hooks/useRefreshToken';
 import useAuth from '../helpers/hooks/useAuth';
 
-const PersistUser =()=>{
+const PersistUser =({children})=>{
 
     const { auth } = useAuth();
     const refresh = useRefreshToken();
@@ -39,7 +39,7 @@ const PersistUser =()=>{
             {
             isLoading 
                 ? <p>Loading....</p>
-                : <Outlet/>
+                : children
             }
         </>
     )

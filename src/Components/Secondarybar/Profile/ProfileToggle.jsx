@@ -1,5 +1,6 @@
 /** @jsxImportSource theme-ui */
 import { Flex } from "theme-ui";
+import { useNavigate } from "react-router";
 import useAuth from "../../../helpers/hooks/useAuth";
 import useAxiosPrivate from "../../../helpers/hooks/useAxiosPrivate";
 import './stylesheet.scss';
@@ -9,15 +10,12 @@ const LOGOUT_URL = 'auth/logout';
 const LOGOUT_ALL_URL = 'auth/logoutAll'
 
 const ProfileTogggle =(props)=>{
-
-    const { setAuth } = useAuth();
+    const navigate = useNavigate();
+    const { setAuth, signOut } = useAuth();
     const axiosPrivate = useAxiosPrivate();
 
     const handlLogout= async (e, type)=>{
-        type === 'all' 
-            ? await axiosPrivate.post(LOGOUT_ALL_URL) 
-            : await axiosPrivate.post(LOGOUT_URL); 
-        setAuth({});
+       signOut(type)
     }
 
     const [changeTheme, theme] = useTheme();
