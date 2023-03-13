@@ -17,7 +17,7 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
     const fetchDrawerDetails = useDrawerDetails();
     const execute = useActions();
     const handleIndexAction = (type)=>{
-        if(type !== "board" ){
+        if(type !== "board" || type !== "archive" ){
             fetchDrawerDetails(type);
         }
     }
@@ -54,20 +54,25 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
                     </button>
                 </Sidebar.MenuIndex>
                 <Sidebar.MenuIndex  id = {"board"} handleIndexAction = {handleIndexAction}>
-                    <div className={`title-container`}>
-                        <Link style={{textDecoration:'none', color:`${theme === "light" ? '#000000' : '#FFFFFF'}`}} to={"board"}> {iconsMap.board()}&nbsp;Board</Link>
-                    </div>
+                    <Link to={"board"}> 
+                        <div className="title-container">
+                            {iconsMap.board()}&nbsp;Board
+                        </div>
+                    </Link>
                 </Sidebar.MenuIndex>
+
                 <Sidebar.MenuIndex id = {"recent_tasks"} arrowOnHover hasPanel panelData = {tasks} handleIndexAction = {handleIndexAction}>
                     <div className="title-container">
                         {iconsMap.recentTasks()}&nbsp;Recent Tasks
                     </div>
                     
                 </Sidebar.MenuIndex>
-                <Sidebar.MenuIndex>
-                    <div className="title-container">
-                        {iconsMap.archive()}&nbsp;Archive
-                    </div>
+                <Sidebar.MenuIndex id = {"archive"} handleIndexAction = {handleIndexAction}>
+                    <Link to={"archive"}>
+                        <div className="title-container">
+                            {iconsMap.archive()}&nbsp;Archive
+                        </div>
+                    </Link>
                 </Sidebar.MenuIndex>
                 <Sidebar.MenuIndex id = {"settings"} bottom arrowOnHover hasPanel>
                     <div className="title-container">

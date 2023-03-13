@@ -30,7 +30,7 @@
         border: none;
         border-radius: 5px;
         background: transparent;
-        margin: 0px;
+        margin: 1px;
         padding: 0px 4px;
         text-align: left;
         align-self: center;
@@ -38,7 +38,15 @@
         align-items: center;
         z-index: 100;
         justify-content: space-between;
+
+        a{
+            width: 100%;
+            height: inherit;
+            text-decoration: none;
+            color: inherit;
+        }
     }
+
     .menu__index.bottom{
         width: 90%;
         bottom: 2%;
@@ -61,8 +69,12 @@
         color: $white;
     }
 
-    .menu__index.active{
-        background-color: $dark-3;
+    .menu__index.light_index.active{
+        background-color: $dark-0;
+        color: $dark-9;
+    }
+    .menu__index.dark_index.active{
+        background-color: $dark-7;
         color: $white;
     }
 
