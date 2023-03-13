@@ -1,7 +1,8 @@
 import { useEffect, useState , useRef} from 'react';
 // import AxiosAjax from '../network/axiosAjax';
-import useAuth from '../helpers/hooks/useAuth';
+import useAuth from '../../helpers/hooks/useAuth';
 import { useNavigate, useLocation } from 'react-router';
+import './stylesheet.scss';
 
 // import { encryptPass } from '../helpers/commonUtils/authUtils';
 import { 
@@ -14,9 +15,7 @@ import {
     Input,
     Link
 } from 'theme-ui';
-import axios from '../network/axios';
 
-const AUTH_LOGIN_URL = "/auth/login"  
 const EMAIL_REGEX = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
@@ -87,124 +86,67 @@ function Auth(){
     }
 
     return(
-        <Flex>
-            <Flex
-                sx={{
-                    width:'25%',
-                    background:'#123E2C', 
-                    height:'100vh'
-                }}>
-            </Flex>
-            <Flex
-            sx={{
-                width:'75%',
-                height:'100vh',
-                background:'transparent',
-                flexDirection:'column'
-            }}>
-                <Box sx={{
-                    width:'100%',
-                    height:'10%',
-                    display:'flex',
-                    justifyContent:'end'
-                }}>
-                    <Container sx={{
-                        alignSelf:'center',
-                        display:'flex',
-                        justifyContent:'end',
-                        width:'95%',
-                        padding:'2px',
-                        alignItems:'center',
-                        height:'100%',
-                        fontSize:0
-                    }}>
-                        <Text sx={{
-                            marginX:'10px'
-                        }}>
+        <div className='auth-container'>
+            <div className='partial-section'/>
+            <div className='auth-form-container'>
+                <div className='signup-container'>
+                    <div className='signup--actions'>
+                        <text>
                             Don't have an account? 
-                        </Text>
-                        <Button
-                            onClick={e=>handleSignUp(e)}
-                            sx={{
-                                background:'#123E2C',
-                                color:'#FFFF',
-                                borderRadius:'4px',
-                                fontWeight:1
-                            }}>
+                        </text>
+                        <button onClick={e=>handleSignUp(e)}>
                             Create Account
-                        </Button>
-                    </Container>
-                </Box>
-                <Box sx={{
-                    width:'100%',
-                    height:'90%',
-                    display:'flex',
-                    flexDirection:'column',
-                    alignItems:'center',
-                }}>
-                <Container sx={{
-                    margin:'150px 400px 0 0',
-                    width:'45%',               
-                }}>
-                    <Text sx={{
-                        fontSize:4,
-                        fontWeight:1,
-                        padding:'5px'
-                    }}>
+                        </button>
+                    </div>
+                </div>
+                <div className='form-container'>
+                <div className='form-fields-container'>
+                    <header>
                         Log into Taskboard
-                    </Text>
+                    </header>
                     <br/>
-                    <Text sx={{
-                        paddingX:'5px',
-                        display:'block',
-                        color:'#FF4E50',
-                        paddingTop:'5px'
-                    }} 
-                    ref={errRef}>{errorMessage}</Text>
-                    <Box sx={{
-                        marginTop:'15px',
-                        fontSize:0
-                    }} as={"form"} onSubmit={(e)=>handleSubmit(e)}>
-                        <Label sx={{
+                    <text ref={errRef}>{errorMessage}
+                    </text>
+                    <form className='form' onSubmit={(e)=>handleSubmit(e)}>
+                        <label style={{
                             padding:'5px',
                             fontWeight:0
                         }} htmlFor="email" >
                             Username / Email
-                        </Label>
-                        <Input sx={{
+                        </label><br/>
+                        <input style={{
+                            width:'98%',
                             margin:'5px',
-                            height:'40px'
-                        }} 
+                            height:'35px',
+                            fontSize:'12px',
+                        }}
                         id = "email"
                         onChange={e=>setemail(e.target.value)}
                         value={email}
                         required
                         autoComplete='off'
                         />
-                        <Container sx={{
-                            display:'flex',
-                            flexDirection:'row',
-                            justifyContent:'space-between',
-                            alignItems:'center'
-                        }}>
-                            <Label sx={{
+                        <div className='password-container'>
+                            <label style={{
                                 padding:'5px',
                                 fontWeight:0,
                             }}
                             htmlFor="password"
                             >
                                 Password
-                            </Label>
-                            <Link sx={{
+                            </label>
+                            <a style={{
                                 minWidth:'140px',
                                 textAlign:'end'
                             }}>
                                 Forgot Password?
-                            </Link>
-                        </Container>
-                        <Input sx={{
+                            </a>
+                        </div>
+                        <input style={{
                             margin:'5px',
-                            height:'40px'
+                            height:'35px',
+                            width:'98%',
+                            fontSize:'14px',
                         }} 
                         id="password"
                         type="password"
@@ -213,17 +155,17 @@ function Auth(){
                         required
                         autoComplete='off'
                         />
-                        <Button sx={{
+                        <button sx={{
                             background:'#123E2C',
                             color:'#ffff',
                             margin:'5px',
                             fontWeight:0
-                        }} type='submit'>Sign In</Button>
-                    </Box>
-                </Container>
-                </Box>
-            </Flex>
-        </Flex>
+                        }} type='submit'>Sign In</button>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
     )
 }
 

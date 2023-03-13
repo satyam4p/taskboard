@@ -4,8 +4,8 @@ import PersistUser from './Components/PersistUser';
 import RequireAuth from './Components/RequireAuth';
 import ErrorElement from './common/ErrorElements/ErrorElement';
 
-const Login = React.lazy(()=> import('./views/auth'));
-const Logout = React.lazy(()=> import('./views/logout'));
+const Login = React.lazy(()=> import('./views/Auth/auth'));
+const Logout = React.lazy(()=> import('./views/Logout/logout'));
 
 const Home = React.lazy(()=> import('./views/Layout/Layout'));
 const Board = React.lazy(()=>import('./views/Board/board'));
