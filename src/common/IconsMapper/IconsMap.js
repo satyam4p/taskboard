@@ -20,7 +20,8 @@ import { SaveOutlined,
     FileZipOutlined,
     SettingOutlined,
     PlusSquareOutlined,
-    BgColorsOutlined
+    BgColorsOutlined,
+    FilterOutlined
 
 
 } from '@ant-design/icons';
@@ -101,6 +102,9 @@ const iconsMap = (()=>{
         theme: (size = 14, weight = 800)=>{
             return <BgColorsOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></BgColorsOutlined>
         },
+        filter:(size= 14, weight = 800)=>{
+            return <FilterOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></FilterOutlined>
+        }
     }
 })();
 

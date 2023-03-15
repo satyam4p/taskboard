@@ -5,7 +5,6 @@ const Board = ()=>{
 
     return(
         <div className="board-container">
-            <h1>Hellow this is Board component</h1>
             <BoardLayout>
             </BoardLayout>
         </div>

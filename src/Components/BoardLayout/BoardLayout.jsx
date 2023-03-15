@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Tables from './templates/Tables/Tables';
 import Column from 'antd/lib/table/Column';
 import './stylesheet.scss';
+import BoardActions from './BoardActions/BoardActions';
 
 const BoardLayout = ()=>{
 
@@ -9,7 +10,7 @@ const BoardLayout = ()=>{
     
     return(
         <div className='board-layout'>
-
+            <BoardActions/>    
         </div>
     )
 
