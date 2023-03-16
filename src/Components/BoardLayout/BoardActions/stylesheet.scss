@@ -10,11 +10,30 @@
 
     .actions{
         padding: 0px 8px 0px 0px;
-        
+        display: flex;
+        align-items: center;    
+    
         button{
             background: transparent;
             border: none;
             color: black;
+        }
+
+        .ant-input-group{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            .ant-input{
+                padding: 3px;
+                border-radius: 4px;
+                background: transparent;
+                color: black;
+            }
+            
+            .ant-btn{
+                font-size: 18px;
+            }
+            
         }
     }
 }

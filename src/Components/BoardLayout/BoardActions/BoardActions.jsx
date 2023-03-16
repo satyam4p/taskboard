@@ -9,8 +9,9 @@ const {Search} = Input;
 
 const BoardActions = ({children})=>{
 
-    const handleSearch =()=>{
-        
+    const handleSearch =(value)=>{
+
+
     }
 
     const handleChange =(e)=>{
@@ -23,7 +24,7 @@ const BoardActions = ({children})=>{
         <div className="board-actions-container">
             <div className="actions">
                 <Search 
-                    className='' 
+                    className='antd-search-field' 
                     placeholder='Search Task'
                     onChange={debounce(handleChange, 400)}    
                     onSearch = { handleSearch }
