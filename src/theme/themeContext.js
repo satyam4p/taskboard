@@ -9,8 +9,12 @@ export const ThemeProvider = ({children}) => {
     useEffect(()=>{
 
         const currentTheme = window.localStorage.getItem("taskboard-theme");
-
-        setTheme(currentTheme);
+        if(currentTheme){
+            setTheme(currentTheme);
+        }else{
+            setTheme("light");
+        }
+        
 
     },[theme, setTheme]);
 
