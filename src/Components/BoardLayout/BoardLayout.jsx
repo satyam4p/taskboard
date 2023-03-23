@@ -3,6 +3,7 @@ import Tables from './templates/Tables/Tables';
 import Column from 'antd/lib/table/Column';
 import './stylesheet.scss';
 import BoardActions from './BoardActions/BoardActions';
+import WithLayoutHOC from './WithLayout/WithLayoutHOC';
 
 const BoardLayout = ()=>{
 
@@ -11,7 +12,7 @@ const BoardLayout = ()=>{
     return(
         <div className='board-layout'>
             <BoardActions/>    
-            <WithLayout/>
+            <WithLayoutHOC/>
         </div>
     )
 

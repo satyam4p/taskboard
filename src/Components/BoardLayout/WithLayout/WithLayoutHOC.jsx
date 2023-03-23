@@ -11,3 +11,5 @@ const WithLayoutHOC = (component)=>{
     )
 
 }
+
+export default WithLayoutHOC
