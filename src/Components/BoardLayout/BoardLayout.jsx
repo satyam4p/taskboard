@@ -11,6 +11,7 @@ const BoardLayout = ()=>{
     return(
         <div className='board-layout'>
             <BoardActions/>    
+            <WithLayout/>
         </div>
     )
 
