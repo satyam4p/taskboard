@@ -17,7 +17,8 @@ function SideMenu({showSideMenu, toggleAddMenu, setToggleAddMenu}){
     const fetchDrawerDetails = useDrawerDetails();
     const execute = useActions();
     const handleIndexAction = (type)=>{
-        if(type !== "board" || type !== "archive" ){
+
+        if(type !== "board" && type !== "archive" ){
             fetchDrawerDetails(type);
         }
     }

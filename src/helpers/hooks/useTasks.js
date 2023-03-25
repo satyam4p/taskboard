@@ -15,7 +15,6 @@ const useTasks = ()=>{
             const result = await axiosprivate.get(URL);
             if(result && result.data){
                 const tasks = Object.values(result.data);
-                console.log("tasks:: ",tasks);
                 dispatch(fetchBoardtasksSuccess(tasks));
             }
         }catch(error){
