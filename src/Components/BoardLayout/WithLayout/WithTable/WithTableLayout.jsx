@@ -18,7 +18,7 @@ const WithTableLayout = ( WrappedComponent )=>{
         render(){
 
             return(
-               <WrappedComponent  {...this.props}/>
+               <WrappedComponent type="table" {...this.props}/>
             )
         }
     }
