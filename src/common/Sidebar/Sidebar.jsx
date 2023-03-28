@@ -164,8 +164,8 @@ const SidePanelIndex = ({ children, handleAction, options })=>{
         return (
             <div className={`sidemenu__sidepanel sidebar-index`} onClick = {()=>handleAction(options?.id)}>
             <div className='sidepanel_index_tag-container'>
-                <Tag className={`sidepanel_index_status-tag ${options?.status.toLowerCase().split(" ").join("_")}`} >{options?.status}</Tag>
-                <Tag className={`sidepanel_index_label-tag ${options?.label.toLowerCase().split(" ").join("_")}`} >{options?.label}</Tag>
+                <Tag className={`sidepanel_index_status-tag ${options?.status.trim().toLowerCase().split(" ").join("_")}`} >{options?.status}</Tag>
+                <Tag className={`sidepanel_index_label-tag ${options?.label.trim().toLowerCase().split(" ").join("_").trim()}`} >{options?.label}</Tag>
             </div>
             <span className='sidepanel_index_title-container'>{options?.name}</span>
             { children }
