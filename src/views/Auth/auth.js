@@ -118,7 +118,7 @@ function Auth(){
                             width:'98%',
                             margin:'5px',
                             height:'35px',
-                            fontSize:'12px',
+                            fontSize:'14px',
                         }}
                         id = "email"
                         onChange={e=>setemail(e.target.value)}
