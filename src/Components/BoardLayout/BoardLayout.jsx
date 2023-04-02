@@ -17,8 +17,8 @@ const BoardLayout = (props)=>{
             <BoardActions/>   
 
             <div className='layout-container'>
-                <table>
-                    <thead>
+                <table className='board-table'>
+                    <thead className='table-header'>
                         <th>
                             #
                         </th>
@@ -35,11 +35,11 @@ const BoardLayout = (props)=>{
                             label
                         </th>
                     </thead>
-                    <tbody>
+                    <tbody className='table-body'>
                          {boardTasks && boardTasks.length 
                             ? boardTasks.map((task, key)=>{
                                     return(
-                                        <tr className='task-card'>
+                                        <tr className='table-row'>
                                             <td>
                                                 {key+1}
                                             </td>
@@ -61,13 +61,10 @@ const BoardLayout = (props)=>{
                             : null    
                         }
                     </tbody>
-                    
                 </table>
-               
             </div> 
         </div>
     )
-
 }
 
 
