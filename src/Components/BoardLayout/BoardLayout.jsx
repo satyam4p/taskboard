@@ -14,7 +14,7 @@ const BoardLayout = (props)=>{
     console.log("Type:: ",type);
     return(
         <div className='board-layout'>
-            <BoardActions/>   
+            {/* <BoardActions/>    */}
 
             <div className='layout-container'>
                 <table className='board-table'>
@@ -40,20 +40,25 @@ const BoardLayout = (props)=>{
                             ? boardTasks.map((task, key)=>{
                                     return(
                                         <tr className='table-row'>
-                                            <td>
+                                            <td className='sequence'>
                                                 {key+1}
                                             </td>
-                                            <td>
+                                            <td className='name'>
                                                 {task.name}
                                             </td>
-                                            <td>
-                                                {task.status}
+                                            <td className='status'>
+                                                <div className={`status-value ${task.status.trim().split(" ").join("-").toLowerCase()}`}>
+                                                    {task.status}
+                                                </div>
+                                                
                                             </td>
-                                            <td>
+                                            <td className='assignee'>
                                                 {task.assignee}
                                             </td>
-                                            <td>
-                                                {task.label}
+                                            <td className='label'>
+                                                <div className={`label-value ${task.label.trim().split(" ").join("-").toLowerCase()}`}>
+                                                    {task.label}
+                                                </div>
                                             </td>
                                         </tr>
                                     )

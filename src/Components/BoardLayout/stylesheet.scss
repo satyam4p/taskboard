@@ -45,6 +45,40 @@
             .table-row td:last-child{
                 min-width: 20px;
             }
+            .table-row {
+                .status-value{
+                    width:max-content;
+                    padding: 5px;
+                    border-radius: 4px;
+                    background-color: $grape-1;
+                }
+                .status-value.complete{
+                    background-color: $green-1;
+                }
+                .status-value.in-progress{
+                    background-color: $gray-2;
+                }
+                .status-value.new{
+                    background-color: $blue-2;
+                }
+                .status-value.closed{
+                    background-color: $red-2;
+                }
+                .label-value{
+                    width:max-content;
+                    padding: 5px;
+                    border-radius: 4px;
+                }
+                .label-value.bug{
+                    background-color: $red-2;
+                }
+                .label-value.task{
+                    background-color: $gray-2;
+                }
+                .label-value.rca{
+                    background-color: $grape-1;
+                }
+            }
             
         }
     }
