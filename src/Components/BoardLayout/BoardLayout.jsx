@@ -44,10 +44,16 @@ const BoardLayout = (props)=>{
                                     return(
                                         <tr className={`table-row ${theme}`}>
                                             <td className='sequence'>
-                                                {key+1}
+                                                <div>
+                                                    {key+1}
+                                                </div>
+                                                
                                             </td>
                                             <td className='name'>
-                                                {task.name}
+                                                <div className='task-name'>
+                                                    {task.name}
+                                                </div>
+                                                
                                             </td>
                                             <td className='status'>
                                                 <div className={`status-value ${task.status.trim().split(" ").join("-").toLowerCase()} ${theme}`}>
