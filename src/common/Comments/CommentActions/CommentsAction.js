@@ -38,7 +38,7 @@ const CommentActions = (props) => {
     return (
         <div className="comments-actions-container">
             <button disabled = {!props.actionsEnabled} onClick={handlePost} className="action-btn">
-                {iconsMap.send(16, 500)} Send
+                {iconsMap.send(16, 500)}Post
             </button>
             <button disabled = {!props.actionsEnabled} onClick={handleClear} className="action-btn">
                 {iconsMap.clear(16, 500)} Clear
