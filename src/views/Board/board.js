@@ -15,8 +15,7 @@ const Board = ()=>{
 
     return(
         <div className="board-container">
-            <BoardLayout>
-            </BoardLayout>
+            <BoardLayout/>
         </div>
     )
 }

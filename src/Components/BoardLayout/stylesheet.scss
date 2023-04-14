@@ -21,7 +21,7 @@
                 th{
                     min-width: 50px;
                     max-width: 100px;
-                    padding: 10px;
+                    padding: 5px;
                     border: 0.5px solid lightgray;
                     font-weight: 500;
                 }
@@ -40,7 +40,24 @@
                     max-width: 100px;
                     padding: 10px;
                     border: 0.5px solid lightgray;
+                    position: relative;
+                    height: 2em;
+                    padding: 5px;
+                    .task-name{
+                        height: inherit;
+                        display: flex;
+                        align-items: center;
+                        cursor: pointer;
+                    }
+                    .showPopup{
+                        width: 10%;
+                        height: inherit;
+                        border: 1px solid gray;
+                        position: fixed;
+                        right: 2%;
+                    }
                 }
+                
                 .table-row td:first-child{
                     min-width: 20px;
                     width: 20px;
