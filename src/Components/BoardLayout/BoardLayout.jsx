@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 // import Tables from './templates/Tables/Tables';
 // import Column from 'antd/lib/table/Column';
 import './stylesheet.scss';
@@ -6,15 +6,25 @@ import './stylesheet.scss';
 import composedTableLayout from './WithLayout/WithTable/WithTableLayout';
 import ThemeContext from '../../theme/themeContext';
 import { useContext } from 'react';
+import InputTableField from './TableFields/Input/Input';
+import { initialiseTaskTable, taskNameUpdate } from './helpers/boardTasksUpdateHelper';
 
 const BoardLayout = (props)=>{
 
     const [layout, setLayout] = useState();
+    const [taskMap, setTaskMap] = useState();
     const [activeInput, setInput] = useState();
     const { boardTasks, type } = props;
+    const [tasks, setTasks] = useState(boardTasks);
     const { theme } = useContext(ThemeContext);
     const activeHeaderRef = useRef([]);
-    const [inputVal, setInputVal] = useState('');//need to find a way o set values of reach input :: maybe use userRef???
+    const boardTasksArray = taskMap ? Array.from(taskMap.values()) : [];
+    useEffect(()=>{
+
+        initialiseTaskTable(props.boardTasks, setTaskMap);
+
+    },[props.boardTasks])
+
     const handleHoverAction=(e, task, index)=>{
         // if(activeHeaderRef.current[index].className && activeHeaderRef.current[index].className === "showPopup"){
         //     activeHeaderRef.current[index].className = ''
@@ -27,10 +37,8 @@ const BoardLayout = (props)=>{
         
     }
     /** change the name value and consistently view thechanged value in Ui,, i.e make it controlled input component */
-    const handleNameChange= (event) =>{
-
-        // console.log("value:: ",event.target.value );
-
+    const handleNameChange= (value, id) =>{
+        taskNameUpdate(taskMap, value, id, setTaskMap);
     }
 
     return(
@@ -57,8 +65,8 @@ const BoardLayout = (props)=>{
                         </th>
                     </thead>
                     <tbody className='table-body'>
-                         {boardTasks && boardTasks.length 
-                            ? boardTasks.map((task, index)=>{
+                         {boardTasksArray && boardTasksArray.length 
+                            ? boardTasksArray.map((task, index)=>{
                                     return(
                                         <tr className={`table-row ${theme}`}>
                                             <td className='sequence'>
@@ -74,14 +82,7 @@ const BoardLayout = (props)=>{
                                                         { 
                                                             activeInput === index ?
                                                             <>
-                                                            <input style={{
-                                                                width:'98%',
-                                                                height:'2em',
-                                                                border:'none',
-                                                                boxShadow:'0px 5px 10px 0px rgba(0, 0, 0, 0.5)',
-                                                            }} value={task.name}
-                                                                onChange={e=>handleNameChange(e)}
-                                                            />
+                                                            <InputTableField id = {task?._id} value = {task.name} changeHandler = {handleNameChange}/>
                                                             </>
                                                                 : <>{task.name}</>
                                                         }
