@@ -12,16 +12,16 @@ const useUpdateTask =() => {
     const { setTask } = useContext(TaskContext);
     const show  = useNotification();
     const dispatch = useDispatch();
-    const axios = useAxiosPrivate();
+    const axiosPrivate = useAxiosPrivate();
     const fetchDrawerDetails = useDrawerDetails()
 
     const update = async (taskId, payload )=>{
 
         const UPDATE_URL = urlSchema.Tasks.PATCH_TASK.replace(':id', taskId);
-
+        
         try{
             dispatch(updateTaskBegin());
-            const updatedTask = await axios.patch(UPDATE_URL, payload);
+            const updatedTask = await axiosPrivate.patch(UPDATE_URL, payload);
             if(updatedTask){
                 show("Task Updated successfully", "success");
                 setTask(prevTask=>{

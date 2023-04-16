@@ -13,7 +13,7 @@ const BoardLayout = (props)=>{
 
     const [layout, setLayout] = useState();
     const [taskMap, setTaskMap] = useState();
-    const [activeInput, setInput] = useState();
+    const [activeInput, setInput] = useState({id: null, index:null});
     const { boardTasks, type } = props;
     const [tasks, setTasks] = useState(boardTasks);
     const { theme } = useContext(ThemeContext);
@@ -78,27 +78,35 @@ const BoardLayout = (props)=>{
                                                 <div className='task-name' ref={el => activeHeaderRef.current[index] = el} 
                                                     onMouseOut={e=>handleHoverAction(e, task, index)} 
                                                     onMouseOver={e=>handleHoverAction(e, task, index)}
-                                                    onClick = {e=>setInput(prev=>prev !== index ? index : prev)}>
+                                                    onClick = {e=>setInput(prev=>{
+                                                        if(prev?.index !== index){
+                                                            return {
+                                                                index,
+                                                                id: task?._id
+                                                            }
+                                                        }
+                                                        return {
+                                                            ...prev
+                                                        }
+                                                    })}>
                                                         { 
-                                                            activeInput === index ?
-                                                            <>
+                                                            activeInput && activeInput?.index === index ?
                                                             <InputTableField id = {task?._id} value = {task.name} changeHandler = {handleNameChange}/>
-                                                            </>
-                                                                : <>{task.name}</>
+                                                            : <>{task.name}</>
                                                         }
                                                 </div>
                                                 
                                             </td>
-                                            <td className='status'>
+                                            <td className='status' onClick={()=>setInput(null)}>
                                                 <div className={`status-value ${task.status.trim().split(" ").join("-").toLowerCase()} ${theme}`}>
                                                     {task.status}
                                                 </div>
                                                 
                                             </td>
-                                            <td className='assignee'>
+                                            <td className='assignee' onClick={()=>setInput(null)}>
                                                 {task.assignee}
                                             </td>
-                                            <td className='label'>
+                                            <td className='label' onClick={()=>setInput(null)}>
                                                 <div className={`label-value ${task.label.trim().split(" ").join("-").toLowerCase()} ${theme}`}>
                                                     {task.label}
                                                 </div>
