@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
 
-
-const InputTableField = ({id, value, changeHandler})=>{
+const InputTableField = ({taskMap, id, value, changeHandler})=>{
 
 
     const [inputValue, setinputValue] = useState(value);
@@ -14,13 +13,14 @@ const InputTableField = ({id, value, changeHandler})=>{
 
     }
 
+
     useEffect(()=>{
 
-        changeHandler(inputValue, id)
+        if(taskMap.get(id)?.name !== inputValue){
+            changeHandler(inputValue, id, taskMap);
+        }
 
     },[inputValue]);
-
-
 
     return(
         <input style={{

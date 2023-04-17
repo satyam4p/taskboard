@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 // import Tables from './templates/Tables/Tables';
 // import Column from 'antd/lib/table/Column';
 import './stylesheet.scss';
@@ -8,6 +8,8 @@ import ThemeContext from '../../theme/themeContext';
 import { useContext } from 'react';
 import InputTableField from './TableFields/Input/Input';
 import { initialiseTaskTable, taskNameUpdate } from './helpers/boardTasksUpdateHelper';
+import { debounce } from 'lodash';
+
 
 const BoardLayout = (props)=>{
 
@@ -19,6 +21,7 @@ const BoardLayout = (props)=>{
     const { theme } = useContext(ThemeContext);
     const activeHeaderRef = useRef([]);
     const boardTasksArray = taskMap ? Array.from(taskMap.values()) : [];
+    
     useEffect(()=>{
 
         initialiseTaskTable(props.boardTasks, setTaskMap);
@@ -37,9 +40,20 @@ const BoardLayout = (props)=>{
         
     }
     /** change the name value and consistently view thechanged value in Ui,, i.e make it controlled input component */
-    const handleNameChange= (value, id) =>{
-        taskNameUpdate(taskMap, value, id, setTaskMap);
-    }
+    const handleNameChange = useCallback(
+        debounce((value, id, taskMap)=>{
+            taskNameUpdate(taskMap, value, id, setTaskMap); 
+            const payload = {
+                name: value
+            }
+        }, 400), []);
+
+    useEffect(()=>{
+
+        console.log("taskMap updated");
+
+    },[taskMap, setTaskMap])
+
 
     return(
         <div className='board-layout'>
@@ -91,7 +105,7 @@ const BoardLayout = (props)=>{
                                                     })}>
                                                         { 
                                                             activeInput && activeInput?.index === index ?
-                                                            <InputTableField id = {task?._id} value = {task.name} changeHandler = {handleNameChange}/>
+                                                            <InputTableField taskMap = {taskMap} id = {task?._id} value = {task.name} changeHandler = {handleNameChange}/>
                                                             : <>{task.name}</>
                                                         }
                                                 </div>
