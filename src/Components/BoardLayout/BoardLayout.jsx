@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import InputTableField from './TableFields/Input/Input';
 import { initialiseTaskTable, taskNameUpdate } from './helpers/boardTasksUpdateHelper';
 import { debounce } from 'lodash';
+import useSaveTransaction from '../../helpers/hooks/useSaveTransaction';
 
 
 const BoardLayout = (props)=>{
@@ -21,7 +22,7 @@ const BoardLayout = (props)=>{
     const { theme } = useContext(ThemeContext);
     const activeHeaderRef = useRef([]);
     const boardTasksArray = taskMap ? Array.from(taskMap.values()) : [];
-    
+    const saveTransaction = useSaveTransaction();
     useEffect(()=>{
 
         initialiseTaskTable(props.boardTasks, setTaskMap);
@@ -43,9 +44,7 @@ const BoardLayout = (props)=>{
     const handleNameChange = useCallback(
         debounce((value, id, taskMap)=>{
             taskNameUpdate(taskMap, value, id, setTaskMap); 
-            const payload = {
-                name: value
-            }
+            saveTransaction(value, 'name', id);
         }, 400), []);
 
     useEffect(()=>{
