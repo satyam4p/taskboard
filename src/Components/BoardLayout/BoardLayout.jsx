@@ -40,9 +40,7 @@ const BoardLayout = (props)=>{
                     index
                 }
             }else{
-                return {
-                    ...prev
-                }
+                return null
             }
         })
     }
@@ -102,7 +100,7 @@ const BoardLayout = (props)=>{
                                             </td>
                                             <td className='name'>
                                                 <div className='task-name' ref={el => activeHeaderRef.current[index] = el} 
-                                                    // onMouseOut={e=>handleHoverAction(e, task, index)} 
+                                                    onMouseOut={e=>handleHoverAction(e, task, index)} 
                                                     onMouseOver={e=>handleHoverAction(e, task, index)}
                                                     onClick = {e=>setInput(prev=>{
                                                         if(prev?.index !== index){
