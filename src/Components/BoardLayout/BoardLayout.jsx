@@ -10,6 +10,7 @@ import InputTableField from './TableFields/Input/Input';
 import { initialiseTaskTable, taskNameUpdate } from './helpers/boardTasksUpdateHelper';
 import { debounce } from 'lodash';
 import useSaveTransaction from '../../helpers/hooks/useSaveTransaction';
+import iconsMap from '../../common/IconsMapper/IconsMap';
 
 
 const BoardLayout = (props)=>{
@@ -23,6 +24,9 @@ const BoardLayout = (props)=>{
     const activeHeaderRef = useRef([]);
     const boardTasksArray = taskMap ? Array.from(taskMap.values()) : [];
     const saveTransaction = useSaveTransaction();
+    const [openTask, setOpenTask] = useState({
+        index: null,
+    })
     useEffect(()=>{
 
         initialiseTaskTable(props.boardTasks, setTaskMap);
@@ -30,15 +34,24 @@ const BoardLayout = (props)=>{
     },[props.boardTasks])
 
     const handleHoverAction=(e, task, index)=>{
-        // if(activeHeaderRef.current[index].className && activeHeaderRef.current[index].className === "showPopup"){
-        //     activeHeaderRef.current[index].className = ''
-        //     // activeHeaderRef.current[index].style.color = '';
-        // }else{
-        //     activeHeaderRef.current[index].className = 'showPopup';
-        //     // activeHeaderRef.current[index].addElement('div',)
-        //     // activeHeaderRef.current[index].style.color = "blue";
-        // }
-        
+        setOpenTask(prev=>{
+            if(prev?.index !== index){
+                return {
+                    index
+                }
+            }else{
+                return {
+                    ...prev
+                }
+            }
+        })
+    }
+
+    const handleTaskOpen=(e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("open Task");
+
     }
     /** change the name value and consistently view thechanged value in Ui,, i.e make it controlled input component */
     const handleNameChange = useCallback(
@@ -89,7 +102,7 @@ const BoardLayout = (props)=>{
                                             </td>
                                             <td className='name'>
                                                 <div className='task-name' ref={el => activeHeaderRef.current[index] = el} 
-                                                    onMouseOut={e=>handleHoverAction(e, task, index)} 
+                                                    // onMouseOut={e=>handleHoverAction(e, task, index)} 
                                                     onMouseOver={e=>handleHoverAction(e, task, index)}
                                                     onClick = {e=>setInput(prev=>{
                                                         if(prev?.index !== index){
@@ -105,7 +118,13 @@ const BoardLayout = (props)=>{
                                                         { 
                                                             activeInput && activeInput?.index === index ?
                                                             <InputTableField taskMap = {taskMap} id = {task?._id} value = {task.name} changeHandler = {handleNameChange}/>
-                                                            : <>{task.name}</>
+                                                            : <div style={{width:'100%', height:'inherit', display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
+                                                                <span>{task.name}</span>
+                                                                {openTask?.index === index 
+                                                                    ? <span onClick={e=>handleTaskOpen(e)} style={{padding:'2px', border:'1px solid lightgray'}}><>{iconsMap.open()}&nbsp; Open</></span>
+                                                                    : null                                                                    
+                                                                }
+                                                            </div>
                                                         }
                                                 </div>
                                                 
