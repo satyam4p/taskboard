@@ -11,12 +11,16 @@ import { initialiseTaskTable, taskNameUpdate } from './helpers/boardTasksUpdateH
 import { debounce } from 'lodash';
 import useSaveTransaction from '../../helpers/hooks/useSaveTransaction';
 import iconsMap from '../../common/IconsMapper/IconsMap';
+import ModalContext from '../../context/ModalProvider';
+import useGetTask from '../../helpers/hooks/useGetTask';
 
 
 const BoardLayout = (props)=>{
 
     const [layout, setLayout] = useState();
     const [taskMap, setTaskMap] = useState();
+    const {setModalType} = useContext(ModalContext);
+    const getTask = useGetTask();
     const [activeInput, setInput] = useState({id: null, index:null});
     const { boardTasks, type } = props;
     const [tasks, setTasks] = useState(boardTasks);
@@ -45,11 +49,19 @@ const BoardLayout = (props)=>{
         })
     }
 
-    const handleTaskOpen=(e)=>{
+    const handleTaskOpen=(e, id)=>{
         e.preventDefault();
         e.stopPropagation();
-        console.log("open Task");
-
+        setModalType(prev=>{
+            if(!prev.isVisible){
+                return {
+                    isVisible: true,
+                    type: 'task'
+                }
+            }
+            return prev;
+        });
+        getTask(id);
     }
     /** change the name value and consistently view thechanged value in Ui,, i.e make it controlled input component */
     const handleNameChange = useCallback(
@@ -119,7 +131,7 @@ const BoardLayout = (props)=>{
                                                             : <div style={{width:'100%', height:'inherit', display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                                                                 <span>{task.name}</span>
                                                                 {openTask?.index === index 
-                                                                    ? <span onClick={e=>handleTaskOpen(e)} style={{padding:'2px', border:'1px solid lightgray'}}><>{iconsMap.open()}&nbsp; Open</></span>
+                                                                    ? <span onClick={e=>handleTaskOpen(e, task?._id)} style={{padding:'2px', border:'1px solid lightgray'}}><>{iconsMap.open()}&nbsp; Open</></span>
                                                                     : null                                                                    
                                                                 }
                                                             </div>
