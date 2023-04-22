@@ -26,7 +26,7 @@ const BoardActions = ({children})=>{
                 <Search 
                     className='antd-search-field' 
                     placeholder='Search Task'
-                    onChange={debounce(handleChange, 400)}    
+                    onChange={debounce(handleChange, 400)}
                     onSearch = { handleSearch }
                 />
                 <button>

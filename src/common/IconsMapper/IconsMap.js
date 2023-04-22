@@ -22,7 +22,8 @@ import { SaveOutlined,
     PlusSquareOutlined,
     BgColorsOutlined,
     FilterOutlined,
-    FullscreenOutlined
+    FullscreenOutlined,
+    ExpandOutlined
 
 
 } from '@ant-design/icons';
@@ -108,6 +109,9 @@ const iconsMap = (()=>{
         },
         open:(size= 14, weight = 800)=>{
             return <FullscreenOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></FullscreenOutlined>
+        },
+        expand:(size= 14, weight = 800)=>{
+            return <ExpandOutlined style={{fontSize:`${size}px`, fontWeight:`${weight}`}}></ExpandOutlined>
         }
     }
 })();

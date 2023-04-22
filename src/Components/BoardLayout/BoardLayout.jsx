@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 // import Tables from './templates/Tables/Tables';
 // import Column from 'antd/lib/table/Column';
 import './stylesheet.scss';
-// import BoardActions from './BoardActions/BoardActions';
+import BoardActions from './BoardActions/BoardActions';
 import composedTableLayout from './WithLayout/WithTable/WithTableLayout';
 import ThemeContext from '../../theme/themeContext';
 import { useContext } from 'react';
@@ -79,7 +79,7 @@ const BoardLayout = (props)=>{
 
     return(
         <div className='board-layout'>
-            {/* <BoardActions/>    */}
+            <BoardActions/>   
 
             <div className='layout-container'>
                 <table className='board-table'>
@@ -131,7 +131,7 @@ const BoardLayout = (props)=>{
                                                             : <div style={{width:'100%', height:'inherit', display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
                                                                 <span>{task.name}</span>
                                                                 {openTask?.index === index 
-                                                                    ? <span onClick={e=>handleTaskOpen(e, task?._id)} style={{padding:'2px', border:'1px solid lightgray'}}><>{iconsMap.open()}&nbsp; Open</></span>
+                                                                    ? <span onClick={e=>handleTaskOpen(e, task?._id)} style={{padding:'2px', border:'1px solid lightgray'}}><>{iconsMap.expand()}&nbsp; Open</></span>
                                                                     : null                                                                    
                                                                 }
                                                             </div>
