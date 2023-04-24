@@ -47,6 +47,12 @@ function Layout(props){
                     </Suspense>   
                 }
                 <Outlet/>
+                {/* <div className ="home-backdrop">
+                    <h1>Task Board</h1>
+                    <h2>
+                        Get started with your tasks and collaborate with others.
+                    </h2>
+                </div> */}
                 </div>
             </div>
            
