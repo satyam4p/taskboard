@@ -13,7 +13,7 @@ const MoreOptions = ({handleMoreAction, currentTaskStatus})=>{
     <div className={`more-options-container ${theme === 'light' ? 'bg-light' : 'bg-dark'}`}>
        {options.map((option, index)=>{
         return (
-            <button disabled= {currentTaskStatus && currentTaskStatus !== "succeeded"} className = "options-index" key={shortid.generate()+index} onClick={()=>handleMoreAction(option)} >
+            <button disabled= {currentTaskStatus && currentTaskStatus !== "succeeded"} className = "options-index" key={shortid.generate()+index} onClick={(e)=>handleMoreAction(e, option)} >
                 {option}
             </button>
         )

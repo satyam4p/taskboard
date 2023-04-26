@@ -87,8 +87,9 @@ const TaskModal=(props)=>{
             })
     }
 
-    const handleMoreAction = ( identifier )=>{
-
+    const handleMoreAction = (e, identifier )=>{
+        e.preventDefault();
+        e.stopPropagation();
         const identifierSmall = identifier.toLowerCase();
         if(identifierSmall === "delete task"){
             const taskId = currentTask?._id;
@@ -100,7 +101,6 @@ const TaskModal=(props)=>{
                 }
             })
         }
-
     }
 
     return(
