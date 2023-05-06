@@ -6,7 +6,7 @@ import ErrorElement from './common/ErrorElements/ErrorElement';
 
 const Login = React.lazy(()=> import('./views/Auth/auth'));
 const Logout = React.lazy(()=> import('./views/Logout/logout'));
-
+const Profile = React.lazy(()=>import('./views/Profile/profile'));
 const Home = React.lazy(()=> import('./views/Layout/Layout'));
 const Board = React.lazy(()=>import('./views/Board/board'));
 const Archive = React.lazy(()=>import('./views/Archive/Archive'));
@@ -70,6 +70,15 @@ const routes = createBrowserRouter([
                 ),
                 errorElement: (<ErrorElement/>),
                 AuthRequired: true
+            },
+            {
+                path:'/profile',
+                name:'Profile',
+                element: (
+                    <React.Suspense fallback={<h5>Loading...</h5>}>
+                        <Profile/>
+                    </React.Suspense>
+                )
             }
         ]
     },

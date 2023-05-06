@@ -5,17 +5,23 @@ import useAuth from "../../../helpers/hooks/useAuth";
 import useAxiosPrivate from "../../../helpers/hooks/useAxiosPrivate";
 import './stylesheet.scss';
 import useTheme from "../../../helpers/hooks/useTheme";
+import { Link } from "react-router-dom";
 
 const LOGOUT_URL = 'auth/logout';
 const LOGOUT_ALL_URL = 'auth/logoutAll'
 
-const ProfileTogggle =(props)=>{
+const ProfileTogggle =({setToggleProile})=>{
     const navigate = useNavigate();
     const { setAuth, signOut } = useAuth();
     const axiosPrivate = useAxiosPrivate();
 
     const handlLogout= async (e, type)=>{
        signOut(type)
+    }
+    const handleProfileToggle = (e)=>{
+        e.preventDefault();
+        navigate('profile');
+        setToggleProile(prev=>!prev);
     }
 
     const [changeTheme, theme] = useTheme();
@@ -24,7 +30,7 @@ const ProfileTogggle =(props)=>{
         <div className={`profile-panel-container ${theme === "light" ? "primary" : "secondary"}`}>
             <div classname = "items-container">
                 <div className="profile-item">
-                    <button>Your Profle</button>
+                    <button onClick={handleProfileToggle}>Your Profle</button>
                 </div>
                 <div sx={{
                         width:'95%',

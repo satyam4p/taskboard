@@ -38,7 +38,7 @@ function SecondaryBar({
                     </div>
                     
                 </div>
-                {toggleProfile && <ProfileTogggle />}
+                {toggleProfile && <ProfileTogggle  setToggleProile = {setToggleProile}/>}
             </>
 
         )
