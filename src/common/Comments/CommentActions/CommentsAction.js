@@ -38,10 +38,10 @@ const CommentActions = (props) => {
     return (
         <div className="comments-actions-container">
             <button disabled = {!props.actionsEnabled} onClick={handlePost} className="action-btn">
-                {iconsMap.send(16, 500)}Post
+                {iconsMap.send(16, 500)}&nbsp;Post
             </button>
             <button disabled = {!props.actionsEnabled} onClick={handleClear} className="action-btn">
-                {iconsMap.clear(16, 500)} Clear
+                {iconsMap.clear(16, 500)} &nbsp;Clear
             </button>
         </div>
     )
