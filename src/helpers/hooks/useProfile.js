@@ -15,7 +15,6 @@ const useProfile = () =>{
         try{
             dispatch(fethcProfileBegin());
             const userProfile = await axiosPrivate.get(url);
-            console.log("userProfile:: ",userProfile);
             if(userProfile && userProfile.data && userProfile.status === 200){
                 dispatch(fetchProfileSuccess(userProfile.data));
             }
