@@ -1,29 +1,30 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import useAxiosPrivate from "./useAxiosPrivate"
+import urlSchema from '../../network/urlSchema/urlSchema.json';
+import { fetchProfileFailed, fetchProfileSuccess, fethcProfileBegin } from "../../features/profile/profileSlice";
+import { useDispatch } from "react-redux";
 
 const useProfile = () =>{
     const [profileCallEnded, setprofileCallEnded] = useState(false);
     const [userProfile, setUserProfile] = useState(null);
     const axiosPrivate = useAxiosPrivate();
-    const getUserProfile = async ()=>{
+    const url = urlSchema.Profile.GET_PROFILE;
+    const dispatch = useDispatch();
+    const getUserProfile = useCallback(async ()=>{
+
         try{
-            const userProfile = await axiosPrivate.get('/auth/me');
-            setprofileCallEnded(true);
-            return userProfile;
+            dispatch(fethcProfileBegin());
+            const userProfile = await axiosPrivate.get(url);
+            console.log("userProfile:: ",userProfile);
+            if(userProfile && userProfile.data && userProfile.status === 200){
+                dispatch(fetchProfileSuccess(userProfile.data));
+            }
         }catch(error){
+            dispatch(fetchProfileFailed(error));
             console.log("an error occured while fetching profile:: ",error);
         }
-    }
-    useEffect(()=>{
-        getUserProfile().then(response=>{
-            if(response.data){
-                setUserProfile(response.data);
-            }
-        }).catch(error=>{
-            console.log("an error occured while fetching profile:: ",error);
-        });
-    },[])
+    })
     
-    return userProfile;   
+    return [getUserProfile, profileCallEnded];   
 }
 export default useProfile;

@@ -27,5 +27,8 @@
     },
     "Drawer":{
         "recent_tasks": "/tasks/recent"
+    },
+    "Profile":{
+        "GET_PROFILE": "/profile"
     }
 }
