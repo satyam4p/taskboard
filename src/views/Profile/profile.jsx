@@ -16,7 +16,18 @@ const UserProfile = ( props )=>{
     return(
         <div className="user-profile">
             <div className="user-profile-image-container">
-                <img className="user-profile-image" src={`${userProfile?.profile}`} alt="profile"/>
+                {userProfile && userProfile.profile ? (
+                        <img className="user-profile-image" src={`${userProfile?.profile}`}/>
+                ) :
+                (
+                    <img className="user-profile-image" src={'../../common/images/defaultImage.png'}/>
+                )
+            }
+                
+                <h3> {userProfile?.user?.username}</h3>
+            </div>
+            <div className="profile-content">
+                <h4>profile content comes here</h4>
             </div>
             
         </div> 
