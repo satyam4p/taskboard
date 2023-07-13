@@ -49,7 +49,7 @@ const Register = (props)=>{
                         padding:'5px',
                         fontWeight:0
                     }} htmlFor="email" >
-                        Username / Email
+                        Email
                     </label><br/>
                     <input style={{
                         width:'98%',
