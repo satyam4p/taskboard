@@ -82,7 +82,8 @@ function Auth(){
 
     const handleSignUp = (event)=>{
         event.preventDefault();
-
+        const to = "/register";
+        navigate(to,  {replace: true});
     }
 
     return(

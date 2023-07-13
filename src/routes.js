@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import PersistUser from './Components/PersistUser';
 import RequireAuth from './Components/RequireAuth';
 import ErrorElement from './common/ErrorElements/ErrorElement';
-
+const Register = React.lazy(()=>import('./views/Auth/register'));
 const Login = React.lazy(()=> import('./views/Auth/auth'));
 const Logout = React.lazy(()=> import('./views/Logout/logout'));
 const Profile = React.lazy(()=>import('./views/Profile/profile'));
@@ -20,7 +20,16 @@ const routes = createBrowserRouter([
             <React.Suspense>
                 <Login/>,
             </React.Suspense>
-            )  , 
+            ), 
+        AuthRequired: false 
+    },
+    {
+        path: '/register', 
+        element:( 
+            <React.Suspense>
+                <Register/>,
+            </React.Suspense>
+            ), 
         AuthRequired: false 
     },
     { 
@@ -29,7 +38,7 @@ const routes = createBrowserRouter([
             <React.Suspense>
                 <Logout/>,
             </React.Suspense>
-            ) , 
+            ), 
         AuthRequired: false
     },
 
