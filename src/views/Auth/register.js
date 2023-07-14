@@ -30,7 +30,7 @@ const Register = (props)=>{
   }
   const validateForm = ()=>{
     if(email && password && repassword){
-      if(!EMAIL_REGEX.test(email) || !PWD_REGEX.test(pass) || password !== repassword){
+      if(!EMAIL_REGEX.test(email) || !PWD_REGEX.test(password) || password !== repassword){
         setValid(false);
         return false;
       }else{
