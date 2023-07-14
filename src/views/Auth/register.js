@@ -72,12 +72,6 @@ const Register = (props)=>{
                         >
                             Password
                         </label>
-                        <a style={{
-                            minWidth:'140px',
-                            textAlign:'end'
-                        }}>
-                            Forgot Password?
-                        </a>
                     </div>
                     <input style={{
                         margin:'5px',
