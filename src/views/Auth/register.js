@@ -1,6 +1,7 @@
-import React,{useRef, useState} from "react";
+import React,{useCallback, useEffect, useRef, useState} from "react";
 import './stylesheet.scss';
 import { useNavigate } from "react-router";
+import debounce from "../../helpers/commonUtils/debounce";
 
 const Register = (props)=>{
   const navigate = useNavigate();
@@ -9,12 +10,86 @@ const Register = (props)=>{
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
+  const [isValid, setValid] = useState(false);
+  const EMAIL_REGEX = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+  const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
   const handleSubmit = (e)=>{
     e.preventDefault();
+    if(!isValid || !validateForm){
+      setErrorMessage("Form data is not valid");
+      errRef.current.style.display = "block"
+      errRef.current.focus();
+      return
+    }else{
+      /** need to send the request for registration */
+    }
+
     setemail('')
     setPassword('')
     setRepassword('')
   }
+  const validateForm = ()=>{
+    if(email && password && repassword){
+      if(!EMAIL_REGEX.test(email) || !PWD_REGEX.test(pass) || password !== repassword){
+        setValid(false);
+        return false;
+      }else{
+        setValid(true)
+        return true
+      }
+    }else{
+      setValid(false)
+      return false;
+    }
+  }
+  const validateEmail =  debounce((email)=>{
+    if(email && !EMAIL_REGEX.test(email)){
+      setErrorMessage("Email is not valid");
+      errRef.current.style.display = 'block';  
+      errRef.current.focus()
+    }else{
+      setErrorMessage("");
+      errRef.current.style.display = 'none';  
+    }
+  },1000)
+  
+  const validatePass =  debounce((pass)=>{
+    if(password && !PWD_REGEX.test(pass)){
+      setErrorMessage("Password is not valid");
+      errRef.current.style.display = 'block';  
+      errRef.current.focus()
+    }else{
+      setErrorMessage("");
+      errRef.current.style.display = 'none';  
+    }
+  },1000)
+
+  useEffect(()=>{
+   validateEmail(email)
+  },[email, setemail])
+
+  useEffect(()=>{
+    validatePass(password);
+  },[password, setPassword])
+
+  const validateRePass = debounce((repass)=>{
+      if(repass!==password){
+        setErrorMessage("Passwords don't match");
+        errRef.current.style.display = 'block';  
+        errRef.current.focus()  
+        setValid(false);
+      }else{
+        setErrorMessage("");
+        errRef.current.style.display = 'none';  
+      }
+    },1000)
+
+  const handleChange = (value)=>{
+    setRepassword(value);
+  }
+  useEffect(()=>{
+    validateRePass(repassword);
+  },[repassword, setRepassword])
 
   const handleSignIn=(e)=>{
     e.preventDefault();
@@ -104,7 +179,7 @@ const Register = (props)=>{
                     }} 
                     id="password2"
                     type="password"
-                    onChange={e=>setRepassword(e.target.value)}
+                    onChange={e=>handleChange(e.target.value)}
                     value = {repassword}
                     required
                     autoComplete='off'
