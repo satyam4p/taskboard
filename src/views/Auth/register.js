@@ -15,7 +15,7 @@ const Register = (props)=>{
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
   const handleSubmit = (e)=>{
     e.preventDefault();
-    if(!isValid || !validateForm){
+    if(!validateForm){
       setErrorMessage("Form data is not valid");
       errRef.current.style.display = "block"
       errRef.current.focus();
