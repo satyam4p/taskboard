@@ -29,6 +29,27 @@ let authProvider = {
         }
 
     },
+    async register({email, password, repassword, username}, callback){
+
+        const URL = urlSchema.Auth.REGISTER;
+        try{
+
+            let response = await axios.post(URL,
+                { email, password, repassword , username},
+                {
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    withCredentials:true
+                });
+            if(response && response.status === 200){
+                callback(null, response?.data);
+            }
+        }catch(e){
+            callback(e);
+        }
+
+    }
     // async signOut(type, callback){
     //     axios.head.
     //     try{

@@ -2,18 +2,21 @@ import React,{useCallback, useEffect, useRef, useState} from "react";
 import './stylesheet.scss';
 import { useNavigate } from "react-router";
 import debounce from "../../helpers/commonUtils/debounce";
+import useAuth from "../../helpers/hooks/useAuth";
 
 const Register = (props)=>{
   const navigate = useNavigate();
+  const { register } = useAuth();
   const errRef = useRef();
   const [errorMessage, setErrorMessage] = useState('');
   const [email, setemail] = useState("");
+  const [username, setUsernme] = useState('');
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
   const [isValid, setValid] = useState(false);
   const EMAIL_REGEX = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e)=>{
     e.preventDefault();
     if(!validateForm){
       setErrorMessage("Form data is not valid");
@@ -22,6 +25,9 @@ const Register = (props)=>{
       return
     }else{
       /** need to send the request for registration */
+      await register({email, password, repassword, username},(response)=>{
+        console.log("response for register:: ",response);
+      })
     }
 
     setemail('')
@@ -30,7 +36,11 @@ const Register = (props)=>{
   }
   const validateForm = ()=>{
     if(email && password && repassword){
-      if(!EMAIL_REGEX.test(email) || !PWD_REGEX.test(password) || password !== repassword){
+      if(!EMAIL_REGEX.test(email) 
+          || !PWD_REGEX.test(password) 
+          || password !== repassword
+          || !validateUsername(username)){
+
         setValid(false);
         return false;
       }else{
@@ -71,6 +81,22 @@ const Register = (props)=>{
   useEffect(()=>{
     validatePass(password);
   },[password, setPassword])
+
+  const validateUsername=(username)=>{
+
+    if(username.trim() && username.length){
+      setErrorMessage("");
+      errRef.current.style.display = 'none';  
+      return true
+    }else{
+        setErrorMessage("username is required");
+        errRef.current.style.display = 'block';  
+        errRef.current.focus()  
+        setValid(false);
+        return false
+    }
+
+  }
 
   const validateRePass = debounce((repass)=>{
       if(repass!==password){
@@ -120,6 +146,24 @@ const Register = (props)=>{
                 <text ref={errRef}>{errorMessage}
                 </text>
                 <form className='form' onSubmit={(e)=>handleSubmit(e)}>
+                  <label style={{
+                          padding:'5px',
+                          fontWeight:0
+                      }} htmlFor="username" >
+                          Username
+                      </label><br/>
+                      <input style={{
+                          width:'98%',
+                          margin:'5px',
+                          height:'35px',
+                          fontSize:'14px',
+                      }}
+                      id = "username"
+                      onChange={e=>setUsernme(e.target.value)}
+                      value={username}
+                      required
+                      autoComplete='off'
+                    />
                     <label style={{
                         padding:'5px',
                         fontWeight:0

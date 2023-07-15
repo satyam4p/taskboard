@@ -31,6 +31,18 @@ export const AuthProvider=({ children })=>{
         })
 
     }
+
+    const register = (data, callback)=>{
+        authProvider.register(data, (error, response)=>{
+            if(error){
+                console.log("error occured while registering", error);
+            }else{
+                console.log("User registered successfuly")
+                callback(response);
+            }
+        })
+    }
+
     const signOut = async (type) =>{
         const LOGOUT = urlSchema.Auth.LOGOUT;
         const LOGOUT_ALL = urlSchema.Auth.LOGOUT_ALL;
@@ -45,7 +57,7 @@ export const AuthProvider=({ children })=>{
     }
 
     return(
-        <AuthContext.Provider value={{ auth, setAuth, signIn, signOut, showNotification, 
+        <AuthContext.Provider value={{ auth, setAuth, signIn, register, signOut, showNotification, 
             setNotification, notificationType, setNotificationType, notificationText, setNotificationText}}>
             { children }
         </AuthContext.Provider>
