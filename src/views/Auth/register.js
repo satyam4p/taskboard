@@ -33,6 +33,7 @@ const Register = (props)=>{
     setemail('')
     setPassword('')
     setRepassword('')
+    setUsernme('');
   }
   const validateForm = ()=>{
     if(email && password && repassword){
