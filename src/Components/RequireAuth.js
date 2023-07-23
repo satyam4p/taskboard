@@ -1,5 +1,5 @@
 import { replace } from "lodash";
-import { useLocation, Navigate, Outlet } from "react-router";
+import React, { useLocation, Navigate, Outlet } from "react-router";
 import useAuth from "../helpers/hooks/useAuth";
 import { authProvider } from "../helpers/authProvider/authProvider";
 

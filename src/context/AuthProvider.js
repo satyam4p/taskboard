@@ -1,8 +1,8 @@
-import { createContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import { authProvider } from "../helpers/authProvider/authProvider";
 import useAxiosPrivate from "../helpers/hooks/useAxiosPrivate";
 import urlSchema from '../network/urlSchema/urlSchema.json';
-import { useNavigate } from "react-router";
+
 
 const AuthContext = createContext({});
 

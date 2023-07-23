@@ -27,6 +27,7 @@ import { SaveOutlined,
 
 
 } from '@ant-design/icons';
+import React from 'react';
 
 const iconsMap = (()=>{
     return {

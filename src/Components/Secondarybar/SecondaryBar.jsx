@@ -1,4 +1,4 @@
-/** @jsxImportSource theme-ui */
+import React from 'react';
 import iconsMap from '../../common/IconsMapper/IconsMap';
 import ProfileTogggle from './Profile/ProfileToggle';
 import './stylesheet.scss';

@@ -1,7 +1,7 @@
 import BoardLayout from "../../Components/BoardLayout/BoardLayout";
 import './stylesheet.scss';
 import useTasks from "../../helpers/hooks/useTasks";
-import { useEffect } from "react";
+import React,{ useEffect } from "react";
 
 const Board = ()=>{
 

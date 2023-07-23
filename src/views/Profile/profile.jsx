@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useProfile from "../../helpers/hooks/useProfile";
 import { selectUserProfile, selectStatus, selectError } from "../../features/profile/profileSlice";
 import { useSelector } from "react-redux";

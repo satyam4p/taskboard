@@ -1,5 +1,4 @@
-/** @jsxImportSource theme-ui */
-import { Flex } from "theme-ui";
+import React from "react";
 import { useNavigate } from "react-router";
 import useAuth from "../../../helpers/hooks/useAuth";
 import useAxiosPrivate from "../../../helpers/hooks/useAxiosPrivate";

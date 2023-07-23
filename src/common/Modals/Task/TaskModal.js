@@ -1,8 +1,5 @@
-/** @jsxImportSource theme-ui */
-/** OOB imports */
 import React,{Suspense, useEffect, useState, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Box, Container } from "theme-ui";
 
 /** Contexts */
 import TaskContext from "./TaskContext/TaskProvider";
@@ -110,7 +107,7 @@ const TaskModal=(props)=>{
                                 currentTaskStatus === "succeeded" || 
                                 currentTaskStatus === "failed" )) ? 
                 <>
-                    <Box as={'form'} onSubmit = {(e)=>{handleSubmit(e)}}>
+                    <form onSubmit = {(e)=>{handleSubmit(e)}}>
                         <TaskActionBar 
                             handleClose = { handleClose } 
                             handleShare = {handleShare} 
@@ -121,7 +118,7 @@ const TaskModal=(props)=>{
                             />
 
                         <TaskHeader editEnabled = {task.editEnabled} config = {taskConfig}/>
-                        <Container sx={{
+                        <div sx={{
                             width:'90%',
                             marginY:'10px',
                             display:'flex',
@@ -152,9 +149,9 @@ const TaskModal=(props)=>{
                                     return null;
                                 })}
                             </div>
-                        </Container>
-                    </Box> 
-                    <Container
+                        </div>
+                    </form> 
+                    <div
                         sx={{
                             width:'90%',
                             marginTop:'20px'
@@ -199,15 +196,15 @@ const TaskModal=(props)=>{
                                 <span>Description</span>
                             </button>
                         </div>
-                        <Container className="data-container">
+                        <div className="data-container">
                             <Suspense fallback={<TextLoader/>}>
                                 { activeTab === 'comments' 
                                     ? <Comments editEnabled = {task.editEnabled}/>
                                     : <TextEditor config = {taskConfig} editEnabled = {task.editEnabled}/>
                                 }
                             </Suspense>
-                        </Container>
-                    </Container>
+                        </div>
+                    </div>
                 </> :
                 <div style={{width:'100%', height:'100%', display:'flex', justifyContent:"center", alignItems:'center' }}>
                     <h4>Loading...</h4>
