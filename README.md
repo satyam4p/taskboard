@@ -9,7 +9,7 @@
 run `npm i` in local directory to install the dependencies.
 ###### if the above command fails the run `npm i --force`
 
-run `npm start` to start the project.
+run `npm start` to start the project. 
 
 
 
