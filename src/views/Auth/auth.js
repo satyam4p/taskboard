@@ -5,16 +5,6 @@ import { useNavigate, useLocation } from 'react-router';
 import './stylesheet.scss';
 
 // import { encryptPass } from '../helpers/commonUtils/authUtils';
-import { 
-    Box, 
-    Button, 
-    Container, 
-    Flex, 
-    Text,
-    Label,
-    Input,
-    Link
-} from 'theme-ui';
 
 const EMAIL_REGEX = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;

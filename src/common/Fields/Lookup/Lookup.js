@@ -4,7 +4,6 @@
  */
 import { cloneDeep, debounce } from 'lodash';
 import React, { useState, useContext, useEffect, useCallback } from 'react';
-import { Select, Box } from 'theme-ui';
 import TaskContext from '../../Modals/Task/TaskContext/TaskProvider';
 import './stylesheet.scss';
 import useAxiosPrivate from '../../../helpers/hooks/useAxiosPrivate';
@@ -94,11 +93,11 @@ const LookupField = (props) => {
       {
         props.editEnabled ?
           (
-            <Select 
+            <select 
               className={'lookup-container'}
               value = { value || displayValue }
               arrow = {
-                <Box
+                <section
                   as="svg"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -111,7 +110,7 @@ const LookupField = (props) => {
                     pointerEvents: 'none',
                   }}>
                   <path d="M7.41 7.84l4.59 4.58 4.59-4.58 1.41 1.41-6 6-6-6z" />
-                </Box>
+                </section>
               }
               onClick={handleClick}
               onChange={handleChange}
@@ -124,7 +123,7 @@ const LookupField = (props) => {
                     </option>
                 )
               }): null}
-          </Select>
+          </select>
         ) :
         <span>
           {value}

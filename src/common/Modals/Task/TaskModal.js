@@ -1,8 +1,6 @@
-/** @jsxImportSource theme-ui */
 /** OOB imports */
 import React,{Suspense, useEffect, useState, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Box, Container } from "theme-ui";
 
 /** Contexts */
 import TaskContext from "./TaskContext/TaskProvider";
@@ -90,16 +88,25 @@ const TaskModal=(props)=>{
     const handleMoreAction = (e, identifier )=>{
         e.preventDefault();
         e.stopPropagation();
-        const identifierSmall = identifier.toLowerCase();
-        if(identifierSmall === "delete task"){
-            const taskId = currentTask?._id;
-            deleteTask(taskId);
-            props.setModalType((prev)=>{
-                return {
-                    ...prev,
-                    isVisible:false
-                }
-            })
+        const identifierSmall = identifier.split(" ").join('_').toLowerCase();
+        switch(identifierSmall){
+            case "delete_task":
+                const taskId = currentTask?._id;
+                deleteTask(taskId);
+                props.setModalType((prev)=>{
+                    return {
+                        ...prev,
+                        isVisible:false
+                    }
+                })
+                return;
+            case "save_and_exit":
+                handleSubmit(e);
+                handleClose(e);
+
+                return
+            default:
+                return
         }
     }
 
@@ -110,69 +117,74 @@ const TaskModal=(props)=>{
                                 currentTaskStatus === "succeeded" || 
                                 currentTaskStatus === "failed" )) ? 
                 <>
-                    <Box as={'form'} onSubmit = {(e)=>{handleSubmit(e)}}>
-                        <TaskActionBar 
-                            handleClose = { handleClose } 
-                            handleShare = {handleShare} 
-                            handleEdit = {handleEdit}
-                            currentTaskStatus = {currentTaskStatus}
-                            editEnabled = { task.editEnabled }  
-                            handleMoreAction = {handleMoreAction}
-                            />
+                    <section>
+                        <form onSubmit = {(e)=>{handleSubmit(e)}}>
+                            <TaskActionBar 
+                                handleClose = { handleClose } 
+                                handleShare = {handleShare} 
+                                handleEdit = {handleEdit}
+                                currentTaskStatus = {currentTaskStatus}
+                                editEnabled = { task.editEnabled }  
+                                handleMoreAction = {handleMoreAction}
+                                />
 
-                        <TaskHeader editEnabled = {task.editEnabled} config = {taskConfig}/>
-                        <Container sx={{
-                            width:'90%',
-                            marginY:'10px',
+                            <TaskHeader editEnabled = {task.editEnabled} config = {taskConfig}/>
+                            <section style={{
+                                width:'90%',
+                                margin:'10px 0px 10px 0px',
+                                display:'flex',
+                                flexDirection:'column',
+                                justifyContent:'space-between',
+                                minHeight:'10em'
+                            }}>
+                                <div style={{
+                                    display:'flex',
+                                    alignItems:'center',
+                                    flexDirection:'column',
+                                    margin:'4px',
+                                }}>
+                                    { taskConfig.map((field, key)=>{
+                                        if(field.entityKey !== "name" && field.entityKey !== "description"){
+                                            return(
+                                                <FieldMapper
+                                                    config = {field}
+                                                    key = {key} 
+                                                    field = {field.entityType}
+                                                    label = {field.label}
+                                                    icon =  {field.icon}
+                                                    options = {field.options}
+                                                    editEnabled = {task.editEnabled}
+                                                />
+                                            )
+                                        }
+                                        return null;
+                                    })}
+                                </div>
+                            </section>
+                        </form>
+                    </section> 
+                    <section
+                        style={{
+                            width:'100%%',
+                            marginTop:'20px',
                             display:'flex',
                             flexDirection:'column',
-                            justifyContent:'space-between',
-                            minHeight:'10em'
+                            alignItems:'center'
                         }}>
-                            <div sx={{
-                                display:'flex',
-                                alignItems:'center',
-                                flexDirection:'column',
-                                margin:'4px',
-                            }}>
-                                { taskConfig.map((field, key)=>{
-                                    if(field.entityKey !== "name" && field.entityKey !== "description"){
-                                        return(
-                                            <FieldMapper
-                                                config = {field}
-                                                key = {key} 
-                                                field = {field.entityType}
-                                                label = {field.label}
-                                                icon =  {field.icon}
-                                                options = {field.options}
-                                                editEnabled = {task.editEnabled}
-                                            />
-                                        )
-                                    }
-                                    return null;
-                                })}
-                            </div>
-                        </Container>
-                    </Box> 
-                    <Container
-                        sx={{
-                            width:'90%',
-                            marginTop:'20px'
-                        }}>
-                        <div sx={{
+                        <div style={{
                             borderBottom:'0.5px solid #DEDEDE',
-                            width:'28%',
+                            width:'90%',
                             display:'flex',
-                            justifyContent:'space-between'
+                            justifyContent:'flex-start'
                         }}>
-                            <button sx={{
-                                borderBottom:()=>activeTab ==='comments' ? '2px solid #476451' : 'none',
+                            <button style={{
+                                // borderBottom:()=>activeTab ==='comments' ? '2px solid #476451' : 'none',
                                 borderTop:'none',
                                 borderLeft:'none',
                                 borderRight:'none',
                                 bg:'transparent',
                                 padding:'4px',
-                                fontSize:0,
+                                fontSize:'12px',
                                 '&:hover':{
                                     border:'1px solid #F6F6F6'
                                 },
@@ -181,33 +193,29 @@ const TaskModal=(props)=>{
                             >
                                 <span>Comments</span>
                             </button>
-                            <button sx={{
-                                borderBottom:()=>activeTab ==='description' ? '2px solid #476451' : 'none',
+                            <button style={{
+                                // borderBottom:()=>activeTab ==='description' ? '2px solid #476451' : 'none',
                                 borderTop:'none',
                                 borderLeft:'none',
                                 borderRight:'none',
                                 bg:'transparent',
                                 padding:'4px',
-                                fontSize:0,
-                                '&:hover':{
-                                    border:'1px solid #F6F6F6'
-                                }
-                                
+                                fontSize:'12px',
                             }}
                             onClick={e=>toggleTab(e,'description')}
                             >
                                 <span>Description</span>
                             </button>
                         </div>
-                        <Container className="data-container">
+                        <section className="data-container" style={{width:'90%', padding:'10px 0px'}}>
                             <Suspense fallback={<TextLoader/>}>
                                 { activeTab === 'comments' 
                                     ? <Comments editEnabled = {task.editEnabled}/>
                                     : <TextEditor config = {taskConfig} editEnabled = {task.editEnabled}/>
                                 }
                             </Suspense>
-                        </Container>
-                    </Container>
+                        </section>
+                    </section>
                 </> :
                 <div style={{width:'100%', height:'100%', display:'flex', justifyContent:"center", alignItems:'center' }}>
                     <h4>Loading...</h4>

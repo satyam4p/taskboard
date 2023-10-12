@@ -15,13 +15,14 @@ export const AuthProvider=({ children })=>{
 
     const signIn = (data, callback)=>{
 
-        authProvider.signIn(data, (error, isAuthenticated, {user, token})=>{
+        authProvider.signIn(data, (error, isAuthenticated, result)=>{
             
             if(error){
                 console.log("error occured while signing in:: ",error);
                 setAuth(null);
                 return;
             }
+            const {user, token} = result;
             setAuth({
                 isAuthenticated,
                 user,
@@ -52,6 +53,7 @@ export const AuthProvider=({ children })=>{
         
         if(response.status ===  200){
             setAuth({});
+            window.localStorage.removeItem('access_token');
             authProvider.isAuthenticated = false;
         }
     }

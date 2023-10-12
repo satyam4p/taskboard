@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import { useState, useContext, useEffect, useCallback } from "react";
 import { Input } from 'antd';
 import TaskContext from "../../Modals/Task/TaskContext/TaskProvider";

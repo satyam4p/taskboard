@@ -33,7 +33,6 @@ const Register = (props)=>{
     setemail('')
     setPassword('')
     setRepassword('')
-    setUsernme('');
   }
   const validateForm = ()=>{
     if(email && password && repassword){
@@ -60,7 +59,7 @@ const Register = (props)=>{
       errRef.current.focus()
     }else{
       setErrorMessage("");
-      errRef.current.style.display = 'none';  
+      // errRef.current.style.display = 'none';  
     }
   },1000)
   
@@ -71,7 +70,7 @@ const Register = (props)=>{
       errRef.current.focus()
     }else{
       setErrorMessage("");
-      errRef.current.style.display = 'none';  
+      // errRef.current.style.display = 'none';  
     }
   },1000)
 
@@ -87,7 +86,7 @@ const Register = (props)=>{
 
     if(username.trim() && username.length){
       setErrorMessage("");
-      errRef.current.style.display = 'none';  
+      // errRef.current.style.display = 'none';  
       return true
     }else{
         setErrorMessage("username is required");
@@ -107,7 +106,7 @@ const Register = (props)=>{
         setValid(false);
       }else{
         setErrorMessage("");
-        errRef.current.style.display = 'none';  
+        // errRef.current.style.display = 'none';  
       }
     },1000)
 
@@ -136,7 +135,7 @@ const Register = (props)=>{
               <button onClick={e=>handleSignIn(e)}>
                   Sign In
               </button>
-          </div>
+          </div> 
         </div>
         <div className='form-container'>
             <div className='form-fields-container'>
@@ -144,7 +143,7 @@ const Register = (props)=>{
                   Sign Up to Taskboard
                 </header>
                 <br/>
-                <text ref={errRef}>{errorMessage}
+                <text style = {{display: 'none'}} ref={errRef}>{errorMessage}
                 </text>
                 <form className='form' onSubmit={(e)=>handleSubmit(e)}>
                   <label style={{

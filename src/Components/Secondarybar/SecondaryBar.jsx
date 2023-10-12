@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import iconsMap from '../../common/IconsMapper/IconsMap';
 import ProfileTogggle from './Profile/ProfileToggle';
 import './stylesheet.scss';
@@ -38,7 +37,8 @@ function SecondaryBar({
                     </div>
                     
                 </div>
-                {toggleProfile && <ProfileTogggle  setToggleProile = {setToggleProile}/>}
+                <div className={`profile-backdrop ${toggleProfile ? 'show' : 'hide'}`} onClick={()=>setToggleProile(false)}/>
+                <ProfileTogggle toggleProfile={toggleProfile} setToggleProile = {setToggleProile}/>
             </>
 
         )

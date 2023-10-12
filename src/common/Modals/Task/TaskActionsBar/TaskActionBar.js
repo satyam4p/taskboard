@@ -22,7 +22,7 @@ const MoreOptions = ({handleMoreAction, currentTaskStatus})=>{
 
 }
 
-const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare, editEnabled, handleMoreAction}) => {
+const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare, editEnabled, handleMoreAction, handleSubmit}) => {
 
     const [showMore, setMore] = useState(false);
     const handleMore =(e)=>{
@@ -41,7 +41,7 @@ const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare,
                 </button>
             </div>
             <div className="icons-container">
-                <button className="icon" sx={{
+                <button className="icon" style={{
                     background:'transparent',
                     border:'none'
                 }}
@@ -54,7 +54,7 @@ const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare,
                 <button 
                     className="icon"
                     onClick={e=>handleEdit(e)}
-                    sx={{
+                    style={{
                         background:'transparent',
                         border:'none'
                     }}>
@@ -65,20 +65,20 @@ const TaskActionBar = ({currentTaskStatus, handleClose, handleEdit, handleShare,
                 <button
                     className="icon"
                     onClick={e=>handleMore(e)}
-                    sx={{
+                    styles={{
                     background:'transparent',
                     border:'none'
                     }}>
                     {iconsMap.more(18, 800, showMore)}
                 </button>
-                { showMore ? <MoreOptions handleMoreAction = {handleMoreAction} currentTaskStatus = {currentTaskStatus}/> : null}
+                { showMore ? <MoreOptions handleSubmit = {handleSubmit} handleMoreAction = {handleMoreAction} currentTaskStatus = {currentTaskStatus}/> : null}
             </div>
             <div className="icons-container"
                 onClick={(e)=>handleClose(e)}>
                     <button 
                     className="icon"
                     onClick={e=>handleEdit(e)}
-                    sx={{
+                    style={{
                         background:'transparent',
                         border:'none'
                     }}>

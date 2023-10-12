@@ -53,7 +53,7 @@ const routes = createBrowserRouter([
                     <Home/>
                 </RequireAuth>
             </PersistUser>
-          </React.Suspense>  
+          </React.Suspense>
         ),
         AuthRequired: true,
         errorElement: (<ErrorElement/>),

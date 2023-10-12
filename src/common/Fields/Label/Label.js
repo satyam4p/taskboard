@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
 import './stylesheet.scss'
-import { Select, Box } from "theme-ui";
 import TaskContext from "../../Modals/Task/TaskContext/TaskProvider";
 import { cloneDeep } from "lodash";
 import debounce from "../../../helpers/commonUtils/debounce";
@@ -39,14 +38,14 @@ const LabelField = (props)=>{
     
     return(
         <div>
-           <Select sx = {{
+           <select sx = {{
                 minWidth:'120px'
             }} 
             className={`label-container ${value}`}
             value={value}
             disabled={!props.editEnabled}
             arrow = {
-            <Box
+            <section
                 as="svg"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -59,7 +58,7 @@ const LabelField = (props)=>{
                 pointerEvents: 'none',
                 }}>
                 <path d="M7.41 7.84l4.59 4.58 4.59-4.58 1.41 1.41-6 6-6-6z" />
-            </Box>
+            </section>
             }
             onChange={e=>handleSelect(e)}
             >
@@ -70,7 +69,7 @@ const LabelField = (props)=>{
                     </option>
                 )
             })}
-            </Select>
+            </select>
         </div>
     )
 }
